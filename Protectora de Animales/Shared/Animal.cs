@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Animal
+    public class Animal : IIdentifiable
     {
         #region Fields/Properties
         public string ID

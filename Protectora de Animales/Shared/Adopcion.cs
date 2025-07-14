@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    internal class Adopcion
+    public class Adopcion : IIdentifiable
     {
         #region Fields/Properties
-        private int m_IdAdopcion;
+        private string m_IdAdopcion;
         private List<Animal> m_animales;
         private User m_usuario;
         private DateTime m_fechaAdopcion;
         private string m_estado;
         private string m_descripcion;
 
-        public int IdAdopcion
+        public string ID
         {
             get { return m_IdAdopcion; }
-            set { m_IdAdopcion = getNextId(); }
+            set { m_IdAdopcion = value; }
         }
         public List<Animal> Animales
         {
@@ -58,7 +58,7 @@ namespace Shared
     
     #endregion
     #region Constructor
-    public Adopcion(int idAdopcion, List<Animal> animales, User usuario, DateTime fechaAdopcion, string estado, string descripcion)
+    public Adopcion(string idAdopcion, List<Animal> animales, User usuario, DateTime fechaAdopcion, string estado, string descripcion)
         {
             m_IdAdopcion = idAdopcion;
             m_animales = animales;
@@ -69,6 +69,7 @@ namespace Shared
         }
         #endregion
 
+        /*
         #region CRUD
         public void crearAdopcion()
         {
@@ -79,7 +80,7 @@ namespace Shared
 
         public void mostrarAdopcion(Adopcion adopcion)
         {
-            Console.WriteLine($"ID de adopción: {adopcion.IdAdopcion}");
+            Console.WriteLine($"ID de adopción: {adopcion.ID}");
             Console.WriteLine($"Fecha de adopción: {adopcion.FechaAdopcion}");
             Console.WriteLine($"Estado: {adopcion.Estado}");
             Console.WriteLine($"Descripción: {adopcion.Descripcion}");
@@ -115,5 +116,6 @@ namespace Shared
         }
 
         #endregion
+        */
     }
 }

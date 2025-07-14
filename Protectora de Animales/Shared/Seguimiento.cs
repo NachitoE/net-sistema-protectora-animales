@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    internal class Seguimiento
+    public class Seguimiento : IIdentifiable
     {
         #region Fields/Properties
-        private int m_idSeguimiento;
+        private string m_idSeguimiento;
         private User m_usuario;
         private DateTime m_fechaSeguimiento;
         private string m_observacion;
         private Animal m_animal;
 
-        public int IdSeguimiento
+        public string ID
         {
             get { return m_idSeguimiento; }
             set { m_idSeguimiento = value; }
@@ -40,7 +40,7 @@ namespace Shared
         #endregion
 
         #region Constructor
-        public Seguimiento(int idSeguimiento, User usuario, DateTime fechaSeguimiento, string observacion, Animal animal)
+        public Seguimiento(string idSeguimiento, User usuario, DateTime fechaSeguimiento, string observacion, Animal animal)
         {
             m_idSeguimiento = idSeguimiento;
             m_usuario = usuario;
@@ -52,6 +52,7 @@ namespace Shared
     
 
     #region CRUD
+        /*
     public void crearSeguimiento()
         {
             int idSeguimiento = 0;
@@ -66,7 +67,7 @@ namespace Shared
         }
         public void mostrarSeguimiento(Seguimiento seguimiento)
         {
-            Console.WriteLine($"ID de seguimiento: {seguimiento.IdSeguimiento}");
+            Console.WriteLine($"ID de seguimiento: {seguimiento.ID}");
             Console.WriteLine($"Fecha de seguimiento: {seguimiento.FechaSeguimiento}");
             Console.WriteLine($"Observación: {seguimiento.Observacion}");
             Console.WriteLine($"Usuario: {seguimiento.Usuario.Name} ({seguimiento.Usuario.DNI})");
@@ -87,6 +88,7 @@ namespace Shared
             Console.WriteLine("El seguimiento ha sido eliminado.");
         }
     }
+        */
     #endregion
 
 }

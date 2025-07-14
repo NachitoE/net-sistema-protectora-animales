@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class User
+    public class User : IIdentifiable
     {
         #region Fields/Properties
         public string ID
