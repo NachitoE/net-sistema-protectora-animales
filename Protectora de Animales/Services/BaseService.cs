@@ -43,7 +43,13 @@ namespace Services
                 return new List<T>();
 
             var json = File.ReadAllText(_filePath);
-            return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
+            var deserializedList = JsonSerializer.Deserialize<List<T>>(json);
+            if (deserializedList == null)
+            {
+                return new List<T>();
+            }
+            return deserializedList;
         }
+        public bool IsEmpty() => _list.Count == 0;
     }
 }

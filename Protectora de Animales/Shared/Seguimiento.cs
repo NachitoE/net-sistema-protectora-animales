@@ -49,9 +49,9 @@ namespace Shared
             m_animal = animal;
         }
         #endregion
-    
 
-    #region CRUD
+
+        #region CRUD
         /*
     public void crearSeguimiento()
         {
@@ -89,6 +89,7 @@ namespace Shared
         }
     }
         */
-    #endregion
+        #endregion
 
+    }
 }

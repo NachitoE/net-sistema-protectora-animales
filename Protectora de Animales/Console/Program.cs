@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Services;
+using Shared;
 
 public class Program
 {
@@ -51,12 +54,15 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Cargando nuevo usuario...");
-                    // TODO: lógica de carga
+                    Console.WriteLine("Iniciando Carga de Usuario...");
+                    User newUser = CreateNewUser();
+                    UserService.Instance.Save(newUser);
                     break;
                 case "2":
                     Console.WriteLine("Mostrando todos los usuarios...");
-                    // TODO: lógica de mostrar
+                    List<User> users = UserService.Instance.GetAll();
+                    users.ForEach(x => Console.WriteLine($"{x.Name} - {x.ID}"));
+
                     break;
                 case "0":
                     return;
@@ -85,7 +91,12 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Registrando adopción...");
+                    if (UserService.Instance.IsEmpty())
+                    {
+                        Console.WriteLine("No existen usuarios cargados. Abortando carga de Adopción.");
+                        break;
+                    }
+                    Console.WriteLine("Ingrese los datos de adopción...");
                     // TODO: lógica
                     break;
                 case "2":
@@ -136,5 +147,21 @@ public class Program
             Console.WriteLine("Presione una tecla para continuar...");
             Console.ReadKey();
         }
+    }
+
+    private static User CreateNewUser()
+    {
+        string name;
+        string dni;
+        Console.WriteLine("Ingrese nombre del Usuario:");
+        name = Console.ReadLine();
+        Console.WriteLine("Ingrese DNI del usuario:");
+        dni = Console.ReadLine();
+
+        User newUser = new User(
+            Guid.NewGuid().ToString(),
+            name,
+            dni);
+        return newUser;
     }
 }

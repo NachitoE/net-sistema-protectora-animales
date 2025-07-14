@@ -9,6 +9,7 @@ namespace Services
 {
     public class AdopcionService : BaseService<Adopcion>
     {
+        public static readonly AdopcionService Instance = new AdopcionService();
         protected override string _filePath => "adoptions.json";
         public override List<Adopcion> GetAll()
         {

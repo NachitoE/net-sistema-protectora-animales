@@ -1,50 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared
+﻿namespace Shared
 {
     public class User : IIdentifiable
     {
         #region Fields/Properties
+
+        private string _id;
         public string ID
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
-        private string _id;
+
+        private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get => _name;
+            set => _name = value;
         }
-        private string _name;
+
+        private string _dni;
         public string DNI
         {
-            get
-            {
-                return _dni;
-            }
-            set
-            {
-                _dni = value;
-            }
+            get => _dni;
+            set => _dni = value;
         }
-        public string _dni;
+
         #endregion
+        public User(string id, string name, string dni)
+        {
+            ID = id;
+            Name = name;
+            DNI = dni;
+        }
     }
 }

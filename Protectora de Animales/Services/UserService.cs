@@ -9,6 +9,7 @@ namespace Services
 {
     public class UserService : BaseService<User>
     {
+        public static readonly UserService Instance = new UserService();
         protected override string _filePath => "users.json";
         public override List<User> GetAll()
         {
