@@ -9,6 +9,7 @@ namespace Services
 {
     public class SeguimientoService : BaseService<Seguimiento>
     {
+        protected override string _filePath => "seguimientos.json";
         public override List<Seguimiento> GetAll()
         {
             return base.GetAll();

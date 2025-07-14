@@ -9,6 +9,7 @@ namespace Services
 {
     public class AnimalService : BaseService<Animal>
     {
+        protected override string _filePath => "animals.json";
         public override List<Animal> GetAll()
         {
             return base.GetAll();
