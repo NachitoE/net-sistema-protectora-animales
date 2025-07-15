@@ -11,7 +11,7 @@ namespace Shared
         #region Fields/Properties
         private string m_IdAdopcion;
         private List<Animal> m_animales;
-        private User m_usuario;
+        private User m_user;
         private DateTime m_fechaAdopcion;
         private string m_estado;
         private string m_descripcion;
@@ -28,8 +28,8 @@ namespace Shared
         }
         public User Usuario
         {
-            get { return m_usuario; }
-            set { m_usuario = value; }
+            get { return m_user; }
+            set { m_user = value; }
         }
 
         public DateTime FechaAdopcion
@@ -62,7 +62,7 @@ namespace Shared
         {
             m_IdAdopcion = idAdopcion;
             m_animales = animales;
-            m_usuario = usuario;
+            m_user = usuario;
             m_fechaAdopcion = fechaAdopcion;
             m_estado = estado;
             m_descripcion = descripcion;
