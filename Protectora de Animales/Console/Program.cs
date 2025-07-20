@@ -61,7 +61,7 @@ public class Program
                 case "2":
                     Console.WriteLine("Mostrando todos los usuarios...");
                     List<User> users = UserService.Instance.GetAll();
-                    users.ForEach(x => Console.WriteLine($"{x.Name} - {x.ID}"));
+                    users.ForEach(x => Console.WriteLine($"{x.Name} - {x.Id}"));
 
                     break;
                 case "0":

@@ -6,48 +6,48 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Adopcion : IIdentifiable
+    public class Adoption : IIdentifiable
     {
         #region Fields/Properties
-        private string m_IdAdopcion;
-        private List<Animal> m_animales;
-        private User m_user;
-        private DateTime m_fechaAdopcion;
-        private string m_estado;
-        private string m_descripcion;
+        private string _id;
+        private List<string> _animalIds;
+        private string _userId;
+        private DateTime _fechaAdopcion;
+        private string _estado;
+        private string _descripcion;
 
-        public string ID
+        public string Id
         {
-            get { return m_IdAdopcion; }
-            set { m_IdAdopcion = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-        public List<Animal> Animales
+        public List<string> AnimalsIDs
         {
-            get { return m_animales; }
-            set { m_animales = value; }
+            get { return _animalIds; }
+            set { _animalIds = value; }
         }
-        public User Usuario
+        public string UserID
         {
-            get { return m_user; }
-            set { m_user = value; }
+            get { return _userId; }
+            set { _userId = value; }
         }
 
         public DateTime FechaAdopcion
         {
-            get { return m_fechaAdopcion; }
-            set { m_fechaAdopcion = value; }
+            get { return _fechaAdopcion; }
+            set { _fechaAdopcion = value; }
         }
 
         public string Estado
         {
-            get { return m_estado; }
-            set { m_estado = value; }
+            get { return _estado; }
+            set { _estado = value; }
         }
 
         public string Descripcion
         {
-            get { return m_descripcion; }
-            set { m_descripcion = value; }
+            get { return _descripcion; }
+            set { _descripcion = value; }
         }
         private int getNextId()
         {
@@ -58,14 +58,14 @@ namespace Shared
     
     #endregion
     #region Constructor
-    public Adopcion(string idAdopcion, List<Animal> animales, User usuario, DateTime fechaAdopcion, string estado, string descripcion)
+    public Adoption(string idAdopcion, List<string> animalIDs, string userID, DateTime fechaAdopcion, string estado, string descripcion)
         {
-            m_IdAdopcion = idAdopcion;
-            m_animales = animales;
-            m_user = usuario;
-            m_fechaAdopcion = fechaAdopcion;
-            m_estado = estado;
-            m_descripcion = descripcion;
+            _id = idAdopcion;
+            _animalIds = animalIDs;
+            _userId = userID;
+            _fechaAdopcion = fechaAdopcion;
+            _estado = estado;
+            _descripcion = descripcion;
         }
         #endregion
 

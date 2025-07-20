@@ -6,47 +6,47 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Seguimiento : IIdentifiable
+    public class MedicalCheckUp : IIdentifiable
     {
         #region Fields/Properties
-        private string m_idSeguimiento;
-        private User m_usuario;
-        private DateTime m_fechaSeguimiento;
-        private string m_observacion;
-        private Animal m_animal;
+        private string _id;
+        private string _userId;
+        private DateTime _checkUpDate;
+        private string _observation;
+        private string _animalId;
 
-        public string ID
+        public string Id
         {
-            get { return m_idSeguimiento; }
-            set { m_idSeguimiento = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-        public User Usuario
+        public string UserId
         {
-            get { return m_usuario; }
-            set { m_usuario = value; }
+            get { return _userId; }
+            set { _userId = value; }
         }
 
-        public DateTime FechaSeguimiento
+        public DateTime CheckUpDate
         {
-            get { return m_fechaSeguimiento; }
-            set { m_fechaSeguimiento = value; }
+            get { return _checkUpDate; }
+            set { _checkUpDate = value; }
         }
 
         public string Observacion
         {
-            get { return m_observacion; }
-            set { m_observacion = value; }
+            get { return _observation; }
+            set { _observation = value; }
         }
         #endregion
 
         #region Constructor
-        public Seguimiento(string idSeguimiento, User usuario, DateTime fechaSeguimiento, string observacion, Animal animal)
+        public MedicalCheckUp(string idSeguimiento, string userId, DateTime fechaSeguimiento, string observacion, string animalId)
         {
-            m_idSeguimiento = idSeguimiento;
-            m_usuario = usuario;
-            m_fechaSeguimiento = fechaSeguimiento;
-            m_observacion = observacion;
-            m_animal = animal;
+            _id = idSeguimiento;
+            _userId = userId;
+            _checkUpDate = fechaSeguimiento;
+            _observation = observacion;
+            _animalId = animalId;
         }
         #endregion
 

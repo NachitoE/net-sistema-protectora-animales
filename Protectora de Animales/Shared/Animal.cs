@@ -9,7 +9,7 @@ namespace Shared
     public class Animal : IIdentifiable
     {
         #region Fields/Properties
-        public string ID
+        public string Id
         {
             get
             {

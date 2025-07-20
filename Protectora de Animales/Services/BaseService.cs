@@ -18,18 +18,18 @@ namespace Services
             _list = Load();
         }
         public virtual List<T> GetAll() => _list;
-        public virtual T GetByID(string id) => _list.First(x => x.ID == id);
+        public virtual T GetByID(string id) => _list.First(x => x.Id == id);
         public virtual void Save(T obj)
         {
-            if (string.IsNullOrEmpty(obj.ID))
-                obj.ID = Guid.NewGuid().ToString();
+            if (string.IsNullOrEmpty(obj.Id))
+                obj.Id = Guid.NewGuid().ToString();
 
             _list.Add(obj);
             Persist();
         }
         public virtual void Delete(T obj)
         {
-            _list.RemoveAll(x => x.ID == obj.ID);
+            _list.RemoveAll(x => x.Id == obj.Id);
             Persist();
         }
         protected virtual void Persist()

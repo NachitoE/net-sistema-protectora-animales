@@ -5,7 +5,7 @@
         #region Fields/Properties
 
         private string _id;
-        public string ID
+        public string Id
         {
             get => _id;
             set => _id = value;
@@ -28,7 +28,7 @@
         #endregion
         public User(string id, string name, string dni)
         {
-            ID = id;
+            Id = id;
             Name = name;
             DNI = dni;
         }

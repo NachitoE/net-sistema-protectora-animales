@@ -8,6 +8,6 @@ namespace Shared
 {
     public interface IIdentifiable
     {
-        string ID { get; set; }
+        string Id { get; set; }
     }
 }
