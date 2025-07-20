@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animal.cs" />
-    <Compile Include="Adopcion.cs" />
+    <Compile Include="Adoption.cs" />
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Seguimiento.cs" />
+    <Compile Include="MedicalCheckUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
