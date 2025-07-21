@@ -3,7 +3,7 @@
     public class User : IIdentifiable
     {
         #region Fields/Properties
-
+        private Type _typeUser = Type.Admin;
         private string _id;
         public string Id
         {
@@ -31,6 +31,11 @@
             Id = id;
             Name = name;
             DNI = dni;
+        }
+
+        enum Type
+        {
+            Admin, Adoptante, Transito, Voluntario
         }
     }
 }
