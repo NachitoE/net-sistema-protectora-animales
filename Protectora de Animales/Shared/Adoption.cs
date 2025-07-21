@@ -12,9 +12,9 @@ namespace Shared
         private string _id;
         private List<string> _animalIds;
         private string _userId;
-        private DateTime _fechaAdopcion;
-        private string _estado;
-        private string _descripcion;
+        private DateTime _adoptionDate;
+        private string _state; //Move to enum?
+        private string _description;
 
         public string Id
         {
@@ -32,22 +32,22 @@ namespace Shared
             set { _userId = value; }
         }
 
-        public DateTime FechaAdopcion
+        public DateTime AdoptionDate
         {
-            get { return _fechaAdopcion; }
-            set { _fechaAdopcion = value; }
+            get { return _adoptionDate; }
+            set { _adoptionDate = value; }
         }
 
-        public string Estado
+        public string State
         {
-            get { return _estado; }
-            set { _estado = value; }
+            get { return _state; }
+            set { _state = value; }
         }
 
-        public string Descripcion
+        public string Description
         {
-            get { return _descripcion; }
-            set { _descripcion = value; }
+            get { return _description; }
+            set { _description = value; }
         }
         private int getNextId()
         {
@@ -63,9 +63,9 @@ namespace Shared
             _id = idAdopcion;
             _animalIds = animalIDs;
             _userId = userID;
-            _fechaAdopcion = fechaAdopcion;
-            _estado = estado;
-            _descripcion = descripcion;
+            _adoptionDate = fechaAdopcion;
+            _state = estado;
+            _description = descripcion;
         }
         #endregion
 
