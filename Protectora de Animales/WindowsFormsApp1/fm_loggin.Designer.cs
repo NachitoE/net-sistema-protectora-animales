@@ -54,11 +54,11 @@
             this.lb_Protectora.AutoSize = true;
             this.lb_Protectora.BackColor = System.Drawing.Color.Cornsilk;
             this.lb_Protectora.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Protectora.Location = new System.Drawing.Point(129, 72);
+            this.lb_Protectora.Location = new System.Drawing.Point(230, 72);
             this.lb_Protectora.Name = "lb_Protectora";
-            this.lb_Protectora.Size = new System.Drawing.Size(54, 30);
+            this.lb_Protectora.Size = new System.Drawing.Size(386, 30);
             this.lb_Protectora.TabIndex = 1;
-            this.lb_Protectora.Text = "PRO";
+            this.lb_Protectora.Text = "PROTECTORA DE ANIMALES \"ANTUEL\"";
             this.lb_Protectora.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tb_password
@@ -78,7 +78,6 @@
             this.btn_loggin.Text = "Iniciar sesión";
             this.btn_loggin.UseVisualStyleBackColor = true;
             this.btn_loggin.Click += new System.EventHandler(this.btn_loggin_Click);
-            this.btn_loggin.Enter += new System.EventHandler(this.btn_loggin_Click);
             // 
             // lb_password
             // 
@@ -114,6 +113,7 @@
             this.llb_singup.TabIndex = 7;
             this.llb_singup.TabStop = true;
             this.llb_singup.Text = "Crear Usuario";
+            this.llb_singup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llb_singup_LinkClicked);
             // 
             // lb_singup
             // 
