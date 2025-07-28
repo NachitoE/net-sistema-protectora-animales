@@ -37,10 +37,11 @@
         }
 
         #endregion
-        public User(string id, string name, string dni)
+        public User(string id, string name, string surname, string dni)
         {
             Id = id;
             Name = name;
+            SurName = surname;
             DNI = dni;
         }
 

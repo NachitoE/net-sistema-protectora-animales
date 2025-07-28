@@ -17,7 +17,14 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-       
+        private void tb_Loggin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_loggin.PerformClick();
+            }
+        }
 
 
 
@@ -57,5 +64,9 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void llb_singup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }
