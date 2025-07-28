@@ -9,6 +9,6 @@ namespace Services
 {
     public class HouseService : BaseService<House>
     {
-        protected override string _filePath => "house.json"
+        protected override string _filePath => "house.json";
     }
 }
