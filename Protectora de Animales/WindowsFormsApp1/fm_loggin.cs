@@ -66,7 +66,8 @@ namespace WindowsFormsApp1
 
         private void llb_singup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            fm_SignUp signupForm = new fm_SignUp();
+            signupForm.ShowDialog(); 
         }
     }
 }

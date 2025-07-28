@@ -35,13 +35,29 @@
             get => _userType;
             set => _userType = value;
         }
+        private string _username;
+        public string UserName
+        {
+            get => _username;
+            set => _username = value;
+        }
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => _password = value;
+        }
         #endregion
-        public User(string id, string name, string surname, string dni)
+        public User(string id, string name, string surname, string dni, Type usertype,string username, string password)
         {
             Id = id;
             Name = name;
             SurName = surname;
             DNI = dni;
+            UserType = usertype;
+            UserName = username;
+            Password = password;
+
         }
 
         public enum Type
