@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class Sightings
+    public class Sighting : IIdentifiable
     {
         private string _sightingId;
         private string _sightingAddressName;
         private int _sightingAddressNumber;
         private DateTime _sightingDateTime;
         private string _animalId;
-        public string SightingId
+        public string Id
         {
             get { return _sightingId; }
             set { _sightingId = value; }

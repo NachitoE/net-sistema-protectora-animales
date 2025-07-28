@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared
 {
-    public class House
+    public class House : IIdentifiable
     {
         #region Fields/Properties
         private string _houseId;
@@ -14,7 +14,7 @@ namespace Shared
         private string _address;
         private int _addressNumber;
         private int _capacity;
-        public string HouseId
+        public string Id
         {
             get { return _houseId; }
             set { _houseId = value; }
