@@ -35,7 +35,6 @@
             get => _userType;
             set => _userType = value;
         }
-
         #endregion
         public User(string id, string name, string dni)
         {
