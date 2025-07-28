@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class fm_loggin : Form
     {
-        public Form1()
+        public fm_loggin()
         {
             InitializeComponent();
         }
@@ -56,7 +56,6 @@ namespace WindowsFormsApp1
                 // Acción si se pulsa "No"
             }
         }
-
 
     }
 }

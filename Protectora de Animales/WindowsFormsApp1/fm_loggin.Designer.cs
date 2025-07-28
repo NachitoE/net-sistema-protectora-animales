@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class fm_loggin
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -56,9 +56,9 @@
             this.lb_Protectora.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Protectora.Location = new System.Drawing.Point(129, 72);
             this.lb_Protectora.Name = "lb_Protectora";
-            this.lb_Protectora.Size = new System.Drawing.Size(657, 30);
+            this.lb_Protectora.Size = new System.Drawing.Size(54, 30);
             this.lb_Protectora.TabIndex = 1;
-            this.lb_Protectora.Text = "PROTECTORA DE ANIMALES: \"NO LE PUSIMOS NOMBRE TODAVÍA\"";
+            this.lb_Protectora.Text = "PRO";
             this.lb_Protectora.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tb_password
@@ -78,6 +78,7 @@
             this.btn_loggin.Text = "Iniciar sesión";
             this.btn_loggin.UseVisualStyleBackColor = true;
             this.btn_loggin.Click += new System.EventHandler(this.btn_loggin_Click);
+            this.btn_loggin.Enter += new System.EventHandler(this.btn_loggin_Click);
             // 
             // lb_password
             // 
@@ -124,7 +125,7 @@
             this.lb_singup.TabIndex = 8;
             this.lb_singup.Text = "¿Nuevo Aquí?";
             // 
-            // Form1
+            // fm_loggin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,8 +139,8 @@
             this.Controls.Add(this.tb_password);
             this.Controls.Add(this.lb_Protectora);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "fm_loggin";
+            this.Text = "INICIO";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

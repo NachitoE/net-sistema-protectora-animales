@@ -10,21 +10,20 @@ namespace Shared
     {
         #region Fields/Properties
         private string _id;
-        private List<string> _animalIds;
+        private string _animalId;
         private string _userId;
         private DateTime _fechaAdopcion;
         private string _estado;
         private string _descripcion;
-
         public string Id
         {
             get { return _id; }
             set { _id = value; }
         }
-        public List<string> AnimalsIDs
+        public string AnimalID
         {
-            get { return _animalIds; }
-            set { _animalIds = value; }
+            get { return _animalId; }
+            set { _animalId = value; }
         }
         public string UserID
         {
@@ -48,20 +47,16 @@ namespace Shared
         {
             get { return _descripcion; }
             set { _descripcion = value; }
-        }
-        private int getNextId()
-        {
-            //indice autoincremental, falta hacer
-            return 0;
+
         }
 
     
     #endregion
     #region Constructor
-    public Adoption(string idAdopcion, List<string> animalIDs, string userID, DateTime fechaAdopcion, string estado, string descripcion)
+    public Adoption(string idAdopcion, string animalId, string userID, DateTime fechaAdopcion, string estado, string descripcion)
         {
             _id = idAdopcion;
-            _animalIds = animalIDs;
+            _animalId = animalId;
             _userId = userID;
             _fechaAdopcion = fechaAdopcion;
             _estado = estado;
@@ -71,6 +66,13 @@ namespace Shared
 
         /*
         #region CRUD
+        
+        private int getNextId()
+        {
+            //indice autoincremental, falta hacer
+            return 0;
+        }
+
         public void crearAdopcion()
         {
             // Después lo programo

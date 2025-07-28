@@ -18,6 +18,12 @@
             set => _name = value;
         }
 
+        private string _surName;
+        public string SurName
+        {
+            get => _surName;
+            set => _surName = value;
+        }
         private string _dni;
         public string DNI
         {
@@ -29,6 +35,7 @@
             get => _userType;
             set => _userType = value;
         }
+
         #endregion
         public User(string id, string name, string dni)
         {

@@ -32,7 +32,7 @@ namespace Shared
             set { _checkUpDate = value; }
         }
 
-        public string Observacion
+        public string Observation
         {
             get { return _observation; }
             set { _observation = value; }
