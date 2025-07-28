@@ -37,7 +37,7 @@ namespace Shared
             set { _adoptionDate = value; }
         }
 
-        public string State
+        public string State //TODO: enum?
         {
             get { return _state; }
             set { _state = value; }
