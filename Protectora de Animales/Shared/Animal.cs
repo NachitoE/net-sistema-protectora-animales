@@ -33,6 +33,8 @@ namespace Shared
             }
         }
         private string _name;
+        
+        //TODO: Species es una clase aparte?
         public string Species
         {
             get
@@ -45,6 +47,19 @@ namespace Shared
             }
         }
         private string _species;
+        public DateTime BirthDate
+        {
+            get => _birthDate;
+            set => _birthDate = value;
+        }
+        private DateTime _birthDate;
+        //TODO: AnimalState
+        public string UserId
+        {
+            get => _userId;
+            set => _userId = value;
+        }
+        private string _userId; //owner
         #endregion
     }
 }
