@@ -103,6 +103,7 @@
             this.tb_user.Name = "tb_user";
             this.tb_user.Size = new System.Drawing.Size(187, 20);
             this.tb_user.TabIndex = 6;
+        
             // 
             // llb_singup
             // 

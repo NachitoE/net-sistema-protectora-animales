@@ -36,7 +36,7 @@
             this.lb_SignUpSurname = new System.Windows.Forms.Label();
             this.tb_SignUpSurName = new System.Windows.Forms.TextBox();
             this.lb_SignUpdni = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_SignUpDni = new System.Windows.Forms.TextBox();
             this.tb_SignUpPasswordCheck = new System.Windows.Forms.TextBox();
             this.lb_SignUpUserType = new System.Windows.Forms.Label();
             this.tb_SignUpPassword = new System.Windows.Forms.TextBox();
@@ -130,12 +130,12 @@
             this.lb_SignUpdni.Text = "DNI:";
             this.lb_SignUpdni.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // textBox3
+            // tb_SignUpDni
             // 
-            this.textBox3.Location = new System.Drawing.Point(115, 215);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(214, 20);
-            this.textBox3.TabIndex = 9;
+            this.tb_SignUpDni.Location = new System.Drawing.Point(115, 215);
+            this.tb_SignUpDni.Name = "tb_SignUpDni";
+            this.tb_SignUpDni.Size = new System.Drawing.Size(214, 20);
+            this.tb_SignUpDni.TabIndex = 9;
             // 
             // tb_SignUpPasswordCheck
             // 
@@ -213,6 +213,7 @@
             this.btn_SingUpconfirm.TabIndex = 18;
             this.btn_SingUpconfirm.Text = "Aceptar";
             this.btn_SingUpconfirm.UseVisualStyleBackColor = false;
+            this.btn_SingUpconfirm.Click += new System.EventHandler(this.btn_SingUpconfirm_Click);
             // 
             // fm_SignUp
             // 
@@ -227,7 +228,7 @@
             this.Controls.Add(this.lb_SignUpPassword);
             this.Controls.Add(this.tb_SignUpUserName);
             this.Controls.Add(this.lb_SignUpUser);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.tb_SignUpDni);
             this.Controls.Add(this.lb_SignUpdni);
             this.Controls.Add(this.tb_SignUpSurName);
             this.Controls.Add(this.lb_SignUpSurname);
@@ -255,7 +256,7 @@
         private System.Windows.Forms.Label lb_SignUpSurname;
         private System.Windows.Forms.TextBox tb_SignUpSurName;
         private System.Windows.Forms.Label lb_SignUpdni;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_SignUpDni;
         private System.Windows.Forms.TextBox tb_SignUpPasswordCheck;
         private System.Windows.Forms.Label lb_SignUpUserType;
         private System.Windows.Forms.TextBox tb_SignUpPassword;

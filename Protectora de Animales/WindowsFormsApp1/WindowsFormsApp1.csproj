@@ -58,8 +58,17 @@
     <Compile Include="fm_SignUp.Designer.cs">
       <DependentUpon>fm_SignUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="fm_AdminMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fm_AdminMenu.Designer.cs">
+      <DependentUpon>fm_AdminMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fm_AdminMenu.resx">
+      <DependentUpon>fm_AdminMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fm_loggin.resx">
       <DependentUpon>fm_loggin.cs</DependentUpon>
     </EmbeddedResource>

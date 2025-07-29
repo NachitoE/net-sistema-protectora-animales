@@ -45,6 +45,10 @@ namespace WindowsFormsApp1
                 SendMessage(message, caption, buttons);
                 return;
             }
+            this.Hide();
+            fm_AdminMenu menuForm= new fm_AdminMenu();
+            menuForm.ShowDialog();
+            this.Show(); 
         }
         private bool ControlLoginEmpty(string text)
         {
@@ -69,5 +73,7 @@ namespace WindowsFormsApp1
             fm_SignUp signupForm = new fm_SignUp();
             signupForm.ShowDialog(); 
         }
+
+       
     }
 }

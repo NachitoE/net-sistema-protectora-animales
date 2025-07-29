@@ -17,6 +17,64 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void btn_SingUpconfirm_Click(object sender, EventArgs e)
+        {
+            bool valid = true;
+            valid &= ValidateEmpty(tb_SignUpName);
+            valid &= ValidateEmpty(tb_SignUpSurName);
+            valid &= ValidateEmpty(tb_SignUpDni);
+            valid &= ValidateEmpty(tb_SignUpUserName);
+            valid &= ValidateEmpty(tb_SignUpPassword);
+            valid &= ValidateEmpty(tb_SignUpPasswordCheck);
+
+
+            if (!valid)
+                MessageBox.Show("Por favor, completá todos los campos del formulario.");
+            
+
+            bool SamePassword = true;
+            SamePassword = ValidatePasswordCheck(tb_SignUpPassword, tb_SignUpPasswordCheck);
+            if (!SamePassword)
+            {
+                MessageBox.Show("Las contraseñas no coinciden");
+            }
+
+            MessageBox.Show("Usuario creado.");
+
+        }
+
+       
+        private bool ValidateEmpty(TextBox txt)
+        {
+            if (string.IsNullOrWhiteSpace(txt.Text))
+            {
+                txt.BackColor = Color.MistyRose;
+                return false;
+            }
+            else
+            {
+                txt.BackColor = SystemColors.Window;
+                return true;
+            }
+        }
+
+        private bool ValidatePasswordCheck(TextBox txt, TextBox txt2)
+        {
+            if (txt.Text != txt2.Text)
+            {
+                txt.BackColor = Color.MistyRose;
+                txt2.BackColor = Color.MistyRose;
+                return false;
+            }
+            else
+            {
+                txt.BackColor = SystemColors.Window;
+                txt2.BackColor = SystemColors.Window;
+                return true;
+            }
+        }
+        }
+
     }
-    }
+    
 
