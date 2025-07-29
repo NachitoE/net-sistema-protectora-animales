@@ -34,15 +34,19 @@ namespace Services
         }
         protected virtual void Persist()
         {
+            string location = GetFileLocation();
+            if (!Directory.Exists(GetFileDir()))
+                Directory.CreateDirectory(GetFileDir());
+
             var json = JsonSerializer.Serialize(_list, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(_filePath, json);
+            File.WriteAllText(location, json);
         }
         protected virtual List<T> Load()
         {
-            if (!File.Exists(_filePath))
+            if (!File.Exists(GetFileLocation()))
                 return new List<T>();
 
-            var json = File.ReadAllText(_filePath);
+            var json = File.ReadAllText(GetFileLocation());
             var deserializedList = JsonSerializer.Deserialize<List<T>>(json);
             if (deserializedList == null)
             {
@@ -51,5 +55,8 @@ namespace Services
             return deserializedList;
         }
         public bool IsEmpty() => _list.Count == 0;
+
+        private string GetFileDir() => Path.GetDirectoryName(GetFileLocation());
+        private string GetFileLocation() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VeterinariaNet", _filePath);
     }
 }
