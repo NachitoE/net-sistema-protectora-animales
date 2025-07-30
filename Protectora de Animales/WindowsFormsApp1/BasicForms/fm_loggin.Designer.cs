@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿using System.Windows.Forms;
+
+namespace WindowsFormsApp1
 {
     partial class fm_loggin
     {
@@ -69,6 +71,7 @@
             this.tb_password.PasswordChar = '*';
             this.tb_password.Size = new System.Drawing.Size(187, 20);
             this.tb_password.TabIndex = 2;
+            this.tb_password.KeyDown += TextBox_KeyDown;
             // 
             // btn_loggin
             // 
@@ -104,7 +107,8 @@
             this.tb_user.Name = "tb_user";
             this.tb_user.Size = new System.Drawing.Size(187, 20);
             this.tb_user.TabIndex = 6;
-      
+            this.tb_user.KeyDown += TextBox_KeyDown;
+
             // 
             // llb_singup
             // 
