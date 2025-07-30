@@ -45,6 +45,7 @@
             this.lb_SignUpUser = new System.Windows.Forms.Label();
             this.lb_SignUpPassCheck = new System.Windows.Forms.Label();
             this.btn_SingUpconfirm = new System.Windows.Forms.Button();
+            this.cb_userType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -218,11 +219,27 @@
             this.btn_SingUpconfirm.UseVisualStyleBackColor = false;
             this.btn_SingUpconfirm.Click += new System.EventHandler(this.btn_SingUpconfirm_Click);
             // 
+            // cb_userType
+            // 
+            this.cb_userType.AllowDrop = true;
+            this.cb_userType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_userType.FormattingEnabled = true;
+            this.cb_userType.Items.AddRange(new object[] {
+            "Transito",
+            "Voluntario",
+            "Adoptante"});
+            this.cb_userType.Location = new System.Drawing.Point(436, 245);
+            this.cb_userType.Name = "cb_userType";
+            this.cb_userType.Size = new System.Drawing.Size(121, 21);
+            this.cb_userType.TabIndex = 19;
+            this.cb_userType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // fm_SignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 335);
+            this.Controls.Add(this.cb_userType);
             this.Controls.Add(this.btn_SingUpconfirm);
             this.Controls.Add(this.lb_SignUpPassCheck);
             this.Controls.Add(this.tb_SignUpPasswordCheck);
@@ -268,5 +285,6 @@
         private System.Windows.Forms.Label lb_SignUpUser;
         private System.Windows.Forms.Label lb_SignUpPassCheck;
         private System.Windows.Forms.Button btn_SingUpconfirm;
+        private System.Windows.Forms.ComboBox cb_userType;
     }
 }

@@ -29,9 +29,9 @@ namespace WindowsFormsApp1
                 valid &= ValidateEmpty(tb_SignUpUserName);
                 valid &= ValidateEmpty(tb_SignUpPassword);
                 valid &= ValidateEmpty(tb_SignUpPasswordCheck);
+                valid &= cb_userType.Text != "";
 
-
-                if (!valid)
+            if (!valid)
                     MessageBox.Show("Por favor, completá todos los campos del formulario.");
 
 
@@ -51,7 +51,22 @@ namespace WindowsFormsApp1
                 string name = tb_SignUpName.Text;
                 string surname = tb_SignUpSurName.Text;
                 string dni = tb_SignUpDni.Text;
-                User.Type userType = User.Type.Adoptante;
+                User.Type userType = User.Type.Transito;
+                switch (cb_userType.Text)
+                {
+                    case "Adoptante":
+                        userType = User.Type.Adoptante;
+                        break;
+                    case "Voluntario":
+                        userType = User.Type.Voluntario;
+                        break;
+                    case "Transito":
+                        userType = User.Type.Transito;
+                        break;
+                    default:
+                        MessageBox.Show("Por favor, selecciona un tipo de usuario válido.");
+                        return;
+                }
 
                 if(UserService.Instance.UserNameExists(userName))
                 {
@@ -65,10 +80,6 @@ namespace WindowsFormsApp1
                 this.Hide();
             }
            
-
-        }
-        private void Hola()
-        {
 
         }
         private bool ValidateEmpty(TextBox txt)
@@ -100,7 +111,12 @@ namespace WindowsFormsApp1
                 return true;
             }
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
+    }
 
     }
     
