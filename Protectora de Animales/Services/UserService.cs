@@ -51,5 +51,13 @@ namespace Services
             }
             return false;
         }
+        public bool UserNameExists(string userName)
+        {
+            foreach (User user in GetAll())
+            {
+                if (user.UserName == userName) return true;
+            }
+            return false;
+        }
     }
 }

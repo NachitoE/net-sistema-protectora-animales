@@ -53,6 +53,11 @@ namespace WindowsFormsApp1
                 string dni = tb_SignUpDni.Text;
                 User.Type userType = User.Type.Adoptante;
 
+                if(UserService.Instance.UserNameExists(userName))
+                {
+                    MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.");
+                    return;
+                }
                 var user = new User(Guid.NewGuid().ToString(), name, surname, dni, userType, userName, password); /// preguntar a nacho algo no cierra
                 UserService.Instance.Save(user);
 
