@@ -46,34 +46,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fm_loggin.cs">
+    <Compile Include="BasicForms\fm_loggin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fm_loggin.Designer.cs">
+    <Compile Include="BasicForms\fm_loggin.Designer.cs">
       <DependentUpon>fm_loggin.cs</DependentUpon>
     </Compile>
-    <Compile Include="fm_SignUp.cs">
+    <Compile Include="BasicForms\fm_SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fm_SignUp.Designer.cs">
+    <Compile Include="BasicForms\fm_SignUp.Designer.cs">
       <DependentUpon>fm_SignUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="fm_AdminMenu.cs">
+    <Compile Include="menuAdmin\fm_AdminMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fm_AdminMenu.Designer.cs">
+    <Compile Include="menuAdmin\fm_AdminMenu.Designer.cs">
       <DependentUpon>fm_AdminMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminAdoptionMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminAdoptionMenu.Designer.cs">
+      <DependentUpon>fm_AdminAdoptionMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminAnimalMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminAnimalMenu.Designer.cs">
+      <DependentUpon>fm_AdminAnimalMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminSightingMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminSightingMenu.Designer.cs">
+      <DependentUpon>fm_AdminSightingMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminVolunteersmenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminVolunteersmenu.Designer.cs">
+      <DependentUpon>fm_AdminVolunteersmenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminFostersMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminFostersMenu.Designer.cs">
+      <DependentUpon>fm_AdminFostersMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminReportsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\fm_AdminReportsMenu.Designer.cs">
+      <DependentUpon>fm_AdminReportsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuFosters\fm_FosterMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuFosters\fm_FosterMenu.Designer.cs">
+      <DependentUpon>fm_FosterMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="fm_AdminMenu.resx">
+    <EmbeddedResource Include="menuAdmin\fm_AdminMenu.resx">
       <DependentUpon>fm_AdminMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fm_loggin.resx">
+    <EmbeddedResource Include="BasicForms\fm_loggin.resx">
       <DependentUpon>fm_loggin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fm_SignUp.resx">
+    <EmbeddedResource Include="BasicForms\fm_SignUp.resx">
       <DependentUpon>fm_SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuFosters\fm_FosterMenu.resx">
+      <DependentUpon>fm_FosterMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,6 +148,20 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{460b5b34-cce6-4022-b925-13c2da28c1a6}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{0a2f810b-5d80-46f8-9c67-1ec8cb4d3153}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="menuVolunteer\" />
+    <Folder Include="menu\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

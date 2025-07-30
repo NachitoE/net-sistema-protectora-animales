@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Services;
 
 namespace WindowsFormsApp1
 {
@@ -45,6 +46,15 @@ namespace WindowsFormsApp1
                 SendMessage(message, caption, buttons);
                 return;
             }
+           
+            /*if (!UserService.Instance.IsValidUser(this.tb_user.Text, this.tb_password.Text))
+            {
+                string message = "Usuario o contraseña incorrectos";
+                string caption = "Error";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                SendMessage(message, caption, buttons);
+                return;
+            }*/
             this.Hide();
             fm_AdminMenu menuForm= new fm_AdminMenu();
             menuForm.ShowDialog();
@@ -74,6 +84,6 @@ namespace WindowsFormsApp1
             signupForm.ShowDialog(); 
         }
 
-       
+      
     }
 }

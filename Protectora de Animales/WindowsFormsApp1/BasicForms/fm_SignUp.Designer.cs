@@ -133,6 +133,7 @@
             // tb_SignUpDni
             // 
             this.tb_SignUpDni.Location = new System.Drawing.Point(115, 215);
+            this.tb_SignUpDni.MaxLength = 8;
             this.tb_SignUpDni.Name = "tb_SignUpDni";
             this.tb_SignUpDni.Size = new System.Drawing.Size(214, 20);
             this.tb_SignUpDni.TabIndex = 9;
@@ -141,6 +142,7 @@
             // 
             this.tb_SignUpPasswordCheck.Location = new System.Drawing.Point(461, 215);
             this.tb_SignUpPasswordCheck.Name = "tb_SignUpPasswordCheck";
+            this.tb_SignUpPasswordCheck.PasswordChar = '*';
             this.tb_SignUpPasswordCheck.Size = new System.Drawing.Size(214, 20);
             this.tb_SignUpPasswordCheck.TabIndex = 15;
             // 
@@ -159,6 +161,7 @@
             // 
             this.tb_SignUpPassword.Location = new System.Drawing.Point(461, 189);
             this.tb_SignUpPassword.Name = "tb_SignUpPassword";
+            this.tb_SignUpPassword.PasswordChar = '*';
             this.tb_SignUpPassword.Size = new System.Drawing.Size(214, 20);
             this.tb_SignUpPassword.TabIndex = 13;
             // 

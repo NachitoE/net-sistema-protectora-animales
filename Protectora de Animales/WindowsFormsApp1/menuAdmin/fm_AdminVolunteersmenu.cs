@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.menusAdmin
 {
-    public partial class fm_AdminMenu : Form
+    public partial class fm_AdminVolunteersmenu : Form
     {
-        public fm_AdminMenu()
+        public fm_AdminVolunteersmenu()
         {
             InitializeComponent();
         }
-
-        
     }
 }

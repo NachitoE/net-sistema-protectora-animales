@@ -35,6 +35,7 @@
             this.btn_menuReports = new System.Windows.Forms.Button();
             this.btn_menuVolunteers = new System.Windows.Forms.Button();
             this.btn_menuFosters = new System.Windows.Forms.Button();
+            this.btn_menuAnimals = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,48 +66,63 @@
             // 
             // btn_menuAdoptions
             // 
-            this.btn_menuAdoptions.Location = new System.Drawing.Point(68, 147);
+            this.btn_menuAdoptions.Location = new System.Drawing.Point(77, 142);
             this.btn_menuAdoptions.Name = "btn_menuAdoptions";
             this.btn_menuAdoptions.Size = new System.Drawing.Size(217, 26);
             this.btn_menuAdoptions.TabIndex = 5;
             this.btn_menuAdoptions.Text = "Adopciones";
             this.btn_menuAdoptions.UseVisualStyleBackColor = true;
+            this.btn_menuAdoptions.Click += new System.EventHandler(this.btn_menuAdoptions_Click);
             // 
             // btn_menuSightings
             // 
-            this.btn_menuSightings.Location = new System.Drawing.Point(68, 179);
+            this.btn_menuSightings.Location = new System.Drawing.Point(77, 206);
             this.btn_menuSightings.Name = "btn_menuSightings";
             this.btn_menuSightings.Size = new System.Drawing.Size(217, 26);
             this.btn_menuSightings.TabIndex = 6;
             this.btn_menuSightings.Text = "Avistamientos";
             this.btn_menuSightings.UseVisualStyleBackColor = true;
+            this.btn_menuSightings.Click += new System.EventHandler(this.btn_menuSightings_Click);
             // 
             // btn_menuReports
             // 
-            this.btn_menuReports.Location = new System.Drawing.Point(68, 243);
+            this.btn_menuReports.Location = new System.Drawing.Point(77, 270);
             this.btn_menuReports.Name = "btn_menuReports";
             this.btn_menuReports.Size = new System.Drawing.Size(217, 26);
             this.btn_menuReports.TabIndex = 7;
             this.btn_menuReports.Text = "Reportes";
             this.btn_menuReports.UseVisualStyleBackColor = true;
+            this.btn_menuReports.Click += new System.EventHandler(this.btn_menuReports_Click);
             // 
             // btn_menuVolunteers
             // 
-            this.btn_menuVolunteers.Location = new System.Drawing.Point(68, 275);
+            this.btn_menuVolunteers.Location = new System.Drawing.Point(77, 302);
             this.btn_menuVolunteers.Name = "btn_menuVolunteers";
             this.btn_menuVolunteers.Size = new System.Drawing.Size(217, 26);
             this.btn_menuVolunteers.TabIndex = 8;
             this.btn_menuVolunteers.Text = "Voluntarios";
             this.btn_menuVolunteers.UseVisualStyleBackColor = true;
+            this.btn_menuVolunteers.Click += new System.EventHandler(this.btn_menuVolunteers_Click);
             // 
             // btn_menuFosters
             // 
-            this.btn_menuFosters.Location = new System.Drawing.Point(68, 211);
+            this.btn_menuFosters.Location = new System.Drawing.Point(77, 238);
             this.btn_menuFosters.Name = "btn_menuFosters";
             this.btn_menuFosters.Size = new System.Drawing.Size(217, 26);
             this.btn_menuFosters.TabIndex = 9;
             this.btn_menuFosters.Text = "Tránsitos";
             this.btn_menuFosters.UseVisualStyleBackColor = true;
+            this.btn_menuFosters.Click += new System.EventHandler(this.btn_menuFosters_Click);
+            // 
+            // btn_menuAnimals
+            // 
+            this.btn_menuAnimals.Location = new System.Drawing.Point(77, 174);
+            this.btn_menuAnimals.Name = "btn_menuAnimals";
+            this.btn_menuAnimals.Size = new System.Drawing.Size(217, 26);
+            this.btn_menuAnimals.TabIndex = 10;
+            this.btn_menuAnimals.Text = "Animales";
+            this.btn_menuAnimals.UseVisualStyleBackColor = true;
+            this.btn_menuAnimals.Click += new System.EventHandler(this.btn_AnimalsMenu_Click);
             // 
             // fm_AdminMenu
             // 
@@ -114,6 +130,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(390, 360);
+            this.Controls.Add(this.btn_menuAnimals);
             this.Controls.Add(this.btn_menuFosters);
             this.Controls.Add(this.btn_menuVolunteers);
             this.Controls.Add(this.btn_menuReports);
@@ -137,5 +154,6 @@
         private System.Windows.Forms.Button btn_menuReports;
         private System.Windows.Forms.Button btn_menuVolunteers;
         private System.Windows.Forms.Button btn_menuFosters;
+        private System.Windows.Forms.Button btn_menuAnimals;
     }
 }

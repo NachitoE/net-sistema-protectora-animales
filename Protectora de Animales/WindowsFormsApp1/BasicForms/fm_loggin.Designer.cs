@@ -42,6 +42,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
@@ -103,7 +104,7 @@
             this.tb_user.Name = "tb_user";
             this.tb_user.Size = new System.Drawing.Size(187, 20);
             this.tb_user.TabIndex = 6;
-        
+      
             // 
             // llb_singup
             // 
