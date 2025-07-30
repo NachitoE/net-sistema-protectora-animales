@@ -9,37 +9,19 @@ namespace Services
 {
     public class UserService : BaseService<User>
     {
-       /* private UserService()
+       private UserService()
         {
             if (IsEmpty())
                 LoadDummyData();
         }
 
-        /* private void LoadDummyData()
-       {Save(new User("user-1", "UTN", "12345678")
-           {
-               SurName = "Rosario",
-               UserType = User.Type.Admin
-           });
-
-           Save(new User("user-2", "Camila", "87654321")
-           {
-               SurName = "Stella",
-               UserType = User.Type.Adoptante
-           });
-
-           Save(new User("user-3", "Ignacio", "44180117")
-           {
-               SurName = "Esteves",
-               UserType = User.Type.Voluntario
-           });
-
-           Save(new User("user-4", "Nicolás", "11223344")
-           {
-               SurName = "Salerno",
-               UserType = User.Type.Transito
-           });
-       }*/
+        private void LoadDummyData()
+        {
+            Save(new User("user-1", "UTN", "Rosario", "12345678", User.Type.Admin, "utn", "123"));
+            Save(new User("user-2", "Camila", "Stella", "87654321", User.Type.Adoptante, "cami", "123"));
+            Save(new User("user-3", "Ignacio", "Esteves", "44180117", User.Type.Voluntario, "nacho", "123"));
+            Save(new User("user-4", "Nicolás", "Salerno", "11223344", User.Type.Transito, "niko", "123"));
+        }
 
 
         public static readonly UserService Instance = new UserService();
@@ -60,6 +42,14 @@ namespace Services
         public override void Delete(User obj)
         {
             base.Delete(obj);
+        }
+        public bool IsValidUser(string userName, string password)
+        {
+            foreach (User user in GetAll())
+            {
+                if (user.UserName == userName && user.Password == password) return true;
+            }
+            return false;
         }
     }
 }

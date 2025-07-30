@@ -45,17 +45,16 @@ namespace WindowsFormsApp1
              
 
             if(valid && SamePassword) {
+                
                 string userName = tb_SignUpUserName.Text;
                 string password = tb_SignUpPassword.Text;
                 string name = tb_SignUpName.Text;
                 string surname = tb_SignUpSurName.Text;
                 string dni = tb_SignUpDni.Text;
-                /*Type userType = Type.Adoptante;
-                
-                user = new User(name,surname,dni,) /// preguntar a nacho algo no cierra
-               
-                UserService userService = new UserService();
-                userService.Save();*/
+                User.Type userType = User.Type.Adoptante;
+
+                var user = new User(Guid.NewGuid().ToString(), name, surname, dni, userType, userName, password); /// preguntar a nacho algo no cierra
+                UserService.Instance.Save(user);
 
                 MessageBox.Show("Usuario creado.");
                 this.Hide();
@@ -63,8 +62,10 @@ namespace WindowsFormsApp1
            
 
         }
+        private void Hola()
+        {
 
-     
+        }
         private bool ValidateEmpty(TextBox txt)
         {
             if (string.IsNullOrWhiteSpace(txt.Text))
