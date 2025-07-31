@@ -17,32 +17,36 @@ namespace Services
 
         private void LoadDummyData()
         {
-            Save(new House
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserId = "user-2",
-                Address = "Bv. Oroño",
-                AddressNumber = 123,
-                Capacity = 2
-            });
+            Save(new House(
+                Guid.NewGuid().ToString(),
+                "user-2",
+                "Bv. Oroño",
+                123,
+                2
+            ));
 
-            Save(new House
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserId = "user-3",
-                Address = "Av. Siempre Viva",
-                AddressNumber = 742,
-                Capacity = 3
-            });
+            Save(new House(
+                Guid.NewGuid().ToString(),
+                "user-3",
+                "Av. Siempre Viva",
+                742,
+                3
+            ));
 
-            Save(new House
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserId = "user-4",
-                Address = "Entre Rios",
-                AddressNumber = 2010,
-                Capacity = 5
-            });
+            Save(new House(
+                Guid.NewGuid().ToString(),
+                "user-4",
+                "Entre Rios",
+                2010,
+                5
+            ));
+            Save(new House(
+                Guid.NewGuid().ToString(),
+                "user-2",
+                "Bv. Oroño",
+                123,
+                2
+            ));
         }
 
         protected override string _filePath => "house.json";

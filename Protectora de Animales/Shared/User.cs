@@ -3,6 +3,8 @@
     public class User : IIdentifiable
     {
         #region Fields/Properties
+        public const int MAX_CAPACITY_VOLUNTARIOS = 2;
+
         private Type _userType = Type.Admin;
         private string _id;
         public string Id

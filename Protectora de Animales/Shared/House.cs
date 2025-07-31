@@ -40,5 +40,13 @@ namespace Shared
             set { _capacity = value; }
         }
         #endregion
+        public House(string id, string userId, string address, int addressNumber, int capacity)
+        {
+            Id = id;
+            UserId = userId;
+            Address = address;
+            AddressNumber = addressNumber;
+            Capacity = capacity;
+        }
     }
 }

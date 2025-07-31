@@ -59,5 +59,23 @@ namespace Services
             }
             return false;
         }
+
+        public static int GetRemainingCapacity(User user)
+        {
+            if (user.UserType == User.Type.Voluntario)
+            {
+                return User.MAX_CAPACITY_VOLUNTARIOS - AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
+            }
+            else if (user.UserType == User.Type.Transito)
+            {
+                var house = HouseService.Instance.GetAll().FirstOrDefault(h => h.UserId == user.Id);
+                if (house == null)
+                    return 0; // No house found for the user
+
+                return house.Capacity - 
+                    AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
+            }
+            return 0;
+        }
     }
 }

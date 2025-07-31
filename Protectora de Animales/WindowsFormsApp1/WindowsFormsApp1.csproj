@@ -132,6 +132,9 @@
     <EmbeddedResource Include="menuAdmin\Animales\fm_AdminAnimalMenu.resx">
       <DependentUpon>fm_AdminAnimalMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="menuAdmin\Animales\fm_AsignResp.resx">
+      <DependentUpon>fm_AsignResp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuAdmin\Animales\fm_ShowAllAnimals.resx">
       <DependentUpon>fm_ShowAllAnimals.cs</DependentUpon>
     </EmbeddedResource>
