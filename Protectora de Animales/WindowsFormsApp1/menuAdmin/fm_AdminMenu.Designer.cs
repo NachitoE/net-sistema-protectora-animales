@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pb_headerpic = new System.Windows.Forms.PictureBox();
             this.lb_MenuTitle = new System.Windows.Forms.Label();
             this.btn_menuAdoptions = new System.Windows.Forms.Button();
             this.btn_menuSightings = new System.Windows.Forms.Button();
@@ -36,21 +35,9 @@
             this.btn_menuVolunteers = new System.Windows.Forms.Button();
             this.btn_menuFosters = new System.Windows.Forms.Button();
             this.btn_menuAnimals = new System.Windows.Forms.Button();
+            this.pb_headerpic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pb_headerpic
-            // 
-            this.pb_headerpic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb_headerpic.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pb_headerpic.Location = new System.Drawing.Point(-1, 27);
-            this.pb_headerpic.Name = "pb_headerpic";
-            this.pb_headerpic.Size = new System.Drawing.Size(388, 95);
-            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pb_headerpic.TabIndex = 2;
-            this.pb_headerpic.TabStop = false;
             // 
             // lb_MenuTitle
             // 
@@ -124,6 +111,19 @@
             this.btn_menuAnimals.UseVisualStyleBackColor = true;
             this.btn_menuAnimals.Click += new System.EventHandler(this.btn_AnimalsMenu_Click);
             // 
+            // pb_headerpic
+            // 
+            this.pb_headerpic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_headerpic.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
+            this.pb_headerpic.Location = new System.Drawing.Point(-1, 27);
+            this.pb_headerpic.Name = "pb_headerpic";
+            this.pb_headerpic.Size = new System.Drawing.Size(388, 95);
+            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb_headerpic.TabIndex = 2;
+            this.pb_headerpic.TabStop = false;
+            // 
             // fm_AdminMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -149,11 +149,11 @@
 
         private System.Windows.Forms.PictureBox pb_headerpic;
         protected internal System.Windows.Forms.Label lb_MenuTitle;
-        private System.Windows.Forms.Button btn_menuAdoptions;
         private System.Windows.Forms.Button btn_menuSightings;
         private System.Windows.Forms.Button btn_menuReports;
         private System.Windows.Forms.Button btn_menuVolunteers;
         private System.Windows.Forms.Button btn_menuFosters;
-        private System.Windows.Forms.Button btn_menuAnimals;
+        public System.Windows.Forms.Button btn_menuAdoptions;
+        public System.Windows.Forms.Button btn_menuAnimals;
     }
 }

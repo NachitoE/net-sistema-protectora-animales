@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿namespace WindowsFormsApp1.menuAdmin.Animales
 {
-    partial class fm_AdminAnimalMenu
+    partial class fm_AsignResp
     {
         /// <summary>
         /// Required designer variable.

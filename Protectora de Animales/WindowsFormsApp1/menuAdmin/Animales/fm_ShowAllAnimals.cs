@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.menuAdmin.Animales
 {
-    public partial class fm_AdminAnimalMenu : Form
+    public partial class fm_ShowAllAnimals : Form
     {
-        public fm_AdminAnimalMenu()
+        public fm_ShowAllAnimals()
         {
             InitializeComponent();
         }
