@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.menuVolunteer
 {
-    public partial class fm_AdminAdoptionMenu : Form
+    public partial class Form1 : Form
     {
-        public fm_AdminAdoptionMenu()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void lb_EnConstruccion_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

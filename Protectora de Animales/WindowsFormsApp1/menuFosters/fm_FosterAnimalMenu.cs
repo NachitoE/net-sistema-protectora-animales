@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.menuFosters
 {
-    public partial class fm_AdminAdoptionMenu : Form
+    public partial class fm_FosterAnimalMenu : Form
     {
-        public fm_AdminAdoptionMenu()
+        public fm_FosterAnimalMenu()
         {
             InitializeComponent();
-        }
-
-        private void lb_EnConstruccion_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

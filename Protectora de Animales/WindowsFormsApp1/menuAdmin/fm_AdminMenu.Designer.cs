@@ -153,11 +153,11 @@
 
         private System.Windows.Forms.PictureBox pb_headerpic;
         protected internal System.Windows.Forms.Label lb_MenuTitle;
-        private System.Windows.Forms.Button btn_menuSightings;
-        private System.Windows.Forms.Button btn_menuReports;
-        private System.Windows.Forms.Button btn_menuVolunteers;
-        private System.Windows.Forms.Button btn_menuFosters;
         public System.Windows.Forms.Button btn_menuAdoptions;
         public System.Windows.Forms.Button btn_menuAnimals;
+        protected System.Windows.Forms.Button btn_menuReports;
+        protected System.Windows.Forms.Button btn_menuVolunteers;
+        protected System.Windows.Forms.Button btn_menuFosters;
+        protected System.Windows.Forms.Button btn_menuSightings;
     }
 }

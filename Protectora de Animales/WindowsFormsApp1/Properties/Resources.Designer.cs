@@ -63,6 +63,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap en_construcción__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("en_construcción (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Studio_Ghibli__Cattt__ {
             get {
                 object obj = ResourceManager.GetObject("Studio Ghibli! Cattt__", resourceCulture);

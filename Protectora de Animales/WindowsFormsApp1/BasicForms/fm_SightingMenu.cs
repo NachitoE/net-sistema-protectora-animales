@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class fm_AdminAdoptionMenu : Form
+    public partial class fm_SightingMenu : Form
     {
-        public fm_AdminAdoptionMenu()
+        public fm_SightingMenu()
         {
             InitializeComponent();
         }
 
-        private void lb_EnConstruccion_Click(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsFormsApp1.menuFosters
 {
-    public partial class fm_AdminSightingMenu : Form
+    public partial class fm_FosterAdoptionMenu : Form
     {
-        public fm_AdminSightingMenu()
+        public fm_FosterAdoptionMenu()
         {
             InitializeComponent();
         }

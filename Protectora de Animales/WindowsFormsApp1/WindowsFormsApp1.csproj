@@ -94,11 +94,11 @@
     <Compile Include="menuAdmin\Animales\fm_AdminAnimalMenu.Designer.cs">
       <DependentUpon>fm_AdminAnimalMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="menuAdmin\fm_AdminSightingMenu.cs">
+    <Compile Include="BasicForms\fm_SightingMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menuAdmin\fm_AdminSightingMenu.Designer.cs">
-      <DependentUpon>fm_AdminSightingMenu.cs</DependentUpon>
+    <Compile Include="BasicForms\fm_SightingMenu.Designer.cs">
+      <DependentUpon>fm_SightingMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="menuAdmin\fm_AdminVolunteersmenu.cs">
       <SubType>Form</SubType>
@@ -118,11 +118,29 @@
     <Compile Include="menuAdmin\fm_AdminReportsMenu.Designer.cs">
       <DependentUpon>fm_AdminReportsMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="menuFosters\fm_FosterMenu.cs">
+    <Compile Include="menuFosters\fm_FosterAdoptionMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menuFosters\fm_FosterMenu.Designer.cs">
-      <DependentUpon>fm_FosterMenu.cs</DependentUpon>
+    <Compile Include="menuFosters\fm_FosterAdoptionMenu.Designer.cs">
+      <DependentUpon>fm_FosterAdoptionMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuFosters\fm_FosterAnimalMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuFosters\fm_FosterAnimalMenu.Designer.cs">
+      <DependentUpon>fm_FosterAnimalMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuFosters\fm_FostersMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuFosters\fm_FostersMenu.Designer.cs">
+      <DependentUpon>fm_FostersMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerMenu.Designer.cs">
+      <DependentUpon>fm_VolunteerMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,6 +156,12 @@
     <EmbeddedResource Include="menuAdmin\Animales\fm_ShowAllAnimals.resx">
       <DependentUpon>fm_ShowAllAnimals.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="menuAdmin\fm_AdminAdoptionMenu.resx">
+      <DependentUpon>fm_AdminAdoptionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuAdmin\fm_AdminFostersMenu.resx">
+      <DependentUpon>fm_AdminFostersMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuAdmin\fm_AdminMenu.resx">
       <DependentUpon>fm_AdminMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,23 +171,38 @@
     <EmbeddedResource Include="BasicForms\fm_SignUp.resx">
       <DependentUpon>fm_SignUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="menuFosters\fm_FosterMenu.resx">
-      <DependentUpon>fm_FosterMenu.cs</DependentUpon>
+    <EmbeddedResource Include="menuAdmin\fm_AdminReportsMenu.resx">
+      <DependentUpon>fm_AdminReportsMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BasicForms\fm_SightingMenu.resx">
+      <DependentUpon>fm_SightingMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuAdmin\fm_AdminVolunteersmenu.resx">
+      <DependentUpon>fm_AdminVolunteersmenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuFosters\fm_FosterAdoptionMenu.resx">
+      <DependentUpon>fm_FosterAdoptionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuFosters\fm_FostersMenu.resx">
+      <DependentUpon>fm_FostersMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuVolunteer\fm_VolunteerMenu.resx">
+      <DependentUpon>fm_VolunteerMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -190,8 +229,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="menuVolunteer\" />
     <Folder Include="menu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\en_construcción %281%291.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

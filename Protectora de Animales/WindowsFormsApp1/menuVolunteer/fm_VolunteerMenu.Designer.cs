@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿namespace WindowsFormsApp1.menuVolunteer
 {
-    partial class fm_AdminSightingMenu
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.

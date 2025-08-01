@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1.menusAdmin
+﻿namespace WindowsFormsApp1.menuFosters
 {
-    partial class fm_AdminFostersMenu
+    partial class fm_FosterAdoptionMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -11,8 +11,6 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-       
-
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -30,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fm_AdminFostersMenu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fm_FosterAdoptionMenu));
             this.pb_UnderConstructionImg = new System.Windows.Forms.PictureBox();
             this.lb_EnConstruccion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).BeginInit();
@@ -43,7 +41,7 @@
             this.pb_UnderConstructionImg.Name = "pb_UnderConstructionImg";
             this.pb_UnderConstructionImg.Size = new System.Drawing.Size(801, 327);
             this.pb_UnderConstructionImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_UnderConstructionImg.TabIndex = 6;
+            this.pb_UnderConstructionImg.TabIndex = 8;
             this.pb_UnderConstructionImg.TabStop = false;
             // 
             // lb_EnConstruccion
@@ -53,18 +51,18 @@
             this.lb_EnConstruccion.Location = new System.Drawing.Point(176, 416);
             this.lb_EnConstruccion.Name = "lb_EnConstruccion";
             this.lb_EnConstruccion.Size = new System.Drawing.Size(423, 13);
-            this.lb_EnConstruccion.TabIndex = 5;
+            this.lb_EnConstruccion.TabIndex = 7;
             this.lb_EnConstruccion.Text = "¡EL EQUIPO ESTÁ TRABAJANDO PARA RESOLVERLO LO MÁS PRONTO POSIBLE!";
             // 
-            // fm_AdminFostersMenu
+            // fm_FosterAdoptionMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pb_UnderConstructionImg);
             this.Controls.Add(this.lb_EnConstruccion);
-            this.Name = "fm_AdminFostersMenu";
-            this.Text = "TRANSITOS";
+            this.Name = "fm_FosterAdoptionMenu";
+            this.Text = "fm_FosterAdoptionMenu";
             ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
