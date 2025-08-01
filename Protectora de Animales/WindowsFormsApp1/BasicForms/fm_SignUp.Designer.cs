@@ -232,7 +232,7 @@
             this.cb_userType.Name = "cb_userType";
             this.cb_userType.Size = new System.Drawing.Size(121, 21);
             this.cb_userType.TabIndex = 19;
-            this.cb_userType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+         
             // 
             // fm_SignUp
             // 

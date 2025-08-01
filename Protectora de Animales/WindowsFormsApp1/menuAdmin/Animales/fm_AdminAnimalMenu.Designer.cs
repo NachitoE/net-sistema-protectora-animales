@@ -28,26 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pb_headerpic = new System.Windows.Forms.PictureBox();
             this.lb_MenuTitle = new System.Windows.Forms.Label();
             this.btn_AddNewAnimal = new System.Windows.Forms.Button();
             this.btn_ShowAllAnimals = new System.Windows.Forms.Button();
             this.btn_asignResp = new System.Windows.Forms.Button();
+            this.pb_headerpic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pb_headerpic
-            // 
-            this.pb_headerpic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb_headerpic.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pb_headerpic.Location = new System.Drawing.Point(-3, -1);
-            this.pb_headerpic.Name = "pb_headerpic";
-            this.pb_headerpic.Size = new System.Drawing.Size(376, 81);
-            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pb_headerpic.TabIndex = 3;
-            this.pb_headerpic.TabStop = false;
             // 
             // lb_MenuTitle
             // 
@@ -56,7 +43,7 @@
             this.lb_MenuTitle.Font = new System.Drawing.Font("Yu Gothic UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_MenuTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lb_MenuTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lb_MenuTitle.Location = new System.Drawing.Point(-10, 42);
+            this.lb_MenuTitle.Location = new System.Drawing.Point(-5, 42);
             this.lb_MenuTitle.Name = "lb_MenuTitle";
             this.lb_MenuTitle.Size = new System.Drawing.Size(146, 38);
             this.lb_MenuTitle.TabIndex = 4;
@@ -91,6 +78,19 @@
             this.btn_asignResp.Text = "Asignar cuidador";
             this.btn_asignResp.UseVisualStyleBackColor = true;
             this.btn_asignResp.Click += new System.EventHandler(this.btn_asignResp_Click);
+            // 
+            // pb_headerpic
+            // 
+            this.pb_headerpic.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_headerpic.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
+            this.pb_headerpic.Location = new System.Drawing.Point(-3, -1);
+            this.pb_headerpic.Name = "pb_headerpic";
+            this.pb_headerpic.Size = new System.Drawing.Size(376, 81);
+            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb_headerpic.TabIndex = 3;
+            this.pb_headerpic.TabStop = false;
             // 
             // fm_AdminAnimalMenu
             // 

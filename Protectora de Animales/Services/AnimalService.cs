@@ -15,43 +15,11 @@ namespace Services
                 LoadDummyData();
         }
 
-        private void LoadDummyData()
+       private void LoadDummyData()
         {
-            Save(new Animal
-            {
-                Id = "animal-1",
-                Name = "Luna",
-                Species = "Perro",
-                BirthDate = new DateTime(2021, 3, 12),
-                UserId = "user-2"
-            });
-
-            Save(new Animal
-            {
-                Id = "animal-2",
-                Name = "Milo",
-                Species = "Gato",
-                BirthDate = new DateTime(2022, 7, 25),
-                UserId = "user-3"
-            });
-
-            Save(new Animal
-            {
-                Id = "animal-3",
-                Name = "Toby",
-                Species = "Perro",
-                BirthDate = new DateTime(2020, 1, 5),
-                UserId = "user-2"
-            });
-
-            Save(new Animal
-            {
-                Id = "animal-4",
-                Name = "Lola",
-                Species = "Gata",
-                BirthDate = new DateTime(2019, 10, 30),
-                UserId = "user-4"
-            });
+            Save(new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), "user-1", Animal.AnimalStateEn.Disponible));
+            Save(new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-2", Animal.AnimalStateEn.Disponible));
+            Save(new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), "user-3", Animal.AnimalStateEn.Disponible));
         }
 
 

@@ -73,7 +73,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.");
                     return;
                 }
-                var user = new User(Guid.NewGuid().ToString(), name, surname, dni, userType, userName, password); /// preguntar a nacho algo no cierra
+                User user = new User(Guid.NewGuid().ToString(), name, surname, dni, userType, userName, password); /// preguntar a nacho algo no cierra
                 UserService.Instance.Save(user);
 
                 MessageBox.Show("Usuario creado.");
@@ -112,10 +112,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 
     }

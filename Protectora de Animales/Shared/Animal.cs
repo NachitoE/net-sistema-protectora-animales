@@ -35,31 +35,64 @@ namespace Shared
         private string _name;
         
         //TODO: Species es una clase aparte?
-        public string Species
+        public SpeciesEn Species
         {
             get
             {
-                return _species;
+                return _specie;
             }
             set
             {
-                _species = value;
+                _specie = value;
             }
         }
-        private string _species;
+        private SpeciesEn _specie;
         public DateTime BirthDate
         {
             get => _birthDate;
             set => _birthDate = value;
         }
         private DateTime _birthDate;
-        //TODO: AnimalState
+
+      
         public string UserId
         {
             get => _userId;
             set => _userId = value;
         }
-        private string _userId; //owner
+        private string _userId; //owner, caretaker
+
+        public AnimalStateEn AnimalState
+        {
+            get => _animalState;
+            set => _animalState = value;
+        }
+
+        private AnimalStateEn _animalState;
+
+        public enum AnimalStateEn
+        {
+            Adoptado, 
+            Disponible
+        } 
+
+        public Animal(string id, string name, SpeciesEn species, DateTime birthDate, string userId, AnimalStateEn animalState)
+        {
+            Id = id;
+            Name = name;
+            Species = species;
+            BirthDate = birthDate;
+            UserId = userId;
+            AnimalState = animalState;
+        }
+
+        public enum  SpeciesEn
+        {
+            Perro,
+            Gato,
+            Conejo,
+            Pajaro
+        }
         #endregion
     }
 }
