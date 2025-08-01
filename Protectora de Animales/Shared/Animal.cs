@@ -86,7 +86,7 @@ namespace Shared
             AnimalState = animalState;
         }
 
-        public enum  SpeciesEn
+        public enum SpeciesEn
         {
             Perro,
             Gato,

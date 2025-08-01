@@ -64,7 +64,8 @@ namespace Services
         {
             if (user.UserType == User.Type.Voluntario)
             {
-                return User.MAX_CAPACITY_VOLUNTARIOS - AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
+                int userAnimalsCount = AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
+                return User.MAX_CAPACITY_VOLUNTARIOS - userAnimalsCount;
             }
             else if (user.UserType == User.Type.Transito)
             {

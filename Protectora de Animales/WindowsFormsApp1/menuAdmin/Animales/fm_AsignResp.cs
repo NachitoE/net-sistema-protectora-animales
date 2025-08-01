@@ -14,6 +14,8 @@ namespace WindowsFormsApp1.menuAdmin.Animales
 {
     public partial class fm_AsignResp : Form
     {
+        private User _selectedTargetUser = null;
+        private Animal _selectedTargetAnimal = null;
         public fm_AsignResp()
         {
             InitializeComponent();
@@ -27,7 +29,11 @@ namespace WindowsFormsApp1.menuAdmin.Animales
 
         private void UserFormLoad(object sender, EventArgs e)
         {
+            btn_accept.Enabled = false;
+
+            //============ Cargar Usuarios =============
             dgv_users.AutoGenerateColumns = false;
+            //tiene q ser una lista de usuarios que sean voluntarios o de tránsito y que tengan capacidad restante
             List<User> users = UserService.Instance.GetAll()
                 .Where(u => (u.UserType == User.Type.Voluntario
                             || u.UserType == User.Type.Transito) &&
@@ -51,7 +57,90 @@ namespace WindowsFormsApp1.menuAdmin.Animales
                 }
             };
 
+            dgv_users.SelectionChanged += (s, usersDGVEventArgs) =>
+            {
+                if (dgv_users.SelectedRows.Count > 0)
+                {
+                    _selectedTargetUser = dgv_users.SelectedRows[0].DataBoundItem as User;
+                }
+                else
+                {
+                    _selectedTargetUser = null;
+                }
+                UpdateAcceptButtonState();
+            };
             dgv_users.DataSource = users;
+            dgv_users.ClearSelection();
+            //============ Cargar Animales =============
+            dgv_animals.AutoGenerateColumns = false;
+            List<Animal> animals = AnimalService.Instance.GetAll()
+                .Where(a => a.AnimalState == Animal.AnimalStateEn.Disponible)
+                .ToList();
+
+            dgv_animals.Columns.Add("Name", "Nombre");
+            dgv_animals.Columns.Add("Species", "Especie");
+            dgv_animals.Columns.Add("BirthDate", "Fecha de Nacimiento");
+            dgv_animals.Columns["Name"].DataPropertyName = "Name";
+            dgv_animals.Columns["Species"].DataPropertyName = "Species";
+            dgv_animals.Columns["BirthDate"].DataPropertyName = "BirthDate";
+            dgv_animals.CellFormatting += (s, animalsDGVEventArgs) =>
+            {
+                if (dgv_animals.Columns[animalsDGVEventArgs.ColumnIndex].Name == "BirthDate")
+                {
+                    var animal = dgv_animals.Rows[animalsDGVEventArgs.RowIndex].DataBoundItem as Animal;
+                    if (animal != null)
+                    {
+                        animalsDGVEventArgs.Value = animal.BirthDate.ToShortDateString();
+                    }
+                }
+            };
+
+            dgv_animals.SelectionChanged += (s, animalsDGVEventArgs) =>
+            {
+                if (dgv_animals.SelectedRows.Count > 0)
+                {
+                    _selectedTargetAnimal = dgv_animals.SelectedRows[0].DataBoundItem as Animal;
+                }
+                else
+                {
+                    _selectedTargetAnimal = null;
+                }
+                UpdateAcceptButtonState();
+            };
+            dgv_animals.DataSource = animals;
+            dgv_animals.ClearSelection();
+            //users and/or animals empty => TODO: Quizás ésto lo podríamos mover al presionar el botón que trae a este form:)
+            if (users.Count == 0 || animals.Count == 0)
+            {
+                string informationString =
+                    users.Count == 0 && animals.Count == 0 ? "ni usuarios ni animales" :
+                    users.Count == 0 ? "usuarios" :
+                    "animales";
+                MessageBox.Show($"No hay {informationString} disponibles para asignar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+            }
+
+
+        }
+        private void UpdateAcceptButtonState() => btn_accept.Enabled = _selectedTargetUser != null && _selectedTargetAnimal != null;
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btn_accept_Click(object sender, EventArgs e)
+        {
+            if(_selectedTargetUser == null || _selectedTargetAnimal == null)
+            {
+                //no debería llegar a este punto, pero veremos
+                MessageBox.Show("Debe estar seleccionado un animal y un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _selectedTargetAnimal.UserId = _selectedTargetUser.Id;
+            _selectedTargetAnimal.AnimalState = Animal.AnimalStateEn.Adoptado;
+            AnimalService.Instance.Save(_selectedTargetAnimal);
+            MessageBox.Show($"El animal {_selectedTargetAnimal.Name} ha sido asignado a {_selectedTargetUser.UserName}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
         }
     }
 }
