@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
         private void btn_menuSightings_Click(object sender, EventArgs e)
         {
             this.Hide();
-            fm_AdminSightingMenu menuredir = new fm_AdminSightingMenu();
+            fm_SightingMenu menuredir = new fm_SightingMenu();
             menuredir.ShowDialog();
             this.Show();
         }
