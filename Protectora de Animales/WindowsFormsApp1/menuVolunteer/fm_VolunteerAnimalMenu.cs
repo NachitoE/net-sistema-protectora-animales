@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1.menuVolunteer
 {
-    public partial class fm_VolunteerMenu : Form
+    public partial class fm_VolunteerAnimalMenu : Form
     {
-        public fm_VolunteerMenu()
+        public fm_VolunteerAnimalMenu()
         {
             InitializeComponent();
         }

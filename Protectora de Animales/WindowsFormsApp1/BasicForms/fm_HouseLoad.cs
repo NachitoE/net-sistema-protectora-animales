@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuVolunteer
+namespace WindowsFormsApp1.BasicForms
 {
-    public partial class fm_VolunteerMenu : Form
+    public partial class fm_HouseLoad : Form
     {
-        public fm_VolunteerMenu()
+        public fm_HouseLoad()
         {
             InitializeComponent();
         }

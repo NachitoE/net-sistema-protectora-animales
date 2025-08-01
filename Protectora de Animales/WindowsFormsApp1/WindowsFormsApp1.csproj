@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicForms\fm_HouseLoad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicForms\fm_HouseLoad.Designer.cs">
+      <DependentUpon>fm_HouseLoad.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicForms\fm_loggin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     <Compile Include="menuAdmin\fm_AdminReportsMenu.Designer.cs">
       <DependentUpon>fm_AdminReportsMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuAdopter\fm_AdopterMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdopter\fm_AdopterMenu.Designer.cs">
+      <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuFosters\fm_FosterAdoptionMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +148,18 @@
     <Compile Include="menuFosters\fm_FostersMenu.Designer.cs">
       <DependentUpon>fm_FostersMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerAdoptionMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerAdoptionMenu.Designer.cs">
+      <DependentUpon>fm_VolunteerAdoptionMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerAnimalMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuVolunteer\fm_VolunteerAnimalMenu.Designer.cs">
+      <DependentUpon>fm_VolunteerAnimalMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuVolunteer\fm_VolunteerMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +168,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BasicForms\fm_HouseLoad.resx">
+      <DependentUpon>fm_HouseLoad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuAdmin\Animales\fm_AddNewAnimal.resx">
       <DependentUpon>fm_AddNewAnimal.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,11 +207,20 @@
     <EmbeddedResource Include="menuAdmin\fm_AdminVolunteersmenu.resx">
       <DependentUpon>fm_AdminVolunteersmenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="menuAdopter\fm_AdopterMenu.resx">
+      <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuFosters\fm_FosterAdoptionMenu.resx">
       <DependentUpon>fm_FosterAdoptionMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuFosters\fm_FostersMenu.resx">
       <DependentUpon>fm_FostersMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuVolunteer\fm_VolunteerAdoptionMenu.resx">
+      <DependentUpon>fm_VolunteerAdoptionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuVolunteer\fm_VolunteerAnimalMenu.resx">
+      <DependentUpon>fm_VolunteerAnimalMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuVolunteer\fm_VolunteerMenu.resx">
       <DependentUpon>fm_VolunteerMenu.cs</DependentUpon>
@@ -228,9 +264,7 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="menu\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\en_construcción %281%291.jpg" />
   </ItemGroup>
