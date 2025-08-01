@@ -43,16 +43,18 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 1);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(813, 70);
+            this.pictureBox1.Size = new System.Drawing.Size(574, 70);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // cb_AnimalSpc
             // 
             this.cb_AnimalSpc.AllowDrop = true;
+            this.cb_AnimalSpc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cb_AnimalSpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_AnimalSpc.FormattingEnabled = true;
             this.cb_AnimalSpc.Items.AddRange(new object[] {
@@ -60,16 +62,17 @@
             "Gato,",
             "Conejo,",
             "Pajaro"});
-            this.cb_AnimalSpc.Location = new System.Drawing.Point(149, 145);
+            this.cb_AnimalSpc.Location = new System.Drawing.Point(149, 146);
             this.cb_AnimalSpc.Name = "cb_AnimalSpc";
-            this.cb_AnimalSpc.Size = new System.Drawing.Size(214, 21);
+            this.cb_AnimalSpc.Size = new System.Drawing.Size(201, 21);
             this.cb_AnimalSpc.TabIndex = 33;
             // 
             // lb_AnimalBirthDate
             // 
+            this.lb_AnimalBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_AnimalBirthDate.AutoSize = true;
             this.lb_AnimalBirthDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lb_AnimalBirthDate.Location = new System.Drawing.Point(15, 178);
+            this.lb_AnimalBirthDate.Location = new System.Drawing.Point(15, 179);
             this.lb_AnimalBirthDate.Name = "lb_AnimalBirthDate";
             this.lb_AnimalBirthDate.Size = new System.Drawing.Size(109, 13);
             this.lb_AnimalBirthDate.TabIndex = 24;
@@ -78,9 +81,10 @@
             // 
             // lb_AnimalSpc
             // 
+            this.lb_AnimalSpc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_AnimalSpc.AutoSize = true;
             this.lb_AnimalSpc.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lb_AnimalSpc.Location = new System.Drawing.Point(15, 148);
+            this.lb_AnimalSpc.Location = new System.Drawing.Point(15, 149);
             this.lb_AnimalSpc.Name = "lb_AnimalSpc";
             this.lb_AnimalSpc.Size = new System.Drawing.Size(45, 13);
             this.lb_AnimalSpc.TabIndex = 22;
@@ -89,16 +93,18 @@
             // 
             // tb_AnimalName
             // 
-            this.tb_AnimalName.Location = new System.Drawing.Point(149, 119);
+            this.tb_AnimalName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_AnimalName.Location = new System.Drawing.Point(149, 120);
             this.tb_AnimalName.Name = "tb_AnimalName";
-            this.tb_AnimalName.Size = new System.Drawing.Size(214, 20);
+            this.tb_AnimalName.Size = new System.Drawing.Size(201, 20);
             this.tb_AnimalName.TabIndex = 21;
             // 
             // lb_AnimalName
             // 
+            this.lb_AnimalName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_AnimalName.AutoSize = true;
             this.lb_AnimalName.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lb_AnimalName.Location = new System.Drawing.Point(15, 122);
+            this.lb_AnimalName.Location = new System.Drawing.Point(15, 123);
             this.lb_AnimalName.Name = "lb_AnimalName";
             this.lb_AnimalName.Size = new System.Drawing.Size(47, 13);
             this.lb_AnimalName.TabIndex = 20;
@@ -107,10 +113,11 @@
             // 
             // mtb_AnimalBd
             // 
-            this.mtb_AnimalBd.Location = new System.Drawing.Point(149, 175);
+            this.mtb_AnimalBd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.mtb_AnimalBd.Location = new System.Drawing.Point(149, 176);
             this.mtb_AnimalBd.Mask = "00/00/0000";
             this.mtb_AnimalBd.Name = "mtb_AnimalBd";
-            this.mtb_AnimalBd.Size = new System.Drawing.Size(214, 20);
+            this.mtb_AnimalBd.Size = new System.Drawing.Size(201, 20);
             this.mtb_AnimalBd.TabIndex = 35;
             this.mtb_AnimalBd.ValidatingType = typeof(System.DateTime);
             // 
@@ -120,17 +127,18 @@
             this.lb_MenuTitle.Font = new System.Drawing.Font("Yu Gothic UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_MenuTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lb_MenuTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lb_MenuTitle.Location = new System.Drawing.Point(125, 74);
+            this.lb_MenuTitle.Location = new System.Drawing.Point(131, 74);
             this.lb_MenuTitle.Name = "lb_MenuTitle";
-            this.lb_MenuTitle.Size = new System.Drawing.Size(271, 30);
+            this.lb_MenuTitle.Size = new System.Drawing.Size(255, 30);
             this.lb_MenuTitle.TabIndex = 36;
             this.lb_MenuTitle.Text = "Agregar nuevo animal";
             // 
             // btn_AcceptnewAnimal
             // 
-            this.btn_AcceptnewAnimal.Location = new System.Drawing.Point(455, 267);
+            this.btn_AcceptnewAnimal.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_AcceptnewAnimal.Location = new System.Drawing.Point(457, 269);
             this.btn_AcceptnewAnimal.Name = "btn_AcceptnewAnimal";
-            this.btn_AcceptnewAnimal.Size = new System.Drawing.Size(75, 23);
+            this.btn_AcceptnewAnimal.Size = new System.Drawing.Size(115, 28);
             this.btn_AcceptnewAnimal.TabIndex = 37;
             this.btn_AcceptnewAnimal.Text = "Aceptar";
             this.btn_AcceptnewAnimal.UseVisualStyleBackColor = true;
@@ -138,10 +146,11 @@
             // 
             // fm_AddNewAnimal
             // 
+            this.AcceptButton = this.btn_AcceptnewAnimal;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(544, 302);
+            this.ClientSize = new System.Drawing.Size(574, 303);
             this.Controls.Add(this.btn_AcceptnewAnimal);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.mtb_AnimalBd);
@@ -151,8 +160,9 @@
             this.Controls.Add(this.tb_AnimalName);
             this.Controls.Add(this.lb_AnimalName);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "fm_AddNewAnimal";
-            this.Text = "fm_AddNewAnimal";
+            this.Text = "Añadir Animal";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

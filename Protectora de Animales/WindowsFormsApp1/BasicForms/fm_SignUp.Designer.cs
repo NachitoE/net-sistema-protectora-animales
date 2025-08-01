@@ -232,10 +232,10 @@
             this.cb_userType.Name = "cb_userType";
             this.cb_userType.Size = new System.Drawing.Size(121, 21);
             this.cb_userType.TabIndex = 19;
-         
             // 
             // fm_SignUp
             // 
+            this.AcceptButton = this.btn_SingUpconfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 335);
@@ -258,6 +258,7 @@
             this.Controls.Add(this.lb_welcome);
             this.Controls.Add(this.pb_headerpic);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_SignUp";
             this.Text = "Registrarse";
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();

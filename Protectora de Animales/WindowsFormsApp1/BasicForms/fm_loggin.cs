@@ -18,15 +18,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                btn_loggin.PerformClick();
-            }
-        }
-
+      
 
 
         private void btn_loggin_Click(object sender, EventArgs e)
@@ -84,6 +76,9 @@ namespace WindowsFormsApp1
             signupForm.ShowDialog(); 
         }
 
-      
+        private void fm_loggin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

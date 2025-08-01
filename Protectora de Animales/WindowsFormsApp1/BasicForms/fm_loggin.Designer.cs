@@ -44,20 +44,25 @@ namespace WindowsFormsApp1
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(95, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(732, 413);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // lb_Protectora
             // 
-            this.lb_Protectora.AutoSize = true;
-            this.lb_Protectora.BackColor = System.Drawing.Color.Cornsilk;
+            this.lb_Protectora.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_Protectora.BackColor = System.Drawing.Color.ForestGreen;
             this.lb_Protectora.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Protectora.Location = new System.Drawing.Point(230, 72);
+            this.lb_Protectora.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lb_Protectora.Location = new System.Drawing.Point(162, 61);
             this.lb_Protectora.Name = "lb_Protectora";
             this.lb_Protectora.Size = new System.Drawing.Size(386, 30);
             this.lb_Protectora.TabIndex = 1;
@@ -66,18 +71,24 @@ namespace WindowsFormsApp1
             // 
             // tb_password
             // 
-            this.tb_password.Location = new System.Drawing.Point(361, 268);
+            this.tb_password.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_password.BackColor = System.Drawing.Color.White;
+            this.tb_password.Location = new System.Drawing.Point(263, 211);
             this.tb_password.Name = "tb_password";
             this.tb_password.PasswordChar = '*';
             this.tb_password.Size = new System.Drawing.Size(187, 20);
             this.tb_password.TabIndex = 2;
-            this.tb_password.KeyDown += TextBox_KeyDown;
             // 
             // btn_loggin
             // 
-            this.btn_loggin.Location = new System.Drawing.Point(346, 323);
+            this.btn_loggin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_loggin.AutoSize = true;
+            this.btn_loggin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_loggin.Location = new System.Drawing.Point(248, 266);
             this.btn_loggin.Name = "btn_loggin";
-            this.btn_loggin.Size = new System.Drawing.Size(216, 42);
+            this.btn_loggin.Size = new System.Drawing.Size(220, 46);
             this.btn_loggin.TabIndex = 3;
             this.btn_loggin.Text = "Iniciar sesión";
             this.btn_loggin.UseVisualStyleBackColor = true;
@@ -85,37 +96,51 @@ namespace WindowsFormsApp1
             // 
             // lb_password
             // 
+            this.lb_password.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_password.AutoSize = true;
-            this.lb_password.Location = new System.Drawing.Point(361, 249);
+            this.lb_password.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lb_password.Location = new System.Drawing.Point(263, 197);
             this.lb_password.Name = "lb_password";
-            this.lb_password.Size = new System.Drawing.Size(64, 13);
+            this.lb_password.Size = new System.Drawing.Size(66, 15);
             this.lb_password.TabIndex = 4;
             this.lb_password.Text = "Contraseña:";
             // 
             // lb_usuario
             // 
+            this.lb_usuario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_usuario.AutoSize = true;
-            this.lb_usuario.Location = new System.Drawing.Point(364, 184);
+            this.lb_usuario.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lb_usuario.Location = new System.Drawing.Point(263, 129);
             this.lb_usuario.Name = "lb_usuario";
-            this.lb_usuario.Size = new System.Drawing.Size(46, 13);
+            this.lb_usuario.Size = new System.Drawing.Size(48, 15);
             this.lb_usuario.TabIndex = 5;
             this.lb_usuario.Text = "Usuario:";
             // 
             // tb_user
             // 
-            this.tb_user.Location = new System.Drawing.Point(361, 201);
+            this.tb_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_user.BackColor = System.Drawing.Color.White;
+            this.tb_user.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.tb_user.Location = new System.Drawing.Point(263, 144);
             this.tb_user.Name = "tb_user";
             this.tb_user.Size = new System.Drawing.Size(187, 20);
             this.tb_user.TabIndex = 6;
-            this.tb_user.KeyDown += TextBox_KeyDown;
-
             // 
             // llb_singup
             // 
+            this.llb_singup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.llb_singup.AutoSize = true;
-            this.llb_singup.Location = new System.Drawing.Point(491, 381);
+            this.llb_singup.BackColor = System.Drawing.Color.Transparent;
+            this.llb_singup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.llb_singup.Location = new System.Drawing.Point(393, 324);
             this.llb_singup.Name = "llb_singup";
-            this.llb_singup.Size = new System.Drawing.Size(71, 13);
+            this.llb_singup.Size = new System.Drawing.Size(73, 15);
             this.llb_singup.TabIndex = 7;
             this.llb_singup.TabStop = true;
             this.llb_singup.Text = "Crear Usuario";
@@ -123,19 +148,25 @@ namespace WindowsFormsApp1
             // 
             // lb_singup
             // 
+            this.lb_singup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_singup.AutoSize = true;
-            this.lb_singup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_singup.Location = new System.Drawing.Point(348, 381);
+            this.lb_singup.BackColor = System.Drawing.Color.Transparent;
+            this.lb_singup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_singup.Location = new System.Drawing.Point(263, 324);
             this.lb_singup.Name = "lb_singup";
-            this.lb_singup.Size = new System.Drawing.Size(89, 13);
+            this.lb_singup.Size = new System.Drawing.Size(77, 13);
             this.lb_singup.TabIndex = 8;
             this.lb_singup.Text = "¿Nuevo Aquí?";
             // 
             // fm_loggin
             // 
+            this.AcceptButton = this.btn_loggin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 569);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(732, 413);
             this.Controls.Add(this.lb_singup);
             this.Controls.Add(this.llb_singup);
             this.Controls.Add(this.tb_user);
@@ -145,8 +176,11 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.tb_password);
             this.Controls.Add(this.lb_Protectora);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_loggin";
             this.Text = "INICIO";
+            this.Load += new System.EventHandler(this.fm_loggin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -20,6 +20,11 @@ namespace Services
             Save(new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), "user-1", Animal.AnimalStateEn.Disponible));
             Save(new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-2", Animal.AnimalStateEn.Disponible));
             Save(new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), "user-3", Animal.AnimalStateEn.Disponible));
+            Save(new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.Adoptado));
+            Save(new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-5", Animal.AnimalStateEn.Adoptado));
+            Save(new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), "user-6", Animal.AnimalStateEn.Disponible));
+            Save(new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-7", Animal.AnimalStateEn.Adoptado));
+
         }
 
 
