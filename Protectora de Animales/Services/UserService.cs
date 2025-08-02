@@ -9,7 +9,7 @@ namespace Services
 {
     public class UserService : BaseService<User>
     {
-       private UserService()
+        private UserService()
         {
             if (IsEmpty())
                 LoadDummyData();
@@ -73,10 +73,15 @@ namespace Services
                 if (house == null)
                     return 0; // No house found for the user
 
-                return house.Capacity - 
+                return house.Capacity -
                     AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
             }
             return 0;
+        }
+
+        public User GetByUserName(string userName)
+        {
+            return GetAll().FirstOrDefault(u => u.UserName == userName);
         }
     }
 }
