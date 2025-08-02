@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicForms\fm_AnimalsMedicalCheckUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicForms\fm_AnimalsMedicalCheckUp.Designer.cs">
+      <DependentUpon>fm_AnimalsMedicalCheckUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicForms\fm_HouseLoad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,18 @@
     <Compile Include="menuAdopter\fm_AdopterMenu.Designer.cs">
       <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuAdopter\fm_AdopterRequisites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdopter\fm_AdopterRequisites.Designer.cs">
+      <DependentUpon>fm_AdopterRequisites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdopter\fm_ShowAdoptionProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdopter\fm_ShowAdoptionProgress.Designer.cs">
+      <DependentUpon>fm_ShowAdoptionProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuAdopter\fm_ShowAvailableAnimals.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +192,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BasicForms\fm_AnimalsMedicalCheckUp.resx">
+      <DependentUpon>fm_AnimalsMedicalCheckUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BasicForms\fm_HouseLoad.resx">
       <DependentUpon>fm_HouseLoad.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +236,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="menuAdopter\fm_AdopterMenu.resx">
       <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuAdopter\fm_AdopterRequisites.resx">
+      <DependentUpon>fm_AdopterRequisites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuAdopter\fm_ShowAdoptionProgress.resx">
+      <DependentUpon>fm_ShowAdoptionProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuAdopter\fm_ShowAvailableAnimals.resx">
       <DependentUpon>fm_ShowAvailableAnimals.cs</DependentUpon>

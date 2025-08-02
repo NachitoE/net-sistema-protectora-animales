@@ -57,6 +57,7 @@
             this.btn_menuAnimals.TabIndex = 13;
             this.btn_menuAnimals.Text = "Animales";
             this.btn_menuAnimals.UseVisualStyleBackColor = true;
+            this.btn_menuAnimals.Click += new System.EventHandler(this.btn_menuAnimals_Click);
             // 
             // btn_menuSightings
             // 
@@ -67,6 +68,7 @@
             this.btn_menuSightings.TabIndex = 12;
             this.btn_menuSightings.Text = "Avistamientos";
             this.btn_menuSightings.UseVisualStyleBackColor = true;
+            this.btn_menuSightings.Click += new System.EventHandler(this.btn_menuSightings_Click);
             // 
             // btn_menuAdoptions
             // 
@@ -77,6 +79,7 @@
             this.btn_menuAdoptions.TabIndex = 11;
             this.btn_menuAdoptions.Text = "Adopciones";
             this.btn_menuAdoptions.UseVisualStyleBackColor = true;
+            this.btn_menuAdoptions.Click += new System.EventHandler(this.btn_menuAdoptions_Click);
             // 
             // pb_headerpic
             // 

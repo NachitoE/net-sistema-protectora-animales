@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.BasicForms;
 
 namespace WindowsFormsApp1.menuFosters
 {
@@ -17,6 +18,19 @@ namespace WindowsFormsApp1.menuFosters
             InitializeComponent();
         }
 
-       
+        private void btn_CaretakersAnimals_Click(object sender, EventArgs e)
+        {
+           /* this.Hide();
+            fm_CaretakersAnimals menuredir = new fm_CaretakersAnimals();
+            menuredir.ShowDialog();
+           this.Show();*/
+        }
+
+        private void btn_AnimalsMedicalCheckup_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fm_AnimalsMedicalCheckUp menuredir = new fm_AnimalsMedicalCheckUp();            menuredir.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.pb_headerpic = new System.Windows.Forms.PictureBox();
-            this.btn_AnimalsCatalog = new System.Windows.Forms.Button();
-            this.btn_AdoptionFollowing = new System.Windows.Forms.Button();
+            this.btn_AnimalsMedicalCheckup = new System.Windows.Forms.Button();
+            this.btn_CaretakersAnimals = new System.Windows.Forms.Button();
             this.lb_MenuTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
@@ -46,25 +46,27 @@
             this.pb_headerpic.TabIndex = 16;
             this.pb_headerpic.TabStop = false;
             // 
-            // btn_AnimalsCatalog
+            // btn_AnimalsMedicalCheckup
             // 
-            this.btn_AnimalsCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AnimalsCatalog.Location = new System.Drawing.Point(85, 213);
-            this.btn_AnimalsCatalog.Name = "btn_AnimalsCatalog";
-            this.btn_AnimalsCatalog.Size = new System.Drawing.Size(182, 26);
-            this.btn_AnimalsCatalog.TabIndex = 22;
-            this.btn_AnimalsCatalog.Text = "Registro Medico";
-            this.btn_AnimalsCatalog.UseVisualStyleBackColor = true;
+            this.btn_AnimalsMedicalCheckup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AnimalsMedicalCheckup.Location = new System.Drawing.Point(85, 213);
+            this.btn_AnimalsMedicalCheckup.Name = "btn_AnimalsMedicalCheckup";
+            this.btn_AnimalsMedicalCheckup.Size = new System.Drawing.Size(182, 26);
+            this.btn_AnimalsMedicalCheckup.TabIndex = 22;
+            this.btn_AnimalsMedicalCheckup.Text = "Registro Medico";
+            this.btn_AnimalsMedicalCheckup.UseVisualStyleBackColor = true;
+            this.btn_AnimalsMedicalCheckup.Click += new System.EventHandler(this.btn_AnimalsMedicalCheckup_Click);
             // 
-            // btn_AdoptionFollowing
+            // btn_CaretakersAnimals
             // 
-            this.btn_AdoptionFollowing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AdoptionFollowing.Location = new System.Drawing.Point(85, 152);
-            this.btn_AdoptionFollowing.Name = "btn_AdoptionFollowing";
-            this.btn_AdoptionFollowing.Size = new System.Drawing.Size(182, 26);
-            this.btn_AdoptionFollowing.TabIndex = 21;
-            this.btn_AdoptionFollowing.Text = "Mis Animales";
-            this.btn_AdoptionFollowing.UseVisualStyleBackColor = true;
+            this.btn_CaretakersAnimals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_CaretakersAnimals.Location = new System.Drawing.Point(85, 152);
+            this.btn_CaretakersAnimals.Name = "btn_CaretakersAnimals";
+            this.btn_CaretakersAnimals.Size = new System.Drawing.Size(182, 26);
+            this.btn_CaretakersAnimals.TabIndex = 21;
+            this.btn_CaretakersAnimals.Text = "Mis Animales";
+            this.btn_CaretakersAnimals.UseVisualStyleBackColor = true;
+            this.btn_CaretakersAnimals.Click += new System.EventHandler(this.btn_CaretakersAnimals_Click);
             // 
             // lb_MenuTitle
             // 
@@ -83,8 +85,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 360);
-            this.Controls.Add(this.btn_AnimalsCatalog);
-            this.Controls.Add(this.btn_AdoptionFollowing);
+            this.Controls.Add(this.btn_AnimalsMedicalCheckup);
+            this.Controls.Add(this.btn_CaretakersAnimals);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.pb_headerpic);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -97,8 +99,8 @@
 
         #endregion
         private System.Windows.Forms.PictureBox pb_headerpic;
-        public System.Windows.Forms.Button btn_AnimalsCatalog;
-        public System.Windows.Forms.Button btn_AdoptionFollowing;
+        public System.Windows.Forms.Button btn_AnimalsMedicalCheckup;
+        public System.Windows.Forms.Button btn_CaretakersAnimals;
         protected internal System.Windows.Forms.Label lb_MenuTitle;
     }
 }

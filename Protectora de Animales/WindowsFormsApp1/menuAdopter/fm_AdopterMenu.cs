@@ -25,5 +25,21 @@ namespace WindowsFormsApp1.menuAdopter
             menuredir.ShowDialog();
             this.Show();
         }
+
+        private void btn_AdoptionFollowing_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fm_ShowAdoptionProgress menuredir = new fm_ShowAdoptionProgress();
+            menuredir.ShowDialog();
+            this.Show();
+        }
+
+        private void btn_AdopterInfo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fm_AdopterRequisites menuredir = new fm_AdopterRequisites();
+            menuredir.ShowDialog();
+            this.Show();
+        }
     }
 }

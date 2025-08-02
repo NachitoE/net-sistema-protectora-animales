@@ -79,6 +79,7 @@
             this.btn_AdoptionFollowing.TabIndex = 11;
             this.btn_AdoptionFollowing.Text = "Seguir mis Adopciones";
             this.btn_AdoptionFollowing.UseVisualStyleBackColor = true;
+            this.btn_AdoptionFollowing.Click += new System.EventHandler(this.btn_AdoptionFollowing_Click);
             // 
             // btn_AdopterInfo
             // 
@@ -89,6 +90,7 @@
             this.btn_AdopterInfo.TabIndex = 14;
             this.btn_AdopterInfo.Text = "Requisitos para adoptar";
             this.btn_AdopterInfo.UseVisualStyleBackColor = true;
+            this.btn_AdopterInfo.Click += new System.EventHandler(this.btn_AdopterInfo_Click);
             // 
             // fm_AdopterMenu
             // 
