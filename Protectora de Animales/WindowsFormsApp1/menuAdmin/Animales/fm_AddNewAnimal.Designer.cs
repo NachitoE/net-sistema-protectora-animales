@@ -58,9 +58,9 @@
             this.cb_AnimalSpc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_AnimalSpc.FormattingEnabled = true;
             this.cb_AnimalSpc.Items.AddRange(new object[] {
-            "Perro,",
-            "Gato,",
-            "Conejo,",
+            "Perro",
+            "Gato",
+            "Conejo",
             "Pajaro"});
             this.cb_AnimalSpc.Location = new System.Drawing.Point(149, 146);
             this.cb_AnimalSpc.Name = "cb_AnimalSpc";
