@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
+using WindowsFormsApp1.menuAdopter;
+using WindowsFormsApp1.menuFosters;
 using WindowsFormsApp1.menuVolunteer;
 
 namespace WindowsFormsApp1
@@ -66,14 +68,14 @@ namespace WindowsFormsApp1
             if (loguser.UserType == Shared.User.Type.Adoptante)
             {
                 this.Hide();
-                fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
+                fm_AdopterMenu menuForm = new fm_AdopterMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
             if(loguser.UserType == Shared.User.Type.Transito)
             {
                 this.Hide();
-                fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
+                fm_FostersMenu menuForm = new fm_FostersMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }

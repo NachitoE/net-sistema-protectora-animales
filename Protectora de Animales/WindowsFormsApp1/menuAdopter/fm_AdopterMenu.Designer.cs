@@ -62,17 +62,18 @@
             // btn_AnimalsCatalog
             // 
             this.btn_AnimalsCatalog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AnimalsCatalog.Location = new System.Drawing.Point(75, 183);
+            this.btn_AnimalsCatalog.Location = new System.Drawing.Point(75, 236);
             this.btn_AnimalsCatalog.Name = "btn_AnimalsCatalog";
             this.btn_AnimalsCatalog.Size = new System.Drawing.Size(217, 26);
             this.btn_AnimalsCatalog.TabIndex = 13;
             this.btn_AnimalsCatalog.Text = "Ver Animales";
             this.btn_AnimalsCatalog.UseVisualStyleBackColor = true;
+            this.btn_AnimalsCatalog.Click += new System.EventHandler(this.btn_AnimalsCatalog_Click);
             // 
             // btn_AdoptionFollowing
             // 
             this.btn_AdoptionFollowing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AdoptionFollowing.Location = new System.Drawing.Point(75, 123);
+            this.btn_AdoptionFollowing.Location = new System.Drawing.Point(75, 169);
             this.btn_AdoptionFollowing.Name = "btn_AdoptionFollowing";
             this.btn_AdoptionFollowing.Size = new System.Drawing.Size(217, 26);
             this.btn_AdoptionFollowing.TabIndex = 11;
@@ -82,7 +83,7 @@
             // btn_AdopterInfo
             // 
             this.btn_AdopterInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_AdopterInfo.Location = new System.Drawing.Point(75, 241);
+            this.btn_AdopterInfo.Location = new System.Drawing.Point(75, 117);
             this.btn_AdopterInfo.Name = "btn_AdopterInfo";
             this.btn_AdopterInfo.Size = new System.Drawing.Size(217, 26);
             this.btn_AdopterInfo.TabIndex = 14;
