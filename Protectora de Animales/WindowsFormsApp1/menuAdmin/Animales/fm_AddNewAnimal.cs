@@ -34,6 +34,7 @@ namespace WindowsFormsApp1.menuAdmin.Animales
             valid &= ValidateEmpty(tb_AnimalName);
             valid &= cb_AnimalSpc.Text != "";
             valid &=ValidDate(mtb_AnimalBd.Text);
+            valid &= ValidateEmpty(tb_AnimalDescription);
 
             if (!valid)
                 MessageBox.Show("Por favor, completá todos los campos del formulario.");
@@ -46,7 +47,8 @@ namespace WindowsFormsApp1.menuAdmin.Animales
                 DateTime birthDate = DateTime.Parse(mtb_AnimalBd.Text);
                 string userId = "";
                 Animal.AnimalStateEn animalState = Animal.AnimalStateEn.Disponible;
-                Animal newAnimal= new Animal(Guid.NewGuid().ToString(), name, species, birthDate, userId, animalState);
+                string desc = tb_AnimalDescription.Text;
+                Animal newAnimal= new Animal(Guid.NewGuid().ToString(), name, species, birthDate, userId, animalState,desc);
                 AnimalService.Instance.Save(newAnimal);
                 MessageBox.Show("Nuevo animal agregado exitosamente.");
                 this.Close();

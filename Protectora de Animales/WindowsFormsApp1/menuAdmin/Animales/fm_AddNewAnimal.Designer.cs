@@ -37,6 +37,8 @@
             this.mtb_AnimalBd = new System.Windows.Forms.MaskedTextBox();
             this.lb_MenuTitle = new System.Windows.Forms.Label();
             this.btn_AcceptnewAnimal = new System.Windows.Forms.Button();
+            this.tb_AnimalDescription = new System.Windows.Forms.TextBox();
+            this.lb_AnimalDescription = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,6 +146,26 @@
             this.btn_AcceptnewAnimal.UseVisualStyleBackColor = true;
             this.btn_AcceptnewAnimal.Click += new System.EventHandler(this.btn_AcceptnewAnimal_Click);
             // 
+            // tb_AnimalDescription
+            // 
+            this.tb_AnimalDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_AnimalDescription.Location = new System.Drawing.Point(149, 202);
+            this.tb_AnimalDescription.Name = "tb_AnimalDescription";
+            this.tb_AnimalDescription.Size = new System.Drawing.Size(201, 20);
+            this.tb_AnimalDescription.TabIndex = 39;
+            // 
+            // lb_AnimalDescription
+            // 
+            this.lb_AnimalDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_AnimalDescription.AutoSize = true;
+            this.lb_AnimalDescription.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lb_AnimalDescription.Location = new System.Drawing.Point(15, 205);
+            this.lb_AnimalDescription.Name = "lb_AnimalDescription";
+            this.lb_AnimalDescription.Size = new System.Drawing.Size(116, 13);
+            this.lb_AnimalDescription.TabIndex = 38;
+            this.lb_AnimalDescription.Text = "Descripción del animal:";
+            this.lb_AnimalDescription.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // fm_AddNewAnimal
             // 
             this.AcceptButton = this.btn_AcceptnewAnimal;
@@ -151,6 +173,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(574, 303);
+            this.Controls.Add(this.tb_AnimalDescription);
+            this.Controls.Add(this.lb_AnimalDescription);
             this.Controls.Add(this.btn_AcceptnewAnimal);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.mtb_AnimalBd);
@@ -181,5 +205,7 @@
         private System.Windows.Forms.MaskedTextBox mtb_AnimalBd;
         protected internal System.Windows.Forms.Label lb_MenuTitle;
         private System.Windows.Forms.Button btn_AcceptnewAnimal;
+        private System.Windows.Forms.TextBox tb_AnimalDescription;
+        private System.Windows.Forms.Label lb_AnimalDescription;
     }
 }
