@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
+using WindowsFormsApp1.menuVolunteer;
 
 namespace WindowsFormsApp1
 {
@@ -47,10 +48,37 @@ namespace WindowsFormsApp1
                 SendMessage(message, caption, buttons);
                 return;
             }
-            this.Hide();
-            fm_AdminMenu menuForm= new fm_AdminMenu();
-            menuForm.ShowDialog();
-            this.Show(); 
+            Shared.User loguser = UserService.Instance.GetByUserName(this.tb_user.Text);
+            
+            if (loguser.UserType == Shared.User.Type.Admin) {
+                this.Hide();
+                fm_AdminMenu menuForm = new fm_AdminMenu();
+                menuForm.ShowDialog();
+                this.Show();
+            }
+            if(loguser.UserType == Shared.User.Type.Voluntario)
+            {
+                this.Hide();
+                fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
+                menuForm.ShowDialog();
+                this.Show();
+            }
+            if (loguser.UserType == Shared.User.Type.Adoptante)
+            {
+                this.Hide();
+                fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
+                menuForm.ShowDialog();
+                this.Show();
+            }
+            if(loguser.UserType == Shared.User.Type.Transito)
+            {
+                this.Hide();
+                fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
+                menuForm.ShowDialog();
+                this.Show();
+            }
+
+
         }
         private bool ControlLoginEmpty(string text)
         {
