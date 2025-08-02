@@ -62,6 +62,7 @@ namespace Shared
         }
         private string _userId; //owner, caretaker
 
+
         public AnimalStateEn AnimalState
         {
             get => _animalState;
@@ -76,7 +77,14 @@ namespace Shared
             Disponible
         } 
 
-        public Animal(string id, string name, SpeciesEn species, DateTime birthDate, string userId, AnimalStateEn animalState)
+        private string _description;
+
+        public string Description
+        {
+            get => _description;
+            set => _description = value;
+        }
+        public Animal(string id, string name, SpeciesEn species, DateTime birthDate, string userId, AnimalStateEn animalState,string desc)
         {
             Id = id;
             Name = name;
@@ -84,6 +92,7 @@ namespace Shared
             BirthDate = birthDate;
             UserId = userId;
             AnimalState = animalState;
+            Description = desc;
         }
 
         public enum SpeciesEn
