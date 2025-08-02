@@ -50,5 +50,8 @@
     <Compile Include="Sighting.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Domain.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    public class User : IIdentifiable
+    public class User : MedicalCheckUp, IIdentifiable
     {
         #region Fields/Properties
         public const int MAX_CAPACITY_VOLUNTARIOS = 2;
@@ -50,7 +50,7 @@
             set => _password = value;
         }
         #endregion
-        public User(string id, string name, string surname, string dni, Type usertype,string username, string password)
+        public User(string id, string name, string surname, string dni, Type usertype, string username, string password)
         {
             Id = id;
             Name = name;
@@ -65,6 +65,22 @@
         public enum Type
         {
             Admin, Adoptante, Transito, Voluntario
+        }
+
+        public Animal Animal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public House House
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }

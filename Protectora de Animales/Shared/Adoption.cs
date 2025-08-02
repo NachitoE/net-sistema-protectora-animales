@@ -50,8 +50,25 @@ namespace Shared
 
         }
 
-    
-    #endregion
+        public Animal Animal
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public User User
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+
+        #endregion
+
         #region Constructor
         public Adoption(string idAdopcion, string animalId, string userID, DateTime fechaAdopcion, string estado, string descripcion)
             {

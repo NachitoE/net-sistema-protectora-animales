@@ -103,5 +103,13 @@ namespace Shared
             Pajaro
         }
         #endregion
+
+        public MedicalCheckUp MedicalCheckUp
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }
