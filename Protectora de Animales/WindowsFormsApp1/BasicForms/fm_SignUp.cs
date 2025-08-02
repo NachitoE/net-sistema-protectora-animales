@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
 using Shared;
+using WindowsFormsApp1.BasicForms;
 
 
 namespace WindowsFormsApp1
@@ -73,8 +74,25 @@ namespace WindowsFormsApp1
                     MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.");
                     return;
                 }
-                User user = new User(Guid.NewGuid().ToString(), name, surname, dni, userType, userName, password); /// preguntar a nacho algo no cierra
-                UserService.Instance.Save(user);
+                string userId = Guid.NewGuid().ToString(); 
+                User user = new User(userId, name, surname, dni, userType, userName, password);
+
+
+                if(userType== User.Type.Transito)
+                {
+                    fm_HouseLoad houseLoadForm = new fm_HouseLoad(userId);
+                    houseLoadForm.ShowDialog();
+                    // Verifica si el usuario completó la carga de la casa sino, vuelve a pedir la carga
+                    if (houseLoadForm.DialogResult != DialogResult.OK)
+                    {
+                        MessageBox.Show("Debe completar la carga de la casa para finalizar el registro.");
+                        return;
+
+                    }
+                    if(houseLoadForm.DialogResult == DialogResult.OK)
+                        UserService.Instance.Save(user);
+                }
+               
 
                 MessageBox.Show("Usuario creado.");
                 this.Hide();

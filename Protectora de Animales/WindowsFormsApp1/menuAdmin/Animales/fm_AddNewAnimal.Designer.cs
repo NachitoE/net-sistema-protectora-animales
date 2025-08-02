@@ -161,6 +161,7 @@
             this.Controls.Add(this.lb_AnimalName);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_AddNewAnimal";
             this.Text = "Añadir Animal";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
