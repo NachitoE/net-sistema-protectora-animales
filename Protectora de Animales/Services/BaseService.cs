@@ -23,6 +23,9 @@ namespace Services
         {
             if (string.IsNullOrEmpty(obj.Id))
                 obj.Id = Guid.NewGuid().ToString();
+            var exists = _list.Exists(x => x.Id == obj.Id);
+            if (exists)
+                Delete(obj);
 
             _list.Add(obj);
             Persist();

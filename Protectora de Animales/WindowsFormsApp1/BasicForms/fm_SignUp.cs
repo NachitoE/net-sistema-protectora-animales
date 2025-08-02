@@ -16,6 +16,12 @@ namespace WindowsFormsApp1
 {
     public partial class fm_SignUp : Form
     {
+        private readonly Dictionary<string, User.Type> _userTypeDict = new Dictionary<string, User.Type>()
+        {
+            { "Adoptante", User.Type.Adoptante },
+            { "Voluntario", User.Type.Voluntario },
+            { "Transito", User.Type.Transito }
+        };
         public fm_SignUp()
         {
             InitializeComponent();
@@ -52,24 +58,10 @@ namespace WindowsFormsApp1
                 string name = tb_SignUpName.Text;
                 string surname = tb_SignUpSurName.Text;
                 string dni = tb_SignUpDni.Text;
-                User.Type userType = User.Type.Transito;
-                switch (cb_userType.Text)
-                {
-                    case "Adoptante":
-                        userType = User.Type.Adoptante;
-                        break;
-                    case "Voluntario":
-                        userType = User.Type.Voluntario;
-                        break;
-                    case "Transito":
-                        userType = User.Type.Transito;
-                        break;
-                    default:
-                        MessageBox.Show("Por favor, selecciona un tipo de usuario válido.");
-                        return;
-                }
+                User.Type userType = _userTypeDict[cb_userType.Text];
 
-                if(UserService.Instance.UserNameExists(userName))
+
+                if (UserService.Instance.UserNameExists(userName))
                 {
                     MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.");
                     return;

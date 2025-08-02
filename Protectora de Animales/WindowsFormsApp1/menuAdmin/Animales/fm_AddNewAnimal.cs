@@ -16,6 +16,13 @@ namespace WindowsFormsApp1.menuAdmin.Animales
 {
     public partial class fm_AddNewAnimal : Form
     {
+        private readonly Dictionary<string, Animal.SpeciesEn> speciesDict = new Dictionary<string, Animal.SpeciesEn>()
+        {
+            { "Perro", Animal.SpeciesEn.Perro },
+            { "Gato", Animal.SpeciesEn.Gato },
+            { "Conejo", Animal.SpeciesEn.Conejo },
+            { "Pajaro", Animal.SpeciesEn.Pajaro },
+        };
         public fm_AddNewAnimal()
         {
             InitializeComponent();
@@ -34,20 +41,7 @@ namespace WindowsFormsApp1.menuAdmin.Animales
             if(valid)
             {
                 string name = tb_AnimalName.Text;
-                Animal.SpeciesEn species = Animal.SpeciesEn.Conejo;
-                switch (cb_AnimalSpc.Text)
-                {
-                    case "Perro":
-                        species = Animal.SpeciesEn.Perro;
-                        break;
-                    case "Gato":
-                        species = Animal.SpeciesEn.Gato;
-                        break;
-                    case "Conejo":
-                        species = Animal.SpeciesEn.Conejo;
-                        break;
-               
-                }
+                Animal.SpeciesEn species = speciesDict[cb_AnimalSpc.Text];
 
                 DateTime birthDate = DateTime.Parse(mtb_AnimalBd.Text);
                 string userId = "";
