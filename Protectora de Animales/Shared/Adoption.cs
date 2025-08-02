@@ -77,60 +77,6 @@ namespace Shared
             }
             #endregion
 
-        /*
-        #region CRUD
-        
-        private int getNextId()
-        {
-            //indice autoincremental, falta hacer
-            return 0;
-        }
-
-        public void crearAdopcion()
-        {
-            // Después lo programo
-            Console.WriteLine("La adopción ha sido creada.");
-
-        }
-
-        public void mostrarAdopcion(Adopcion adopcion)
-        {
-            Console.WriteLine($"ID de adopción: {adopcion.ID}");
-            Console.WriteLine($"Fecha de adopción: {adopcion.FechaAdopcion}");
-            Console.WriteLine($"Estado: {adopcion.Estado}");
-            Console.WriteLine($"Descripción: {adopcion.Descripcion}");
-            Console.WriteLine("Animales adoptados:");
-            foreach (var animal in adopcion.Animales)
-            {
-                Console.WriteLine($"- {animal.Name} ({animal.Species})");
-            }
-            Console.WriteLine($"Usuario: {adopcion.Usuario.Name} ({adopcion.Usuario.DNI})");
-        }
-
-        public void modificarAdopcion(Adopcion adopcion)
-        {
-            Console.WriteLine("Ingrese el nuevo estado de la adopción: /n nota: los estados posibles son: EN REVISION, ACEPTADA O RECHAZADA");
-            string nuevoEstado = Console.ReadLine();
-            adopcion.Estado = nuevoEstado;
-            Console.WriteLine("Ingrese una nueva descripción para la adopción:");
-            string nuevaDescripcion = Console.ReadLine();
-            adopcion.Descripcion = nuevaDescripcion;
-            Console.WriteLine("La adopción ha sido modificada.");
-            //preguntar a los chicos si hacemos las validaciones de scripts
-        }
-        public void eliminarAdopcion(Adopcion adopcion)
-        {
-            if (adopcion == null)
-            {
-                Console.WriteLine("No se puede eliminar una adopción nula.");
-                return;
-            }
-            else if (adopcion.Estado == "RECHAZADA")
-                //tendría que hacer un delete de la persistencia o del arreglo en memoria no? 
-                Console.WriteLine("La adopción ha sido eliminada exitosamente.");
-        }
-
-        #endregion
-        */
+       
     }
 }
