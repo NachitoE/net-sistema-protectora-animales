@@ -81,10 +81,13 @@ namespace WindowsFormsApp1
                         return;
 
                     }
-                    if(houseLoadForm.DialogResult == DialogResult.OK||userType!=User.Type.Transito)
+                    if(houseLoadForm.DialogResult == DialogResult.OK)
                         UserService.Instance.Save(user);
+
                 }
-               
+               if (userType != User.Type.Transito)
+                    UserService.Instance.Save(user);
+
 
                 MessageBox.Show("Usuario creado.");
                 this.Hide();
