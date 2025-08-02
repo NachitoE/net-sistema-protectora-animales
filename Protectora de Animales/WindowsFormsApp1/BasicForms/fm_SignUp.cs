@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
                         return;
 
                     }
-                    if(houseLoadForm.DialogResult == DialogResult.OK)
+                    if(houseLoadForm.DialogResult == DialogResult.OK||userType!=User.Type.Transito)
                         UserService.Instance.Save(user);
                 }
                

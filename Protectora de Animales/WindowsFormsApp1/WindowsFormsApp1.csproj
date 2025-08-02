@@ -130,6 +130,12 @@
     <Compile Include="menuAdopter\fm_AdopterMenu.Designer.cs">
       <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuAdopter\fm_ShowAvailableAnimals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdopter\fm_ShowAvailableAnimals.Designer.cs">
+      <DependentUpon>fm_ShowAvailableAnimals.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuFosters\fm_FosterAdoptionMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,8 +216,14 @@
     <EmbeddedResource Include="menuAdopter\fm_AdopterMenu.resx">
       <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="menuAdopter\fm_ShowAvailableAnimals.resx">
+      <DependentUpon>fm_ShowAvailableAnimals.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuFosters\fm_FosterAdoptionMenu.resx">
       <DependentUpon>fm_FosterAdoptionMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuFosters\fm_FosterAnimalMenu.resx">
+      <DependentUpon>fm_FosterAnimalMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuFosters\fm_FostersMenu.resx">
       <DependentUpon>fm_FostersMenu.cs</DependentUpon>
