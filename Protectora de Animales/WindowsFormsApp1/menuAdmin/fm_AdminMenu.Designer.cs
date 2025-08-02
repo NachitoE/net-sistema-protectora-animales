@@ -142,6 +142,7 @@
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.pb_headerpic);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_AdminMenu";
             this.Text = "MENU ADMINISTRADOR";
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();

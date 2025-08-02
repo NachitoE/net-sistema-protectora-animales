@@ -61,6 +61,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lb_EnConstruccion);
             this.Controls.Add(this.pb_UnderConstructionImg);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_AnimalsMedicalCheckUp";
             this.Text = "fm_AnimalsMedicalCheckUp";
             ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).EndInit();

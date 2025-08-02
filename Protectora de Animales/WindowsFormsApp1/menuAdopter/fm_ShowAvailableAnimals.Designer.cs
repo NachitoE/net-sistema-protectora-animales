@@ -125,6 +125,7 @@
             this.Controls.Add(this.pb_headerpic);
             this.Controls.Add(this.dgv_animals);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_ShowAvailableAnimals";
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_animals)).EndInit();

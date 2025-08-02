@@ -102,6 +102,8 @@
             this.Controls.Add(this.btn_menuAdoptions);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.pb_headerpic);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_FostersMenu";
             this.Text = "ADOPCIONES";
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();

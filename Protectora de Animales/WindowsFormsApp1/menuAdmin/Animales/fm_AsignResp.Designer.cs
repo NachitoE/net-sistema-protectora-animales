@@ -100,8 +100,10 @@
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.dgv_animals);
             this.Controls.Add(this.dgv_users);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "fm_AsignResp";
-            this.Text = "Form1";
+            this.Text = "ASIGNAR CUIDADOR";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_users)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_animals)).EndInit();
             this.ResumeLayout(false);

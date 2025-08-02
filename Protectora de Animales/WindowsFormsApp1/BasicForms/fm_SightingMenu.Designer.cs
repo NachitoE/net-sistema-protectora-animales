@@ -54,14 +54,16 @@
             this.lb_EnConstruccion.TabIndex = 1;
             this.lb_EnConstruccion.Text = "¡EL EQUIPO ESTÁ TRABAJANDO PARA RESOLVERLO LO MÁS PRONTO POSIBLE!";
             // 
-            // fm_AdminSightingMenu
+            // fm_SightingMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lb_EnConstruccion);
             this.Controls.Add(this.pb_UnderConstructionImg);
-            this.Name = "fm_AdminSightingMenu";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "fm_SightingMenu";
             this.Text = "AVISTAMIENTOS";
             ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).EndInit();
             this.ResumeLayout(false);

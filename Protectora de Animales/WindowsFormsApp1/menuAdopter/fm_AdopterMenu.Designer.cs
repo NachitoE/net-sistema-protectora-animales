@@ -102,6 +102,7 @@
             this.Controls.Add(this.btn_AdoptionFollowing);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.pb_headerpic);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "fm_AdopterMenu";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

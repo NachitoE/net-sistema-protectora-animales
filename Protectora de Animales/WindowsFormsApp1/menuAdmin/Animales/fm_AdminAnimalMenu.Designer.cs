@@ -102,6 +102,7 @@
             this.Controls.Add(this.btn_asignResp);
             this.Controls.Add(this.lb_MenuTitle);
             this.Controls.Add(this.pb_headerpic);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "fm_AdminAnimalMenu";
             this.Text = "Animales lobby";
