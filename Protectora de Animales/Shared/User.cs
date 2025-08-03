@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    public class User : MedicalCheckUp, IIdentifiable
+    public class User : IIdentifiable
     {
         #region Fields/Properties
         public const int MAX_CAPACITY_VOLUNTARIOS = 2;
