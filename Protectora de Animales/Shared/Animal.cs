@@ -80,7 +80,8 @@ namespace Shared
             get => _description;
             set => _description = value;
         }
-        public Animal(string id, string name, SpeciesEn species, DateTime birthDate, string userId, AnimalStateEn animalState,string desc)
+    
+        public Animal(string id, string name, SpeciesEn species, DateTime birthDate, string userId, AnimalStateEn animalState,string description)
         {
             Id = id;
             Name = name;
@@ -88,7 +89,7 @@ namespace Shared
             BirthDate = birthDate;
             UserId = userId;
             AnimalState = animalState;
-            Description = desc;
+            Description = description;
         }
 
         public enum SpeciesEn
@@ -100,12 +101,6 @@ namespace Shared
         }
         #endregion
 
-        public MedicalCheckUp MedicalCheckUp
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        
     }
 }

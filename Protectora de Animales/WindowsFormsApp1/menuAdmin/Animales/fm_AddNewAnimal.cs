@@ -34,14 +34,14 @@ namespace WindowsFormsApp1.menuAdmin.Animales
 
             if(valid)
             {
-                string name = tb_AnimalName.Text;
-                Animal.SpeciesEn species = speciesDict[cb_AnimalSpc.Text];
+                string Name = tb_AnimalName.Text;
+                Animal.SpeciesEn Species = speciesDict[cb_AnimalSpc.Text];
 
-                DateTime birthDate = DateTime.Parse(mtb_AnimalBd.Text);
-                string userId = "";
-                Animal.AnimalStateEn animalState = Animal.AnimalStateEn.Disponible;
-                string desc = tb_AnimalDescription.Text;
-                Animal newAnimal= new Animal(Guid.NewGuid().ToString(), name, species, birthDate, userId, animalState,desc);
+                DateTime BirthDate = DateTime.Parse(mtb_AnimalBd.Text);
+                string UserId = "";
+                Animal.AnimalStateEn AnimalState = Animal.AnimalStateEn.Disponible;
+                string Description = tb_AnimalDescription.Text;
+                Animal newAnimal= new Animal(Guid.NewGuid().ToString(), Name, Species, BirthDate, UserId, AnimalState,Description);
                 AnimalService.Instance.Save(newAnimal);
                 MessageBox.Show("Nuevo animal agregado exitosamente.");
                 this.Close();
