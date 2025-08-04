@@ -33,6 +33,7 @@
             this.btn_ShowAllAnimals = new System.Windows.Forms.Button();
             this.btn_asignResp = new System.Windows.Forms.Button();
             this.pb_headerpic = new System.Windows.Forms.PictureBox();
+            this.lb_AnimalModify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,11 +93,21 @@
             this.pb_headerpic.TabIndex = 3;
             this.pb_headerpic.TabStop = false;
             // 
+            // lb_AnimalModify
+            // 
+            this.lb_AnimalModify.Location = new System.Drawing.Point(51, 297);
+            this.lb_AnimalModify.Name = "lb_AnimalModify";
+            this.lb_AnimalModify.Size = new System.Drawing.Size(248, 28);
+            this.lb_AnimalModify.TabIndex = 14;
+            this.lb_AnimalModify.Text = "Modificar Animales";
+            this.lb_AnimalModify.UseVisualStyleBackColor = true;
+            // 
             // fm_AdminAnimalMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(375, 368);
+            this.Controls.Add(this.lb_AnimalModify);
             this.Controls.Add(this.btn_AddNewAnimal);
             this.Controls.Add(this.btn_ShowAllAnimals);
             this.Controls.Add(this.btn_asignResp);
@@ -119,5 +130,6 @@
         public System.Windows.Forms.Button btn_AddNewAnimal;
         private System.Windows.Forms.Button btn_ShowAllAnimals;
         public System.Windows.Forms.Button btn_asignResp;
+        private System.Windows.Forms.Button lb_AnimalModify;
     }
 }

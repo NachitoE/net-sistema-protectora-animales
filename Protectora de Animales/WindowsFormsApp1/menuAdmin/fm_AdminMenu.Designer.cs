@@ -36,6 +36,7 @@
             this.btn_menuFosters = new System.Windows.Forms.Button();
             this.btn_menuAnimals = new System.Windows.Forms.Button();
             this.pb_headerpic = new System.Windows.Forms.PictureBox();
+            this.lb_UserModify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // btn_menuAdoptions
             // 
             this.btn_menuAdoptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuAdoptions.Location = new System.Drawing.Point(77, 142);
+            this.btn_menuAdoptions.Location = new System.Drawing.Point(77, 113);
             this.btn_menuAdoptions.Name = "btn_menuAdoptions";
             this.btn_menuAdoptions.Size = new System.Drawing.Size(217, 26);
             this.btn_menuAdoptions.TabIndex = 5;
@@ -65,7 +66,7 @@
             // btn_menuSightings
             // 
             this.btn_menuSightings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuSightings.Location = new System.Drawing.Point(77, 206);
+            this.btn_menuSightings.Location = new System.Drawing.Point(77, 177);
             this.btn_menuSightings.Name = "btn_menuSightings";
             this.btn_menuSightings.Size = new System.Drawing.Size(217, 26);
             this.btn_menuSightings.TabIndex = 6;
@@ -76,7 +77,7 @@
             // btn_menuReports
             // 
             this.btn_menuReports.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuReports.Location = new System.Drawing.Point(77, 270);
+            this.btn_menuReports.Location = new System.Drawing.Point(77, 281);
             this.btn_menuReports.Name = "btn_menuReports";
             this.btn_menuReports.Size = new System.Drawing.Size(217, 26);
             this.btn_menuReports.TabIndex = 7;
@@ -87,7 +88,7 @@
             // btn_menuVolunteers
             // 
             this.btn_menuVolunteers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuVolunteers.Location = new System.Drawing.Point(77, 302);
+            this.btn_menuVolunteers.Location = new System.Drawing.Point(77, 313);
             this.btn_menuVolunteers.Name = "btn_menuVolunteers";
             this.btn_menuVolunteers.Size = new System.Drawing.Size(217, 26);
             this.btn_menuVolunteers.TabIndex = 8;
@@ -98,7 +99,7 @@
             // btn_menuFosters
             // 
             this.btn_menuFosters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuFosters.Location = new System.Drawing.Point(77, 238);
+            this.btn_menuFosters.Location = new System.Drawing.Point(77, 249);
             this.btn_menuFosters.Name = "btn_menuFosters";
             this.btn_menuFosters.Size = new System.Drawing.Size(217, 26);
             this.btn_menuFosters.TabIndex = 9;
@@ -109,7 +110,7 @@
             // btn_menuAnimals
             // 
             this.btn_menuAnimals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_menuAnimals.Location = new System.Drawing.Point(77, 174);
+            this.btn_menuAnimals.Location = new System.Drawing.Point(77, 145);
             this.btn_menuAnimals.Name = "btn_menuAnimals";
             this.btn_menuAnimals.Size = new System.Drawing.Size(217, 26);
             this.btn_menuAnimals.TabIndex = 10;
@@ -128,11 +129,22 @@
             this.pb_headerpic.TabIndex = 2;
             this.pb_headerpic.TabStop = false;
             // 
+            // lb_UserModify
+            // 
+            this.lb_UserModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_UserModify.Location = new System.Drawing.Point(77, 214);
+            this.lb_UserModify.Name = "lb_UserModify";
+            this.lb_UserModify.Size = new System.Drawing.Size(217, 26);
+            this.lb_UserModify.TabIndex = 11;
+            this.lb_UserModify.Text = "Modificar Usuarios";
+            this.lb_UserModify.UseVisualStyleBackColor = true;
+            // 
             // fm_AdminMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 360);
+            this.Controls.Add(this.lb_UserModify);
             this.Controls.Add(this.btn_menuAnimals);
             this.Controls.Add(this.btn_menuFosters);
             this.Controls.Add(this.btn_menuVolunteers);
@@ -160,5 +172,6 @@
         protected System.Windows.Forms.Button btn_menuVolunteers;
         protected System.Windows.Forms.Button btn_menuFosters;
         protected System.Windows.Forms.Button btn_menuSightings;
+        protected System.Windows.Forms.Button lb_UserModify;
     }
 }
