@@ -20,10 +20,10 @@ namespace WindowsFormsApp1.menuVolunteer
 
         private void btn_CaretakersAnimals_Click(object sender, EventArgs e)
         {
-           /* this.Hide();
-            fm_CaretakersAnimals menuredir = new fm_CaretakersAnimals();
+           this.Hide();
+           fm_CaretakersAnimals menuredir = new fm_CaretakersAnimals();
            menuredir.ShowDialog();
-           this.show();*/
+           this.Show();
         }
 
         private void btn_AnimalsMedicalCheckup_Click(object sender, EventArgs e)

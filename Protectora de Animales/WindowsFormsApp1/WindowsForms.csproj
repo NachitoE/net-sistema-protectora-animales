@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicForms\CaretakersAnimals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicForms\CaretakersAnimals.Designer.cs">
+      <DependentUpon>CaretakersAnimals.cs</DependentUpon>
+    </Compile>
     <Compile Include="BasicForms\fm_AnimalsMedicalCheckUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BasicForms\CaretakersAnimals.resx">
+      <DependentUpon>CaretakersAnimals.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BasicForms\fm_AnimalsMedicalCheckUp.resx">
       <DependentUpon>fm_AnimalsMedicalCheckUp.cs</DependentUpon>
     </EmbeddedResource>

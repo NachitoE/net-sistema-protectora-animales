@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
         public fm_loggin()
         {
             InitializeComponent();
+            UserService.Instance.SetCurrentLoggedOnUser(null);
         }
 
       
@@ -43,29 +44,29 @@ namespace WindowsFormsApp1
                 SendMessage(message, caption, buttons);
                 return;
             }
-            Shared.User loguser = UserService.Instance.GetByUserName(this.tb_user.Text);
-            
-            if (loguser.UserType == Shared.User.Type.Admin) {
+            Shared.User logUser = UserService.Instance.GetByUserName(this.tb_user.Text);
+            UserService.Instance.SetCurrentLoggedOnUser(logUser);
+            if (logUser.UserType == Shared.User.Type.Admin) {
                 this.Hide();
                 fm_AdminMenu menuForm = new fm_AdminMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if(loguser.UserType == Shared.User.Type.Voluntario)
+            if(logUser.UserType == Shared.User.Type.Voluntario)
             {
                 this.Hide();
                 fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if (loguser.UserType == Shared.User.Type.Adoptante)
+            if (logUser.UserType == Shared.User.Type.Adoptante)
             {
                 this.Hide();
                 fm_AdopterMenu menuForm = new fm_AdopterMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if(loguser.UserType == Shared.User.Type.Transito)
+            if(logUser.UserType == Shared.User.Type.Transito)
             {
                 this.Hide();
                 fm_FostersMenu menuForm = new fm_FostersMenu();

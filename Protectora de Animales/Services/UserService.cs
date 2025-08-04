@@ -6,6 +6,13 @@ namespace Services
 {
     public class UserService : BaseService<User>
     {
+        //Un poco hack esto por ahora, ver como se podría mejorar.
+        private User _currentLoggedOnUser;
+        public User CurrentLoggedOnUser
+        {
+            get => _currentLoggedOnUser;
+            set => _currentLoggedOnUser = value;
+        }
         private UserService()
         {
             if (IsEmpty())
@@ -79,6 +86,10 @@ namespace Services
         public User GetByUserName(string userName)
         {
             return GetAll().FirstOrDefault(u => u.UserName == userName);
+        }
+        public void SetCurrentLoggedOnUser(User user)
+        {
+            _currentLoggedOnUser = user;
         }
     }
 }

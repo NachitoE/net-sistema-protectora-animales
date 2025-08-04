@@ -45,6 +45,7 @@
             this.btn_menuAnimals.TabIndex = 18;
             this.btn_menuAnimals.Text = "Animales";
             this.btn_menuAnimals.UseVisualStyleBackColor = true;
+            this.btn_menuAnimals.Click += new System.EventHandler(this.btn_menuAnimals_Click);
             // 
             // btn_menuSightings
             // 
