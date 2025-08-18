@@ -11,18 +11,12 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void btn_menuVolunteers_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            fm_AdminVolunteersmenu menuredir = new fm_AdminVolunteersmenu();
-            menuredir.ShowDialog();
-            this.Show();
-        }
+        
 
-        private void btn_menuFosters_Click(object sender, EventArgs e)
+        private void btn_menuUsers_Click(object sender, EventArgs e)
         {
             this.Hide();
-            fm_AdminFostersMenu menuredir = new fm_AdminFostersMenu();
+            fm_AdminUsersMenu menuredir = new fm_AdminUsersMenu();
             menuredir.ShowDialog();
             this.Show();
         }
@@ -58,5 +52,6 @@ namespace WindowsFormsApp1
             menuredir.ShowDialog();
             this.Show();
         }
+
     }
 }

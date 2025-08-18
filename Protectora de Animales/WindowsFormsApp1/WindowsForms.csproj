@@ -118,23 +118,35 @@
     <Compile Include="BasicForms\fm_SightingMenu.Designer.cs">
       <DependentUpon>fm_SightingMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="menuAdmin\fm_AdminVolunteersmenu.cs">
+    <Compile Include="menuAdmin\Users\fm_AdminUsersMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="menuAdmin\fm_AdminVolunteersmenu.Designer.cs">
-      <DependentUpon>fm_AdminVolunteersmenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="menuAdmin\fm_AdminFostersMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="menuAdmin\fm_AdminFostersMenu.Designer.cs">
-      <DependentUpon>fm_AdminFostersMenu.cs</DependentUpon>
+    <Compile Include="menuAdmin\Users\fm_AdminUsersMenu.Designer.cs">
+      <DependentUpon>fm_AdminUsersMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="menuAdmin\fm_AdminReportsMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="menuAdmin\fm_AdminReportsMenu.Designer.cs">
       <DependentUpon>fm_AdminReportsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_DeleteUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_DeleteUsers.Designer.cs">
+      <DependentUpon>fm_DeleteUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_ModifyUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_ModifyUsers.Designer.cs">
+      <DependentUpon>fm_ModifyUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_ShowAllUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuAdmin\Users\fm_ShowAllUsers.Designer.cs">
+      <DependentUpon>fm_ShowAllUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="menuAdopter\fm_AdopterMenu.cs">
       <SubType>Form</SubType>
@@ -222,8 +234,8 @@
     <EmbeddedResource Include="menuAdmin\fm_AdminAdoptionMenu.resx">
       <DependentUpon>fm_AdminAdoptionMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="menuAdmin\fm_AdminFostersMenu.resx">
-      <DependentUpon>fm_AdminFostersMenu.cs</DependentUpon>
+    <EmbeddedResource Include="menuAdmin\Users\fm_AdminUsersMenu.resx">
+      <DependentUpon>fm_AdminUsersMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuAdmin\fm_AdminMenu.resx">
       <DependentUpon>fm_AdminMenu.cs</DependentUpon>
@@ -240,8 +252,8 @@
     <EmbeddedResource Include="BasicForms\fm_SightingMenu.resx">
       <DependentUpon>fm_SightingMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="menuAdmin\fm_AdminVolunteersmenu.resx">
-      <DependentUpon>fm_AdminVolunteersmenu.cs</DependentUpon>
+    <EmbeddedResource Include="menuAdmin\Users\fm_ShowAllUsers.resx">
+      <DependentUpon>fm_ShowAllUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuAdopter\fm_AdopterMenu.resx">
       <DependentUpon>fm_AdopterMenu.cs</DependentUpon>
