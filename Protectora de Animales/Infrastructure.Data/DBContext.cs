@@ -49,6 +49,15 @@ namespace Infrastructure.Data
                 entity.Property(e => e.DNI)
                     .IsRequired()
                     .HasMaxLength(25);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.SurName)
+                   .IsRequired()
+                   .HasMaxLength(100);
+
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
