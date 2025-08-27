@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Domain;
 
 namespace Infrastructure.Data
 {
@@ -49,7 +49,10 @@ namespace Infrastructure.Data
                 entity.Property(e => e.DNI)
                     .IsRequired()
                     .HasMaxLength(25);
-
+                entity.Property(e => e.UserType)
+                    .IsRequired()
+                    .HasConversion<string>();
+                
             });
         }
     }

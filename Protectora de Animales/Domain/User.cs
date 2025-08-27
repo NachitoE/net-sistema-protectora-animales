@@ -1,5 +1,5 @@
 ﻿using System;
-using Shared.Enums;
+
 namespace Domain
 {
     public class User
@@ -64,5 +64,9 @@ namespace Domain
             Password = password;
 
         }
+    }
+    public enum UserType
+    {
+        Admin, Adoptante, Transito, Voluntario
     }
 }
