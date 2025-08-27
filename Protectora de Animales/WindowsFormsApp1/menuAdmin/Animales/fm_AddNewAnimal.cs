@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Services;
-using Shared;
+using Domain;
 
 namespace WindowsFormsApp1.menuAdmin.Animales
 {

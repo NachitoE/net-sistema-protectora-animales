@@ -44,29 +44,29 @@ namespace WindowsFormsApp1
                 SendMessage(message, caption, buttons);
                 return;
             }
-            Shared.User logUser = UserService.Instance.GetByUserName(this.tb_user.Text);
+            Domain.User logUser = UserService.Instance.GetByUserName(this.tb_user.Text);
             UserService.Instance.SetCurrentLoggedOnUser(logUser);
-            if (logUser.UserType == Shared.User.Type.Admin) {
+            if (logUser.UserType == Domain.User.Type.Admin) {
                 this.Hide();
                 fm_AdminMenu menuForm = new fm_AdminMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if(logUser.UserType == Shared.User.Type.Voluntario)
+            if(logUser.UserType == Domain.User.Type.Voluntario)
             {
                 this.Hide();
                 fm_VolunteerMenu menuForm = new fm_VolunteerMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if (logUser.UserType == Shared.User.Type.Adoptante)
+            if (logUser.UserType == Domain.User.Type.Adoptante)
             {
                 this.Hide();
                 fm_AdopterMenu menuForm = new fm_AdopterMenu();
                 menuForm.ShowDialog();
                 this.Show();
             }
-            if(logUser.UserType == Shared.User.Type.Transito)
+            if(logUser.UserType == Domain.User.Type.Transito)
             {
                 this.Hide();
                 fm_FostersMenu menuForm = new fm_FostersMenu();

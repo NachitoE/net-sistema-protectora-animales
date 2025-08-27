@@ -28,7 +28,7 @@ namespace WindowsFormsApp1.BasicForms
             string Address = tb_HouseAdress.Text;
             int AddressNumber= int.Parse(tb_HouseAdressNumber.Text);
             int Capacity = (int)nud_HouseCapacity.Value;
-            Shared.House newHouse = new Shared.House(Guid.NewGuid().ToString(), userId, Address, AddressNumber, Capacity);
+            Domain.House newHouse = new Domain.House(Guid.NewGuid().ToString(), userId, Address, AddressNumber, Capacity);
             Services.HouseService.Instance.Save(newHouse);
             this.DialogResult = DialogResult.OK;//termina siendo irrelevante? Falta algún manejo?
             MessageBox.Show("Nueva casa agregada exitosamente.");

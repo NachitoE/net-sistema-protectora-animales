@@ -1,11 +1,12 @@
-﻿namespace Shared
+﻿using Shared.Enums;
+namespace Domain
 {
-    public class User : IIdentifiable
+    public class User
     {
         #region Fields/Properties
         public const int MAX_CAPACITY_VOLUNTARIOS = 2;
 
-        private Type _userType = Type.Admin;
+        private UserType _userType = UserType.Admin;
         private string _id;
         public string Id
         {
@@ -32,7 +33,7 @@
             get => _dni;
             set => _dni = value;
         }
-        public Type UserType
+        public UserType UserType
         {
             get => _userType;
             set => _userType = value;
@@ -50,7 +51,7 @@
             set => _password = value;
         }
         #endregion
-        public User(string id, string name, string surname, string dni, Type usertype, string username, string password)
+        public User(string id, string name, string surname, string dni, UserType usertype, string username, string password)
         {
             Id = id;
             Name = name;
@@ -60,27 +61,6 @@
             UserName = username;
             Password = password;
 
-        }
-
-        public enum Type
-        {
-            Admin, Adoptante, Transito, Voluntario
-        }
-
-        public Animal Animal
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public House House
-        {
-            get => default;
-            set
-            {
-            }
         }
     }
 }

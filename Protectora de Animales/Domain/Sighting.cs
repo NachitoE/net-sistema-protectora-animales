@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared
+namespace Domain
 {
     public class Sighting : IIdentifiable
     {

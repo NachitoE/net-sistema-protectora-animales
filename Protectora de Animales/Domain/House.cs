@@ -1,5 +1,5 @@
 ﻿
-namespace Shared
+namespace Domain
 {
     public class House : IIdentifiable
     {

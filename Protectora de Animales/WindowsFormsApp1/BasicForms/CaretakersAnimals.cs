@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
-using Shared;
+using Domain;
 
 namespace WindowsFormsApp1.BasicForms
 {

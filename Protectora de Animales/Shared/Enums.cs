@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOs
+namespace Shared.Enums
 {
-    public class Class1
+    public enum UserType
     {
+        Admin, Adoptante, Transito, Voluntario
     }
 }

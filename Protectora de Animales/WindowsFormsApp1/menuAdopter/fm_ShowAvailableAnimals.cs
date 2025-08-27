@@ -17,8 +17,8 @@ namespace WindowsFormsApp1.menuAdopter
         {
             SetupColumns();
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedAnimals = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedAnimals = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible).ToList();
             dgv_animals.DataSource = nonAdoptedAnimals;
         }
         private void SetupColumns()
@@ -41,32 +41,32 @@ namespace WindowsFormsApp1.menuAdopter
         private void btn_Dog_Click(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedDogs = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible&& a.Species == Shared.Animal.SpeciesEn.Perro).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedDogs = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible&& a.Species == Domain.Animal.SpeciesEn.Perro).ToList();
             dgv_animals.DataSource = nonAdoptedDogs;
         }
 
         private void btn_Cat_Click(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedCats = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible && a.Species == Shared.Animal.SpeciesEn.Gato).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedCats = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible && a.Species == Domain.Animal.SpeciesEn.Gato).ToList();
             dgv_animals.DataSource = nonAdoptedCats;
         }
 
         private void btn_Bunny_Click(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedBunnies = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible && a.Species == Shared.Animal.SpeciesEn.Conejo).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedBunnies = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible && a.Species == Domain.Animal.SpeciesEn.Conejo).ToList();
             dgv_animals.DataSource = nonAdoptedBunnies;
         }
 
         private void btn_Bird_Click(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedBirds = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible && a.Species == Shared.Animal.SpeciesEn.Pajaro).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedBirds = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible && a.Species == Domain.Animal.SpeciesEn.Pajaro).ToList();
             dgv_animals.DataSource = nonAdoptedBirds;
         }
     };

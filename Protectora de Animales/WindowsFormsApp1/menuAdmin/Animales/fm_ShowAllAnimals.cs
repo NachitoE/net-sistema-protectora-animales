@@ -18,8 +18,8 @@ namespace WindowsFormsApp1.menuAdmin.Animales
         private void ShowAllAnimalsFormLoad(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<Shared.Animal> animals = Services.AnimalService.Instance.GetAll();
-            var nonAdoptedAnimals = animals.Where(a => a.AnimalState == Shared.Animal.AnimalStateEn.Disponible).ToList();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedAnimals = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible).ToList();
             dgv_animals.Columns.Add("Name", "Nombre");
             dgv_animals.Columns.Add("Species", "Especie");
             dgv_animals.Columns.Add("UserId", "Responsable");

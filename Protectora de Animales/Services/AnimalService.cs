@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Shared;
+using Domain;
 
 namespace Services
 {
