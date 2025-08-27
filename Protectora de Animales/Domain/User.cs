@@ -1,4 +1,5 @@
-﻿using Shared.Enums;
+﻿using System;
+using Shared.Enums;
 namespace Domain
 {
     public class User
@@ -51,13 +52,14 @@ namespace Domain
             set => _password = value;
         }
         #endregion
-        public User(string id, string name, string surname, string dni, UserType usertype, string username, string password)
+        public User(string id, string name, string surname, string dni, string usertypeStr, string username, string password)
         {
             Id = id;
             Name = name;
             SurName = surname;
             DNI = dni;
-            UserType = usertype;
+            Enum.TryParse(usertypeStr, out UserType userType);
+            UserType = userType;
             UserName = username;
             Password = password;
 
