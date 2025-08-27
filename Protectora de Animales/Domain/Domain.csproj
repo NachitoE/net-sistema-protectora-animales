@@ -44,7 +44,6 @@
     <Compile Include="Animal.cs" />
     <Compile Include="Adoption.cs" />
     <Compile Include="House.cs" />
-    <Compile Include="Interfaces.cs" />
     <Compile Include="MedicalCheckUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sighting.cs" />
@@ -52,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{73f95241-028e-42ae-bc7c-fead347f3533}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
