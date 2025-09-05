@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
-using Domain;
+using Microsoft.Extensions.Configuration.Json;
+using Shared;
 
 namespace Infrastructure.Data
 {
