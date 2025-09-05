@@ -7,7 +7,7 @@ using Domain;
 
 namespace Services
 {
-    public abstract class BaseService<T> where T : IIdentifiable
+    public abstract class BaseService<T> where T
     {
         protected abstract string _filePath { get; }
         private List<T> _list;

@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class Sighting : IIdentifiable
+    public class Sighting
     {
         private string _sightingId;
         private string _sightingAddressName;

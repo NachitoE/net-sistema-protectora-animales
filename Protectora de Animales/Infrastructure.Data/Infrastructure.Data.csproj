@@ -200,7 +200,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\Protectora de Animales\Shared\Domain.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{0a2f810b-5d80-46f8-9c67-1ec8cb4d3153}</Project>
       <Name>Domain</Name>
     </ProjectReference>

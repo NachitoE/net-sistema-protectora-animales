@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class Animal : IIdentifiable
+    public class Animal
     {
         #region Fields/Properties
         public string Id

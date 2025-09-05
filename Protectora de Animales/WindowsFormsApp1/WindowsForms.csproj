@@ -307,7 +307,7 @@
       <Project>{460b5b34-cce6-4022-b925-13c2da28c1a6}</Project>
       <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shared\Domain.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{0a2f810b-5d80-46f8-9c67-1ec8cb4d3153}</Project>
       <Name>Domain</Name>
     </ProjectReference>

@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class Adoption : IIdentifiable
+    public class Adoption
     {
         #region Fields/Properties
         private string _id;

@@ -1,7 +1,7 @@
 ﻿
 namespace Domain
 {
-    public class House : IIdentifiable
+    public class House
     {
         #region Fields/Properties
         private string _houseId;

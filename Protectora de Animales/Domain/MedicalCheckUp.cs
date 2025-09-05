@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class MedicalCheckUp : IIdentifiable
+    public class MedicalCheckUp
     {
         #region Fields/Properties
         private string _id;
