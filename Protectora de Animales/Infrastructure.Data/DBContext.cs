@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Domain;
+using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace Infrastructure.Data
 {
@@ -63,7 +65,7 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
-                
+
             });
         }
     }
