@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.API
+namespace DTOs
 {
-    public class Class1
+    public class UserRegisterResponseDTO : BaseResponse
     {
     }
 }

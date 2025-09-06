@@ -1,6 +1,6 @@
 namespace DTOs
 {
-    public class UserRegisterDTO
+    public class UserRegisterRequestDTO
     {
         public string Name { get; set; }
         public string SurName { get; set; }
