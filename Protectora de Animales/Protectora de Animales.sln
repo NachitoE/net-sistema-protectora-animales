@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.API", "Infrastructure.API\Infrastructure.API.csproj", "{042FD87F-0C3D-4D44-9134-508C2693257A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data", "Infrastructure.Data\Infrastructure.Data.csproj", "{FD26720E-76E7-42A0-9401-40E329633304}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{8D6B33C5-CEE1-20B5-A207-99CBB61F699C}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{042FD87F-0C3D-4D44-9134-508C2693257A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{042FD87F-0C3D-4D44-9134-508C2693257A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{042FD87F-0C3D-4D44-9134-508C2693257A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD26720E-76E7-42A0-9401-40E329633304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD26720E-76E7-42A0-9401-40E329633304}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD26720E-76E7-42A0-9401-40E329633304}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD26720E-76E7-42A0-9401-40E329633304}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D6B33C5-CEE1-20B5-A207-99CBB61F699C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D6B33C5-CEE1-20B5-A207-99CBB61F699C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6B33C5-CEE1-20B5-A207-99CBB61F699C}.Release|Any CPU.ActiveCfg = Release|Any CPU
