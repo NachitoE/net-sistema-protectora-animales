@@ -108,9 +108,9 @@
             // pb_Background
             // 
             this.pb_Background.BackColor = System.Drawing.Color.OliveDrab;
-            this.pb_Background.Location = new System.Drawing.Point(339, 25);
+            this.pb_Background.Location = new System.Drawing.Point(316, 25);
             this.pb_Background.Name = "pb_Background";
-            this.pb_Background.Size = new System.Drawing.Size(471, 319);
+            this.pb_Background.Size = new System.Drawing.Size(494, 319);
             this.pb_Background.TabIndex = 12;
             this.pb_Background.TabStop = false;
             // 
@@ -132,16 +132,16 @@
             this.btn_AcceptMod.TabIndex = 14;
             this.btn_AcceptMod.Text = "Aceptar";
             this.btn_AcceptMod.UseVisualStyleBackColor = true;
+            this.btn_AcceptMod.Click += new System.EventHandler(this.btn_AcceptMod_Click);
             // 
             // dgv_User
             // 
             this.dgv_User.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_User.Location = new System.Drawing.Point(357, 51);
+            this.dgv_User.Location = new System.Drawing.Point(329, 51);
             this.dgv_User.Name = "dgv_User";
-            this.dgv_User.Size = new System.Drawing.Size(437, 262);
+            this.dgv_User.Size = new System.Drawing.Size(465, 262);
             this.dgv_User.TabIndex = 15;
-           
             // 
             // fm_ModifyUsers
             // 

@@ -252,6 +252,9 @@
     <EmbeddedResource Include="BasicForms\fm_SightingMenu.resx">
       <DependentUpon>fm_SightingMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="menuAdmin\Users\fm_DeleteUsers.resx">
+      <DependentUpon>fm_DeleteUsers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuAdmin\Users\fm_ModifyUsers.resx">
       <DependentUpon>fm_ModifyUsers.cs</DependentUpon>
     </EmbeddedResource>
