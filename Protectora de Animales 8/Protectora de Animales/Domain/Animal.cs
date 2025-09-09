@@ -58,6 +58,12 @@ namespace Domain
         }
         private string _userId; //owner, caretaker
 
+        public User User {
+            get => _user;
+            set => _user = value; 
+        }
+
+        private User? _user;
 
         public AnimalStateEn AnimalState
         {
