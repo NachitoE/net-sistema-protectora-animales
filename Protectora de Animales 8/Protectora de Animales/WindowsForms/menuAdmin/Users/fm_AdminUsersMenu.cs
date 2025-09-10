@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using WindowsFormsApp1.menuAdmin.Users;
+using WindowsForms.menuAdmin.Users;
 
-namespace WindowsFormsApp1.menusAdmin
+namespace WindowsForms.menusAdmin
 {
     public partial class fm_AdminUsersMenu : Form
     {

@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuAdmin.Animales
+namespace WindowsForms.menuAdmin.Animales
 {
     public partial class fm_AsignResp : Form
     {

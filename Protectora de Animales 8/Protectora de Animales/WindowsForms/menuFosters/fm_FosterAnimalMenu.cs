@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using WindowsFormsApp1.BasicForms;
+using WindowsForms.BasicForms;
 
 namespace WindowsFormsApp1.menuFosters
 {

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.BasicForms
+﻿namespace WindowsForms.BasicForms
 {
     partial class fm_AnimalsMedicalCheckUp
     {

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.BasicForms
+namespace WindowsForms.BasicForms
 {
     public partial class fm_HouseLoad : Form
     {

@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using Services;
 using Domain;
-using WindowsFormsApp1.BasicForms;
+using WindowsForms.BasicForms;
 
 
-namespace WindowsFormsApp1
+namespace WindowsForms
 {
     public partial class fm_SignUp : Form
     {

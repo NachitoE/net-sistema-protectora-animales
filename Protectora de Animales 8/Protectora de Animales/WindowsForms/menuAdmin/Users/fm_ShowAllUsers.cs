@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuAdmin.Users
+namespace WindowsForms.menuAdmin.Users
 {
     public partial class fm_ShowAllUsers : Form
     {

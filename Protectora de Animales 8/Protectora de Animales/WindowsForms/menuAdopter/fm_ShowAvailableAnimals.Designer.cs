@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuAdopter
+﻿namespace WindowsForms.menuAdopter
 {
     partial class fm_ShowAvailableAnimals
     {

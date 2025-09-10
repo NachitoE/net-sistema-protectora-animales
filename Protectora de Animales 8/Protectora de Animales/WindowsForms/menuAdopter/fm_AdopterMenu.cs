@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuAdopter
+namespace WindowsForms.menuAdopter
 {
     public partial class fm_AdopterMenu : Form
     {

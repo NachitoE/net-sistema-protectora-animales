@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menusAdmin
+﻿namespace WindowsForms.menusAdmin
 {
     partial class fm_AdminUsersMenu
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using WindowsFormsApp1.menusAdmin;
+using WindowsForms.menusAdmin;
 
 namespace WindowsFormsApp1
 {

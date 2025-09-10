@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuAdmin.Users
+﻿namespace WindowsForms.menuAdmin.Users
 {
     partial class fm_ModifyUsers
     {
@@ -46,7 +46,6 @@
             // pb_headerpic
             // 
             this.pb_headerpic.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pb_headerpic.Image = global::WindowsFormsApp1.Properties.Resources.Studio_Ghibli__Cattt__;
             this.pb_headerpic.Location = new System.Drawing.Point(0, 0);
             this.pb_headerpic.Name = "pb_headerpic";
             this.pb_headerpic.Size = new System.Drawing.Size(55, 450);

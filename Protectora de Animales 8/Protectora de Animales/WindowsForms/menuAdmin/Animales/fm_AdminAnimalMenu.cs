@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using WindowsFormsApp1.menuAdmin.Animales;
+using WindowsForms.menuAdmin.Animales;
 
-namespace WindowsFormsApp1
+namespace WindowsForms
 {
     public partial class fm_AdminAnimalMenu : Form
     {

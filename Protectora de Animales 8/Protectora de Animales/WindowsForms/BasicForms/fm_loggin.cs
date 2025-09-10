@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using Services;
-using WindowsFormsApp1.menuAdopter;
-using WindowsFormsApp1.menuFosters;
-using WindowsFormsApp1.menuVolunteer;
+using WindowsForms.menuAdopter;
+using WindowsForms.menuFosters;
+using WindowsForms.menuVolunteer;
 
-namespace WindowsFormsApp1
+namespace WindowsForms
 {
     public partial class fm_loggin : Form
     {

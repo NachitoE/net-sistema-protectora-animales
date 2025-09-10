@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.BasicForms
+namespace WindowsForms.BasicForms
 {
     public partial class fm_AnimalsMedicalCheckUp : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuFosters
+﻿namespace WindowsForms.menuFosters
 {
     partial class fm_FosterAnimalMenu
     {

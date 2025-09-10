@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuVolunteer
+namespace WindowsForms.menuVolunteer
 {
     public partial class fm_VolunteerAdoptionMenu : Form
     {

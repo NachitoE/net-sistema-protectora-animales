@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuAdmin.Animales
+﻿namespace WindowsForms.menuAdmin.Animales
 {
     partial class fm_ShowAllAnimals
     {

@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuVolunteer
+﻿namespace WindowsForms.menuVolunteer
 {
     partial class fm_VolunteerAdoptionMenu
     {

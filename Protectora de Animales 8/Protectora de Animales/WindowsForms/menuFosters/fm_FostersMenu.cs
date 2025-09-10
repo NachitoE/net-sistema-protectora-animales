@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WindowsFormsApp1.menuFosters
+namespace WindowsForms.menuFosters
 {
     public partial class fm_FostersMenu : Form
     {

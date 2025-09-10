@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using WindowsFormsApp1.BasicForms;
+using WindowsForms.BasicForms;
 
-namespace WindowsFormsApp1.menuVolunteer
+namespace WindowsForms.menuVolunteer
 {
     public partial class fm_VolunteerMenu : Form
     {

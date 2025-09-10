@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Services;
 using Domain;
 
-namespace WindowsFormsApp1.menuAdmin.Animales
+namespace WindowsForms.menuAdmin.Animales
 {
     public partial class fm_AddNewAnimal : Form
     {

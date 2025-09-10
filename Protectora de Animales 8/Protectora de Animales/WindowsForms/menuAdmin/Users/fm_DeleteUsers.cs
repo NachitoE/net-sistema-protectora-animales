@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
 
-namespace WindowsFormsApp1.menuAdmin.Users
+namespace WindowsForms.menuAdmin.Users
 {
     public partial class fm_DeleteUsers : Form
     {

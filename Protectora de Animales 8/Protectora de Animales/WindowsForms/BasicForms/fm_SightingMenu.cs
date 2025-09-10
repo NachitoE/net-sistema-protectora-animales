@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace WindowsForms
 {
     public partial class fm_SightingMenu : Form
     {

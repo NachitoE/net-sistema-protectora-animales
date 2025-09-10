@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.BasicForms;
+using WindowsForms.BasicForms;
 
-namespace WindowsFormsApp1.menuVolunteer
+namespace WindowsForms.menuVolunteer
 {
     public partial class fm_VolunteerAnimalMenu : Form
     {

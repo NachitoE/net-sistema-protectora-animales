@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Services;
 using Domain;
 
-namespace WindowsFormsApp1.BasicForms
+namespace WindowsForms.BasicForms
 {
     public partial class fm_CaretakersAnimals : Form
     {

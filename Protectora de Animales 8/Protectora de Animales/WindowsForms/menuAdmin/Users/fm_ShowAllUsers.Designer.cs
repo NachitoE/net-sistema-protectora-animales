@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.menuAdmin.Users
+﻿namespace WindowsForms.menuAdmin.Users
 {
     partial class fm_ShowAllUsers
     {
