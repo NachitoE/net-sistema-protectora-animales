@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using DTOs;
+﻿using DTOs;
+using Infrastructure.API.Interfaces;
 using Newtonsoft.Json;
 
 namespace Infrastructure.API
 {
-    public class AuthController
+    public class AuthClient
     {
         IApiHttpClient _apiHttpClient;
-        public AuthController(IApiHttpClient apiHttpClient)
+        public AuthClient(IApiHttpClient apiHttpClient)
         {
             _apiHttpClient = apiHttpClient;
         }

@@ -1,19 +1,12 @@
-﻿using System;
+﻿using Infrastructure.API.Interfaces;
+using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Infrastructure.API
 {
-    public interface IApiHttpClient
-    {
-        Task<T> GetAsync<T>(string endpoint);
-        Task<T> PostAsync<T>(string endpoint, object data);
-        Task<T> PutAsync<T>(string endpoint, object data);
-        Task<bool> DeleteAsync(string endpoint);
-    }
-
     public class APIHttpClient : IApiHttpClient, IDisposable
     {
         private readonly HttpClient _httpClient;
