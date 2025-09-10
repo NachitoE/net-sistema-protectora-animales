@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.API.Interfaces
+﻿namespace Infrastructure.API
 {
     public interface IApiHttpClient
     {

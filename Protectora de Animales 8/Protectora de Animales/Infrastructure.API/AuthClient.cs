@@ -1,5 +1,5 @@
 ﻿using DTOs;
-using Infrastructure.API.Interfaces;
+using Infrastructure.API;
 using Newtonsoft.Json;
 
 namespace Infrastructure.API
