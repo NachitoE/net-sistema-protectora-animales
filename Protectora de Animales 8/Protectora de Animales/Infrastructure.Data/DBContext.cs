@@ -68,6 +68,43 @@ namespace Infrastructure.Data
                     .HasConversion<string>();
 
             });
+
+            modelBuilder.Entity<Animal>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Species)
+                    .IsRequired()
+                    .HasConversion<string>();
+
+                entity.Property(e => e.BirthDate)
+                    .IsRequired();
+
+                entity.Property(e => e.AnimalState)
+                    .IsRequired()
+                    .HasConversion<string>();
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(300);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired();
+
+                entity.Navigation(e => e.User);
+
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId);
+
+            });
         }
     }
 }
