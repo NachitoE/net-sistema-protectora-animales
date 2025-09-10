@@ -1,16 +1,48 @@
 ﻿using Domain;
 using DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infrastructure.Data;
 
 namespace Services
 {
     public class UsersService
     {
+        //Note to self: still need to add Update and Delete methods
 
+        // Question: should we make a register method or use Add for every time a user is created?
+        public UserDTO Add(UserDTO userDTO) 
+        {
+            UserRepository userRepository = new UserRepository();
+            User createdUser = 
+                new User(Guid.NewGuid().ToString(), userDTO.Name, userDTO.SurName, userDTO.DNI, userDTO.UserType, userDTO.UserName, "temporarypassword");
+
+            userRepository.Add(createdUser);
+            
+            userDTO.Id = createdUser.Id;
+
+            return userDTO;
+        }
+
+        public UserDTO? Get(int id)
+        {
+            var userRepository = new UserRepository();
+            User? user = userRepository.Get(id);
+
+            if (user != null) { 
+                var strUserType = user.UserType.ToString();
+                return new UserDTO
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    SurName = user.SurName,
+                    DNI = user.DNI,
+                    UserType = strUserType,
+                    UserName = user.UserName,
+                };
+            }
+            return null;
+
+
+        }
         public List<UserDTO> GetAll()
         {
             var usersDomain = new List<User>();//get from db
