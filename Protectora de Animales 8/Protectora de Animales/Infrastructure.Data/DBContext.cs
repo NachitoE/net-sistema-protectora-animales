@@ -38,6 +38,7 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            //----- USERS -----
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -68,9 +69,15 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
-
+                //seeding data
+                entity.HasData(
+                new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123"),
+                new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123"),
+                new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123"),
+                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123"));
             });
 
+            //----- ANIMAL -----
             modelBuilder.Entity<Animal>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -97,15 +104,24 @@ namespace Infrastructure.Data
                     .IsRequired()
                     .HasMaxLength(300);
 
-                entity.Property(e => e.UserId)
-                    .IsRequired();
+                entity.Property(e => e.UserId);
 
                 entity.Navigation(e => e.User);
 
                 entity.HasOne(e => e.User)
                     .WithMany()
-                    .HasForeignKey(e => e.UserId);
+                    .HasForeignKey(e => e.UserId)
+                    .IsRequired(false);
 
+                //seeding data
+                entity.HasData(
+                    new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.Adoptado, ""),
+                    new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
+                    new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.Adoptado, "Como es el bichito"));
             });
         }
     }

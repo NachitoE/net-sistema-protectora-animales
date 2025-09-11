@@ -51,12 +51,12 @@ namespace Domain
         private DateTime _birthDate;
 
       
-        public string UserId
+        public string? UserId
         {
             get => _userId;
             set => _userId = value;
         }
-        private string _userId; //owner, caretaker
+        private string? _userId; //owner, caretaker
 
         public User User {
             get => _user;
