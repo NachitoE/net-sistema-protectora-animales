@@ -56,5 +56,12 @@ namespace Infrastructure.Data
             }
             return false;
         }
+
+        public User? Login(string userName, string password)
+        {
+            DBContext context = this.CreateContext();
+            return context.Users
+                .FirstOrDefault(u => u.UserName == userName && u.Password == password);
+        }
     }
 }

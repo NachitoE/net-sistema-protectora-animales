@@ -12,7 +12,7 @@ namespace Infrastructure.API
         private readonly HttpClient _httpClient;
         private readonly string _baseUrl;
 
-        public APIHttpClient(string baseUrl = "WEBAPIURL")
+        public APIHttpClient(string baseUrl = "https://localhost:7056/")
         {
             _baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
             _httpClient = new HttpClient
@@ -35,7 +35,7 @@ namespace Infrastructure.API
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error en GET request a {endpoint}: {ex.Message}", ex);
+                throw new Exception($"GET Request error on endpoint: {endpoint}: {ex.Message}", ex);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Infrastructure.API
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error en POST request a {endpoint}: {ex.Message}", ex);
+                throw new Exception($"POST Request error on endpoint: {endpoint}: {ex.Message}", ex);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Infrastructure.API
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error en PUT request a {endpoint}: {ex.Message}", ex);
+                throw new Exception($"PUT Request error on endpoint: {endpoint}: {ex.Message}", ex);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Infrastructure.API
             }
             catch (HttpRequestException ex)
             {
-                throw new Exception($"Error en DELETE request a {endpoint}: {ex.Message}", ex);
+                throw new Exception($"DELETE Request error on endpoint: {endpoint}: {ex.Message}", ex);
             }
         }
 
