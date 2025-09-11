@@ -42,7 +42,7 @@ namespace Services
             return null;
         }
 
-        public bool Delete(int id) 
+        public bool Delete(string id) 
         {
             UserRepository userRepository = new UserRepository();
             return userRepository.Delete(id);

@@ -27,7 +27,7 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
-            app.MapDelete("/users/{id}", (int id) =>
+            app.MapDelete("/users/{id}", (string id) =>
             {
                 UsersService userService = new UsersService();
                 bool deleted = userService.Delete(id);

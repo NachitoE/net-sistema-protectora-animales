@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 
 namespace Infrastructure.Data
@@ -43,7 +44,7 @@ namespace Infrastructure.Data
             return false;
         }
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
             DBContext context = this.CreateContext();
             User? existingUser = context.Users.Find(id);
