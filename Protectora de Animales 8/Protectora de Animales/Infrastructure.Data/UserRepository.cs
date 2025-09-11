@@ -63,5 +63,12 @@ namespace Infrastructure.Data
             return context.Users
                 .FirstOrDefault(u => u.UserName == userName && u.Password == password);
         }
+
+        public bool ExistsByUserName(string userName)
+        {
+            DBContext context = this.CreateContext();
+            return context.Users
+                .FirstOrDefault(u => u.UserName == userName) != null;
+        }
     }
 }

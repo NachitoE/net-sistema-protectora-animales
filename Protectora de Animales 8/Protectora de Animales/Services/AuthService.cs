@@ -30,5 +30,26 @@ namespace Services
             }
             return null;
         }
+
+        public bool Register(UserRegisterRequestDTO registerReqDTO)
+        {
+            UserRepository userRepository = new UserRepository();
+            bool exists = userRepository.ExistsByUserName(registerReqDTO.UserName);
+            if (exists)
+            {
+                return false;
+            }
+            User createdUser =
+               new User(Guid.NewGuid().ToString(),
+               registerReqDTO.Name,
+               registerReqDTO.SurName,
+               registerReqDTO.DNI,
+               (UserType)Enum.Parse(typeof(UserType), registerReqDTO.UserType),
+               registerReqDTO.UserName,
+               registerReqDTO.Password);
+
+            userRepository.Add(createdUser);
+            return true;
+        }
     }
 }
