@@ -51,14 +51,16 @@ namespace Domain
             get => _password;
             set => _password = value;
         }
+
+        public User() { }
         #endregion
-        public User(string id, string name, string surname, string dni, string usertypeStr, string username, string password)
+        public User(string id, string name, string surname, string dni, string usertype, string username, string password)
         {
             Id = id;
             Name = name;
             SurName = surname;
             DNI = dni;
-            Enum.TryParse(usertypeStr, out UserType userType);
+            Enum.TryParse(usertype, out UserType userType);
             UserType = userType;
             UserName = username;
             Password = password;
