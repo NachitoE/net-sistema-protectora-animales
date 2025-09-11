@@ -29,7 +29,7 @@ namespace Domain
             set => _surName = value;
         }
         private string _dni;
-        public string DNI
+        public string Dni
         {
             get => _dni;
             set => _dni = value;
@@ -52,17 +52,15 @@ namespace Domain
             set => _password = value;
         }
 
-        public User() { }
         #endregion
-        public User(string id, string name, string surname, string dni, string usertype, string username, string password)
+        public User(string id, string name, string surName, string dni, UserType userType, string userName, string password)
         {
             Id = id;
             Name = name;
-            SurName = surname;
-            DNI = dni;
-            Enum.TryParse(usertype, out UserType userType);
+            SurName = surName;
+            Dni = dni;
             UserType = userType;
-            UserName = username;
+            UserName = userName;
             Password = password;
 
         }

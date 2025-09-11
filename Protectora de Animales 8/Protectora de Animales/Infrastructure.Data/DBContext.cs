@@ -53,7 +53,7 @@ namespace Infrastructure.Data
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.DNI)
+                entity.Property(e => e.Dni)
                     .IsRequired()
                     .HasMaxLength(25);
 

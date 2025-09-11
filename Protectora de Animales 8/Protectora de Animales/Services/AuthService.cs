@@ -23,7 +23,7 @@ namespace Services
                     Id = user.Id,
                     Name = user.Name,
                     SurName = user.SurName,
-                    DNI = user.DNI,
+                    DNI = user.Dni,
                     UserType = strUserType,
                     UserName = user.UserName,
                 };

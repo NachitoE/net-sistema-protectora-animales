@@ -35,7 +35,7 @@ namespace Infrastructure.Data
             {
                 existingUser.Name = u.Name;
                 existingUser.SurName = u.SurName;
-                existingUser.DNI = u.DNI;
+                existingUser.Dni = u.Dni;
                 existingUser.UserName = u.UserName;
                 existingUser.Password = u.Password;
                 context.SaveChanges();

@@ -13,7 +13,7 @@ namespace Services
         {
             UserRepository userRepository = new UserRepository();
             User createdUser = 
-                new User(Guid.NewGuid().ToString(), userDTO.Name, userDTO.SurName, userDTO.DNI, userDTO.UserType, userDTO.UserName, "temporarypassword");
+                new User(Guid.NewGuid().ToString(), userDTO.Name, userDTO.SurName, userDTO.DNI, (UserType)Enum.Parse(typeof(UserType), userDTO.UserType), userDTO.UserName, "temporarypassword");
 
             userRepository.Add(createdUser);
             
@@ -34,7 +34,7 @@ namespace Services
                     Id = user.Id,
                     Name = user.Name,
                     SurName = user.SurName,
-                    DNI = user.DNI,
+                    DNI = user.Dni,
                     UserType = strUserType,
                     UserName = user.UserName,
                 };
@@ -56,7 +56,7 @@ namespace Services
                 Id = user.Id,
                 Name = user.Name,
                 SurName = user.SurName,
-                DNI = user.DNI,
+                DNI = user.Dni,
                 UserType = user.UserType.ToString(),
                 UserName = user.UserName
             }).ToList();
