@@ -20,11 +20,11 @@ namespace Infrastructure.Data
 
         }
 
-        public User? Get(int id)
+        public User? Get(string id)
         {
             DBContext context = CreateContext();
             User? foundUser = context.Users.Find(id);
-            return null;
+            return foundUser;
         }
 
         public bool Update(User u) 

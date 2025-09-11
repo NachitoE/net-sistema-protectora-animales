@@ -22,7 +22,7 @@ namespace Services
             return userDTO;
         }
 
-        public UserDTO? Get(int id)
+        public UserDTO? Get(string id)
         {
             var userRepository = new UserRepository();
             User? user = userRepository.Get(id);
