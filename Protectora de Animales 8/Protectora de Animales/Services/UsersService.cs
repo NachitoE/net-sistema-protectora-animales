@@ -40,9 +40,14 @@ namespace Services
                 };
             }
             return null;
-
-
         }
+
+        public bool Delete(int id) 
+        {
+            UserRepository userRepository = new UserRepository();
+            return userRepository.Delete(id);
+        }
+
         public List<UserDTO> GetAll()
         {
             var usersDomain = new List<User>();//get from db
