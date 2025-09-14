@@ -50,7 +50,8 @@ namespace Services
 
         public List<UserDTO> GetAll()
         {
-            var usersDomain = new List<User>();//get from db
+            UserRepository userRepository = new UserRepository();
+            var usersDomain = userRepository.GetAll();
             var allUsersDTOs = usersDomain.Select((user) => new UserDTO
             {
                 Id = user.Id,

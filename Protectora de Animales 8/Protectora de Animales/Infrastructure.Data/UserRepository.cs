@@ -27,6 +27,12 @@ namespace Infrastructure.Data
             return foundUser;
         }
 
+        public IEnumerable<User> GetAll()
+        {
+            DBContext context = CreateContext();
+            return context.Users;
+        }
+
         public bool Update(User u) 
         {
             DBContext context = this.CreateContext();

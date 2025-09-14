@@ -1,5 +1,6 @@
 ﻿using Services;
 using DTOs;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI
 {
@@ -26,6 +27,23 @@ namespace WebAPI
                 .WithName("GetUser")
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
+            app.MapGet("/users", () =>
+            {
+                try
+                {
+                    UsersService userService = new UsersService();
+                    List<UserDTO> usersDTOs = userService.GetAll();
+                    return Results.Ok(usersDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("AllUsers")
+                .Produces<IEnumerable<UserDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
 
             app.MapPost("/users", (UserDTO dto) =>
