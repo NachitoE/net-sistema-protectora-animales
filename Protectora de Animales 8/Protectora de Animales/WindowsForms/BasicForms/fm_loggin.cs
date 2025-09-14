@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using DTOs;
+using Infrastructure.API;
 using Services;
 using WindowsForms.menuAdopter;
 using WindowsForms.menuFosters;
@@ -12,13 +14,12 @@ namespace WindowsForms
         public fm_loggin()
         {
             InitializeComponent();
-            UserService.Instance.SetCurrentLoggedOnUser(null);
         }
 
       
 
 
-        private void btn_loggin_Click(object sender, EventArgs e)
+        private async void btn_loggin_Click(object sender, EventArgs e)
         {
             if (ControlLoginEmpty(this.tb_user.Text)) {
                 string message = "Rellena el usuario";
@@ -35,8 +36,10 @@ namespace WindowsForms
                 SendMessage(message, caption, buttons);
                 return;
             }
-
-            if (!UserService.Instance.IsValidUser(this.tb_user.Text, this.tb_password.Text))
+            UserDTOClient userClient = new UserDTOClient(new APIHttpClient());
+            AuthClient authClient = new AuthClient(new APIHttpClient());
+            UserDTO? loggingUser = await authClient.LoginAsync(new UserLoginRequestDTO(this.tb_user.Text, this.tb_password.Text));
+            if (loggingUser == null)
             {
                 string message = "Usuario o contraseña incorrectos";
                 string caption = "Error";
@@ -44,12 +47,12 @@ namespace WindowsForms
                 SendMessage(message, caption, buttons);
                 return;
             }
-            Domain.User logUser = UserService.Instance.GetByUserName(this.tb_user.Text);
-            UserService.Instance.SetCurrentLoggedOnUser(logUser);
-            if (logUser.UserType == Domain.User.Type.Admin) {
+            //NACHO TODO: Save user on a singleton or something
+                //NACHO TODO: maybe move types to another place? (type safety)
+            if (loggingUser.UserType == "Admin") {
                 this.Hide();
                 fm_AdminMenu menuForm = new fm_AdminMenu();
-                menuForm.ShowDialog();
+                //menuForm.show();
                 this.Show();
             }
             if(logUser.UserType == Domain.User.Type.Voluntario)
