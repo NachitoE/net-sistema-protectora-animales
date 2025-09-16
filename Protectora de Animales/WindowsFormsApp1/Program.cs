@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using WindowsFormsApp1.menuAdopter;
 
 namespace WindowsFormsApp1
 {
@@ -13,7 +14,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fm_loggin());
+            Application.Run(new fm_ShowAvailableAnimals());
         }
     }
 }
