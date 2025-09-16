@@ -26,5 +26,6 @@ app.MapControllers();
 
 app.MapUserEndpoints();
 app.MapAuthEndpoints();
+app.MapAnimalEndpoints();
 
 app.Run();

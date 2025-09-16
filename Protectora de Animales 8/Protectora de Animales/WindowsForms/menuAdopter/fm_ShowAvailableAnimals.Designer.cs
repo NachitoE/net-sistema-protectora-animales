@@ -56,7 +56,6 @@
             lb_MATitle.Size = new Size(263, 15);
             lb_MATitle.TabIndex = 2;
             lb_MATitle.Text = "Seleccione que especie de animal desea adoptar:";
-            lb_MATitle.Click += label1_Click;
             // 
             // btn_Dog
             // 
@@ -66,6 +65,7 @@
             btn_Dog.TabIndex = 3;
             btn_Dog.Text = "Perro";
             btn_Dog.UseVisualStyleBackColor = true;
+            btn_Dog.Click += btn_Dog_Click;
             // 
             // btn_Cat
             // 
@@ -75,6 +75,7 @@
             btn_Cat.TabIndex = 4;
             btn_Cat.Text = "Gato";
             btn_Cat.UseVisualStyleBackColor = true;
+            btn_Cat.Click += btn_Cat_Click;
             // 
             // btn_Bunny
             // 
@@ -84,6 +85,7 @@
             btn_Bunny.TabIndex = 5;
             btn_Bunny.Text = "Conejo";
             btn_Bunny.UseVisualStyleBackColor = true;
+            btn_Bunny.Click += btn_Bunny_Click;
             // 
             // btn_Bird
             // 
@@ -93,6 +95,7 @@
             btn_Bird.TabIndex = 6;
             btn_Bird.Text = "Pájaro";
             btn_Bird.UseVisualStyleBackColor = true;
+            btn_Bird.Click += btn_Bird_Click;
             // 
             // dgv_animals
             // 
@@ -101,7 +104,6 @@
             dgv_animals.Name = "dgv_animals";
             dgv_animals.Size = new Size(341, 405);
             dgv_animals.TabIndex = 7;
-            dgv_animals.CellContentClick += dataGridView1_CellContentClick;
             // 
             // fm_ShowAvailableAnimals
             // 

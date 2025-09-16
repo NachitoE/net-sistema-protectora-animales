@@ -7,7 +7,7 @@ namespace Infrastructure.API
         where TResponse : class 
     {
         protected abstract string _endpoint { get; }
-        IApiHttpClient _apiHttpClient;
+        protected IApiHttpClient _apiHttpClient;
         public BaseDTOClient(IApiHttpClient apiHttpClient)
         {
             _apiHttpClient = apiHttpClient;

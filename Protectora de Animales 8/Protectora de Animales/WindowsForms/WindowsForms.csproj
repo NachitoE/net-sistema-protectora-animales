@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\Infrastructure.API\Infrastructure.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="menuAdmin\fm_AdminReportsMenu.cs">
       <SubType>Form</SubType>
     </Compile>

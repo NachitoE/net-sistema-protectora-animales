@@ -8,5 +8,7 @@ namespace Infrastructure.API
         public AnimalDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient)
         {
         }
+
+        public async Task<List<AnimalDTO>> GetAllAvailableAnimalsAsync() => await _apiHttpClient.GetAsync<List<AnimalDTO>>($"{_endpoint}/available");
     }
 }
