@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="menuAdmin\fm_AdminReportsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="menuAdmin\fm_AdminAdoptionMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="menuAdmin\fm_AdminMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="menuAdopter\fm_ShowAdoptionProgress.cs">
       <SubType>Form</SubType>
     </Compile>

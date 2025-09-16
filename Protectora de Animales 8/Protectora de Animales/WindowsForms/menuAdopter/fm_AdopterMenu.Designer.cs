@@ -57,7 +57,6 @@
             label1.TabIndex = 1;
             label1.Text = "MENU";
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.Click += this.label1_Click;
             // 
             // btn_AdopterInfo
             // 
@@ -67,7 +66,6 @@
             btn_AdopterInfo.TabIndex = 2;
             btn_AdopterInfo.Text = "Requisitos para adoptar";
             btn_AdopterInfo.UseVisualStyleBackColor = true;
-            btn_AdopterInfo.Click += this.button1_Click;
             // 
             // btn_AdoptionFollowing
             // 
