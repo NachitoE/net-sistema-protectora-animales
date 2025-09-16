@@ -29,7 +29,7 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
-            app.MapGet("/users", () =>
+            app.MapGet("/users", (string? userName) =>
             {
                 try
                 {
@@ -77,6 +77,24 @@ namespace WebAPI
                 .WithName("DeleteUser")
                 .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status404NotFound)
+                .WithOpenApi();
+
+            app.MapPost("/users/search", (UserDTO criteria) =>
+            {
+                try
+                {
+                    UsersService userService = new UsersService();
+                    List<UserDTO> usersDTOs = userService.GetByCriteria(criteria);
+                    return Results.Ok(usersDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("SearchUsers")
+                .Produces<IEnumerable<UserDTO>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
         }
     }

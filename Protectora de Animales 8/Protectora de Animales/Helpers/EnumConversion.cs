@@ -23,8 +23,16 @@ namespace Helpers
                     return result;
                 throw new ArgumentException($"Invalid animal state: {state}");
             }
+            
+            public static string UserTypeToString(UserType userType) => userType.ToString();
+            public static UserType StringToUserType(string userType)
+            {
+                if (Enum.TryParse<UserType>(userType, true, out var result))
+                    return result;
+                throw new ArgumentException($"Invalid user type: {userType}");
+            }
 
-        }
+    }
 }
 
 

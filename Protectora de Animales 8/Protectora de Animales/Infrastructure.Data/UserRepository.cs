@@ -76,5 +76,28 @@ namespace Infrastructure.Data
             return context.Users
                 .FirstOrDefault(u => u.UserName == userName) != null;
         }
+        public List<User> FilterByCriteria(string? name = null, string? surName = null,
+    string? dni = null, string? userType = null, string? userName = null)
+        {
+            DBContext context = CreateContext();
+            IQueryable<User> query = context.Users;
+
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(u => u.Name.Contains(name));
+
+            if (!string.IsNullOrEmpty(surName))
+                query = query.Where(u => u.SurName.Contains(surName));
+
+            if (!string.IsNullOrEmpty(dni))
+                query = query.Where(u => u.Dni == dni);
+
+            if (!string.IsNullOrEmpty(userType) && Enum.TryParse<UserType>(userType, out var type))
+                query = query.Where(u => u.UserType == type);
+
+            if (!string.IsNullOrEmpty(userName))
+                query = query.Where(u => u.UserName.Contains(userName));
+
+            return query.ToList();
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace Infrastructure.API
     {
         protected override string _endpoint => "users";
         public UserDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient) { }
+        
     }
 }

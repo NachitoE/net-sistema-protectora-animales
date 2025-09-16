@@ -18,6 +18,7 @@ namespace Infrastructure.API
         public async virtual Task<TResponse> PostAsync(object data) => await _apiHttpClient.PostAsync<TResponse>($"{_endpoint}", data);
         public async virtual Task<TResponse> PutAsync(string id, object data) => await _apiHttpClient.PutAsync<TResponse>($"{_endpoint}/{id}", data);
         public async virtual Task<bool> DeleteAsync(string id) => await _apiHttpClient.DeleteAsync($"{_endpoint}/{id}");
+        public async virtual Task<List<TResponse>> SearchAsync(TResponse criteria) => await _apiHttpClient.PostAsync<List<TResponse>>($"{_endpoint}/search", criteria);
 
     }
 }

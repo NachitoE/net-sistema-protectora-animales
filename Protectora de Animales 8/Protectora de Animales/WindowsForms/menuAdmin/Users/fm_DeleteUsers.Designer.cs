@@ -52,6 +52,7 @@
             btn_AcceptUsn.TabIndex = 18;
             btn_AcceptUsn.Text = "Aceptar";
             btn_AcceptUsn.UseVisualStyleBackColor = true;
+            btn_AcceptUsn.Click += btn_AcceptUsn_Click;
             // 
             // llb_ShowAllUsers
             // 
@@ -126,7 +127,7 @@
             lb_UserData.Location = new Point(584, 58);
             lb_UserData.Margin = new Padding(4, 0, 4, 0);
             lb_UserData.Name = "lb_UserData";
-            lb_UserData.Size = new Size(120, 15);
+            lb_UserData.Size = new Size(121, 15);
             lb_UserData.TabIndex = 20;
             lb_UserData.Text = "DATOS DEL USUARIO:";
             // 

@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using Helpers;
 using Infrastructure.Data;
 
 namespace Services
@@ -64,30 +65,18 @@ namespace Services
             return allUsersDTOs;
         }
 
-        public List<UserDTO> GetByCriteria(string criteria)
+        public List<UserDTO> GetByCriteria(UserDTO criteria)
         {
-            //var clienteRepository = new ClienteRepository();
+            UserRepository userRepository = new UserRepository();
+            List<User> filteredUsers = userRepository.FilterByCriteria(
+                criteria.Name,
+                criteria.SurName,
+                criteria.DNI,
+                criteria.UserType,
+                criteria.UserName
+                );
 
-            // Mapear DTO a Domain Model
-            //var criteria = new ClienteCriteria(criteriaDTO.Texto);
-
-            // Llamar al repositorio
-            //var clientes = clienteRepository.GetByCriteria(criteria);
-
-            // Mapear Domain Model a DTO
-            /*
-            return clientes.Select(c => new ClienteDTO
-            {
-                Id = c.Id,
-                Nombre = c.Nombre,
-                Apellido = c.Apellido,
-                Email = c.Email,
-                PaisId = c.PaisId,
-                PaisNombre = c.Pais?.Nombre,
-                FechaAlta = c.FechaAlta
-            });
-            */
-            return new List<UserDTO>();
+            return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
         }
 
 
