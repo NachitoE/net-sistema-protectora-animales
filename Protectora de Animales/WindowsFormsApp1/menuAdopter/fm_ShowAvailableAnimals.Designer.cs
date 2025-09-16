@@ -71,6 +71,7 @@
             this.dgv_animals.ReadOnly = true;
             this.dgv_animals.Size = new System.Drawing.Size(473, 411);
             this.dgv_animals.TabIndex = 6;
+            this.dgv_animals.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_animals_CellContentClick);
             // 
             // btn_Dog
             // 

@@ -69,6 +69,11 @@ namespace WindowsFormsApp1.menuAdopter
             var nonAdoptedBirds = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible && a.Species == Domain.Animal.SpeciesEn.Pajaro).ToList();
             dgv_animals.DataSource = nonAdoptedBirds;
         }
+
+        private void dgv_animals_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     };
    
     }
