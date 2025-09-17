@@ -64,6 +64,7 @@
             llb_ShowAllUsers.TabIndex = 17;
             llb_ShowAllUsers.TabStop = true;
             llb_ShowAllUsers.Text = "No recuerdo el nombre de Usuario";
+            llb_ShowAllUsers.LinkClicked += llb_ShowAllUsers_LinkClicked;
             // 
             // tb_getUsername
             // 
@@ -150,6 +151,7 @@
             btnAcceptDelete.TabIndex = 23;
             btnAcceptDelete.Text = "Aceptar";
             btnAcceptDelete.UseVisualStyleBackColor = true;
+            btnAcceptDelete.Click += btnAcceptDelete_Click;
             // 
             // fm_DeleteUsers
             // 

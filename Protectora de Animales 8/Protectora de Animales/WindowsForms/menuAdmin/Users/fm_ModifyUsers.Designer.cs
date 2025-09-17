@@ -28,147 +28,160 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pb_headerpic = new System.Windows.Forms.PictureBox();
-            this.lb_UserData = new System.Windows.Forms.Label();
-            this.lb_MUser = new System.Windows.Forms.Label();
-            this.lb_ModInfo = new System.Windows.Forms.Label();
-            this.tb_getUsername = new System.Windows.Forms.TextBox();
-            this.llb_ShowAllUsers = new System.Windows.Forms.LinkLabel();
-            this.pb_Background = new System.Windows.Forms.PictureBox();
-            this.btn_AcceptUsn = new System.Windows.Forms.Button();
-            this.btn_AcceptMod = new System.Windows.Forms.Button();
-            this.dgv_User = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Background)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_User)).BeginInit();
-            this.SuspendLayout();
+            pb_headerpic = new PictureBox();
+            lb_UserData = new Label();
+            lb_MUser = new Label();
+            lb_ModInfo = new Label();
+            tb_getUsername = new TextBox();
+            llb_ShowAllUsers = new LinkLabel();
+            pb_Background = new PictureBox();
+            btn_AcceptUsn = new Button();
+            btn_AcceptMod = new Button();
+            dgv_User = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)pb_headerpic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Background).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_User).BeginInit();
+            SuspendLayout();
             // 
             // pb_headerpic
             // 
-            this.pb_headerpic.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pb_headerpic.Image = global::WindowsForms.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pb_headerpic.Location = new System.Drawing.Point(0, 0);
-            this.pb_headerpic.Name = "pb_headerpic";
-            this.pb_headerpic.Size = new System.Drawing.Size(55, 450);
-            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pb_headerpic.TabIndex = 6;
-            this.pb_headerpic.TabStop = false;
+            pb_headerpic.Dock = DockStyle.Left;
+            pb_headerpic.Image = Properties.Resources.Studio_Ghibli__Cattt__;
+            pb_headerpic.Location = new Point(0, 0);
+            pb_headerpic.Margin = new Padding(4, 3, 4, 3);
+            pb_headerpic.Name = "pb_headerpic";
+            pb_headerpic.Size = new Size(64, 519);
+            pb_headerpic.SizeMode = PictureBoxSizeMode.CenterImage;
+            pb_headerpic.TabIndex = 6;
+            pb_headerpic.TabStop = false;
             // 
             // lb_UserData
             // 
-            this.lb_UserData.AutoSize = true;
-            this.lb_UserData.BackColor = System.Drawing.Color.OliveDrab;
-            this.lb_UserData.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lb_UserData.Location = new System.Drawing.Point(471, 9);
-            this.lb_UserData.Name = "lb_UserData";
-            this.lb_UserData.Size = new System.Drawing.Size(123, 13);
-            this.lb_UserData.TabIndex = 7;
-            this.lb_UserData.Text = "DATOS DEL USUARIO:";
+            lb_UserData.AutoSize = true;
+            lb_UserData.BackColor = Color.OliveDrab;
+            lb_UserData.ForeColor = SystemColors.ButtonHighlight;
+            lb_UserData.Location = new Point(550, 10);
+            lb_UserData.Margin = new Padding(4, 0, 4, 0);
+            lb_UserData.Name = "lb_UserData";
+            lb_UserData.Size = new Size(121, 15);
+            lb_UserData.TabIndex = 7;
+            lb_UserData.Text = "DATOS DEL USUARIO:";
             // 
             // lb_MUser
             // 
-            this.lb_MUser.AutoSize = true;
-            this.lb_MUser.BackColor = System.Drawing.Color.OliveDrab;
-            this.lb_MUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lb_MUser.Location = new System.Drawing.Point(72, 9);
-            this.lb_MUser.Name = "lb_MUser";
-            this.lb_MUser.Size = new System.Drawing.Size(92, 13);
-            this.lb_MUser.TabIndex = 8;
-            this.lb_MUser.Text = "Modificar Usuario:";
+            lb_MUser.AutoSize = true;
+            lb_MUser.BackColor = Color.OliveDrab;
+            lb_MUser.ForeColor = SystemColors.ButtonHighlight;
+            lb_MUser.Location = new Point(84, 10);
+            lb_MUser.Margin = new Padding(4, 0, 4, 0);
+            lb_MUser.Name = "lb_MUser";
+            lb_MUser.Size = new Size(104, 15);
+            lb_MUser.TabIndex = 8;
+            lb_MUser.Text = "Modificar Usuario:";
             // 
             // lb_ModInfo
             // 
-            this.lb_ModInfo.AutoSize = true;
-            this.lb_ModInfo.BackColor = System.Drawing.Color.OliveDrab;
-            this.lb_ModInfo.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lb_ModInfo.Location = new System.Drawing.Point(72, 36);
-            this.lb_ModInfo.Name = "lb_ModInfo";
-            this.lb_ModInfo.Size = new System.Drawing.Size(156, 26);
-            this.lb_ModInfo.TabIndex = 9;
-            this.lb_ModInfo.Text = "Por favor,ingrese el nombre del usuario que desee modificar:";
+            lb_ModInfo.AutoSize = true;
+            lb_ModInfo.BackColor = Color.OliveDrab;
+            lb_ModInfo.ForeColor = SystemColors.ButtonHighlight;
+            lb_ModInfo.Location = new Point(84, 42);
+            lb_ModInfo.Margin = new Padding(4, 0, 4, 0);
+            lb_ModInfo.Name = "lb_ModInfo";
+            lb_ModInfo.Size = new Size(327, 15);
+            lb_ModInfo.TabIndex = 9;
+            lb_ModInfo.Text = "Por favor,ingrese el nombre del usuario que desee modificar:";
             // 
             // tb_getUsername
             // 
-            this.tb_getUsername.Location = new System.Drawing.Point(75, 79);
-            this.tb_getUsername.Name = "tb_getUsername";
-            this.tb_getUsername.Size = new System.Drawing.Size(153, 20);
-            this.tb_getUsername.TabIndex = 10;
+            tb_getUsername.Location = new Point(88, 91);
+            tb_getUsername.Margin = new Padding(4, 3, 4, 3);
+            tb_getUsername.Name = "tb_getUsername";
+            tb_getUsername.Size = new Size(178, 23);
+            tb_getUsername.TabIndex = 10;
             // 
             // llb_ShowAllUsers
             // 
-            this.llb_ShowAllUsers.AutoSize = true;
-            this.llb_ShowAllUsers.Location = new System.Drawing.Point(72, 114);
-            this.llb_ShowAllUsers.Name = "llb_ShowAllUsers";
-            this.llb_ShowAllUsers.Size = new System.Drawing.Size(169, 13);
-            this.llb_ShowAllUsers.TabIndex = 11;
-            this.llb_ShowAllUsers.TabStop = true;
-            this.llb_ShowAllUsers.Text = "No recuerdo el nombre de Usuario";
+            llb_ShowAllUsers.AutoSize = true;
+            llb_ShowAllUsers.Location = new Point(84, 132);
+            llb_ShowAllUsers.Margin = new Padding(4, 0, 4, 0);
+            llb_ShowAllUsers.Name = "llb_ShowAllUsers";
+            llb_ShowAllUsers.Size = new Size(189, 15);
+            llb_ShowAllUsers.TabIndex = 11;
+            llb_ShowAllUsers.TabStop = true;
+            llb_ShowAllUsers.Text = "No recuerdo el nombre de Usuario";
+            llb_ShowAllUsers.LinkClicked += llb_ShowAllUsers_LinkClicked;
+            // 
             // pb_Background
             // 
-            this.pb_Background.BackColor = System.Drawing.Color.OliveDrab;
-            this.pb_Background.Location = new System.Drawing.Point(316, 25);
-            this.pb_Background.Name = "pb_Background";
-            this.pb_Background.Size = new System.Drawing.Size(494, 319);
-            this.pb_Background.TabIndex = 12;
-            this.pb_Background.TabStop = false;
+            pb_Background.BackColor = Color.OliveDrab;
+            pb_Background.Location = new Point(369, 29);
+            pb_Background.Margin = new Padding(4, 3, 4, 3);
+            pb_Background.Name = "pb_Background";
+            pb_Background.Size = new Size(576, 368);
+            pb_Background.TabIndex = 12;
+            pb_Background.TabStop = false;
             // 
             // btn_AcceptUsn
             // 
-            this.btn_AcceptUsn.Location = new System.Drawing.Point(235, 79);
-            this.btn_AcceptUsn.Name = "btn_AcceptUsn";
-            this.btn_AcceptUsn.Size = new System.Drawing.Size(75, 23);
-            this.btn_AcceptUsn.TabIndex = 13;
-            this.btn_AcceptUsn.Text = "Aceptar";
-            this.btn_AcceptUsn.UseVisualStyleBackColor = true;
+            btn_AcceptUsn.Location = new Point(274, 91);
+            btn_AcceptUsn.Margin = new Padding(4, 3, 4, 3);
+            btn_AcceptUsn.Name = "btn_AcceptUsn";
+            btn_AcceptUsn.Size = new Size(88, 27);
+            btn_AcceptUsn.TabIndex = 13;
+            btn_AcceptUsn.Text = "Aceptar";
+            btn_AcceptUsn.UseVisualStyleBackColor = true;
             // 
             // btn_AcceptMod
             // 
-            this.btn_AcceptMod.Location = new System.Drawing.Point(735, 415);
-            this.btn_AcceptMod.Name = "btn_AcceptMod";
-            this.btn_AcceptMod.Size = new System.Drawing.Size(75, 23);
-            this.btn_AcceptMod.TabIndex = 14;
-            this.btn_AcceptMod.Text = "Aceptar";
-            this.btn_AcceptMod.UseVisualStyleBackColor = true;
+            btn_AcceptMod.Location = new Point(858, 479);
+            btn_AcceptMod.Margin = new Padding(4, 3, 4, 3);
+            btn_AcceptMod.Name = "btn_AcceptMod";
+            btn_AcceptMod.Size = new Size(88, 27);
+            btn_AcceptMod.TabIndex = 14;
+            btn_AcceptMod.Text = "Aceptar";
+            btn_AcceptMod.UseVisualStyleBackColor = true;
             // 
             // dgv_User
             // 
-            this.dgv_User.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_User.Location = new System.Drawing.Point(329, 51);
-            this.dgv_User.Name = "dgv_User";
-            this.dgv_User.Size = new System.Drawing.Size(465, 262);
-            this.dgv_User.TabIndex = 15;
+            dgv_User.BackgroundColor = SystemColors.ButtonHighlight;
+            dgv_User.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_User.Location = new Point(384, 59);
+            dgv_User.Margin = new Padding(4, 3, 4, 3);
+            dgv_User.Name = "dgv_User";
+            dgv_User.Size = new Size(542, 302);
+            dgv_User.TabIndex = 15;
             // 
             // fm_ModifyUsers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 450);
-            this.Controls.Add(this.dgv_User);
-            this.Controls.Add(this.btn_AcceptMod);
-            this.Controls.Add(this.btn_AcceptUsn);
-            this.Controls.Add(this.pb_Background);
-            this.Controls.Add(this.llb_ShowAllUsers);
-            this.Controls.Add(this.tb_getUsername);
-            this.Controls.Add(this.lb_ModInfo);
-            this.Controls.Add(this.lb_MUser);
-            this.Controls.Add(this.lb_UserData);
-            this.Controls.Add(this.pb_headerpic);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "fm_ModifyUsers";
-            this.Text = "Modificar Usuario";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Background)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_User)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-        
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(959, 519);
+            Controls.Add(dgv_User);
+            Controls.Add(btn_AcceptMod);
+            Controls.Add(btn_AcceptUsn);
+            Controls.Add(pb_Background);
+            Controls.Add(llb_ShowAllUsers);
+            Controls.Add(tb_getUsername);
+            Controls.Add(lb_ModInfo);
+            Controls.Add(lb_MUser);
+            Controls.Add(lb_UserData);
+            Controls.Add(pb_headerpic);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "fm_ModifyUsers";
+            Text = "Modificar Usuario";
+            ((System.ComponentModel.ISupportInitialize)pb_headerpic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Background).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_User).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+
         }
 
         #endregion
 
-                private System.Windows.Forms.PictureBox pb_headerpic;
+        private System.Windows.Forms.PictureBox pb_headerpic;
         private System.Windows.Forms.Label lb_UserData;
         private System.Windows.Forms.Label lb_MUser;
         private System.Windows.Forms.Label lb_ModInfo;

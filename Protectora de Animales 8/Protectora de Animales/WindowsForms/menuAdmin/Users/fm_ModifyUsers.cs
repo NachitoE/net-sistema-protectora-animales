@@ -16,5 +16,10 @@ namespace WindowsForms.menuAdmin.Users
         {
             InitializeComponent();
         }
+
+        private void llb_ShowAllUsers_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }

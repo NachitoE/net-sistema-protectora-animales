@@ -30,7 +30,7 @@ namespace WindowsForms.menuAdmin.Users
         {
             UserDTOClient userClient = new UserDTOClient(new APIHttpClient());
             List<UserDTO> filteredUserList = await userClient.SearchAsync(new UserDTO() { UserName = tb_getUsername.Text });
-            
+
             dgv_User.DataSource = filteredUserList;
 
 
@@ -56,7 +56,7 @@ namespace WindowsForms.menuAdmin.Users
 
         private void btnAcceptDelete_Click(object sender, EventArgs e)
         {
-            /*
+            
             string message = "Se eliminará el usuario seleccionado¿Desea continuar?";
             string caption = "Advertencia";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
@@ -64,12 +64,12 @@ namespace WindowsForms.menuAdmin.Users
             DialogResult result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.Yes)
             {
-                Shared.User WantedUser = UserService.Instance.GetByUserName(this.tb_getUsername.Text);
+                MessageBox.Show("to implement");
             }
             else if (result == DialogResult.No)
             {
             }
-            */
+            
         }
 
     }
