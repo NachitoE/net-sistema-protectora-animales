@@ -1,16 +1,10 @@
-﻿using DTOs;
-using Infrastructure.API;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsForms.menuAdmin.Animals
+namespace WindowsFormsApp1.menuAdmin.Animales
 {
     public partial class fm_ShowAllAnimals : Form
     {
@@ -20,11 +14,12 @@ namespace WindowsForms.menuAdmin.Animals
             Load += ShowAllAnimalsFormLoad;
         }
 
-
-        private async void ShowAllAnimalsFormLoad(object sender, EventArgs e)
+       
+        private void ShowAllAnimalsFormLoad(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<AnimalDTO> animalDTOs = await new AnimalDTOClient(new APIHttpClient()).GetAllAsync();
+            List<Domain.Animal> animals = Services.AnimalService.Instance.GetAll();
+            var nonAdoptedAnimals = animals.Where(a => a.AnimalState == Domain.Animal.AnimalStateEn.Disponible).ToList();
             dgv_animals.Columns.Add("Name", "Nombre");
             dgv_animals.Columns.Add("Species", "Especie");
             dgv_animals.Columns.Add("UserId", "Responsable");
@@ -35,8 +30,9 @@ namespace WindowsForms.menuAdmin.Animals
             dgv_animals.Columns["BirthDate"].DataPropertyName = "BirthDate";
             dgv_animals.Columns["AnimalState"].DataPropertyName = "AnimalState";
             dgv_animals.Columns["UserId"].DataPropertyName = "UserId";
-            dgv_animals.DataSource = animalDTOs;
+            dgv_animals.DataSource = nonAdoptedAnimals;
         }
-
+      
+       
     }
 }

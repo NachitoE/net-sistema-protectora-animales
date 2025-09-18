@@ -79,7 +79,43 @@ namespace Services
             return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
         }
 
+        public List<UserDTO> GetAvailableToAdopt(UserDTO criteria)
+        {
+            UserService.Instance.GetAll()
+                .Where(u => (u.UserType == User.Type.Voluntario
+                            || u.UserType == User.Type.Transito) &&
+                            UserService.GetUserRemainingCapacity(u) > 0)
+                .ToList();
+            UserRepository userRepository = new UserRepository();
+            List<User> filteredUsers = userRepository.FilterByCriteria(
+                criteria.Name,
+                criteria.SurName,
+                criteria.DNI,
+                criteria.UserType,
+                criteria.UserName
+                );
 
+            return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
+        }
+
+        public static int GetUserRemainingCapacity(UserDTO userDTO)
+        {
+            if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Voluntario))
+            {
+                int userAnimalsCount = new AnimalsService().GetAnimalsBelongingToUser(userDTO.Id).Count;
+                return User.MAX_CAPACITY_VOLUNTARIOS - userAnimalsCount;
+            }
+            else if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Transito))
+            {
+                var house = HouseService.Instance.GetAll().FirstOrDefault(h => h.UserId == userDTO.Id);
+                if (house == null)
+                    return 0; // No house found for the user
+
+                return house.Capacity -
+                    AnimalService.Instance.GetAll().Count(a => a.UserId == userDTO.Id);
+            }
+            return 0;
+        }
         /*
          *  public bool IsValidUser(string userName, string password)
         {
@@ -98,24 +134,7 @@ namespace Services
             return false;
         }
 
-        public static int GetRemainingCapacity(User user)
-        {
-            if (user.UserType == User.Type.Voluntario)
-            {
-                int userAnimalsCount = AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
-                return User.MAX_CAPACITY_VOLUNTARIOS - userAnimalsCount;
-            }
-            else if (user.UserType == User.Type.Transito)
-            {
-                var house = HouseService.Instance.GetAll().FirstOrDefault(h => h.UserId == user.Id);
-                if (house == null)
-                    return 0; // No house found for the user
 
-                return house.Capacity -
-                    AnimalService.Instance.GetAll().Count(a => a.UserId == user.Id);
-            }
-            return 0;
-        }
 
         public User GetByUserName(string userName)
         {

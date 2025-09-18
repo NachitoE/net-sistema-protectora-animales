@@ -90,12 +90,12 @@ namespace Services
             return new List<AnimalDTO>();
         }
 
-        public List<AnimalDTO> GetAnimalsByClient(string clientId)
+        public List<AnimalDTO> GetAnimalsBelongingToUser(string userId)
         {
             AnimalRepository animalRepository = new AnimalRepository();
             var animalsDomain = animalRepository.GetAll();
             var clientAnimals = animalsDomain
-                .Where(a => a.UserId == clientId)
+                .Where(a => a.UserId == userId)
                 .Select(animal => new AnimalDTO
                 {
                     Id = animal.Id,

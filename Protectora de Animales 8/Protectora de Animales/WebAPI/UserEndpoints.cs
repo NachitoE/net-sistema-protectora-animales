@@ -96,6 +96,25 @@ namespace WebAPI
                 .Produces<IEnumerable<UserDTO>>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
+
+            app.MapGet("/users/available-to-adopt", (string id) =>
+            {
+                try
+                {
+                    UsersService userService = new UsersService();
+                    UserDTO? userDTO = userService.Get(id);
+                    if (userDTO == null) throw new ArgumentException("User not found");
+                    return Results.Ok(userDTO);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("GetUser")
+                .Produces<UserDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
         }
     }
 }

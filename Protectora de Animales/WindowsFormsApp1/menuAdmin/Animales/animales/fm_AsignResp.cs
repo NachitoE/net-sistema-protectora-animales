@@ -1,12 +1,17 @@
-﻿using DTOs;
+﻿using Services;
+using Domain;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Windows.Forms;
 
-namespace WindowsForms.menuAdmin.Animals
+namespace WindowsFormsApp1.menuAdmin.Animales
 {
     public partial class fm_AsignResp : Form
     {
-        private UserDTO _selectedTargetUser = null;
-        private AnimalDTO _selectedTargetAnimal = null;
+        private User _selectedTargetUser = null;
+        private Animal _selectedTargetAnimal = null;
         public fm_AsignResp()
         {
             InitializeComponent();
@@ -25,7 +30,11 @@ namespace WindowsForms.menuAdmin.Animals
             //============ Cargar Usuarios =============
             dgv_users.AutoGenerateColumns = false;
             //tiene q ser una lista de usuarios que sean voluntarios o de tránsito y que tengan capacidad restante
-            List<UserDTO> users = 
+            List<User> users = UserService.Instance.GetAll()
+                .Where(u => (u.UserType == User.Type.Voluntario
+                            || u.UserType == User.Type.Transito) &&
+                            UserService.GetRemainingCapacity(u) > 0)
+                .ToList();
             dgv_users.Columns.Add("UserName", "Usuario");
             dgv_users.Columns.Add("UserType", "Tipo de Usuario");
             dgv_users.Columns.Add("RemainingCapacity", "Capacidad Restante");
@@ -117,7 +126,7 @@ namespace WindowsForms.menuAdmin.Animals
 
         private void btn_accept_Click(object sender, EventArgs e)
         {
-            if (_selectedTargetUser == null || _selectedTargetAnimal == null)
+            if(_selectedTargetUser == null || _selectedTargetAnimal == null)
             {
                 //no debería llegar a este punto, pero veremos
                 MessageBox.Show("Debe estar seleccionado un animal y un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
