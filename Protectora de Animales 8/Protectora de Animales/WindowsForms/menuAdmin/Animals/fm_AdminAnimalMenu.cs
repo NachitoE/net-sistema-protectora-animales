@@ -16,5 +16,39 @@ namespace WindowsForms.menuAdmin.Animals
         {
             InitializeComponent();
         }
+
+        private void btn_asignResp_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            /*var menuredir = new fm_AsignResp();
+            menuredir.Show();*/
+            this.Show();
+        }
+
+        private void btn_AddNewAnimal_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_AddNewAnimal();
+            menuredir.Show();
+            this.Show();
+        }
+
+        private void btn_ShowAllAnimals_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_ShowAllAnimals();
+            menuredir.Show();
+            this.Show();
+
+        }
+
+        private void btn_AnimalModify_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            /// menuredir = new fm_AnimalModify();
+            /// menuredir.Show();
+            this.Show();
+
+        }
     }
 }

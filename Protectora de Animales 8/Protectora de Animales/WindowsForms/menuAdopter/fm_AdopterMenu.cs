@@ -16,5 +16,30 @@ namespace WindowsForms.menuAdopter
         {
             InitializeComponent();
         }
+
+        private void btn_AdopterInfo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_AdopterRequisites();
+            menuredir.ShowDialog();
+            this.Show();
+
+        }
+
+        private void btn_AdoptionFollowing_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_ShowAdoptionProgress();
+            menuredir.ShowDialog();
+            this.Show();
+        }
+
+        private void btn_AdopterAnimals_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_ShowAvailableAnimals();
+            menuredir.ShowDialog();
+            this.Show();
+        }
     }
 }

@@ -68,6 +68,7 @@
             btn_menuAdoptions.TabIndex = 2;
             btn_menuAdoptions.Text = "Adopciones";
             btn_menuAdoptions.UseVisualStyleBackColor = true;
+            btn_menuAdoptions.Click += btn_menuAdoptions_Click;
             // 
             // btn_menuAnimals
             // 
@@ -77,6 +78,7 @@
             btn_menuAnimals.TabIndex = 3;
             btn_menuAnimals.Text = "Animales";
             btn_menuAnimals.UseVisualStyleBackColor = true;
+            btn_menuAnimals.Click += btn_menuAnimals_Click;
             // 
             // btn_menuSightings
             // 
@@ -86,6 +88,7 @@
             btn_menuSightings.TabIndex = 4;
             btn_menuSightings.Text = "Avistamientos";
             btn_menuSightings.UseVisualStyleBackColor = true;
+            btn_menuSightings.Click += btn_menuSightings_Click;
             // 
             // btn_menuReports
             // 
@@ -95,6 +98,7 @@
             btn_menuReports.TabIndex = 5;
             btn_menuReports.Text = "Reportes";
             btn_menuReports.UseVisualStyleBackColor = true;
+            btn_menuReports.Click += btn_menuReports_Click;
             // 
             // btn_menuUsers
             // 
@@ -104,6 +108,7 @@
             btn_menuUsers.TabIndex = 6;
             btn_menuUsers.Text = "Usuarios";
             btn_menuUsers.UseVisualStyleBackColor = true;
+            btn_menuUsers.Click += btn_menuUsers_Click;
             // 
             // fm_AdminMenu
             // 

@@ -79,7 +79,7 @@ namespace Services
             return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
         }
 
-        public List<UserDTO> GetAvailableToAdopt(UserDTO criteria)
+        /* DECIRLE A NACHO public List<UserDTO> GetAvailableToAdopt(UserDTO criteria)
         {
             UserService.Instance.GetAll()
                 .Where(u => (u.UserType == User.Type.Voluntario
@@ -96,9 +96,9 @@ namespace Services
                 );
 
             return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
-        }
+        }*/
 
-        public static int GetUserRemainingCapacity(UserDTO userDTO)
+       /* public static int GetUserRemainingCapacity(UserDTO userDTO)
         {
             if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Voluntario))
             {

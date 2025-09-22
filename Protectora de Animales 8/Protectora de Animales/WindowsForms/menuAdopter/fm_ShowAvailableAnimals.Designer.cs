@@ -130,7 +130,6 @@
         private PictureBox pb_headerpic;
         private Label lb_MATitle;
         private Button btn_Dog;
-        private Button button1;
         private Button btn_Bunny;
         private Button btn_Bird;
         private DataGridView dgv_animals;

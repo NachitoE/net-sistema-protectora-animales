@@ -14,7 +14,7 @@ namespace WindowsForms.menuAdmin.Users
         public fm_ShowAllUsers()
         {
             InitializeComponent();
-            Load += ShowUsersFormLoad;
+           
         }
         private async void ShowUsersFormLoad(object sender, EventArgs e)
         {

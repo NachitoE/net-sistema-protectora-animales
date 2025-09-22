@@ -8,9 +8,9 @@ namespace WindowsForms.menuAdmin.Users
         public fm_DeleteUsers()
         {
             InitializeComponent();
-            Load += DeleteUserFormLoad;
+            
         }
-
+         
         private void DeleteUserFormLoad(object sender, EventArgs e)
         {
             dgv_User.AutoGenerateColumns = false;

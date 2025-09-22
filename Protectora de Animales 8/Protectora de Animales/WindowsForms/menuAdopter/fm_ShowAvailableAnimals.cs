@@ -65,11 +65,6 @@ namespace WindowsForms.menuAdopter
 
         }
 
-        private void dgv_animals_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void FilterBySpecies(string selSpecies)
         {
             dgv_animals.AutoGenerateColumns = false;

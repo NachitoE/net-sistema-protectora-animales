@@ -32,7 +32,7 @@
             label1 = new Label();
             btn_AdopterInfo = new Button();
             btn_AdoptionFollowing = new Button();
-            btn_AdopterInfoa = new Button();
+            btn_AdopterAnimals = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -66,6 +66,7 @@
             btn_AdopterInfo.TabIndex = 2;
             btn_AdopterInfo.Text = "Requisitos para adoptar";
             btn_AdopterInfo.UseVisualStyleBackColor = true;
+            btn_AdopterInfo.Click += btn_AdopterInfo_Click;
             // 
             // btn_AdoptionFollowing
             // 
@@ -75,22 +76,24 @@
             btn_AdoptionFollowing.TabIndex = 3;
             btn_AdoptionFollowing.Text = "Seguir mis Adopciones";
             btn_AdoptionFollowing.UseVisualStyleBackColor = true;
+            btn_AdoptionFollowing.Click += btn_AdoptionFollowing_Click;
             // 
-            // btn_AdopterInfoa
+            // btn_AdopterAnimals
             // 
-            btn_AdopterInfoa.Location = new Point(93, 293);
-            btn_AdopterInfoa.Name = "btn_AdopterInfoa";
-            btn_AdopterInfoa.Size = new Size(250, 23);
-            btn_AdopterInfoa.TabIndex = 4;
-            btn_AdopterInfoa.Text = "Ver Animales";
-            btn_AdopterInfoa.UseVisualStyleBackColor = true;
+            btn_AdopterAnimals.Location = new Point(93, 293);
+            btn_AdopterAnimals.Name = "btn_AdopterAnimals";
+            btn_AdopterAnimals.Size = new Size(250, 23);
+            btn_AdopterAnimals.TabIndex = 4;
+            btn_AdopterAnimals.Text = "Ver Animales";
+            btn_AdopterAnimals.UseVisualStyleBackColor = true;
+            btn_AdopterAnimals.Click += btn_AdopterAnimals_Click;
             // 
             // fm_AdopterMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(426, 400);
-            Controls.Add(btn_AdopterInfoa);
+            Controls.Add(btn_AdopterAnimals);
             Controls.Add(btn_AdoptionFollowing);
             Controls.Add(btn_AdopterInfo);
             Controls.Add(label1);
@@ -108,6 +111,6 @@
         private Label label1;
         private Button btn_AdopterInfo;
         private Button btn_AdoptionFollowing;
-        private Button btn_AdopterInfoa;
+        private Button btn_AdopterAnimals;
     }
 }

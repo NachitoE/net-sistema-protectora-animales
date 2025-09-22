@@ -12,14 +12,10 @@ namespace WebAPI
                 try
                 {
                     AuthService authService = new AuthService();
-                    UserDTO? userDTO = authService.Login(loginReqDTO);
-                    if (userDTO == null) throw new ArgumentException("Login data is incorrect or user does not exist");
-                    return Results.Ok(new UserLoginResponseDTO()
-                    {
-                        User = userDTO,
-                        Message = "User logged in successfully",
-                        Success = true
-                    });
+                    UserLoginResponseDTO loginResponse = authService.Login(loginReqDTO);
+                    if (loginResponse == null || loginResponse.User == null)
+                        throw new ArgumentException("Login data is incorrect or user does not exist");
+                    return Results.Ok(loginResponse);
                 }
                 catch (ArgumentException ex)
                 {

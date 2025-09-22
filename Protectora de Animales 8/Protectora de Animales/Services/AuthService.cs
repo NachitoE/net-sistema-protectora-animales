@@ -2,34 +2,43 @@
 using DTOs;
 using Infrastructure.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Services
 {
     public class AuthService
     {
-        public UserDTO? Login(UserLoginRequestDTO loginReqDTO)
+        public UserLoginResponseDTO Login(UserLoginRequestDTO loginReqDTO)
         {
             UserRepository userRepository = new UserRepository();
             var user = userRepository.Login(loginReqDTO.UserName, loginReqDTO.Password);
-            if (user != null)
+
+            if (user == null)
             {
-                var strUserType = user.UserType.ToString();
-                return new UserDTO
+                return new UserLoginResponseDTO
+                {
+                    Success = false,
+                    Message = "Usuario o contraseña incorrectos"
+                };
+            }
+
+            return new UserLoginResponseDTO
+            {
+                Success = true,
+                Message = "Login exitoso",
+                User = new UserDTO
                 {
                     Id = user.Id,
                     Name = user.Name,
                     SurName = user.SurName,
                     DNI = user.Dni,
-                    UserType = strUserType,
-                    UserName = user.UserName,
-                };
-            }
-            return null;
+                    UserType = user.UserType.ToString(),
+                    UserName = user.UserName
+                    // no incluimos la contraseña por seguridad
+                }
+            };
         }
+
 
         public bool Register(UserRegisterRequestDTO registerReqDTO)
         {

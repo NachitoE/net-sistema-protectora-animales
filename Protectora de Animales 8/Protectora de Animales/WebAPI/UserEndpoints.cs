@@ -10,6 +10,30 @@ namespace WebAPI
         // This way you can call MapUserEndpoints from any instance of the WebApplication class.
         public static void MapUserEndpoints(this WebApplication app)
         {
+            app.MapPost("/users/login", (UserLoginRequestDTO loginRequest) =>
+            {
+                try
+                {
+                    var authService = new AuthService();
+                    var response = authService.Login(loginRequest);
+
+                    if (response.Success && response.User != null)
+                    {
+                        return Results.Ok(response);
+                    }
+
+                    return Results.BadRequest(new { error = response.Message ?? "Credenciales inválidas" });
+                }
+                catch (Exception ex)
+                {
+                    return Results.Problem(ex.Message);
+                }
+            })
+.WithName("LoginUser")
+.Produces<UserLoginResponseDTO>(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status400BadRequest)
+.WithOpenApi();
+
             app.MapGet("/users/{id}", (string id) =>
             {
                 try
@@ -24,7 +48,7 @@ namespace WebAPI
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-                .WithName("GetUser")
+                .WithName("papasconmilanesa")
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();

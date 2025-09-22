@@ -7,7 +7,7 @@ namespace Services
 {
     public class HouseRepository
     {
-        public HouseDTO Add(HouseDTO animalDTO)
+        /*public HouseDTO Add(HouseDTO animalDTO)
         {
             AnimalRepository animalRepository = new AnimalRepository();
             Animal createdAnimal = new Animal
@@ -26,7 +26,7 @@ namespace Services
             animalDTO.Id = createdAnimal.Id;
 
             return animalDTO;
-        }
+        }DECIRLE A NACHO*/
 
         public AnimalDTO? Get(string id)
         {

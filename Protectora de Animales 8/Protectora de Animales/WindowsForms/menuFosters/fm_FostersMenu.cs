@@ -8,22 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsForms.BasicForms;
-using WindowsForms.menuAdmin.Animals;
-using WindowsForms.menuAdmin.Users;
+using WindowsForms.menuFoster;
 
-namespace WindowsForms.menuAdmin
+namespace WindowsForms.menuFosters
 {
-    public partial class fm_AdminMenu : Form
+    public partial class fm_FostersMenu : Form
     {
-        public fm_AdminMenu()
+        public fm_FostersMenu()
         {
             InitializeComponent();
         }
 
         private void btn_menuAdoptions_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            var menuredir = new fm_AdminAdoptionMenu();
+           this.Hide();
+            var menuredir= new fm_FosterAdoptionMenu();
             menuredir.ShowDialog();
             this.Show();
         }
@@ -31,7 +30,7 @@ namespace WindowsForms.menuAdmin
         private void btn_menuAnimals_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var menuredir = new fm_AdminAnimalMenu();
+            var menuredir = new fm_FosterAnimalMenu();
             menuredir.ShowDialog();
             this.Show();
         }
@@ -40,23 +39,6 @@ namespace WindowsForms.menuAdmin
         {
             this.Hide();
             var menuredir = new fm_SightingMenu();
-            menuredir.ShowDialog();
-            this.Show();
-
-        }
-
-        private void btn_menuReports_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var menuredir = new fm_AdminReportsMenu();
-            menuredir.ShowDialog();
-            this.Show();
-        }
-
-        private void btn_menuUsers_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var menuredir = new fm_AdminUsersMenu();
             menuredir.ShowDialog();
             this.Show();
         }
