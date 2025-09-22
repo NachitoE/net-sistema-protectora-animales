@@ -32,32 +32,20 @@ namespace WebAPI
                 .Produces(StatusCodes.Status404NotFound)
                 .WithOpenApi();
 
-            app.MapPost("auth/register", (UserRegisterRequestDTO registerReqDTO) =>
+            app.MapPost("/api/auth/register", (UserRegisterRequestDTO registerReqDTO) =>
             {
-                try
-                {
-                    AuthService authService = new AuthService();
-                    bool registered = authService.Register(registerReqDTO);
-                    if (!registered) throw new ArgumentException("Username already exists");
-                    return Results.Ok(new UserRegisterResponseDTO()
-                    {
-                        Message = "User registered successfully",
-                        Success = true
-                    });
-                }
-                catch (ArgumentException ex)
-                {
-                    return Results.BadRequest(new UserRegisterResponseDTO()
-                    {
-                        Message = ex.Message,
-                        Success = false
-                    });
-                }
+                AuthService authService = new AuthService();
+                var result = authService.Register(registerReqDTO); // devuelve UserRegisterResponseDTO
+
+                if (!result.Success)
+                    return Results.BadRequest(result);
+
+                return Results.Ok(result);
             })
-                .WithName("Register")
-                .Produces(StatusCodes.Status200OK)
-                .Produces(StatusCodes.Status400BadRequest)
-                .WithOpenApi();
+   .WithName("Register")
+   .Produces<UserRegisterResponseDTO>(StatusCodes.Status200OK)
+   .Produces<UserRegisterResponseDTO>(StatusCodes.Status400BadRequest)
+   .WithOpenApi();
         }
 
     }

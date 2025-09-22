@@ -1,4 +1,4 @@
-﻿namespace WindowsForms.menuAdmin.Animals
+﻿/*namespace WindowsForms.menuAdmin.Animals
 {
     partial class fm_AsignResp
     {
@@ -114,4 +114,4 @@
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_accept;
     }
-}
+}*/

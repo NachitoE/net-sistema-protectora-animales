@@ -29,11 +29,11 @@ namespace WebAPI
                     return Results.Problem(ex.Message);
                 }
             })
-.WithName("LoginUser")
-.Produces<UserLoginResponseDTO>(StatusCodes.Status200OK)
-.Produces(StatusCodes.Status400BadRequest)
-.WithOpenApi();
-
+                .WithName("LoginUser")
+                .Produces<UserLoginResponseDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+            
             app.MapGet("/users/{id}", (string id) =>
             {
                 try
@@ -140,5 +140,7 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
         }
+
+
     }
 }

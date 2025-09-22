@@ -40,13 +40,17 @@ namespace Services
         }
 
 
-        public bool Register(UserRegisterRequestDTO registerReqDTO)
+        public UserRegisterResponseDTO Register(UserRegisterRequestDTO registerReqDTO)
         {
             UserRepository userRepository = new UserRepository();
             bool exists = userRepository.ExistsByUserName(registerReqDTO.UserName);
             if (exists)
             {
-                return false;
+                return new UserRegisterResponseDTO
+                {
+                    Success = false,
+                    Message = "El nombre de usuario ya está en uso"
+                };
             }
             User createdUser =
                new User(Guid.NewGuid().ToString(),
@@ -58,7 +62,12 @@ namespace Services
                registerReqDTO.Password);
 
             userRepository.Add(createdUser);
-            return true;
+            return new UserRegisterResponseDTO
+            {
+                Success = true,
+                Message = "Usuario creado correctamente",
+                UserId = createdUser.Id
+            };
         }
     }
 }

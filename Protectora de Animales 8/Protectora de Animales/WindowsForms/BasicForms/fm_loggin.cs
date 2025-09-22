@@ -11,7 +11,7 @@ namespace WindowsForms.BasicForms
 {
     public partial class fm_loggin : Form
     {
-       
+
         private const string ApiBaseUrl = "https://localhost:7056/";
         private readonly HttpClient _httpClient;
 
@@ -46,7 +46,7 @@ namespace WindowsForms.BasicForms
 
                 if (!httpResponse.IsSuccessStatusCode)
                 {
-                    
+
                     var body = await httpResponse.Content.ReadAsStringAsync();
                     MessageBox.Show($"Error desde la API ({(int)httpResponse.StatusCode}): {httpResponse.ReasonPhrase}\n{body}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -94,7 +94,7 @@ namespace WindowsForms.BasicForms
             }
         }
 
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -108,6 +108,14 @@ namespace WindowsForms.BasicForms
         private void tb_user_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void llb_singup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            fm_SignUp signUpForm = new fm_SignUp();
+            signUpForm.ShowDialog();
+            this.Show();
         }
     }
 }

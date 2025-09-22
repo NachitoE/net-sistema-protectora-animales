@@ -134,6 +134,7 @@
             llb_singup.TabIndex = 7;
             llb_singup.TabStop = true;
             llb_singup.Text = "Crear Usuario";
+            llb_singup.LinkClicked += llb_singup_LinkClicked;
             // 
             // lb_singup
             // 

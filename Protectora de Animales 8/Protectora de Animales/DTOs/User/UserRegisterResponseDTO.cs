@@ -8,5 +8,7 @@ namespace DTOs
 {
     public class UserRegisterResponseDTO : BaseResponse
     {
+        public string? UserId { get; set; }
+        public string? UserType { get; set; }
     }
 }
