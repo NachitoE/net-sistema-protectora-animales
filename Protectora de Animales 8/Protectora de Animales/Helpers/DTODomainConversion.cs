@@ -47,5 +47,16 @@ namespace Helpers
             };
         }
 
+        public static HouseDTO ToDTO(this House house)
+        {
+            return new HouseDTO
+            {
+                Id = house.Id,
+                UserId = house.UserId,
+                Address = house.Address,
+                AddressNumber = house.AddressNumber,
+                Capacity = house.Capacity
+            };
+        }
     }
 }
