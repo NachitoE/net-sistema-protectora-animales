@@ -53,5 +53,14 @@ namespace Services
             ).ToList();
             return allHouseDTOs;
         }
+
+        public HouseDTO? GetHouseBelongingToUser(string userId)
+        {
+            var filteredHouseDTOs = GetAll()
+                .Where((h) => h.UserId == userId)
+                .ToList();
+            return filteredHouseDTOs.FirstOrDefault();
+
+        }
     }
 }

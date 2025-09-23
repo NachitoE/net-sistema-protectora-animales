@@ -121,21 +121,21 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
-            app.MapGet("/users/available-to-adopt", (string id) =>
+            app.MapGet("/users/available-to-adopt", () =>
             {
                 try
                 {
                     UsersService userService = new UsersService();
-                    UserDTO? userDTO = userService.Get(id);
-                    if (userDTO == null) throw new ArgumentException("User not found");
-                    return Results.Ok(userDTO);
+                    List<UserDTO> userDTOs = userService.GetAvailableToAdopt();
+                    if (userDTOs == null) throw new ArgumentException("No available users found");
+                    return Results.Ok(userDTOs);
                 }
                 catch (ArgumentException ex)
                 {
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-                .WithName("GetUser")
+                .WithName("AvailableToAdopt")
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
