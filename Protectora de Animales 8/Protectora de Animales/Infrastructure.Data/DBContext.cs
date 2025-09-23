@@ -132,6 +132,35 @@ namespace Infrastructure.Data
                     new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
                     new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.Adoptado, "Como es el bichito"));
             });
+
+            //----- HOUSE -----
+            modelBuilder.Entity<House>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.UserId)
+                    .IsRequired();
+
+                entity.Property(e => e.Address)
+                    .IsRequired();
+
+                entity.Property(e => e.AddressNumber)
+                    .IsRequired();
+
+                entity.Property(e => e.Capacity)
+                   .IsRequired();
+
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId);
+
+                entity.HasData(
+                    new House("house-1", "user-4", "Zeballos", 1341, 2)
+                        );
+            });
         }
     }
 }

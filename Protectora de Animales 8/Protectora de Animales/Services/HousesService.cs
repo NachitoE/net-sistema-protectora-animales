@@ -8,23 +8,28 @@ namespace Services
 {
     public class HousesService
     {
-        public HouseDTO Add(HouseDTO houseDTO)
+        public HouseDTO Add(HouseRegisterRequestDTO houseRegDTO)
         {
             HouseRepository houseRepository = new HouseRepository();
             House createdHouse = new House
             (
                 Guid.NewGuid().ToString(),
-                houseDTO.UserId,
-                houseDTO.Address,
-                houseDTO.AddressNumber,
-                houseDTO.Capacity
+                houseRegDTO.UserId,
+                houseRegDTO.Address,
+                houseRegDTO.AddressNumber,
+                houseRegDTO.Capacity
             );
 
             houseRepository.Add(createdHouse);
 
-            houseDTO.Id = createdHouse.Id;
-
-            return houseDTO;
+            return new HouseDTO()
+            {
+                Id = createdHouse.Id,
+                UserId = createdHouse.UserId,
+                Address = createdHouse.Address,
+                AddressNumber = createdHouse.AddressNumber,
+                Capacity = createdHouse.Capacity
+            };
         }
 
         public HouseDTO? Get(string id)

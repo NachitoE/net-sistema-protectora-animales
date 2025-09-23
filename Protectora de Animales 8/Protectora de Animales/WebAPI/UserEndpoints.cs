@@ -69,7 +69,7 @@ namespace WebAPI
                 .WithName("AllUsers")
                 .Produces<IEnumerable<UserDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
-
+            /*
             app.MapPost("/users", (UserDTO dto) =>
             {
                 try
@@ -87,7 +87,7 @@ namespace WebAPI
                 .Produces<UserDTO>(StatusCodes.Status201Created)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
-
+            */
             app.MapDelete("/users/{id}", (string id) =>
             {
                 UsersService userService = new UsersService();

@@ -32,7 +32,7 @@ namespace WebAPI
                 .Produces(StatusCodes.Status404NotFound)
                 .WithOpenApi();
 
-            app.MapPost("/api/auth/register", (UserRegisterRequestDTO registerReqDTO) =>
+            app.MapPost("/auth/register", (UserRegisterRequestDTO registerReqDTO) =>
             {
                 AuthService authService = new AuthService();
                 var result = authService.Register(registerReqDTO); // devuelve UserRegisterResponseDTO

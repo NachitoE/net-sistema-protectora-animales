@@ -30,7 +30,7 @@ namespace WindowsForms.BasicForms
             this.Close();
         }
 
-        public HouseRegisterRequestDTO GetHouseDTO()
+        public HouseRegisterRequestDTO GetHouseRegDTO()
         {
             return new HouseRegisterRequestDTO
             {

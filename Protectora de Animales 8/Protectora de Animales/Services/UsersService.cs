@@ -1,6 +1,5 @@
 ﻿using Domain;
 using DTOs;
-using DTOs.User;
 using Helpers;
 using Infrastructure.Data;
 
@@ -111,31 +110,6 @@ namespace Services
             return 0;
         }
 
-        public async Task<string> CreateTransitoAsync(TransitoRegisterRequestDTO request)
-        {
-            var user = new User(
-                null, // se genera en la API
-                request.Name,
-                request.SurName,
-                request.DNI,
-                UserType.Transito,
-                request.UserName,
-                request.Password
-            );
-            UserRepository userRepo = new UserRepository();
-            userRepo.Add(user);
-            return user.Id;
-        }
-
-        public Task<IDisposable> BeginTransactionAsync()
-        {
-            return Task.FromResult<IDisposable>(new NoOpTransaction());
-        }
-
-        private class NoOpTransaction : IDisposable
-        {
-            public void Dispose() { }
-        }
     }
     /*
      *  public bool IsValidUser(string userName, string password)

@@ -34,6 +34,15 @@ namespace Domain
             get { return _capacity; }
             set { _capacity = value; }
         }
+
+        public User User
+        {
+            get => _user;
+            set => _user = value;
+        }
+
+        private User? _user;
+
         #endregion
         public House(string id, string userId, string address, int addressNumber, int capacity)
         {
