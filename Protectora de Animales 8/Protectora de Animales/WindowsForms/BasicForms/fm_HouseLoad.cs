@@ -7,10 +7,10 @@ namespace WindowsForms.BasicForms
     public partial class fm_HouseLoad : Form
     {
         String userId;
-        public fm_HouseLoad(string userId)
+        public fm_HouseLoad()
         {
             InitializeComponent();
-            this.userId = userId;
+          
         }
 
         private async void btn_ConfirmHouse_Click(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace WindowsForms.BasicForms
 
             var request = new HouseRegisterRequestDTO
             {
-                UserId = userId,
+                
                 Address = tb_HouseStreet.Text,
                 AddressNumber = int.Parse(tb_Houseumber.Text),
                 Capacity = (int)nud_HouseCapacity.Value

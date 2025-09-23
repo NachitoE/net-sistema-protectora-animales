@@ -53,21 +53,11 @@ namespace WindowsForms.BasicForms
                     UserName = tb_SUUsername.Text,
                     Password = tb_SUPassword.Text
                 };
-                var authService = new AuthServiceClient();
-               
-                var response = await authService.RegisterAsync(request);
 
-                if (!response.Success)
+                if (request.UserType == "Transito") 
                 {
-                    MessageBox.Show(response.Message);
-                    return;
-                }
 
-                
-                if (response.UserType == "Transito")
-                {
-                  
-                    fm_HouseLoad houseLoadForm = new fm_HouseLoad(response.UserId);
+                    fm_HouseLoad houseLoadForm = new fm_HouseLoad();
                     houseLoadForm.ShowDialog();
 
                     if (houseLoadForm.DialogResult != DialogResult.OK)
@@ -76,6 +66,19 @@ namespace WindowsForms.BasicForms
                         return;
                     }
                 }
+
+                var authService = new AuthServiceClient();
+
+                
+                var response = await authService.RegisterAsync(request);
+                if (!response.Success)
+                {
+                    MessageBox.Show(response.Message);
+                    return;
+                }
+
+                
+                
 
                 MessageBox.Show("Usuario creado.");
                 this.Hide();
