@@ -78,28 +78,21 @@ namespace Services
 
             return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
         }
-
-        public List<UserDTO> GetAvailableToAdopt(UserDTO criteria)
+        public List<UserDTO> GetAvailableToAdopt()
         {
-            GetAll()
+            var availableUsers = GetAll()
                 .Where(u => (u.UserType == EnumConversion.UserTypeToString(UserType.Voluntario)
                             || u.UserType == EnumConversion.UserTypeToString(UserType.Transito)) &&
                             GetUserRemainingCapacity(u) > 0)
                 .ToList();
-            UserRepository userRepository = new UserRepository();
-            List<User> filteredUsers = userRepository.FilterByCriteria(
-                criteria.Name,
-                criteria.SurName,
-                criteria.DNI,
-                criteria.UserType,
-                criteria.UserName
-                );
 
-            return filteredUsers.Select(fUser => fUser.ToDTO()).ToList();
+            return availableUsers;
         }
-
+        
         public static int GetUserRemainingCapacity(UserDTO userDTO)
         {
+            HousesService housesService = new HousesService();
+            AnimalsService animalsService = new AnimalsService();
             if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Voluntario))
             {
                 int userAnimalsCount = new AnimalsService().GetAnimalsBelongingToUser(userDTO.Id).Count;
@@ -107,12 +100,12 @@ namespace Services
             }
             else if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Transito))
             {
-                var house = HouseService.Instance.GetAll().FirstOrDefault(h => h.UserId == userDTO.Id);
+                var house = housesService.GetHouseBelongingToUser(userDTO.Id);
                 if (house == null)
                     return 0; // No house found for the user
 
                 return house.Capacity -
-                    AnimalService.Instance.GetAll().Count(a => a.UserId == userDTO.Id);
+                    animalsService.GetAnimalsBelongingToUser(userDTO.Id).Count;
             }
             return 0;
         }

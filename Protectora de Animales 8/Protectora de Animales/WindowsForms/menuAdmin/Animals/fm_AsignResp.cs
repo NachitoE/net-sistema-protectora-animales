@@ -1,5 +1,8 @@
 ﻿using DTOs;
+using Helpers;
+using Infrastructure.API;
 using System.Data;
+using static Domain.Animal;
 
 namespace WindowsForms.menuAdmin.Animals
 {
@@ -18,14 +21,20 @@ namespace WindowsForms.menuAdmin.Animals
 
         }
 
-        private void UserFormLoad(object sender, EventArgs e)
+        private async void UserFormLoad(object sender, EventArgs e)
         {
             btn_accept.Enabled = false;
 
+            var userClient = new UserDTOClient(new APIHttpClient());
+            var animalClient = new AnimalDTOClient(new APIHttpClient());
+            //tiene q ser una lista de usuarios que sean voluntarios o de tránsito y que tengan capacidad restante 
+            List<UserDTO> users = await userClient.GetAvailableToAdoptAsync();
+            List<AnimalDTO> animals = await animalClient.GetAllAvailableAnimalsAsync();
+
+
             //============ Cargar Usuarios =============
             dgv_users.AutoGenerateColumns = false;
-            //tiene q ser una lista de usuarios que sean voluntarios o de tránsito y que tengan capacidad restante
-            List<UserDTO> users = 
+            
             dgv_users.Columns.Add("UserName", "Usuario");
             dgv_users.Columns.Add("UserType", "Tipo de Usuario");
             dgv_users.Columns.Add("RemainingCapacity", "Capacidad Restante");
@@ -36,10 +45,10 @@ namespace WindowsForms.menuAdmin.Animals
             {
                 if (dgv_users.Columns[usersDGVEventArgs.ColumnIndex].Name == "RemainingCapacity")
                 {
-                    var user = dgv_users.Rows[usersDGVEventArgs.RowIndex].DataBoundItem as User;
+                    var user = dgv_users.Rows[usersDGVEventArgs.RowIndex].DataBoundItem as UserDTO;
                     if (user != null)
                     {
-                        usersDGVEventArgs.Value = UserService.GetRemainingCapacity(user);
+                        usersDGVEventArgs.Value = user;
                     }
                 }
             };
@@ -48,7 +57,7 @@ namespace WindowsForms.menuAdmin.Animals
             {
                 if (dgv_users.SelectedRows.Count > 0)
                 {
-                    _selectedTargetUser = dgv_users.SelectedRows[0].DataBoundItem as User;
+                    _selectedTargetUser = dgv_users.SelectedRows[0].DataBoundItem as UserDTO;
                 }
                 else
                 {
@@ -60,9 +69,7 @@ namespace WindowsForms.menuAdmin.Animals
             dgv_users.ClearSelection();
             //============ Cargar Animales =============
             dgv_animals.AutoGenerateColumns = false;
-            List<Animal> animals = AnimalService.Instance.GetAll()
-                .Where(a => a.AnimalState == Animal.AnimalStateEn.Disponible)
-                .ToList();
+            
 
             dgv_animals.Columns.Add("Name", "Nombre");
             dgv_animals.Columns.Add("Species", "Especie");
@@ -74,7 +81,7 @@ namespace WindowsForms.menuAdmin.Animals
             {
                 if (dgv_animals.Columns[animalsDGVEventArgs.ColumnIndex].Name == "BirthDate")
                 {
-                    var animal = dgv_animals.Rows[animalsDGVEventArgs.RowIndex].DataBoundItem as Animal;
+                    var animal = dgv_animals.Rows[animalsDGVEventArgs.RowIndex].DataBoundItem as AnimalDTO;
                     if (animal != null)
                     {
                         animalsDGVEventArgs.Value = animal.BirthDate.ToShortDateString();
@@ -86,7 +93,7 @@ namespace WindowsForms.menuAdmin.Animals
             {
                 if (dgv_animals.SelectedRows.Count > 0)
                 {
-                    _selectedTargetAnimal = dgv_animals.SelectedRows[0].DataBoundItem as Animal;
+                    _selectedTargetAnimal = dgv_animals.SelectedRows[0].DataBoundItem as AnimalDTO;
                 }
                 else
                 {
@@ -115,7 +122,7 @@ namespace WindowsForms.menuAdmin.Animals
             Close();
         }
 
-        private void btn_accept_Click(object sender, EventArgs e)
+        private async void btn_accept_Click(object sender, EventArgs e)
         {
             if (_selectedTargetUser == null || _selectedTargetAnimal == null)
             {
@@ -124,8 +131,9 @@ namespace WindowsForms.menuAdmin.Animals
                 return;
             }
             _selectedTargetAnimal.UserId = _selectedTargetUser.Id;
-            _selectedTargetAnimal.AnimalState = Animal.AnimalStateEn.Adoptado;
-            AnimalService.Instance.Save(_selectedTargetAnimal);
+            _selectedTargetAnimal.AnimalState = EnumConversion.AnimalStateToString(AnimalStateEn.Adoptado);
+            AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient());
+            await animalClient.PostAsync(_selectedTargetAnimal);
             MessageBox.Show($"El animal {_selectedTargetAnimal.Name} ha sido asignado a {_selectedTargetUser.UserName}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
