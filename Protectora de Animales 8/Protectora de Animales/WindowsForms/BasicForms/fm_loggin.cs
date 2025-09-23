@@ -67,7 +67,7 @@ namespace WindowsForms.BasicForms
                     {
                         "Admin" => new fm_AdminMenu(),
                         "Adoptante" => new fm_AdopterMenu(),
-                        "Voluntario" => new fm_VolunteerAdoptionMenu(),
+                        "Voluntario" => new fm_VolunteerMenu(),
                         "Transito" => new fm_FostersMenu(),
                         _ => null
                     };

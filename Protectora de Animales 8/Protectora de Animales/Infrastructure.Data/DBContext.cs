@@ -71,13 +71,20 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
+
+                // Relación uno a uno entre User y House
+                entity.HasOne<House>()
+                    .WithOne()
+                    .HasForeignKey<House>(h => h.UserId);
                 //seeding data
                 entity.HasData(
                 new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123"),
                 new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123"),
                 new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123"),
                 new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123"));
+               
             });
+
 
             //----- ANIMAL -----
             modelBuilder.Entity<Animal>(entity =>

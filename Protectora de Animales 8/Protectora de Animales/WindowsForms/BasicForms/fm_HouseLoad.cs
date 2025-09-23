@@ -6,7 +6,7 @@ namespace WindowsForms.BasicForms
 {
     public partial class fm_HouseLoad : Form
     {
-        String userId;
+        
         public fm_HouseLoad()
         {
             InitializeComponent();
@@ -28,13 +28,12 @@ namespace WindowsForms.BasicForms
 
             var request = new HouseRegisterRequestDTO
             {
-                
                 Address = tb_HouseStreet.Text,
                 AddressNumber = int.Parse(tb_Houseumber.Text),
                 Capacity = (int)nud_HouseCapacity.Value
             };
             var _houseService = new HouseServiceClient();
-            var response = await _houseService.RegisterAsync(request);
+            var response = await _houseService.RegisterAsync(request); 
 
             if (!response.Success)
             {
@@ -72,6 +71,15 @@ namespace WindowsForms.BasicForms
                 numericUpDown.BackColor = SystemColors.Window;
                 return true;
             }
+        }
+        public HouseRegisterRequestDTO GetHouseDTO()
+        {
+            return new HouseRegisterRequestDTO
+            {
+                Address = tb_HouseStreet.Text,
+                AddressNumber = int.TryParse(tb_Houseumber.Text, out var num) ? num : 0,
+                Capacity = (int)nud_HouseCapacity.Value
+            };
         }
 
     }

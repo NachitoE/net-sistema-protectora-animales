@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using DTOs.User;
 using Helpers;
 using Infrastructure.Data;
 
@@ -109,34 +110,61 @@ namespace Services
             }
             return 0;
         }
-        /*
-         *  public bool IsValidUser(string userName, string password)
+
+        public async Task<string> CreateTransitoAsync(TransitoRegisterRequestDTO request)
         {
-            foreach (User user in GetAll())
-            {
-                if (user.UserName == userName && user.Password == password) return true;
-            }
-            return false;
-        }
-        public bool UserNameExists(string userName)
-        {
-            foreach (User user in GetAll())
-            {
-                if (user.UserName == userName) return true;
-            }
-            return false;
+            var user = new User(
+                null, // se genera en la API
+                request.Name,
+                request.SurName,
+                request.DNI,
+                UserType.Transito,
+                request.UserName,
+                request.Password
+            );
+            UserRepository userRepo = new UserRepository();
+            userRepo.Add(user);
+            return user.Id;
         }
 
-
-
-        public User GetByUserName(string userName)
+        public Task<IDisposable> BeginTransactionAsync()
         {
-            return GetAll().FirstOrDefault(u => u.UserName == userName);
+            return Task.FromResult<IDisposable>(new NoOpTransaction());
         }
-        public void SetCurrentLoggedOnUser(User user)
+
+        private class NoOpTransaction : IDisposable
         {
-            _currentLoggedOnUser = user;
+            public void Dispose() { }
         }
-        */
     }
+    /*
+     *  public bool IsValidUser(string userName, string password)
+    {
+        foreach (User user in GetAll())
+        {
+            if (user.UserName == userName && user.Password == password) return true;
+        }
+        return false;
+    }
+    public bool UserNameExists(string userName)
+    {
+        foreach (User user in GetAll())
+        {
+            if (user.UserName == userName) return true;
+        }
+        return false;
+    }
+
+
+
+    public User GetByUserName(string userName)
+    {
+        return GetAll().FirstOrDefault(u => u.UserName == userName);
+    }
+    public void SetCurrentLoggedOnUser(User user)
+    {
+        _currentLoggedOnUser = user;
+    }
+    */
 }
+

@@ -1,15 +1,8 @@
 ﻿using Azure.Core;
 using DTOs;
+using DTOs.User;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Infrastructure.API;
 
 namespace WindowsForms.BasicForms
 {
@@ -54,20 +47,30 @@ namespace WindowsForms.BasicForms
                     Password = tb_SUPassword.Text
                 };
 
-                if (request.UserType == "Transito") 
+                if (request.UserType == "Transito")
                 {
-
                     fm_HouseLoad houseLoadForm = new fm_HouseLoad();
-                    houseLoadForm.ShowDialog();
-
-                    if (houseLoadForm.DialogResult != DialogResult.OK)
+                    if (houseLoadForm.ShowDialog() != DialogResult.OK)
                     {
                         MessageBox.Show("Debe completar la carga de la casa.");
                         return;
                     }
-                }
 
-                var authService = new AuthServiceClient();
+                    var houseRequest = houseLoadForm.GetHouseDTO();
+                    var transitoRequest = new TransitoRegisterRequestDTO
+                    {
+                        Name = request.Name,
+                        SurName = request.SurName,
+                        DNI = request.DNI,
+                        UserName = request.UserName,
+                        Password = request.Password,
+                        House = houseRequest
+                    };
+
+                    var transitoService = new TransitoClient();
+                    var resp = await transitoService.RegisterAsync(transitoRequest);
+                }
+                    var authService = new AuthServiceClient();
 
                 
                 var response = await authService.RegisterAsync(request);

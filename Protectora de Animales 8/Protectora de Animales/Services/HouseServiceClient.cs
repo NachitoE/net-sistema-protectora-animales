@@ -21,7 +21,7 @@ namespace Services
 
         public async Task<HouseRegisterResponseDTO> RegisterAsync(HouseRegisterRequestDTO request)
         {
-            var response = await _httpClient.PostAsJsonAsync("houses", request);
+            var response = await _httpClient.PostAsJsonAsync("transito/register", request);
 
             if (!response.IsSuccessStatusCode)
             {

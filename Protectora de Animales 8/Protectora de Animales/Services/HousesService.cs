@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using DTOs.House;
 using Helpers;
 using Infrastructure.Data;
 
@@ -62,5 +63,20 @@ namespace Services
             return filteredHouseDTOs.FirstOrDefault();
 
         }
+
+        public async Task CreateAsync(string userId, HouseRegisterRequestDTO request)
+        {
+            House house = new House(
+                null, // El id se deja nulo para que lo genere la API
+                userId,
+                request.Address,
+                request.AddressNumber,
+                request.Capacity
+            );
+
+            var houseRepo = new HouseRepository();
+            houseRepo.Add(house);
+        }
     }
 }
+
