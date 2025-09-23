@@ -1,0 +1,57 @@
+﻿using Domain;
+using DTOs;
+using Helpers;
+using Infrastructure.Data;
+
+namespace Services
+{
+    public class HousesService
+    {
+        public HouseDTO Add(HouseDTO houseDTO)
+        {
+            HouseRepository houseRepository = new HouseRepository();
+            House createdHouse = new House
+            (
+                Guid.NewGuid().ToString(),
+                houseDTO.UserId,
+                houseDTO.Address,
+                houseDTO.AddressNumber,
+                houseDTO.Capacity
+            );
+
+            houseRepository.Add(createdHouse);
+
+            houseDTO.Id = createdHouse.Id;
+
+            return houseDTO;
+        }
+
+        public HouseDTO? Get(string id)
+        {
+            var houseRepository = new HouseRepository();
+            House? house = houseRepository.Get(id);
+
+            if (house != null)
+            {
+                return house.ToDTO();
+            }
+            return null;
+        }
+
+        public bool Delete(string id)
+        {
+            HouseRepository houseRepository = new HouseRepository();
+            return houseRepository.Delete(id);
+        }
+
+        public List<HouseDTO> GetAll()
+        {
+            HouseRepository houseRepository = new HouseRepository();
+            var housesDomain = houseRepository.GetAll();
+            var allHouseDTOs = housesDomain.Select((house) =>
+                house.ToDTO()
+            ).ToList();
+            return allHouseDTOs;
+        }
+    }
+}

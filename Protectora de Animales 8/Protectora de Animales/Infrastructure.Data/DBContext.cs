@@ -16,6 +16,8 @@ namespace Infrastructure.Data
 
         public DbSet<Animal> Animals { get; set; }
 
+        public DbSet<House> Houses { get; set; }
+
         internal DBContext()
         {
             Database.EnsureCreated();

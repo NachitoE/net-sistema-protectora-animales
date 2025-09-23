@@ -81,10 +81,10 @@ namespace Services
 
         /*public List<UserDTO> GetAvailableToAdopt(UserDTO criteria)
         {
-            UserService.Instance.GetAll()
-                .Where(u => (u.UserType == User.Type.Voluntario
-                            || u.UserType == User.Type.Transito) &&
-                            UserService.GetUserRemainingCapacity(u) > 0)
+            GetAll()
+                .Where(u => (u.UserType == EnumConversion.UserTypeToString(UserType.Voluntario)
+                            || u.UserType == EnumConversion.UserTypeToString(UserType.Transito)) &&
+                            GetUserRemainingCapacity(u) > 0)
                 .ToList();
             UserRepository userRepository = new UserRepository();
             List<User> filteredUsers = userRepository.FilterByCriteria(
