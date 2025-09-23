@@ -7,5 +7,4 @@ namespace Infrastructure.API.Interfaces
         Task<string> CreateTransitoAsync(TransitoRegisterRequestDTO request);
         Task<IDisposable> BeginTransactionAsync();
     }
-
 }

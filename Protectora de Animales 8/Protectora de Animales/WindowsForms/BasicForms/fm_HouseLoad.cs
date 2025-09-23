@@ -1,19 +1,18 @@
 ﻿using DTOs.House;
-using Services;
-
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsForms.BasicForms
 {
     public partial class fm_HouseLoad : Form
     {
-        
         public fm_HouseLoad()
         {
             InitializeComponent();
-          
         }
 
-        private async void btn_ConfirmHouse_Click(object sender, EventArgs e)
+        private void btn_ConfirmHouse_Click(object sender, EventArgs e)
         {
             bool valid = true;
             valid &= ValidateEmpty(tb_HouseStreet);
@@ -26,26 +25,21 @@ namespace WindowsForms.BasicForms
                 return;
             }
 
-            var request = new HouseRegisterRequestDTO
+            // No llamamos a la API aquí, solo cerramos el form con OK
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        public HouseRegisterRequestDTO GetHouseDTO()
+        {
+            return new HouseRegisterRequestDTO
             {
                 Address = tb_HouseStreet.Text,
-                AddressNumber = int.Parse(tb_Houseumber.Text),
+                AddressNumber = int.TryParse(tb_Houseumber.Text, out var num) ? num : 0,
                 Capacity = (int)nud_HouseCapacity.Value
             };
-            var _houseService = new HouseServiceClient();
-            var response = await _houseService.RegisterAsync(request); 
-
-            if (!response.Success)
-            {
-                MessageBox.Show(response.Message);
-                return;
-            }
-
-            this.DialogResult = DialogResult.OK;
-            MessageBox.Show("Nueva casa agregada exitosamente.");
-            this.Close();
-        
         }
+
         private bool ValidateEmpty(TextBox textBox)
         {
             if (string.IsNullOrWhiteSpace(textBox.Text))
@@ -59,28 +53,15 @@ namespace WindowsForms.BasicForms
                 return true;
             }
         }
+
         private bool ValidNumber(NumericUpDown numericUpDown)
         {
-            
             numericUpDown.BackColor = Color.LightCoral;
-            if (numericUpDown.Value ==0 || numericUpDown.Value >10  )
+            if (numericUpDown.Value == 0 || numericUpDown.Value > 10)
                 return false;
-            
-            else
-            {
-                numericUpDown.BackColor = SystemColors.Window;
-                return true;
-            }
-        }
-        public HouseRegisterRequestDTO GetHouseDTO()
-        {
-            return new HouseRegisterRequestDTO
-            {
-                Address = tb_HouseStreet.Text,
-                AddressNumber = int.TryParse(tb_Houseumber.Text, out var num) ? num : 0,
-                Capacity = (int)nud_HouseCapacity.Value
-            };
-        }
 
+            numericUpDown.BackColor = SystemColors.Window;
+            return true;
+        }
     }
 }

@@ -16,9 +16,11 @@ namespace DTOs.User
             public string UserName { get; set; }
             public string Password { get; set; }
 
-            // Datos de la House
-            public HouseRegisterRequestDTO House { get; set; }
-        
+        // Datos de la House
+        public string Address { get; set; }
+        public int AddressNumber { get; set; }
+        public int Capacity { get; set; }
+
     }
 }
 
