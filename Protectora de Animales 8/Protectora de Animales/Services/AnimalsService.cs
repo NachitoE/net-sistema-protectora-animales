@@ -112,20 +112,31 @@ namespace Services
         public AnimalDTO? Update(AnimalDTO animalDTO)
         {
             AnimalRepository animalRepository = new AnimalRepository();
-            
+
             Animal animalToUpdate = new Animal
             (
                 animalDTO.Id,
                 animalDTO.Name,
-                (Animal.SpeciesEn)Enum.Parse(typeof(Animal.SpeciesEn), animalDTO.Species),
+                EnumConversion.StringToSpecies(animalDTO.Species),
                 animalDTO.BirthDate,
                 animalDTO.UserId,
-                (Animal.AnimalStateEn)Enum.Parse(typeof(Animal.AnimalStateEn), animalDTO.AnimalState),
+                EnumConversion.StringToAnimalState(animalDTO.AnimalState),
                 animalDTO.Description
             );
 
             bool updated = animalRepository.Update(animalToUpdate);
             return updated ? animalDTO : null;
+        }
+        public void SetAnimalAsAvailable(string id)
+        {
+            var animalRepository = new AnimalRepository();
+            Animal? animal = animalRepository.Get(id);
+
+            if (animal != null)
+            {
+                animal.AnimalState = AnimalStateEn.Disponible;
+                animalRepository.Update(animal);
+            }
         }
     }
 }

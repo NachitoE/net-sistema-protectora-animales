@@ -19,7 +19,7 @@ namespace Services
                 houseRegDTO.AddressNumber,
                 houseRegDTO.Capacity
             );
-
+            new UsersService().ActivateUser(houseRegDTO.UserId);
             houseRepository.Add(createdHouse);
 
             return new HouseDTO()
@@ -49,8 +49,16 @@ namespace Services
             HouseRepository houseRepository = new HouseRepository();
             if (houseRepository.Delete(id))
             {
-                //deactivate assigned user
-                new UsersService().SetUserPendingHouse(id);
+                // set user as pending house, set current user animals as available
+                var userDTO = GetUserBelongingToHouse(id);
+                if (userDTO == null)
+                    return false;
+                AnimalsService animalsService = new AnimalsService();
+                var animals = animalsService.GetAnimalsBelongingToUser(userDTO.Id);
+                foreach(AnimalDTO animal in animals)
+                {
+                    animalsService.SetAnimalAsAvailable(animal.Id);
+                }
                 return true;
             }
             return false;
@@ -74,7 +82,13 @@ namespace Services
             return filteredHouseDTOs.FirstOrDefault();
 
         }
-
+        public UserDTO? GetUserBelongingToHouse(string houseId)
+        {
+            var house = Get(houseId);
+            if (house == null) return null;
+            var userService = new UsersService();
+            return userService.Get(house.UserId);
+        }
         public bool HasHouse(string userId)
         {
             var filteredHouseDTOs = GetAll()
