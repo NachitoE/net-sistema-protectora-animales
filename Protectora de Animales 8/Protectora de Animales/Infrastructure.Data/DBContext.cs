@@ -25,7 +25,7 @@ namespace Infrastructure.Data
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { if (!optionsBuilder.IsConfigured) { var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build(); string connectionString = configuration.GetConnectionString("DefaultConnection"); optionsBuilder.UseSqlServer(connectionString); } }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
