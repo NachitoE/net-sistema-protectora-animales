@@ -8,6 +8,7 @@ namespace Domain
         public const int MAX_CAPACITY_VOLUNTARIOS = 2;
 
         private UserType _userType = UserType.Admin;
+        private UserStatus _userStatus = UserStatus.Active;
         private string _id;
         public string Id
         {
@@ -39,6 +40,11 @@ namespace Domain
             get => _userType;
             set => _userType = value;
         }
+        public UserStatus UserStatus
+        {
+            get => _userStatus;
+            set => _userStatus = value;
+        }
         private string _username;
         public string UserName
         {
@@ -53,7 +59,7 @@ namespace Domain
         }
 
         #endregion
-        public User(string id, string name, string surName, string dni, UserType userType, string userName, string password)
+        public User(string id, string name, string surName, string dni, UserType userType, string userName, string password, UserStatus userStatus = UserStatus.Active)
         {
             Id = id;
             Name = name;
@@ -62,11 +68,16 @@ namespace Domain
             UserType = userType;
             UserName = userName;
             Password = password;
-
+            UserStatus = userStatus;
         }
     }
     public enum UserType
     {
         Admin, Adoptante, Transito, Voluntario
+    }
+    
+    public enum UserStatus
+    {
+        Active, Inactive, PendingHouse
     }
 }

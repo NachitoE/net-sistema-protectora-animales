@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using Helpers;
 using Infrastructure.Data;
 using System;
 
@@ -52,14 +53,21 @@ namespace Services
                     Message = "El nombre de usuario ya está en uso"
                 };
             }
+            UserStatus userStatus = UserStatus.Active;
+            // calc status
+            if (registerReqDTO.UserType == EnumConversion.UserTypeToString(UserType.Transito))
+            {
+                userStatus = UserStatus.PendingHouse;
+            }
             User createdUser =
                new User(Guid.NewGuid().ToString(),
                registerReqDTO.Name,
                registerReqDTO.SurName,
                registerReqDTO.DNI,
-               (UserType)Enum.Parse(typeof(UserType), registerReqDTO.UserType),
+               EnumConversion.StringToUserType(registerReqDTO.UserType),
                registerReqDTO.UserName,
-               registerReqDTO.Password);
+               registerReqDTO.Password,
+               userStatus);
 
             userRepository.Add(createdUser);
             return new UserRegisterResponseDTO

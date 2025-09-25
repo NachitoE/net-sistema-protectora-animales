@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTOs.House
 {
-    public class HouseRegisterResponseDTO: BaseResponse
+    public class HouseBaseResponseDTO: BaseResponse
     {
         public string HouseId { get; set; }
     }

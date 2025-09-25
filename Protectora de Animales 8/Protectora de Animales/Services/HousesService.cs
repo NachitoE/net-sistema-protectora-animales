@@ -47,7 +47,13 @@ namespace Services
         public bool Delete(string id)
         {
             HouseRepository houseRepository = new HouseRepository();
-            return houseRepository.Delete(id);
+            if (houseRepository.Delete(id))
+            {
+                //deactivate assigned user
+                new UsersService().SetUserPendingHouse(id);
+                return true;
+            }
+            return false;
         }
 
         public List<HouseDTO> GetAll()
@@ -69,18 +75,61 @@ namespace Services
 
         }
 
-        public async Task CreateAsync(string userId, HouseRegisterRequestDTO request)
+        public bool HasHouse(string userId)
         {
-            House house = new House(
-                null, // El id se deja nulo para que lo genere la API
-                userId,
-                request.Address,
-                request.AddressNumber,
-                request.Capacity
-            );
+            var filteredHouseDTOs = GetAll()
+                .Where((h) => h.UserId == userId)
+                .ToList();
+            return filteredHouseDTOs.Count > 0;
+        }
 
-            var houseRepo = new HouseRepository();
-            houseRepo.Add(house);
+        public HouseBaseResponseDTO ChangeCapacity(HouseChangeCapacityDTO changeCapacityDTO)
+        {
+            var userService = new UsersService();
+            var houseRepository = new HouseRepository();
+            var house = houseRepository.Get(changeCapacityDTO.HouseId);
+            
+            if (house == null)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "Casa no encontrada",
+                    Success = false
+                };
+            }
+            UserDTO? houseUserDTO = userService.Get(house.UserId);
+            if (houseUserDTO == null)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "El usuario asignado a esa casa no fue encontrado",
+                    Success = false
+                };
+            }
+            if (changeCapacityDTO.NewCapacity < 0)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "La capacidad no puede ser negativa",
+                    Success = false
+                };
+            }
+            int currentAnimalsAmountInHouse = house.Capacity - userService.GetUserRemainingCapacity(houseUserDTO);
+            if (changeCapacityDTO.NewCapacity < currentAnimalsAmountInHouse)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "La nueva capacidad no puede ser menor que la cantidad de animales actuales",
+                    Success = false
+                };
+            }
+            house.Capacity = changeCapacityDTO.NewCapacity;
+            houseRepository.Update(house);
+            return new HouseBaseResponseDTO()
+            {
+                Message = "Capacidad actualizada con éxito",
+                Success = true
+            };
         }
     }
 }

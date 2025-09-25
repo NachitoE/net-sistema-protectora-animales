@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTOs.House
 {
-    internal class TrialDTO
+    public class HouseChangeCapacityDTO
     {
+        public string HouseId { get; set; }
+        public int NewCapacity { get; set; }
     }
 }

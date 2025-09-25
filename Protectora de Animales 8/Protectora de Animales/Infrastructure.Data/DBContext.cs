@@ -22,18 +22,8 @@ namespace Infrastructure.Data
         {
             Database.EnsureCreated();
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DBContext(DbContextOptions<DBContext> options) : base(options)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .Build();
-
-                string connectionString = configuration.GetConnectionString("DefaultConnection");
-                optionsBuilder.UseSqlServer(connectionString);
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,17 +61,21 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
-
+                
+                entity.Property(e => e.UserStatus)
+                    .IsRequired()
+                    .HasDefaultValue(UserStatus.Active)
+                    .HasConversion<string>();
                 // Relación uno a uno entre User y House
                 entity.HasOne<House>()
                     .WithOne()
                     .HasForeignKey<House>(h => h.UserId);
                 //seeding data
                 entity.HasData(
-                new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123"),
-                new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123"),
-                new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123"),
-                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123"));
+                new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123", UserStatus.Active),
+                new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123", UserStatus.Active),
+                new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123", UserStatus.Active),
+                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123", UserStatus.Active));
                
             });
 

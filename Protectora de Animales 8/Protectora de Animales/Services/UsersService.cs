@@ -10,11 +10,13 @@ namespace Services
         //Note to self: still need to add Update and Delete methods
 
         // Question: should we make a register method or use Add for every time a user is created?
+        /*
         public UserDTO Add(UserDTO userDTO) 
         {
             UserRepository userRepository = new UserRepository();
+            
             User createdUser = 
-                new User(Guid.NewGuid().ToString(), userDTO.Name, userDTO.SurName, userDTO.DNI, (UserType)Enum.Parse(typeof(UserType), userDTO.UserType), userDTO.UserName, "temporarypassword");
+                new User(Guid.NewGuid().ToString(), userDTO.Name, userDTO.SurName, userDTO.DNI, (UserType)Enum.Parse(typeof(UserType), userDTO.UserType), userDTO.UserName, "temporarypassword", userStatus);
 
             userRepository.Add(createdUser);
             
@@ -22,7 +24,7 @@ namespace Services
 
             return userDTO;
         }
-
+        */
         public UserDTO? Get(string id)
         {
             var userRepository = new UserRepository();
@@ -89,7 +91,7 @@ namespace Services
             return availableUsers;
         }
         
-        public static int GetUserRemainingCapacity(UserDTO userDTO)
+        public int GetUserRemainingCapacity(UserDTO userDTO)
         {
             HousesService housesService = new HousesService();
             AnimalsService animalsService = new AnimalsService();
@@ -110,6 +112,31 @@ namespace Services
             return 0;
         }
 
+        public void DeactivateUser(string id)
+        {
+            ChangeUserStatus(id, UserStatus.Inactive);
+        }
+
+        public void ActivateUser(string id)
+        {
+            ChangeUserStatus(id, UserStatus.Active);
+        }
+
+        public void SetUserPendingHouse(string id)
+        {
+            ChangeUserStatus(id, UserStatus.PendingHouse);
+        }
+
+        private void ChangeUserStatus(string id, UserStatus newStatus)
+        {
+            UserRepository userRepository = new UserRepository();
+            User? user = userRepository.Get(id);
+            if (user != null)
+            {
+                user.UserStatus = newStatus;
+                userRepository.Update(user);
+            }
+        }
     }
     /*
      *  public bool IsValidUser(string userName, string password)
