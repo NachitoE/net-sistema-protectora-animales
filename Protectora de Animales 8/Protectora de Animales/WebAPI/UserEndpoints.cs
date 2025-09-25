@@ -40,7 +40,7 @@ namespace WebAPI
                 {
                     UsersService userService = new UsersService();
                     UserDTO? userDTO = userService.Get(id);
-                    if (userDTO == null) throw new ArgumentException("User not found");
+                    if (userDTO == null) throw new ArgumentException("Usuario no encontrado");
                     return Results.Ok(userDTO);
                 }
                 catch (ArgumentException ex)
@@ -127,7 +127,7 @@ namespace WebAPI
                 {
                     UsersService userService = new UsersService();
                     List<UserDTO> userDTOs = userService.GetAvailableToAdopt();
-                    if (userDTOs == null) throw new ArgumentException("No available users found");
+                    if (!(userDTOs.Count > 0)) throw new ArgumentException("No hay usuarios disponibles para adoptar");
                     return Results.Ok(userDTOs);
                 }
                 catch (ArgumentException ex)

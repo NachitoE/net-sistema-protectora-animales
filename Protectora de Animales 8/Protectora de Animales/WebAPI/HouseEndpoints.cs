@@ -15,7 +15,7 @@ namespace WebAPI
                     // un usuario puede tener solo 1 casa asignada
                     if (housesService.HasHouse(houseRegDTO.UserId))
                     {
-                        throw new ArgumentException("The user already has a registered house");
+                        throw new ArgumentException("El usuario ya tiene una casa asignada");
                     }
                     HouseDTO houseDTO = housesService.Add(houseRegDTO);
                     return Results.Created($"/houses/{houseDTO.Id}", houseDTO);

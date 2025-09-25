@@ -14,7 +14,7 @@ namespace WebAPI
                     AuthService authService = new AuthService();
                     UserLoginResponseDTO loginResponse = authService.Login(loginReqDTO);
                     if (loginResponse == null || loginResponse.User == null)
-                        throw new ArgumentException("Login data is incorrect or user does not exist");
+                        throw new ArgumentException("La data del login no es correcta o el usuario no existe");
                     return Results.Ok(loginResponse);
                 }
                 catch (ArgumentException ex)
