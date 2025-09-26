@@ -117,5 +117,13 @@ namespace WindowsForms.BasicForms
             signUpForm.ShowDialog();
             this.Show();
         }
+
+        private void btn_ReportSighting_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fm_SightingForm redir = new fm_SightingForm();
+            redir.ShowDialog();
+            this.Show();
+        }
     }
 }

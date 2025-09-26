@@ -28,52 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fm_SightingMenu));
-            this.pb_UnderConstructionImg = new System.Windows.Forms.PictureBox();
-            this.lb_EnConstruccion = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).BeginInit();
-            this.SuspendLayout();
+            button1 = new Button();
+            SuspendLayout();
             // 
-            // pb_UnderConstructionImg
+            // button1
             // 
-            this.pb_UnderConstructionImg.Image = ((System.Drawing.Image)(resources.GetObject("pb_UnderConstructionImg.Image")));
-            this.pb_UnderConstructionImg.Location = new System.Drawing.Point(0, 0);
-            this.pb_UnderConstructionImg.Name = "pb_UnderConstructionImg";
-            this.pb_UnderConstructionImg.Size = new System.Drawing.Size(801, 327);
-            this.pb_UnderConstructionImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_UnderConstructionImg.TabIndex = 0;
-            this.pb_UnderConstructionImg.TabStop = false;
-            // 
-            // lb_EnConstruccion
-            // 
-            this.lb_EnConstruccion.AutoSize = true;
-            this.lb_EnConstruccion.BackColor = System.Drawing.Color.Gold;
-            this.lb_EnConstruccion.Location = new System.Drawing.Point(172, 356);
-            this.lb_EnConstruccion.Name = "lb_EnConstruccion";
-            this.lb_EnConstruccion.Size = new System.Drawing.Size(423, 13);
-            this.lb_EnConstruccion.TabIndex = 1;
-            this.lb_EnConstruccion.Text = "¡EL EQUIPO ESTÁ TRABAJANDO PARA RESOLVERLO LO MÁS PRONTO POSIBLE!";
+            button1.Location = new Point(785, 475);
+            button1.Name = "button1";
+            button1.Size = new Size(136, 32);
+            button1.TabIndex = 0;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
             // fm_SightingMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lb_EnConstruccion);
-            this.Controls.Add(this.pb_UnderConstructionImg);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "fm_SightingMenu";
-            this.Text = "AVISTAMIENTOS";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_UnderConstructionImg)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-        
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(731, 560);
+            Controls.Add(button1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "fm_SightingMenu";
+            Text = "AVISTAMIENTOS";
+            ResumeLayout(false);
+
         }
 
         #endregion
 
-                private System.Windows.Forms.PictureBox pb_UnderConstructionImg;
-        private System.Windows.Forms.Label lb_EnConstruccion;
+        private Button button1;
     }
 }
