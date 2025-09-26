@@ -24,7 +24,8 @@ namespace Helpers
                 throw new ArgumentException($"Invalid animal state: {state}");
             }
             
-            public static string UserTypeToString(UserType userType) => userType.ToString();
+            public static string SightingStateToString(Sighting.SightingState state) => state.ToString();
+        public static string UserTypeToString(UserType userType) => userType.ToString();
             public static UserType StringToUserType(string userType)
             {
                 if (Enum.TryParse<UserType>(userType, true, out var result))

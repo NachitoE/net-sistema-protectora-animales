@@ -1,11 +1,13 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Emit;
+
 
 
 namespace Infrastructure.Data
@@ -17,6 +19,7 @@ namespace Infrastructure.Data
         public DbSet<Animal> Animals { get; set; }
 
         public DbSet<House> Houses { get; set; }
+        public DbSet<Sighting> Sightings { get; set; }
 
         internal DBContext()
         {
@@ -154,6 +157,71 @@ namespace Infrastructure.Data
                 entity.HasData(
                     new House("house-1", "user-4", "Zeballos", 1341, 2)
                         );
+            });
+            //----- SIGHTING -----
+            modelBuilder.Entity<Sighting>(entity =>
+            { entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.SightingAddressName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                entity.Property(e => e.SightingAddressNumber)
+                    .IsRequired();
+                entity.Property(e => e.SightingDateTime)
+                    .IsRequired();
+                entity.Property(e => e.SightingDescription)
+                    .IsRequired()
+                    .HasMaxLength(300);
+                entity.Property(e => e.Sightingstate)
+                    .IsRequired();
+                entity.HasData(
+     new Sighting
+     {
+         Id = "s1",
+         SightingAddressName = "Calle Falsa",
+         SightingAddressNumber = "123",
+         SightingDateTime = new DateTime(2025, 9, 25, 10, 30, 0),
+         SightingDescription = "Avisté un perro corriendo solo",
+         Sightingstate = Sighting.SightingState.Nuevo
+     },
+     new Sighting
+     {
+         Id = "s2",
+         SightingAddressName = "Av. Libertad",
+         SightingAddressNumber = "456",
+         SightingDateTime = new DateTime(2025, 9, 24, 14, 0, 0),
+         SightingDescription = "Gato atrapado en un árbol, unos pibes le estaban tirando piedras, los cagué a trompadas pero no pude bajar al gato del árbol",
+         Sightingstate = Sighting.SightingState.Nuevo
+     },
+     new Sighting
+     {
+         Id = "s3",
+         SightingAddressName = "Plaza Central",
+         SightingAddressNumber = "10",
+         SightingDateTime = new DateTime(2025, 9, 23, 9, 15, 0),
+         SightingDescription = "Conejo perdido cerca del parque",
+         Sightingstate = Sighting.SightingState.Nuevo
+     },
+     new Sighting
+     {
+         Id = "s4",
+         SightingAddressName = "Barrio Norte",
+         SightingAddressNumber = "2345",
+         SightingDateTime = new DateTime(2025, 9, 22, 18, 45, 0),
+         SightingDescription = "Se ve un pájaro herido",
+         Sightingstate = Sighting.SightingState.Nuevo
+     },
+     new Sighting
+     {
+         Id = "s5",
+         SightingAddressName = "Ruta 5",
+         SightingAddressNumber = "2000",
+         SightingDateTime = new DateTime(2025, 9, 21, 12, 0, 0),
+         SightingDescription = "Avistamiento de perro callejero al borde de la ruta, pueden ser más de uno, pareciese tener crías",
+         Sightingstate = Sighting.SightingState.Nuevo
+     }
+ );
             });
         }
     }

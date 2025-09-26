@@ -1,5 +1,7 @@
 ﻿using Domain;
 using DTOs;
+using DTOs.Sighting;
+using static Domain.Sighting;
 
 namespace Helpers
 {
@@ -58,5 +60,18 @@ namespace Helpers
                 Capacity = house.Capacity
             };
         }
+
+        public static SightingDTO ToDTO(this Sighting sighting)
+        {
+            return new SightingDTO
+            {
+                Id = sighting.Id,
+                SightingAdressName = sighting.SightingAddressName,
+                SightingAdressNumber = sighting.SightingAddressNumber,
+                SightingDatetime = sighting.SightingDateTime,
+                SightingDescription = sighting.SightingDescription,
+                SightingState = Helpers.EnumConversion.SightingStateToString(sighting.Sightingstate)
+            };
+        } 
     }
 }
