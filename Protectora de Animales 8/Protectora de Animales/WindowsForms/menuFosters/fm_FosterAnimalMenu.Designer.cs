@@ -40,9 +40,9 @@
             pb_headerpic.Dock = DockStyle.Top;
             pb_headerpic.Image = Properties.Resources.Studio_Ghibli__Cattt__;
             pb_headerpic.Location = new Point(0, 0);
-            pb_headerpic.Margin = new Padding(4, 3, 4, 3);
+            pb_headerpic.Margin = new Padding(5, 4, 5, 4);
             pb_headerpic.Name = "pb_headerpic";
-            pb_headerpic.Size = new Size(455, 110);
+            pb_headerpic.Size = new Size(520, 147);
             pb_headerpic.SizeMode = PictureBoxSizeMode.CenterImage;
             pb_headerpic.TabIndex = 16;
             pb_headerpic.TabStop = false;
@@ -50,21 +50,22 @@
             // btn_AnimalsMedicalCheckup
             // 
             btn_AnimalsMedicalCheckup.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            btn_AnimalsMedicalCheckup.Location = new Point(99, 246);
-            btn_AnimalsMedicalCheckup.Margin = new Padding(4, 3, 4, 3);
+            btn_AnimalsMedicalCheckup.Location = new Point(113, 328);
+            btn_AnimalsMedicalCheckup.Margin = new Padding(5, 4, 5, 4);
             btn_AnimalsMedicalCheckup.Name = "btn_AnimalsMedicalCheckup";
-            btn_AnimalsMedicalCheckup.Size = new Size(212, 30);
+            btn_AnimalsMedicalCheckup.Size = new Size(242, 40);
             btn_AnimalsMedicalCheckup.TabIndex = 22;
             btn_AnimalsMedicalCheckup.Text = "Registro Medico";
             btn_AnimalsMedicalCheckup.UseVisualStyleBackColor = true;
+            btn_AnimalsMedicalCheckup.Click += btn_AnimalsMedicalCheckup_Click;
             // 
             // btn_CaretakersAnimals
             // 
             btn_CaretakersAnimals.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            btn_CaretakersAnimals.Location = new Point(99, 175);
-            btn_CaretakersAnimals.Margin = new Padding(4, 3, 4, 3);
+            btn_CaretakersAnimals.Location = new Point(113, 233);
+            btn_CaretakersAnimals.Margin = new Padding(5, 4, 5, 4);
             btn_CaretakersAnimals.Name = "btn_CaretakersAnimals";
-            btn_CaretakersAnimals.Size = new Size(212, 30);
+            btn_CaretakersAnimals.Size = new Size(242, 40);
             btn_CaretakersAnimals.TabIndex = 21;
             btn_CaretakersAnimals.Text = "Mis Animales";
             btn_CaretakersAnimals.UseVisualStyleBackColor = true;
@@ -76,24 +77,24 @@
             lb_MenuTitle.Font = new Font("Yu Gothic UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lb_MenuTitle.ForeColor = SystemColors.ButtonHighlight;
             lb_MenuTitle.ImageAlign = ContentAlignment.MiddleRight;
-            lb_MenuTitle.Location = new Point(-2, 61);
-            lb_MenuTitle.Margin = new Padding(4, 0, 4, 0);
+            lb_MenuTitle.Location = new Point(-2, 81);
+            lb_MenuTitle.Margin = new Padding(5, 0, 5, 0);
             lb_MenuTitle.Name = "lb_MenuTitle";
-            lb_MenuTitle.Size = new Size(114, 48);
+            lb_MenuTitle.Size = new Size(130, 64);
             lb_MenuTitle.TabIndex = 20;
             lb_MenuTitle.Text = "MENU";
             // 
             // fm_FosterAnimalMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(455, 415);
+            ClientSize = new Size(520, 553);
             Controls.Add(btn_AnimalsMedicalCheckup);
             Controls.Add(btn_CaretakersAnimals);
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerpic);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             MaximizeBox = false;
             Name = "fm_FosterAnimalMenu";
             Text = "fm_FosterAnimalMenu";

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿
+using Domain;
+using DTOs;
+using Infrastructure.API;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace WindowsForms.NewFolder1
 {
     public partial class fm_CaretakersAnimals : Form
@@ -15,6 +10,32 @@ namespace WindowsForms.NewFolder1
         public fm_CaretakersAnimals()
         {
             InitializeComponent();
+            Load += ShowCaretakerAnimalsFormLoad;
+        }
+
+
+        private async void ShowCaretakerAnimalsFormLoad(object sender, EventArgs e)
+        {
+            UserDTO? user = Session.CurrentLoggedUser;
+            if (user == null)
+            {
+                MessageBox.Show("No se detectó al usuario loggeado", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+            UserDTOClient animalClient = new UserDTOClient(new APIHttpClient());
+            List<AnimalDTO> caretakerAnimals = await animalClient.GetUserAnimalsAsync(user.Id);
+            dgv_userAnimals.AutoGenerateColumns = false;
+            dgv_userAnimals.Columns.Add("Name", "Nombre");
+            dgv_userAnimals.Columns.Add("Species", "Especie");
+            dgv_userAnimals.Columns.Add("UserId", "Responsable");
+            dgv_userAnimals.Columns.Add("BirthDate", "Fecha de Nacimiento");
+            dgv_userAnimals.Columns.Add("AnimalState", "Estado");
+            dgv_userAnimals.Columns["Name"].DataPropertyName = "Name";
+            dgv_userAnimals.Columns["Species"].DataPropertyName = "Species";
+            dgv_userAnimals.Columns["BirthDate"].DataPropertyName = "BirthDate";
+            dgv_userAnimals.Columns["AnimalState"].DataPropertyName = "AnimalState";
+            dgv_userAnimals.Columns["UserId"].DataPropertyName = "UserId";
+            dgv_userAnimals.DataSource = caretakerAnimals;
         }
     }
 }
