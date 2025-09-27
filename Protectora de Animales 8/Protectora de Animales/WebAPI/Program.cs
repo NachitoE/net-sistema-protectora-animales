@@ -30,4 +30,5 @@ app.MapUserEndpoints();
 app.MapAuthEndpoints();
 app.MapAnimalEndpoints();
 app.MapHouseEndpoints();
+app.MapSightingEndpoints();
 app.Run();

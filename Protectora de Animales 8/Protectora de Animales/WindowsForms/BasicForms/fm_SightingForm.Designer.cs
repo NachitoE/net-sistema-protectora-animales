@@ -40,6 +40,7 @@
             btn_SubmitReport = new Button();
             mtb_SightingTime = new MaskedTextBox();
             lb_SightingInfo = new Label();
+            btn_Help = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -119,12 +120,11 @@
             // tb_SightingDescription
             // 
             tb_SightingDescription.Location = new Point(108, 269);
-            tb_SightingDescription.MaxLength = 6;
+            tb_SightingDescription.MaxLength = 10000;
             tb_SightingDescription.Multiline = true;
             tb_SightingDescription.Name = "tb_SightingDescription";
             tb_SightingDescription.Size = new Size(228, 136);
             tb_SightingDescription.TabIndex = 21;
-            tb_SightingDescription.Text = "Ej: Perro pequeño con manchas en la espalda vagando solo por la calle. Sociable, parece perdido, retienen en... estaba entre... toda descripción que recuerde nos es de ayuda.";
             // 
             // btn_SubmitReport
             // 
@@ -144,7 +144,6 @@
             mtb_SightingTime.Name = "mtb_SightingTime";
             mtb_SightingTime.Size = new Size(228, 23);
             mtb_SightingTime.TabIndex = 26;
-            mtb_SightingTime.Text = "020920251900";
             mtb_SightingTime.ValidatingType = typeof(DateTime);
             // 
             // lb_SightingInfo
@@ -156,12 +155,26 @@
             lb_SightingInfo.TabIndex = 27;
             lb_SightingInfo.Text = "Gracias por su preocupación. Necesitamos que nos \r\nproporcione los siguientes datos para tomar su reporte:\r\n";
             // 
-            // SightingForm
+            // btn_Help
+            // 
+            btn_Help.BackColor = SystemColors.ActiveCaption;
+            btn_Help.Cursor = Cursors.Help;
+            btn_Help.FlatStyle = FlatStyle.Popup;
+            btn_Help.Location = new Point(77, 269);
+            btn_Help.Name = "btn_Help";
+            btn_Help.Size = new Size(25, 26);
+            btn_Help.TabIndex = 28;
+            btn_Help.Text = "?";
+            btn_Help.UseVisualStyleBackColor = false;
+            btn_Help.Click += btn_Help_Click;
+            // 
+            // fm_SightingForm
             // 
             AcceptButton = btn_SubmitReport;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(451, 448);
+            Controls.Add(btn_Help);
             Controls.Add(lb_SightingInfo);
             Controls.Add(mtb_SightingTime);
             Controls.Add(btn_SubmitReport);
@@ -177,7 +190,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             KeyPreview = true;
             MaximizeBox = false;
-            Name = "SightingForm";
+            Name = "fm_SightingForm";
             Text = "SightingForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -198,5 +211,6 @@
         private Button btn_SubmitReport;
         private MaskedTextBox mtb_SightingTime;
         private Label lb_SightingInfo;
+        private Button btn_Help;
     }
 }
