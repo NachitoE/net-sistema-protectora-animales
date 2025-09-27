@@ -83,10 +83,12 @@ namespace WindowsForms.BasicForms
         {
             bool valido = DateTime.TryParse(mtb.Text, out fecha);
 
-         
             if (valido)
             {
-                if (fecha < DateTime.Now)
+                DateTime ahora = DateTime.Now;
+                DateTime fechaLimite = ahora.AddDays(-2);
+
+                if (fecha < fechaLimite|| fecha > ahora)
                 {
                     valido = false;
                 }
@@ -107,5 +109,6 @@ namespace WindowsForms.BasicForms
     MessageBoxIcon.Information
 );
         }
+
     }
 }

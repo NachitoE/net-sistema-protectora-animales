@@ -28,20 +28,20 @@ namespace Infrastructure.Data
         }
         public bool Update(Domain.Sighting s)
         {
-            DBContext context = this.CreateContext();
-            Domain.Sighting? existingSighting = context.Sightings.Find(s.Id);
+            using var context = this.CreateContext();
+            var existingSighting = context.Sightings.Find(s.Id);
+
             if (existingSighting != null)
             {
-                existingSighting.SightingAddressName = s.SightingAddressName;
-                existingSighting.SightingAddressNumber = s.SightingAddressNumber;
-                existingSighting.SightingDateTime = s.SightingDateTime;
-                existingSighting.SightingDescription = s.SightingDescription;
                 existingSighting.Sightingstate = s.Sightingstate;
+
                 context.SaveChanges();
                 return true;
             }
+
             return false;
         }
+        
         public bool Delete(string id)
         {
             DBContext context = this.CreateContext();
