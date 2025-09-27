@@ -18,6 +18,7 @@ namespace WindowsForms.BasicForms
         public fm_loggin()
         {
             InitializeComponent();
+            Session.LogOff();
             _httpClient = new HttpClient { BaseAddress = new Uri(ApiBaseUrl) };
         }
 
@@ -61,6 +62,7 @@ namespace WindowsForms.BasicForms
 
                 if (response.Success && response.User != null)
                 {
+                    Session.LogOn(response.User);
                     MessageBox.Show($"Bienvenido {response.User.Name} {response.User.SurName}", "Login exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Form menuredir = response.User.UserType switch

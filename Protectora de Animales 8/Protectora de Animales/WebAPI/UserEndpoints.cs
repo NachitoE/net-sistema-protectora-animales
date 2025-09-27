@@ -139,6 +139,25 @@ namespace WebAPI
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
+
+            app.MapGet("/users/{id}/animals", (string id) =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    List<AnimalDTO> animalsDTO = animalService.GetAnimalsBelongingToUser(id);
+                    if (!(animalsDTO.Count > 0)) throw new ArgumentException("El usuario no cuenta con animales asignados");
+                    return Results.Ok(animalsDTO);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("Conseguir animales del usuario")
+                .Produces<AnimalDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
         }
 
 
