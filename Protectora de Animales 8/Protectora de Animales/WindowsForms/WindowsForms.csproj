@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="menuAdmin\Animals\fm_AsignResp.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\Infrastructure.API\Infrastructure.API.csproj" />
