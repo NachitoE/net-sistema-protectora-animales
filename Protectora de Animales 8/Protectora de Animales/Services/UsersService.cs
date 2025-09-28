@@ -32,15 +32,7 @@ namespace Services
 
             if (user != null) { 
                 var strUserType = user.UserType.ToString();
-                return new UserDTO
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    SurName = user.SurName,
-                    DNI = user.Dni,
-                    UserType = strUserType,
-                    UserName = user.UserName,
-                };
+                return user.ToDTO();
             }
             return null;
         }
@@ -55,15 +47,7 @@ namespace Services
         {
             UserRepository userRepository = new UserRepository();
             var usersDomain = userRepository.GetAll();
-            var allUsersDTOs = usersDomain.Select((user) => new UserDTO
-            {
-                Id = user.Id,
-                Name = user.Name,
-                SurName = user.SurName,
-                DNI = user.Dni,
-                UserType = user.UserType.ToString(),
-                UserName = user.UserName
-            }).ToList();
+            var allUsersDTOs = usersDomain.Select((user) => user.ToDTO()).ToList();
             return allUsersDTOs;
         }
 

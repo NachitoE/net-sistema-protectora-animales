@@ -15,7 +15,7 @@ namespace Helpers
                 SurName = user.SurName,
                 DNI = user.Dni,
                 UserName = user.UserName,
-                UserType = EnumConversion.UserTypeToString(user.UserType)
+                UserType = EnumConversion.UserTypeToString(user.UserType),
             };
         }
         /*

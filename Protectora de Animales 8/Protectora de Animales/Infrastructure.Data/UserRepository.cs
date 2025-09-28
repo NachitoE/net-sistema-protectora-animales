@@ -1,6 +1,5 @@
 ﻿using Domain;
 
-
 namespace Infrastructure.Data
 {
     public class UserRepository
@@ -75,7 +74,7 @@ namespace Infrastructure.Data
                 .FirstOrDefault(u => u.UserName == userName) != null;
         }
         public List<User> FilterByCriteria(string? name = null, string? surName = null,
-    string? dni = null, string? userType = null, string? userName = null)
+    string? dni = null, string? userType = null, string? userName = null, string? userStatus = null)
         {
             DBContext context = CreateContext();
             IQueryable<User> query = context.Users;
@@ -94,6 +93,9 @@ namespace Infrastructure.Data
 
             if (!string.IsNullOrEmpty(userName))
                 query = query.Where(u => u.UserName.Contains(userName));
+
+            if (!string.IsNullOrEmpty(userStatus) && Enum.TryParse<UserStatus>(userStatus, out var status))
+                query = query.Where(u => u.UserStatus == status);
 
             return query.ToList();
         }
