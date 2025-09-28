@@ -120,7 +120,6 @@
             tb_user.Name = "tb_user";
             tb_user.Size = new Size(218, 23);
             tb_user.TabIndex = 6;
-            tb_user.TextChanged += tb_user_TextChanged;
             // 
             // llb_singup
             // 

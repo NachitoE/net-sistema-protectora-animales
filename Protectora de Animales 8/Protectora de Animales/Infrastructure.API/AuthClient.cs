@@ -1,6 +1,4 @@
 ﻿using DTOs;
-using Infrastructure.API;
-using Newtonsoft.Json;
 
 namespace Infrastructure.API
 {

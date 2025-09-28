@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms.menuFoster
 {
-    partial class fm_FosterAnimalMenu
+    partial class fm_CaretakersAnimalMenu
     {
         /// <summary>
         /// Required designer variable.

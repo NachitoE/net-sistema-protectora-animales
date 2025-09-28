@@ -1,6 +1,4 @@
 ﻿using DTOs;
-using System;
-using System.Net.Http;
 using System.Net.Http.Json;
 using WindowsForms.menuAdmin;
 using WindowsForms.menuAdopter;
@@ -107,10 +105,6 @@ namespace WindowsForms.BasicForms
             base.Dispose(disposing);
         }
 
-        private void tb_user_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void llb_singup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

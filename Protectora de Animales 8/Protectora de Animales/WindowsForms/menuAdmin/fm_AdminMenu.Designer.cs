@@ -35,6 +35,7 @@
             btn_menuSightings = new Button();
             btn_menuReports = new Button();
             btn_menuUsers = new Button();
+            btn_FosterHouses = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).BeginInit();
             SuspendLayout();
             // 
@@ -92,7 +93,7 @@
             // 
             // btn_menuReports
             // 
-            btn_menuReports.Location = new Point(93, 247);
+            btn_menuReports.Location = new Point(93, 276);
             btn_menuReports.Name = "btn_menuReports";
             btn_menuReports.Size = new Size(250, 23);
             btn_menuReports.TabIndex = 5;
@@ -102,7 +103,7 @@
             // 
             // btn_menuUsers
             // 
-            btn_menuUsers.Location = new Point(93, 276);
+            btn_menuUsers.Location = new Point(93, 305);
             btn_menuUsers.Name = "btn_menuUsers";
             btn_menuUsers.Size = new Size(250, 23);
             btn_menuUsers.TabIndex = 6;
@@ -110,11 +111,21 @@
             btn_menuUsers.UseVisualStyleBackColor = true;
             btn_menuUsers.Click += btn_menuUsers_Click;
             // 
+            // btn_FosterHouses
+            // 
+            btn_FosterHouses.Location = new Point(93, 247);
+            btn_FosterHouses.Name = "btn_FosterHouses";
+            btn_FosterHouses.Size = new Size(250, 23);
+            btn_FosterHouses.TabIndex = 7;
+            btn_FosterHouses.Text = "Casas";
+            btn_FosterHouses.UseVisualStyleBackColor = true;
+            // 
             // fm_AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(426, 400);
+            Controls.Add(btn_FosterHouses);
             Controls.Add(btn_menuUsers);
             Controls.Add(btn_menuReports);
             Controls.Add(btn_menuSightings);
@@ -123,7 +134,7 @@
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerPic);
             Name = "fm_AdminMenu";
-            Text = "Form1";
+            Text = "Administrador";
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -138,5 +149,6 @@
         private Button btn_menuSightings;
         private Button btn_menuReports;
         private Button btn_menuUsers;
+        private Button btn_FosterHouses;
     }
 }

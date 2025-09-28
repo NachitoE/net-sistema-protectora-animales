@@ -16,5 +16,10 @@ namespace WindowsForms.menuAdmin.Animals
         {
             InitializeComponent();
         }
+
+        private void btn_AcceptnewAnimal_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

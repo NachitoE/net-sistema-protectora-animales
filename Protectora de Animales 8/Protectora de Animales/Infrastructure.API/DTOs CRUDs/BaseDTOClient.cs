@@ -1,6 +1,4 @@
 ﻿
-using Infrastructure.API;
-
 namespace Infrastructure.API
 {
     public abstract class BaseDTOClient<TResponse> 

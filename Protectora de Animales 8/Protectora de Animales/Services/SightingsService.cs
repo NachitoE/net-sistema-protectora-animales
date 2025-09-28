@@ -1,10 +1,7 @@
 ﻿using Domain;
-using DTOs;
 using DTOs.Sighting;
 using Helpers;
 using Infrastructure.Data;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Services
 {

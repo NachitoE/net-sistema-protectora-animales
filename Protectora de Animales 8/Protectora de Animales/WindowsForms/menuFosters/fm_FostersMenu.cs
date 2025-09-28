@@ -21,7 +21,7 @@ namespace WindowsForms.menuFosters
         private void btn_menuAnimals_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var menuredir = new fm_FosterAnimalMenu();
+            var menuredir = new fm_CaretakersAnimalMenu();
             menuredir.ShowDialog();
             this.Show();
         }

@@ -1,6 +1,5 @@
 ﻿using Services;
 using DTOs;
-using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI
 {

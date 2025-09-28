@@ -1,12 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection.Emit;
 
 
 

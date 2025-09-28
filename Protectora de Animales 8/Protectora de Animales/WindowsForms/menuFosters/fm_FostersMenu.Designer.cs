@@ -33,6 +33,7 @@
             btn_menuSightings = new Button();
             btn_menuAdoptions = new Button();
             pb_headerpic = new PictureBox();
+            btn_MovingOut = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerpic).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // btn_menuSightings
             // 
             btn_menuSightings.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            btn_menuSightings.Location = new Point(93, 292);
+            btn_menuSightings.Location = new Point(93, 288);
             btn_menuSightings.Margin = new Padding(4, 3, 4, 3);
             btn_menuSightings.Name = "btn_menuSightings";
             btn_menuSightings.Size = new Size(253, 30);
@@ -97,11 +98,23 @@
             pb_headerpic.TabIndex = 4;
             pb_headerpic.TabStop = false;
             // 
+            // btn_MovingOut
+            // 
+            btn_MovingOut.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btn_MovingOut.Location = new Point(93, 345);
+            btn_MovingOut.Margin = new Padding(4, 3, 4, 3);
+            btn_MovingOut.Name = "btn_MovingOut";
+            btn_MovingOut.Size = new Size(253, 30);
+            btn_MovingOut.TabIndex = 14;
+            btn_MovingOut.Text = "Cambiar de casa";
+            btn_MovingOut.UseVisualStyleBackColor = true;
+            // 
             // fm_FostersMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(455, 415);
+            Controls.Add(btn_MovingOut);
             Controls.Add(btn_menuAnimals);
             Controls.Add(btn_menuSightings);
             Controls.Add(btn_menuAdoptions);
@@ -124,5 +137,6 @@
         public System.Windows.Forms.Button btn_menuAnimals;
         protected System.Windows.Forms.Button btn_menuSightings;
         public System.Windows.Forms.Button btn_menuAdoptions;
+        protected Button btn_MovingOut;
     }
 }
