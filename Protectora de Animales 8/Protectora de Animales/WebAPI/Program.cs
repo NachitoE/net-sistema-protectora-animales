@@ -1,5 +1,4 @@
 using WebAPI;
-using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,4 +29,5 @@ app.MapUserEndpoints();
 app.MapAuthEndpoints();
 app.MapAnimalEndpoints();
 app.MapHouseEndpoints();
+app.MapSightingEndpoints();
 app.Run();

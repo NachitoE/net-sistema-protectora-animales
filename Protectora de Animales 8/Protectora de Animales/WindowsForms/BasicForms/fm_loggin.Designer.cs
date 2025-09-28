@@ -29,6 +29,7 @@
             tb_user = new TextBox();
             llb_singup = new LinkLabel();
             lb_singup = new Label();
+            btn_ReportSighting = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -119,7 +120,6 @@
             tb_user.Name = "tb_user";
             tb_user.Size = new Size(218, 23);
             tb_user.TabIndex = 6;
-            tb_user.TextChanged += tb_user_TextChanged;
             // 
             // llb_singup
             // 
@@ -149,6 +149,22 @@
             lb_singup.TabIndex = 8;
             lb_singup.Text = "¿Nuevo Aquí?";
             // 
+            // btn_ReportSighting
+            // 
+            btn_ReportSighting.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btn_ReportSighting.AutoSize = true;
+            btn_ReportSighting.BackColor = Color.OliveDrab;
+            btn_ReportSighting.FlatStyle = FlatStyle.System;
+            btn_ReportSighting.ForeColor = Color.Ivory;
+            btn_ReportSighting.Location = new Point(289, 427);
+            btn_ReportSighting.Margin = new Padding(4, 3, 4, 3);
+            btn_ReportSighting.Name = "btn_ReportSighting";
+            btn_ReportSighting.Size = new Size(273, 25);
+            btn_ReportSighting.TabIndex = 9;
+            btn_ReportSighting.Text = "Reportar Animal Perdido";
+            btn_ReportSighting.UseVisualStyleBackColor = false;
+            btn_ReportSighting.Click += btn_ReportSighting_Click;
+            // 
             // fm_loggin
             // 
             AcceptButton = btn_loggin;
@@ -156,6 +172,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(854, 477);
+            Controls.Add(btn_ReportSighting);
             Controls.Add(lb_singup);
             Controls.Add(llb_singup);
             Controls.Add(tb_user);
@@ -187,5 +204,6 @@
         private System.Windows.Forms.TextBox tb_user;
         private System.Windows.Forms.LinkLabel llb_singup;
         private System.Windows.Forms.Label lb_singup;
+        private Button btn_ReportSighting;
     }
 }

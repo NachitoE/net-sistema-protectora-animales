@@ -1,6 +1,4 @@
 ﻿using Domain;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 
 namespace Infrastructure.Data

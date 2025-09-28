@@ -1,9 +1,6 @@
-﻿using Infrastructure.API;
-using Newtonsoft.Json;
-using System;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure.API
 {

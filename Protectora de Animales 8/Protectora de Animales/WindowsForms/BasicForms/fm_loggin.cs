@@ -1,6 +1,4 @@
 ﻿using DTOs;
-using System;
-using System.Net.Http;
 using System.Net.Http.Json;
 using WindowsForms.menuAdmin;
 using WindowsForms.menuAdopter;
@@ -107,16 +105,20 @@ namespace WindowsForms.BasicForms
             base.Dispose(disposing);
         }
 
-        private void tb_user_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void llb_singup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
             fm_SignUp signUpForm = new fm_SignUp();
             signUpForm.ShowDialog();
+            this.Show();
+        }
+
+        private void btn_ReportSighting_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fm_SightingForm redir = new fm_SightingForm();
+            redir.ShowDialog();
             this.Show();
         }
     }

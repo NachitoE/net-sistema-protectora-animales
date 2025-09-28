@@ -1,38 +1,63 @@
 ﻿using System;
 
 namespace Domain
-{
+{ 
     public class Sighting
     {
+        #region Fields/Properties
         private string _sightingId;
         private string _sightingAddressName;
-        private int _sightingAddressNumber;
+        private string _sightingAddressNumber;
         private DateTime _sightingDateTime;
-        private string _animalId;
+        private string _sightingDescription;
+        private SightingState _sightingState; 
+
         public string Id
         {
-            get { return _sightingId; }
-            set { _sightingId = value; }
+            get => _sightingId;
+            set => _sightingId = value;
         }
         public string SightingAddressName
         {
-            get { return _sightingAddressName; }
-            set { _sightingAddressName = value; }
+            get => _sightingAddressName; 
+            set => _sightingAddressName = value;
         }
-        public int SightingAddressNumber
+        public string SightingAddressNumber
         {
-            get { return _sightingAddressNumber; }
-            set { _sightingAddressNumber = value; }
+            get => _sightingAddressNumber;
+            set => _sightingAddressNumber = value; 
         }
         public DateTime SightingDateTime
         {
-            get { return _sightingDateTime; }
-            set { _sightingDateTime = value; }
+            get => _sightingDateTime;
+            set => _sightingDateTime = value; 
         }
-        public string AnimalId
+
+        public string SightingDescription
         {
-            get { return _animalId; }
-            set { _animalId = value; }
+            get => _sightingDescription; 
+            set => _sightingDescription = value ;
+        }
+        public SightingState Sightingstate
+        {
+            get => _sightingState; 
+            set => _sightingState = value;
+        }
+        #endregion
+        public Sighting() { }
+        public Sighting(string id, string Adressname, string Adressnumber, DateTime Sightingdate, string Description, SightingState state= SightingState.Nuevo)
+        {
+            _sightingId = id;
+            _sightingAddressName = Adressname;
+            _sightingAddressNumber = Adressnumber;
+            _sightingDateTime = Sightingdate;
+            _sightingDescription = Description;
+            _sightingState = state;
+        }
+
+        public enum SightingState
+        {
+            Nuevo, Atendido, Eliminado
         }
     }
 }
