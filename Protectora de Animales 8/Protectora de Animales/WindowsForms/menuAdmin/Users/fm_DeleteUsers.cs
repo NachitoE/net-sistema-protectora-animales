@@ -34,7 +34,7 @@ namespace WindowsForms.menuAdmin.Users
             dgv_User.DataSource = filteredUserList;
 
 
-            if (filteredUserList.Count > 0)
+            if (filteredUserList.Count > 1)
             {
                 Console.Error.WriteLine("Filtered user list by username having more than one user with the same username");
             }
