@@ -65,6 +65,25 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
+            app.MapPut("/animals/{id}", (string id, AnimalDTO dto) =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    AnimalDTO? animalDTO = animalService.Update(dto);
+                    if (animalDTO == null) throw new ArgumentException("No se pudo modificar el animal");
+                    return Results.Ok(animalDTO);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("ModifyAnimal")
+                .Produces<AnimalDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
             app.MapDelete("/animals/{id}", (string id) =>
             {
                 AnimalsService animalService = new AnimalsService();

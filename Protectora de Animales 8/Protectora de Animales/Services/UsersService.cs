@@ -3,6 +3,7 @@ using DTOs;
 using DTOs.User;
 using Helpers;
 using Infrastructure.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Services
 {
@@ -138,11 +139,12 @@ namespace Services
             User? user = userRepository.Get(id);
             if (user != null)
             {
-                user.Name = userDTO.Name;
-                user.SurName = userDTO.SurName;
-                user.Dni = userDTO.DNI;
-                user.UserType = EnumConversion.StringToUserType(userDTO.UserType);
-                user.UserName = userDTO.UserName;
+                user.Name = userDTO.Name.IsNullOrEmpty() ? user.Name : userDTO.Name;
+                user.SurName = userDTO.SurName.IsNullOrEmpty() ? user.SurName : userDTO.SurName;
+                user.Dni = userDTO.DNI.IsNullOrEmpty() ? user.Dni : userDTO.DNI;
+                user.UserType = string.IsNullOrEmpty(userDTO.UserType) ? user.UserType : EnumConversion.StringToUserType(userDTO.UserType);
+                user.UserName = userDTO.UserName.IsNullOrEmpty() ? user.UserName : userDTO.UserName;
+                
                 userRepository.Update(user);
                 return user.ToDTO();
             }

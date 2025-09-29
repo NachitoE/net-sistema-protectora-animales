@@ -45,8 +45,8 @@ namespace WindowsForms.menuAdmin.Animals
         private void btn_AnimalModify_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ///menuredir = new fm_AnimalModify();
-            /// menuredir.Show();
+            var menuredir = new fm_ModifyAnimals();
+            menuredir.ShowDialog();
             this.Show();
 
         }

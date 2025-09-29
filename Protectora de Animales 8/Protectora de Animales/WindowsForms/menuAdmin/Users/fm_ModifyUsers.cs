@@ -77,8 +77,12 @@ namespace WindowsForms.menuAdmin.Users
                 {
                     UserDTO userToModify = users[0];
                     UserDTOClient userClient = ApiClientsFactory.UserClient();
-                    await userClient.PutAsync(userToModify.Id, userToModify);
-
+                    var putResult = await userClient.PutAsync(userToModify.Id, userToModify);
+                    if (!putResult.Success)
+                    {
+                        MessageBox.Show(putResult.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     MessageBox.Show("Usuario modificado correctamente.", "Éxito");
                 }
             }
