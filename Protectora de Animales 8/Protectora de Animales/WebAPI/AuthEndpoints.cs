@@ -35,17 +35,17 @@ namespace WebAPI
             app.MapPost("/auth/register", (UserRegisterRequestDTO registerReqDTO) =>
             {
                 AuthService authService = new AuthService();
-                var result = authService.Register(registerReqDTO); // devuelve UserRegisterResponseDTO
+                var result = authService.Register(registerReqDTO);
 
                 if (!result.Success)
-                    return Results.BadRequest(result);
+                    return Results.BadRequest(new { error = result.Message });
 
                 return Results.Ok(result);
             })
-   .WithName("Register")
-   .Produces<UserRegisterResponseDTO>(StatusCodes.Status200OK)
-   .Produces<UserRegisterResponseDTO>(StatusCodes.Status400BadRequest)
-   .WithOpenApi();
+                .WithName("Register")
+                .Produces<UserRegisterResponseDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
         }
 
     }
