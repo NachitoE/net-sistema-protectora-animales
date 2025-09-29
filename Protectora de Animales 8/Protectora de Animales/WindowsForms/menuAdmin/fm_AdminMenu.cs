@@ -60,5 +60,13 @@ namespace WindowsForms.menuAdmin
             menuredir.ShowDialog();
             this.Show();
         }
+
+        private void btn_FosterHouses_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            //var menuredir = new fm_AdminUsersMenu();
+            //menuredir.ShowDialog();
+            this.Show();
+        }
     }
 }

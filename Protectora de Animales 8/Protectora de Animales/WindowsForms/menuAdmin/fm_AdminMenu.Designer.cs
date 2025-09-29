@@ -119,6 +119,7 @@
             btn_FosterHouses.TabIndex = 7;
             btn_FosterHouses.Text = "Casas";
             btn_FosterHouses.UseVisualStyleBackColor = true;
+            btn_FosterHouses.Click += btn_FosterHouses_Click;
             // 
             // fm_AdminMenu
             // 
@@ -133,6 +134,7 @@
             Controls.Add(btn_menuAdoptions);
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerPic);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "fm_AdminMenu";
             Text = "Administrador";
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).EndInit();
