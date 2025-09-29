@@ -157,8 +157,45 @@ namespace WebAPI
                 .Produces<AnimalDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
-        }
 
+            app.MapGet("/users/{id}/remaining-capacity", (string id) =>
+            {
+                try
+                {
+                    UsersService usersService = new UsersService();
+                    var response = usersService.GetUserRemainingCapacity(id);
+                    if(!response.Success) throw new ArgumentException(response.Message ?? "No se pudo obtener la capacidad restante del usuario");
+                    return Results.Ok(response)
+;                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("Conseguir cuantos animales puede almacenar el usuario")
+                .Produces<AnimalDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
+            app.MapPut("/users/{id}", (string id, UserDTO dto) =>
+            {
+                try
+                {
+                    UsersService userService = new UsersService();
+                    UserDTO? userDTO = userService.ModifyUser(id, dto);
+                    if(userDTO == null) throw new ArgumentException("No se pudo modificar el usuario");
+                    return Results.Ok(userDTO);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("UpdateUser")
+                .Produces<UserDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+        }
 
     }
 }

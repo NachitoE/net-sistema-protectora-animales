@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using DTOs.User;
 using Helpers;
 using Infrastructure.Data;
 
@@ -69,33 +70,84 @@ namespace Services
             var availableUsers = GetAll()
                 .Where(u => (u.UserType == EnumConversion.UserTypeToString(UserType.Voluntario)
                             || u.UserType == EnumConversion.UserTypeToString(UserType.Transito)) &&
-                            GetUserRemainingCapacity(u) > 0)
+                            GetUserRemainingCapacity(u).RemainingCapacity > 0)
                 .ToList();
 
             return availableUsers;
         }
         
-        public int GetUserRemainingCapacity(UserDTO userDTO)
+        public UserRemainingCapacityResponseDTO GetUserRemainingCapacity(UserDTO userDTO)
         {
             HousesService housesService = new HousesService();
             AnimalsService animalsService = new AnimalsService();
             if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Voluntario))
             {
                 int userAnimalsCount = new AnimalsService().GetAnimalsBelongingToUser(userDTO.Id).Count;
-                return User.MAX_CAPACITY_VOLUNTARIOS - userAnimalsCount;
+                return new UserRemainingCapacityResponseDTO()
+                {
+                    RemainingCapacity = User.MAX_CAPACITY_VOLUNTARIOS - userAnimalsCount,
+                    User = userDTO,
+                    Success = true
+                };
             }
             else if (userDTO.UserType == EnumConversion.UserTypeToString(UserType.Transito))
             {
                 var house = housesService.GetHouseBelongingToUser(userDTO.Id);
                 if (house == null)
-                    return 0; // No house found for the user
+                    return new UserRemainingCapacityResponseDTO()
+                    {
+                        RemainingCapacity = 0,
+                        User = userDTO,
+                        Success = false,
+                        Message = "El usuario no tiene una casa asignada"
+                    };
 
-                return house.Capacity -
-                    animalsService.GetAnimalsBelongingToUser(userDTO.Id).Count;
+                return new UserRemainingCapacityResponseDTO()
+                {
+                    RemainingCapacity = house.Capacity - animalsService.GetAnimalsBelongingToUser(userDTO.Id).Count,
+                    User = userDTO,
+                    Success = true,
+                };
             }
-            return 0;
+            return new UserRemainingCapacityResponseDTO()
+            {
+                RemainingCapacity = 0,
+                User = userDTO,
+                Success = false,
+                Message = "El usuario no es ni voluntario ni tránsito"
+            };
         }
 
+        public UserRemainingCapacityResponseDTO GetUserRemainingCapacity(string userId)
+        {
+            var userDTO = Get(userId);
+            if (userDTO == null)
+                return new UserRemainingCapacityResponseDTO()
+                {
+                    RemainingCapacity = 0,
+                    User = null,
+                    Success = false,
+                    Message = "El usuario no existe"
+                }; ;
+            return GetUserRemainingCapacity(userDTO);
+        }
+
+        public UserDTO? ModifyUser(string id, UserDTO userDTO)
+        {
+            UserRepository userRepository = new UserRepository();
+            User? user = userRepository.Get(id);
+            if (user != null)
+            {
+                user.Name = userDTO.Name;
+                user.SurName = userDTO.SurName;
+                user.Dni = userDTO.DNI;
+                user.UserType = EnumConversion.StringToUserType(userDTO.UserType);
+                user.UserName = userDTO.UserName;
+                userRepository.Update(user);
+                return user.ToDTO();
+            }
+            return null;
+        }
         public void DeactivateUser(string id)
         {
             ChangeUserStatus(id, UserStatus.Inactive);

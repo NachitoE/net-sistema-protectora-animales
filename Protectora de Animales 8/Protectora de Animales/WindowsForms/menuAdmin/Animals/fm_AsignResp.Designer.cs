@@ -28,88 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_users = new System.Windows.Forms.DataGridView();
-            this.dgv_animals = new System.Windows.Forms.DataGridView();
-            this.btn_cancel = new System.Windows.Forms.Button();
-            this.btn_accept = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_users)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_animals)).BeginInit();
-            this.SuspendLayout();
+            dgv_users = new DataGridView();
+            dgv_animals = new DataGridView();
+            btn_cancel = new Button();
+            btn_accept = new Button();
+            ((System.ComponentModel.ISupportInitialize)dgv_users).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_animals).BeginInit();
+            SuspendLayout();
             // 
             // dgv_users
             // 
-            this.dgv_users.AllowUserToAddRows = false;
-            this.dgv_users.AllowUserToDeleteRows = false;
-            this.dgv_users.AllowUserToResizeColumns = false;
-            this.dgv_users.AllowUserToResizeRows = false;
-            this.dgv_users.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_users.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_users.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgv_users.Location = new System.Drawing.Point(12, 12);
-            this.dgv_users.MultiSelect = false;
-            this.dgv_users.Name = "dgv_users";
-            this.dgv_users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_users.Size = new System.Drawing.Size(385, 289);
-            this.dgv_users.TabIndex = 0;
+            dgv_users.AllowUserToAddRows = false;
+            dgv_users.AllowUserToDeleteRows = false;
+            dgv_users.AllowUserToResizeColumns = false;
+            dgv_users.AllowUserToResizeRows = false;
+            dgv_users.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_users.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_users.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgv_users.Location = new Point(14, 14);
+            dgv_users.Margin = new Padding(4, 3, 4, 3);
+            dgv_users.MultiSelect = false;
+            dgv_users.Name = "dgv_users";
+            dgv_users.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_users.Size = new Size(449, 333);
+            dgv_users.TabIndex = 0;
             // 
             // dgv_animals
             // 
-            this.dgv_animals.AllowUserToAddRows = false;
-            this.dgv_animals.AllowUserToDeleteRows = false;
-            this.dgv_animals.AllowUserToResizeColumns = false;
-            this.dgv_animals.AllowUserToResizeRows = false;
-            this.dgv_animals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_animals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_animals.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgv_animals.Location = new System.Drawing.Point(403, 12);
-            this.dgv_animals.MultiSelect = false;
-            this.dgv_animals.Name = "dgv_animals";
-            this.dgv_animals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_animals.Size = new System.Drawing.Size(385, 289);
-            this.dgv_animals.TabIndex = 1;
+            dgv_animals.AllowUserToAddRows = false;
+            dgv_animals.AllowUserToDeleteRows = false;
+            dgv_animals.AllowUserToResizeColumns = false;
+            dgv_animals.AllowUserToResizeRows = false;
+            dgv_animals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_animals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_animals.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgv_animals.Location = new Point(470, 14);
+            dgv_animals.Margin = new Padding(4, 3, 4, 3);
+            dgv_animals.MultiSelect = false;
+            dgv_animals.Name = "dgv_animals";
+            dgv_animals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_animals.Size = new Size(449, 333);
+            dgv_animals.TabIndex = 1;
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(713, 415);
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_cancel.TabIndex = 2;
-            this.btn_cancel.Text = "Cancelar";
-            this.btn_cancel.UseVisualStyleBackColor = true;
+            btn_cancel.Location = new Point(832, 479);
+            btn_cancel.Margin = new Padding(4, 3, 4, 3);
+            btn_cancel.Name = "btn_cancel";
+            btn_cancel.Size = new Size(88, 27);
+            btn_cancel.TabIndex = 2;
+            btn_cancel.Text = "Cancelar";
+            btn_cancel.UseVisualStyleBackColor = true;
             // 
             // btn_accept
             // 
-            this.btn_accept.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btn_accept.ForeColor = System.Drawing.Color.Black;
-            this.btn_accept.Location = new System.Drawing.Point(622, 415);
-            this.btn_accept.Name = "btn_accept";
-            this.btn_accept.Size = new System.Drawing.Size(75, 23);
-            this.btn_accept.TabIndex = 3;
-            this.btn_accept.Text = "Aceptar";
-            this.btn_accept.UseVisualStyleBackColor = false;
+            btn_accept.BackColor = SystemColors.ButtonFace;
+            btn_accept.ForeColor = Color.Black;
+            btn_accept.Location = new Point(726, 479);
+            btn_accept.Margin = new Padding(4, 3, 4, 3);
+            btn_accept.Name = "btn_accept";
+            btn_accept.Size = new Size(88, 27);
+            btn_accept.TabIndex = 3;
+            btn_accept.Text = "Aceptar";
+            btn_accept.UseVisualStyleBackColor = false;
+            btn_accept.Click += btn_accept_Click;
             // 
             // fm_AsignResp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_accept);
-            this.Controls.Add(this.btn_cancel);
-            this.Controls.Add(this.dgv_animals);
-            this.Controls.Add(this.dgv_users);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "fm_AsignResp";
-            this.Text = "ASIGNAR CUIDADOR";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_users)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_animals)).EndInit();
-            this.ResumeLayout(false);
-        
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(933, 519);
+            Controls.Add(btn_accept);
+            Controls.Add(btn_cancel);
+            Controls.Add(dgv_animals);
+            Controls.Add(dgv_users);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "fm_AsignResp";
+            Text = "ASIGNAR CUIDADOR";
+            ((System.ComponentModel.ISupportInitialize)dgv_users).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_animals).EndInit();
+            ResumeLayout(false);
+
         }
 
         #endregion
 
-                private System.Windows.Forms.DataGridView dgv_users;
+        private System.Windows.Forms.DataGridView dgv_users;
         private System.Windows.Forms.DataGridView dgv_animals;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_accept;

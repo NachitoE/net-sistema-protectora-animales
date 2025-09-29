@@ -128,7 +128,7 @@ namespace Services
                     Success = false
                 };
             }
-            int currentAnimalsAmountInHouse = house.Capacity - userService.GetUserRemainingCapacity(houseUserDTO);
+            int currentAnimalsAmountInHouse = house.Capacity - userService.GetUserRemainingCapacity(houseUserDTO).RemainingCapacity;
             if (changeCapacityDTO.NewCapacity < currentAnimalsAmountInHouse)
             {
                 return new HouseBaseResponseDTO()

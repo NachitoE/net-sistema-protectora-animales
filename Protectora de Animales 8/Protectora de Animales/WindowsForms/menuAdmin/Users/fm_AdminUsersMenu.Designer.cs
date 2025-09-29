@@ -28,89 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lb_MenuTitle = new System.Windows.Forms.Label();
-            this.pb_headerpic = new System.Windows.Forms.PictureBox();
-            this.btn_ModifyUsers = new System.Windows.Forms.Button();
-            this.btn_DeleteUsers = new System.Windows.Forms.Button();
-            this.btn_ShowAllUsers = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).BeginInit();
-            this.SuspendLayout();
+            lb_MenuTitle = new Label();
+            pb_headerpic = new PictureBox();
+            btn_ModifyUsers = new Button();
+            btn_DeleteUsers = new Button();
+            btn_ShowAllUsers = new Button();
+            ((System.ComponentModel.ISupportInitialize)pb_headerpic).BeginInit();
+            SuspendLayout();
             // 
             // lb_MenuTitle
             // 
-            this.lb_MenuTitle.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.lb_MenuTitle.Font = new System.Drawing.Font("Yu Gothic UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_MenuTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lb_MenuTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lb_MenuTitle.Location = new System.Drawing.Point(-1, 53);
-            this.lb_MenuTitle.Name = "lb_MenuTitle";
-            this.lb_MenuTitle.Size = new System.Drawing.Size(98, 42);
-            this.lb_MenuTitle.TabIndex = 5;
-            this.lb_MenuTitle.Text = "MENU";
+            lb_MenuTitle.BackColor = Color.DarkOliveGreen;
+            lb_MenuTitle.Font = new Font("Yu Gothic UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lb_MenuTitle.ForeColor = SystemColors.ButtonHighlight;
+            lb_MenuTitle.ImageAlign = ContentAlignment.MiddleRight;
+            lb_MenuTitle.Location = new Point(-1, 61);
+            lb_MenuTitle.Margin = new Padding(4, 0, 4, 0);
+            lb_MenuTitle.Name = "lb_MenuTitle";
+            lb_MenuTitle.Size = new Size(114, 48);
+            lb_MenuTitle.TabIndex = 5;
+            lb_MenuTitle.Text = "MENU";
             // 
             // pb_headerpic
             // 
-            this.pb_headerpic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pb_headerpic.Image = global::WindowsForms.Properties.Resources.Studio_Ghibli__Cattt__;
-            this.pb_headerpic.Location = new System.Drawing.Point(0, 0);
-            this.pb_headerpic.Name = "pb_headerpic";
-            this.pb_headerpic.Size = new System.Drawing.Size(390, 95);
-            this.pb_headerpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pb_headerpic.TabIndex = 4;
-            this.pb_headerpic.TabStop = false;
+            pb_headerpic.Dock = DockStyle.Top;
+            pb_headerpic.Image = Properties.Resources.Studio_Ghibli__Cattt__;
+            pb_headerpic.Location = new Point(0, 0);
+            pb_headerpic.Margin = new Padding(4, 3, 4, 3);
+            pb_headerpic.Name = "pb_headerpic";
+            pb_headerpic.Size = new Size(455, 110);
+            pb_headerpic.SizeMode = PictureBoxSizeMode.CenterImage;
+            pb_headerpic.TabIndex = 4;
+            pb_headerpic.TabStop = false;
             // 
             // btn_ModifyUsers
             // 
-            this.btn_ModifyUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ModifyUsers.Location = new System.Drawing.Point(87, 198);
-            this.btn_ModifyUsers.Name = "btn_ModifyUsers";
-            this.btn_ModifyUsers.Size = new System.Drawing.Size(217, 26);
-            this.btn_ModifyUsers.TabIndex = 13;
-            this.btn_ModifyUsers.Text = "Modificar Usuarios";
-            this.btn_ModifyUsers.UseVisualStyleBackColor = true;
+            btn_ModifyUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btn_ModifyUsers.Location = new Point(102, 228);
+            btn_ModifyUsers.Margin = new Padding(4, 3, 4, 3);
+            btn_ModifyUsers.Name = "btn_ModifyUsers";
+            btn_ModifyUsers.Size = new Size(253, 30);
+            btn_ModifyUsers.TabIndex = 13;
+            btn_ModifyUsers.Text = "Modificar Usuarios";
+            btn_ModifyUsers.UseVisualStyleBackColor = true;
+            btn_ModifyUsers.Click += btn_ModifyUsers_Click;
             // 
             // btn_DeleteUsers
             // 
-            this.btn_DeleteUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_DeleteUsers.Location = new System.Drawing.Point(87, 150);
-            this.btn_DeleteUsers.Name = "btn_DeleteUsers";
-            this.btn_DeleteUsers.Size = new System.Drawing.Size(217, 26);
-            this.btn_DeleteUsers.TabIndex = 12;
-            this.btn_DeleteUsers.Text = "Eliminar Usuarios";
-            this.btn_DeleteUsers.UseVisualStyleBackColor = true;
+            btn_DeleteUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btn_DeleteUsers.Location = new Point(102, 173);
+            btn_DeleteUsers.Margin = new Padding(4, 3, 4, 3);
+            btn_DeleteUsers.Name = "btn_DeleteUsers";
+            btn_DeleteUsers.Size = new Size(253, 30);
+            btn_DeleteUsers.TabIndex = 12;
+            btn_DeleteUsers.Text = "Eliminar Usuarios";
+            btn_DeleteUsers.UseVisualStyleBackColor = true;
+            btn_DeleteUsers.Click += btn_DeleteUsers_Click;
             // 
             // btn_ShowAllUsers
             // 
-            this.btn_ShowAllUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ShowAllUsers.Location = new System.Drawing.Point(87, 252);
-            this.btn_ShowAllUsers.Name = "btn_ShowAllUsers";
-            this.btn_ShowAllUsers.Size = new System.Drawing.Size(217, 26);
-            this.btn_ShowAllUsers.TabIndex = 11;
-            this.btn_ShowAllUsers.Text = "Ver Usuarios";
-            this.btn_ShowAllUsers.UseVisualStyleBackColor = true;
+            btn_ShowAllUsers.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btn_ShowAllUsers.Location = new Point(102, 291);
+            btn_ShowAllUsers.Margin = new Padding(4, 3, 4, 3);
+            btn_ShowAllUsers.Name = "btn_ShowAllUsers";
+            btn_ShowAllUsers.Size = new Size(253, 30);
+            btn_ShowAllUsers.TabIndex = 11;
+            btn_ShowAllUsers.Text = "Ver Usuarios";
+            btn_ShowAllUsers.UseVisualStyleBackColor = true;
+            btn_ShowAllUsers.Click += btn_ShowAllUsers_Click;
             // 
             // fm_AdminUsersMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 360);
-            this.Controls.Add(this.btn_ModifyUsers);
-            this.Controls.Add(this.btn_DeleteUsers);
-            this.Controls.Add(this.btn_ShowAllUsers);
-            this.Controls.Add(this.lb_MenuTitle);
-            this.Controls.Add(this.pb_headerpic);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "fm_AdminUsersMenu";
-            this.Text = "Usuarios";
-            ((System.ComponentModel.ISupportInitialize)(this.pb_headerpic)).EndInit();
-            this.ResumeLayout(false);
-        
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(455, 415);
+            Controls.Add(btn_ModifyUsers);
+            Controls.Add(btn_DeleteUsers);
+            Controls.Add(btn_ShowAllUsers);
+            Controls.Add(lb_MenuTitle);
+            Controls.Add(pb_headerpic);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            Name = "fm_AdminUsersMenu";
+            Text = "Usuarios";
+            ((System.ComponentModel.ISupportInitialize)pb_headerpic).EndInit();
+            ResumeLayout(false);
+
         }
 
         #endregion
 
-                protected internal System.Windows.Forms.Label lb_MenuTitle;
+        protected internal System.Windows.Forms.Label lb_MenuTitle;
         private System.Windows.Forms.PictureBox pb_headerpic;
         public System.Windows.Forms.Button btn_ModifyUsers;
         protected System.Windows.Forms.Button btn_DeleteUsers;

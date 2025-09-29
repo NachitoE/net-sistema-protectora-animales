@@ -1,14 +1,15 @@
-﻿using System;
+﻿using DTOs;
+using System;
 
 namespace Infrastructure.API.DTOs_CRUDs
 {
-    public class HouseDTOClient : BaseDTOClient<HouseDTOClient>
+    public class HouseDTOClient : BaseDTOClient<HouseDTO>
     {
         protected override string _endpoint => "houses";
         public HouseDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient)
         {
         }
-        public override Task<HouseDTOClient> PostAsync(object data)
+        public override Task<HouseDTO> PostAsync(object data)
         {
             return base.PostAsync(data);
         }

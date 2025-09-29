@@ -20,8 +20,8 @@ namespace WindowsForms.menuAdmin.Animals
         private void btn_asignResp_Click(object sender, EventArgs e)
         {
             this.Hide();
-            /*var menuredir = new fm_AsignResp();
-            menuredir.Show();*/
+            var menuredir = new fm_AsignResp();
+            menuredir.Show();
             this.Show();
         }
 
@@ -45,7 +45,7 @@ namespace WindowsForms.menuAdmin.Animals
         private void btn_AnimalModify_Click(object sender, EventArgs e)
         {
             this.Hide();
-            /// menuredir = new fm_AnimalModify();
+            ///menuredir = new fm_AnimalModify();
             /// menuredir.Show();
             this.Show();
 
