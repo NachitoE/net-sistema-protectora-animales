@@ -119,7 +119,7 @@ namespace WebAPI
             app.MapPut("/animals/{id}/assign-responsible", (string id, [FromBody] string userId) =>
             {
                 AnimalsService animalService = new AnimalsService();
-                AnimalDTO? assigned = animalService.AssignResponsible(id ,userId);
+                AnimalDTO? assigned = animalService.AssignResponsible(id, userId);
                 if (assigned != null)
                     return Results.Ok(assigned);
                 else
@@ -129,6 +129,26 @@ namespace WebAPI
                 .Produces(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound)
                 .WithOpenApi();
+
+            app.MapPost("/animals/search", (AnimalDTO criteria) =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    List<AnimalDTO> animalsDTOs = animalService.GetByCriteria(criteria);
+                    return Results.Ok(animalsDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("Search Animals")
+                .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
         }
+
     }
 }

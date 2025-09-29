@@ -112,21 +112,107 @@ namespace Services
         public AnimalDTO? Update(AnimalDTO animalDTO)
         {
             AnimalRepository animalRepository = new AnimalRepository();
+            Animal? existingAnimal = animalRepository.Get(animalDTO.Id);
+            
+            if (existingAnimal == null)
+            {
+                return null; // Animal no encontrado
+            }
 
-            Animal animalToUpdate = new Animal
-            (
-                animalDTO.Id,
-                animalDTO.Name,
-                EnumConversion.StringToSpecies(animalDTO.Species),
-                animalDTO.BirthDate,
-                animalDTO.UserId,
-                EnumConversion.StringToAnimalState(animalDTO.AnimalState),
-                animalDTO.Description
-            );
+            // Validaciones de datos
+            if (!IsValidAnimalData(animalDTO, existingAnimal))
+            {
+                return null;
+            }
 
-            bool updated = animalRepository.Update(animalToUpdate);
-            return updated ? animalDTO : null;
+            // Actualización parcial - solo cambiar campos que no están vacíos
+            existingAnimal.Name = string.IsNullOrEmpty(animalDTO.Name) ? existingAnimal.Name : animalDTO.Name;
+            existingAnimal.Description = string.IsNullOrEmpty(animalDTO.Description) ? existingAnimal.Description : animalDTO.Description;
+            
+            // Para BirthDate, verificar si es una fecha válida diferente del valor por defecto
+            if (animalDTO.BirthDate != default(DateTime) && animalDTO.BirthDate != existingAnimal.BirthDate)
+            {
+                existingAnimal.BirthDate = animalDTO.BirthDate;
+            }
+
+            // Species y AnimalState solo si no están vacíos y son válidos
+            if (!string.IsNullOrEmpty(animalDTO.Species))
+            {
+                existingAnimal.Species = EnumConversion.StringToSpecies(animalDTO.Species);
+            }
+            
+            if (!string.IsNullOrEmpty(animalDTO.AnimalState))
+            {
+                existingAnimal.AnimalState = EnumConversion.StringToAnimalState(animalDTO.AnimalState);
+            }
+
+            // UserId puede ser null/vacío intencionalmente
+            if (animalDTO.UserId != null)
+            {
+                existingAnimal.UserId = string.IsNullOrEmpty(animalDTO.UserId) ? null : animalDTO.UserId;
+            }
+
+            bool updated = animalRepository.Update(existingAnimal);
+            return updated ? existingAnimal.ToDTO() : null;
         }
+
+        private bool IsValidAnimalData(AnimalDTO animalDTO, Animal existingAnimal)
+        {
+            // Validar ID
+            if (string.IsNullOrEmpty(animalDTO.Id))
+            {
+                return false;
+            }
+
+            // Validar nombre si se está proporcionando
+            if (!string.IsNullOrEmpty(animalDTO.Name) && animalDTO.Name.Trim().Length == 0)
+            {
+                return false;
+            }
+
+            // Validar fecha de nacimiento si se está proporcionando
+            if (animalDTO.BirthDate != default(DateTime))
+            {
+                // No puede ser fecha futura
+                if (animalDTO.BirthDate > DateTime.Now)
+                {
+                    return false;
+                }
+                
+                // No puede ser muy antigua (antes de 1980)
+                if (animalDTO.BirthDate < new DateTime(1980, 1, 1))
+                {
+                    return false;
+                }
+            }
+
+            // Validar especies si se está proporcionando
+            if (!string.IsNullOrEmpty(animalDTO.Species))
+            {
+                if (!Enum.TryParse<Animal.SpeciesEn>(animalDTO.Species, true, out _))
+                {
+                    return false;
+                }
+            }
+
+            // Validar estado del animal si se está proporcionando
+            if (!string.IsNullOrEmpty(animalDTO.AnimalState))
+            {
+                if (!Enum.TryParse<Animal.AnimalStateEn>(animalDTO.AnimalState, true, out _))
+                {
+                    return false;
+                }
+            }
+
+            // Validar descripción si se está proporcionando
+            if (!string.IsNullOrEmpty(animalDTO.Description) && animalDTO.Description.Trim().Length == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public void SetAnimalAsAvailable(string id)
         {
             var animalRepository = new AnimalRepository();
@@ -152,6 +238,20 @@ namespace Services
                 return animal.ToDTO();
             }
             return null;
+        }
+
+        public List<AnimalDTO> GetByCriteria(AnimalDTO criteria)
+        {
+            AnimalRepository animalRepository = new AnimalRepository();
+            List<Animal> filteredAnimals = animalRepository.FilterByCriteria(
+                criteria.Name,
+                criteria.Species,
+                criteria.Description,
+                criteria.AnimalState,
+                criteria.UserId
+                );
+
+            return filteredAnimals.Select(fUser => fUser.ToDTO()).ToList();
         }
     }
 }

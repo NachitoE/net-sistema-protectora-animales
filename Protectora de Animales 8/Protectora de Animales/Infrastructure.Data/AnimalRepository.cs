@@ -1,9 +1,4 @@
 ﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
@@ -65,6 +60,30 @@ namespace Infrastructure.Data
                 return true;
             }
             return false;
+        }
+
+        public List<Animal> FilterByCriteria(string? name = null, string? species = null,
+            string? description = null, string? animalState = null, string? userId = null)
+        {
+            DBContext context = CreateContext();
+            IQueryable<Animal> query = context.Animals;
+
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(a => a.Name.Contains(name));
+
+            if (!string.IsNullOrEmpty(species) && Enum.TryParse<Animal.SpeciesEn>(species, out var speciesEnum))
+                query = query.Where(a => a.Species == speciesEnum);
+
+            if (!string.IsNullOrEmpty(description))
+                query = query.Where(a => a.Description.Contains(description));
+
+            if (!string.IsNullOrEmpty(animalState) && Enum.TryParse<Animal.AnimalStateEn>(animalState, out var stateEnum))
+                query = query.Where(a => a.AnimalState == stateEnum);
+
+            if (!string.IsNullOrEmpty(userId))
+                query = query.Where(a => a.UserId == userId);
+
+            return query.ToList();
         }
     }
 }
