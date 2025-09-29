@@ -21,7 +21,7 @@ namespace WindowsForms.menuAdmin.Animals
         {
             this.Hide();
             var menuredir = new fm_AsignResp();
-            menuredir.Show();
+            menuredir.ShowDialog();
             this.Show();
         }
 
@@ -29,7 +29,7 @@ namespace WindowsForms.menuAdmin.Animals
         {
             this.Hide();
             var menuredir = new fm_AddNewAnimal();
-            menuredir.Show();
+            menuredir.ShowDialog();
             this.Show();
         }
 
@@ -37,7 +37,7 @@ namespace WindowsForms.menuAdmin.Animals
         {
             this.Hide();
             var menuredir = new fm_ShowAllAnimals();
-            menuredir.Show();
+            menuredir.ShowDialog();
             this.Show();
 
         }

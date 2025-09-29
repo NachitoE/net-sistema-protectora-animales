@@ -95,6 +95,20 @@ namespace WebAPI
                 .WithName("AvailableAnimals")
                 .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
+
+            app.MapPut("/animals/{id}/assign-responsible", (string id, string userId) =>
+            {
+                AnimalsService animalService = new AnimalsService();
+                AnimalDTO? assigned = animalService.AssignResponsible(id ,userId);
+                if (assigned != null)
+                    return Results.Ok(assigned);
+                else
+                    return Results.NotFound();
+            })
+                .WithName("Assign Responsible")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .WithOpenApi();
         }
     }
 }

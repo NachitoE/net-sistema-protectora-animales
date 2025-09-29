@@ -17,6 +17,7 @@ namespace Infrastructure.Data
         public void Add(Animal a)
         {
             DBContext context = CreateContext();
+            a.UserId = null; // hotfix para evitar crashes, no deberia estar asignado a ningun user pero con "" tira error
             context.Animals.Add(a);
             context.SaveChanges();
 

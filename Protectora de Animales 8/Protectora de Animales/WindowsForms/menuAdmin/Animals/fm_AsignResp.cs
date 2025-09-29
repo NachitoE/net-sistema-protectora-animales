@@ -136,10 +136,8 @@ namespace WindowsForms.menuAdmin.Animals
                 MessageBox.Show("Debe estar seleccionado un animal y un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            _selectedTargetAnimal.UserId = _selectedTargetUser.Id;
-            _selectedTargetAnimal.AnimalState = EnumConversion.AnimalStateToString(AnimalStateEn.Adoptado);
             AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient());
-            await animalClient.PostAsync(_selectedTargetAnimal);
+            await animalClient.AssignResponsible(_selectedTargetAnimal.Id, _selectedTargetUser.Id);
             MessageBox.Show($"El animal {_selectedTargetAnimal.Name} ha sido asignado a {_selectedTargetUser.UserName}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }

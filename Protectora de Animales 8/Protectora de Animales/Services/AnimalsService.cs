@@ -138,5 +138,20 @@ namespace Services
                 animalRepository.Update(animal);
             }
         }
+
+        public AnimalDTO? AssignResponsible(string id, string userId)
+        {
+            var animalRepository = new AnimalRepository();
+            // TODO: validar que usuario existe?
+            Animal? animal = animalRepository.Get(id);
+            if (animal != null)
+            {
+                animal.UserId = userId;
+                animal.AnimalState = AnimalStateEn.Adoptado;
+                animalRepository.Update(animal);
+                return animal.ToDTO();
+            }
+            return null;
+        }
     }
 }
