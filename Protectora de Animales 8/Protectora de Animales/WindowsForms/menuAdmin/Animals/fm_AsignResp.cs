@@ -23,16 +23,19 @@ namespace WindowsForms.menuAdmin.Animals
         private async void UserFormLoad(object sender, EventArgs e)
         {
             btn_accept.Enabled = false;
-            UserDTOClient userClient = new UserDTOClient(new APIHttpClient());
-            AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient());
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
             //============ Cargar Usuarios =============
             dgv_users.AutoGenerateColumns = false;
             //tiene q ser una lista de usuarios que sean voluntarios o de tránsito y que tengan capacidad restante
-            List<UserDTO> availableUsersToAdopt = await userClient.GetAvailableToAdoptAsync();
+            ApiResult<List<UserDTO>> availableUsersToAdoptResult = await userClient.GetAvailableToAdoptAsync();
+            List<UserDTO> availableUsersToAdopt = availableUsersToAdoptResult.Data ?? new List<UserDTO>();
+
             Dictionary<UserDTO, int> usersWithRemainingCapacity = new();
             availableUsersToAdopt.ForEach(async u =>
             {
-                int remainingCapacity = await userClient.GetUserRemainingCapacity(u.Id);
+                var remainingCapacityResponse = await userClient.GetUserRemainingCapacity(u.Id);
+                int remainingCapacity = remainingCapacityResponse.Data!.RemainingCapacity;
                 if (remainingCapacity > 0)
                 {
                     usersWithRemainingCapacity.Add(u, remainingCapacity);
@@ -75,8 +78,8 @@ namespace WindowsForms.menuAdmin.Animals
             dgv_users.ClearSelection();
             //============ Cargar Animales =============
             dgv_animals.AutoGenerateColumns = false;
-            List<AnimalDTO> availableAnimals = await animalClient.GetAllAvailableAnimalsAsync();
-
+            ApiResult<List<AnimalDTO>> availableAnimalsResult = await animalClient.GetAllAvailableAnimalsAsync();
+            List<AnimalDTO> availableAnimals = availableAnimalsResult.Data ?? new List<AnimalDTO>();
             dgv_animals.Columns.Add("Name", "Nombre");
             dgv_animals.Columns.Add("Species", "Especie");
             dgv_animals.Columns.Add("BirthDate", "Fecha de Nacimiento");
@@ -136,7 +139,7 @@ namespace WindowsForms.menuAdmin.Animals
                 MessageBox.Show("Debe estar seleccionado un animal y un usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient());
+            AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
             await animalClient.AssignResponsible(_selectedTargetAnimal.Id, _selectedTargetUser.Id);
             MessageBox.Show($"El animal {_selectedTargetAnimal.Name} ha sido asignado a {_selectedTargetUser.UserName}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();

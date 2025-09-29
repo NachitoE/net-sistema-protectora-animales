@@ -9,17 +9,8 @@ namespace Infrastructure.API.DTOs_CRUDs
         public SightingDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient)
         {
         }
-        public override Task<SightingDTO> PostAsync(object data)
-        {
-            return base.PostAsync(data);
-        }
 
-        public Task<List<SightingDTO>> GetAllSightingsAsync()
-        {
-            return GetAllAsync();
-        }
-
-        public Task<SightingDTO> UpdateSighting(string id, string nuevoEstado)
+        public Task<ApiResult<SightingDTO>> UpdateSighting(string id, string nuevoEstado)
         {
             var data = new
             {

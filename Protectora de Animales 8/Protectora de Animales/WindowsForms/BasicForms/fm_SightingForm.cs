@@ -51,9 +51,12 @@ namespace WindowsForms.BasicForms
                 {
                     using var apiClient = new APIHttpClient(ApiBaseUrl);
 
-                    var created = await apiClient.PostAsync<SightingDTO>("sightings", request);
-
-                    MessageBox.Show($"Avistamiento guardado con éxito. ID: {created.Id}");
+                    var createdResult = await apiClient.PostAsync<SightingDTO>("sightings", request);
+                    if(!createdResult.Success)
+                    {
+                        throw new Exception(createdResult.Message);
+                    }
+                    MessageBox.Show($"Avistamiento guardado con éxito. ID: {createdResult.Data.Id}");
 
 
                 }

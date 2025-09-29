@@ -18,8 +18,9 @@ namespace WindowsForms.menuAdopter
         {
             SetupColumns();
             dgv_animals.AutoGenerateColumns = false;
-            AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient());
-            List<AnimalDTO> availableAnimals = await animalClient.GetAllAvailableAnimalsAsync();
+            AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
+            ApiResult<List<AnimalDTO>> availableAnimalsResult = await animalClient.GetAllAvailableAnimalsAsync();
+            var availableAnimals = availableAnimalsResult.Data ?? new List<AnimalDTO>();
             _availableAnimals = availableAnimals;
             dgv_animals.DataSource = availableAnimals;
         }

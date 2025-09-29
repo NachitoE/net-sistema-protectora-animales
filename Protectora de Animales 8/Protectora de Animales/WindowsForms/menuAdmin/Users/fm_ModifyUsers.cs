@@ -39,13 +39,13 @@ namespace WindowsForms.menuAdmin.Users
 
         private async void btn_AcceptUsn_Click(object sender, EventArgs e)
         {
-            UserDTOClient userClient = new UserDTOClient(new APIHttpClient());
-            List<UserDTO> filteredUserList = await userClient.SearchAsync(
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            ApiResult<List<UserDTO>> filteredUserListResult = await userClient.SearchAsync(
                 new UserDTO()
                 {
                     UserName = tb_getUsername.Text
                 });
-
+            var filteredUserList = filteredUserListResult.Data ?? new List<UserDTO>();
             if (filteredUserList.Count > 0)
             {
                 Console.Error.WriteLine("Filtered user list by username having more than one user with the same username");
@@ -76,8 +76,8 @@ namespace WindowsForms.menuAdmin.Users
                 if (dgv_User.DataSource is List<UserDTO> users && users.Count > 0)
                 {
                     UserDTO userToModify = users[0];
-
-                    await new UserDTOClient(new APIHttpClient()).PutAsync(userToModify.Id, userToModify);
+                    UserDTOClient userClient = ApiClientsFactory.UserClient();
+                    await userClient.PutAsync(userToModify.Id, userToModify);
 
                     MessageBox.Show("Usuario modificado correctamente.", "Éxito");
                 }

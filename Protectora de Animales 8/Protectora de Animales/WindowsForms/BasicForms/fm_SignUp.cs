@@ -38,7 +38,7 @@ namespace WindowsForms.BasicForms
             }
 
             var userType = cb_UserType.Text;
-            AuthClient authClient = new AuthClient(new APIHttpClient());
+            AuthClient authClient = ApiClientsFactory.AuthClient();
             if (userType == "Transito")
             {
                 // Abrimos form de la casa
@@ -60,7 +60,7 @@ namespace WindowsForms.BasicForms
                     UserName = tb_SUUsername.Text,
                     Password = tb_SUPassword.Text,
                 };
-                UserRegisterResponseDTO userRegisterResponse = await authClient.RegisterAsync(userRegDTO);
+                ApiResult<UserRegisterResponseDTO> userRegisterResponse = await authClient.RegisterAsync(userRegDTO);
 
                 if(!userRegisterResponse.Success)
                 {
@@ -68,17 +68,16 @@ namespace WindowsForms.BasicForms
                     return;
                 }
                 //registrar casa porque usuario fue un éxito
-                HouseDTOClient houseClient = new HouseDTOClient(new APIHttpClient());
+                HouseDTOClient houseClient = ApiClientsFactory.HouseClient();
                 var houseDto = houseForm.GetHouseRegDTO();
-                houseDto.UserId = userRegisterResponse.UserId;
+                houseDto.UserId = userRegisterResponse.Data.UserId;
 
                 var houseResponse = await houseClient.PostAsync(houseDto);
 
-                if (houseResponse == null)
+                if (!houseResponse.Success)
                 {
-                    // TODO: Mejor error handling
                     //MessageBox.Show(response.Message);
-                    MessageBox.Show("Error al cargar la casa.");
+                    MessageBox.Show(houseResponse.Message);
                     return;
                 }
 

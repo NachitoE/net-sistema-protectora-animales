@@ -19,9 +19,10 @@ namespace WindowsForms.BasicForms
             SetupColumns();
             dgv_Sightings.AutoGenerateColumns = false;
 
-            SightingDTOClient sightingClient = new SightingDTOClient(new APIHttpClient());
-            List<SightingDTO> sightings = await sightingClient.GetAllSightingsAsync();
+            SightingDTOClient sightingClient = ApiClientsFactory.SightingClient();
 
+            var sightingResult = await sightingClient.GetAllAsync();
+            List<SightingDTO> sightings = sightingResult.Data;
             _sightings = sightings;
             dgv_Sightings.DataSource = sightings;
         }
@@ -85,20 +86,21 @@ namespace WindowsForms.BasicForms
             if (confirm == DialogResult.No) return;
 
             sighting.SightingState = "Eliminado";
-            SightingDTOClient sightingClient = new SightingDTOClient(new APIHttpClient());
+            SightingDTOClient sightingClient = ApiClientsFactory.SightingClient();
             await sightingClient.UpdateSighting(sighting.Id, "Eliminado");
 
             MessageBox.Show("El avistamiento ha sido eliminado correctamente.",
                             "Eliminado",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
-
-            _sightings = await sightingClient.GetAllSightingsAsync();
+            var sightingResult = await sightingClient.GetAllAsync();
+            if(sightingResult.Success && sightingResult.Data != null)
+                _sightings = sightingResult.Data;
             dgv_Sightings.DataSource = _sightings;
         }
 
 
-        private async  void btn_ConfirmSighting_Click(object sender, EventArgs e)
+        private async void btn_ConfirmSighting_Click(object sender, EventArgs e)
         {
             if (dgv_Sightings.CurrentRow == null) return;
 
@@ -113,12 +115,23 @@ namespace WindowsForms.BasicForms
                 return;
             }
             selected.SightingState = "Atendido";
-            using var apiClient = new APIHttpClient("https://localhost:7056/");
-            var updated = await apiClient.PutAsync<SightingDTO>($"sightings/{selected.Id}", selected);
-            MessageBox.Show("El avistamiento ha sido marcado como atendido.",
-                            "Confirmación",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+            var apiClient = ApiClientsFactory.SightingClient();
+            var result = await apiClient.PutAsync(selected.Id, selected);
+            if (result.Success)
+            {
+                MessageBox.Show("El avistamiento ha sido marcado como atendido.",
+                                            "Confirmación",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Error al actualizar el avistamiento: {result.Message}",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+
             SightingMenuLoadAsync(null, null);
         }
     

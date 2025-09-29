@@ -9,9 +9,5 @@ namespace Infrastructure.API.DTOs_CRUDs
         public HouseDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient)
         {
         }
-        public override Task<HouseDTO> PostAsync(object data)
-        {
-            return base.PostAsync(data);
-        }
     }
 }

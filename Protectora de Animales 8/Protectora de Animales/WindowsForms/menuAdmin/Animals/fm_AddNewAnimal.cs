@@ -25,7 +25,7 @@ namespace WindowsForms.menuAdmin.Animals
 
             if (valid)
             {
-                AnimalDTOClient animalClient = new AnimalDTOClient(new APIHttpClient()); 
+                AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
                 string Name = tb_AnimalName.Text;
                 SpeciesEn Species = EnumConversion.StringToSpecies(cb_AnimalSpc.Text);
 

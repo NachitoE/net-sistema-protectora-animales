@@ -20,7 +20,9 @@ namespace WindowsForms.menuAdmin.Users
         {
             SetupColumns();
             dgv_Users.AutoGenerateColumns = false;
-            _allUsers = await new UserDTOClient(new APIHttpClient()).GetAllAsync();
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            var allUsersResult = await userClient.GetAllAsync();
+            _allUsers = allUsersResult.Data ?? new List<UserDTO>();
             dgv_Users.DataSource = _allUsers;
         }
         private void SetupColumns()
