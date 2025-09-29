@@ -1,6 +1,7 @@
 ﻿using Services;
 using DTOs;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI
 {
@@ -96,7 +97,7 @@ namespace WebAPI
                 .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
 
-            app.MapPut("/animals/{id}/assign-responsible", (string id, string userId) =>
+            app.MapPut("/animals/{id}/assign-responsible", (string id, [FromBody] string userId) =>
             {
                 AnimalsService animalService = new AnimalsService();
                 AnimalDTO? assigned = animalService.AssignResponsible(id ,userId);
