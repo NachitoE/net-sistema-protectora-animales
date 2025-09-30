@@ -1,16 +1,18 @@
 ﻿@page "/login"
 @using Infrastructure.API
 @using DTOs
-<h3>Login</h3>
-<div class="mb-3">
-    <label for="passwordInput" class="form-label">Password</label>
-    <div class="input-group">
+<form>
+    <div class="form-group">
+        <label for="usernameInput">Usuario:</label>
         <input type="text" class="form-control" id="usernameInput" placeholder="Usuario" @bind="@userName">
-        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" @bind="@password">
-        <button @onclick="@OnClick">pepe</button>
     </div>
-    <div>@name</div>
-</div>
+    <div class="form-group">
+        <label for="passwordInput">Contraseña:</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" @bind="@password">
+    </div>
+</form>
+<button class="btn btn-primary mt-3" @onclick="@OnClick">Ingresar</button>
+<div>@name</div>
 @code {
     private string userName { get; set; }
     private string password { get; set; }
