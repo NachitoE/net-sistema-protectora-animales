@@ -1,5 +1,6 @@
 ﻿using DTOs;
-using System;
+using DTOs.House;
+using System.Threading.Tasks;
 
 namespace Infrastructure.API.DTOs_CRUDs
 {
@@ -9,9 +10,10 @@ namespace Infrastructure.API.DTOs_CRUDs
         public HouseDTOClient(IApiHttpClient apiHttpClient) : base(apiHttpClient)
         {
         }
-        public override Task<HouseDTO> PostAsync(object data)
+        public async Task<ApiResult<HouseDTO>> ChangeCapacity(HouseChangeCapacityDTO houseChangeCapacityDTO)
         {
-            return base.PostAsync(data);
+            var res = await _apiHttpClient.PutAsync<HouseDTO>($"/{_endpoint}/capacity", houseChangeCapacityDTO);
+            return res;
         }
     }
 }

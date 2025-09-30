@@ -22,8 +22,9 @@ namespace WindowsForms.NewFolder1
                 MessageBox.Show("No se detectó al usuario loggeado", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            UserDTOClient animalClient = new UserDTOClient(new APIHttpClient());
-            List<AnimalDTO> caretakerAnimals = await animalClient.GetUserAnimalsAsync(user.Id);
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            ApiResult<List<AnimalDTO>> caretakerAnimalsResult = await userClient.GetUserAnimalsAsync(user.Id);
+            List<AnimalDTO> caretakerAnimals = caretakerAnimalsResult.Data ?? new List<AnimalDTO>();
             dgv_userAnimals.AutoGenerateColumns = false;
             dgv_userAnimals.Columns.Add("Name", "Nombre");
             dgv_userAnimals.Columns.Add("Species", "Especie");

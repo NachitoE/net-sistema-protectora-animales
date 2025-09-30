@@ -28,9 +28,9 @@ namespace WindowsForms.menuAdmin.Users
 
         private async void btn_AcceptUsn_Click(object sender, EventArgs e)
         {
-            UserDTOClient userClient = new UserDTOClient(new APIHttpClient());
-            List<UserDTO> filteredUserList = await userClient.SearchAsync(new UserDTO() { UserName = tb_getUsername.Text });
-
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            ApiResult<List<UserDTO>> filteredUserListResult = await userClient.SearchAsync(new UserDTO() { UserName = tb_getUsername.Text });
+            var filteredUserList = filteredUserListResult.Data ?? new List<UserDTO>();
             dgv_User.DataSource = filteredUserList;
 
 

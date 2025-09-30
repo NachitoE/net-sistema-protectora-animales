@@ -43,7 +43,7 @@ namespace WebAPI
                     HousesService housesService = new HousesService();
                     HouseBaseResponseDTO houseResponseDTO = housesService.ChangeCapacity(houseCapDTO);
                     if (!houseResponseDTO.Success) throw new ArgumentException(houseResponseDTO.Message);
-                    return Results.Ok(houseResponseDTO);
+                    return Results.Ok(housesService.Get(houseResponseDTO.HouseId));
                 }
                 catch (ArgumentException ex)
                 {

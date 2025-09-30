@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsForms.BasicForms;
 using WindowsForms.menuAdmin.Animals;
+using WindowsForms.menuAdmin.Houses;
 using WindowsForms.menuAdmin.Users;
 
 namespace WindowsForms.menuAdmin
@@ -64,8 +65,8 @@ namespace WindowsForms.menuAdmin
         private void btn_FosterHouses_Click(object sender, EventArgs e)
         {
             this.Hide();
-            //var menuredir = new fm_AdminUsersMenu();
-            //menuredir.ShowDialog();
+            var menuredir = new fm_HouseChangeCapacity();
+            menuredir.ShowDialog();
             this.Show();
         }
     }

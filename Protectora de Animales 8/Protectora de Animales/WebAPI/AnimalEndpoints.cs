@@ -1,6 +1,7 @@
 ﻿using Services;
 using DTOs;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI
 {
@@ -64,6 +65,25 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
+            app.MapPut("/animals/{id}", (string id, AnimalDTO dto) =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    AnimalDTO? animalDTO = animalService.Update(dto);
+                    if (animalDTO == null) throw new ArgumentException("No se pudo modificar el animal");
+                    return Results.Ok(animalDTO);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("ModifyAnimal")
+                .Produces<AnimalDTO>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
             app.MapDelete("/animals/{id}", (string id) =>
             {
                 AnimalsService animalService = new AnimalsService();
@@ -96,10 +116,10 @@ namespace WebAPI
                 .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
 
-            app.MapPut("/animals/{id}/assign-responsible", (string id, string userId) =>
+            app.MapPut("/animals/{id}/assign-responsible", (string id, [FromBody] string userId) =>
             {
                 AnimalsService animalService = new AnimalsService();
-                AnimalDTO? assigned = animalService.AssignResponsible(id ,userId);
+                AnimalDTO? assigned = animalService.AssignResponsible(id, userId);
                 if (assigned != null)
                     return Results.Ok(assigned);
                 else
@@ -109,6 +129,26 @@ namespace WebAPI
                 .Produces(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound)
                 .WithOpenApi();
+
+            app.MapPost("/animals/search", (AnimalDTO criteria) =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    List<AnimalDTO> animalsDTOs = animalService.GetByCriteria(criteria);
+                    return Results.Ok(animalsDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("Search Animals")
+                .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
         }
+
     }
 }

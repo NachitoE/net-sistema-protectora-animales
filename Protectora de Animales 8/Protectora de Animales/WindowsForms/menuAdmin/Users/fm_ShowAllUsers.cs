@@ -14,13 +14,16 @@ namespace WindowsForms.menuAdmin.Users
         public fm_ShowAllUsers()
         {
             InitializeComponent();
+            Load += ShowUsersFormLoad;
            
         }
         private async void ShowUsersFormLoad(object sender, EventArgs e)
         {
             SetupColumns();
             dgv_Users.AutoGenerateColumns = false;
-            _allUsers = await new UserDTOClient(new APIHttpClient()).GetAllAsync();
+            UserDTOClient userClient = ApiClientsFactory.UserClient();
+            var allUsersResult = await userClient.GetAllAsync();
+            _allUsers = allUsersResult.Data ?? new List<UserDTO>();
             dgv_Users.DataSource = _allUsers;
         }
         private void SetupColumns()

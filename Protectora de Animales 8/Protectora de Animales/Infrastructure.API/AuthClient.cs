@@ -9,52 +9,32 @@ namespace Infrastructure.API
         {
             _apiHttpClient = apiHttpClient;
         }
-        async public Task<UserDTO> LoginAsync(UserLoginRequestDTO userLogin)
+        async public Task<ApiResult<UserDTO>> LoginAsync(UserLoginRequestDTO userLogin)
         {
-            try
+            var loginResult = await _apiHttpClient.PostAsync<UserLoginResponseDTO>(
+                "/auth/login",
+                data: userLogin
+                );
+            if (loginResult.Success)
             {
-                var loginResponse = await _apiHttpClient.PostAsync<UserLoginResponseDTO>(
-                    "/auth/login",
-                    data: userLogin
-                    );
-                if (loginResponse != null)
-                {
-                    if (loginResponse.Success)
-                    {
-                        return loginResponse.User;
-                    }
-                    else
-                    {
-                        throw new Exception($"Login failed: {loginResponse.Message}");
-                    }
-                }
-                throw new Exception("Login failed: No response from server.");
+                return ApiResult<UserDTO>.FromSuccess(loginResult.Data.User);
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception($"LoginAsync Error: {ex.Message}", ex);
+                return ApiResult<UserDTO>.FromError("Fallo de login: " + loginResult.Message, null, loginResult.StatusCode);
             }
         }
 
-        async public Task<UserRegisterResponseDTO> RegisterAsync(UserRegisterRequestDTO userRegister)
+        async public Task<ApiResult<UserRegisterResponseDTO>> RegisterAsync(UserRegisterRequestDTO userRegister)
         {
-            try
-            {
-                Console.WriteLine("aaaa");
                 var registerResponse = await _apiHttpClient.PostAsync<UserRegisterResponseDTO>(
                     "/auth/register",
                     data: userRegister
                     );
-                if (registerResponse != null)
-                {
-                    return registerResponse;
-                }
-                throw new Exception("Register failed: No response from server.");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"RegisterAsync Error: {ex.Message}", ex);
-            }
+
+                return registerResponse;
+
         }
     }
 }
+

@@ -141,6 +141,7 @@ namespace Services
             houseRepository.Update(house);
             return new HouseBaseResponseDTO()
             {
+                HouseId = house.Id,
                 Message = "Capacidad actualizada con éxito",
                 Success = true
             };

@@ -24,7 +24,9 @@ namespace WindowsForms.menuAdmin.Animals
         private async void ShowAllAnimalsFormLoad(object sender, EventArgs e)
         {
             dgv_animals.AutoGenerateColumns = false;
-            List<AnimalDTO> animalDTOs = await new AnimalDTOClient(new APIHttpClient()).GetAllAsync();
+            AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
+            ApiResult<List<AnimalDTO>> animalDTOsResult = await animalClient.GetAllAsync();
+            var animalDTOs = animalDTOsResult.Data;
             dgv_animals.Columns.Add("Name", "Nombre");
             dgv_animals.Columns.Add("Species", "Especie");
             dgv_animals.Columns.Add("UserId", "Responsable");
