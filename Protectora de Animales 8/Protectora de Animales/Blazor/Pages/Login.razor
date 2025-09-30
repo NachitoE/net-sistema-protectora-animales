@@ -1,0 +1,31 @@
+﻿@page "/login"
+@using Infrastructure.API
+@using DTOs
+<h3>Login</h3>
+<div class="mb-3">
+    <label for="passwordInput" class="form-label">Password</label>
+    <div class="input-group">
+        <input type="text" class="form-control" id="usernameInput" placeholder="Usuario" @bind="@userName">
+        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" @bind="@password">
+        <button @onclick="@OnClick">Login</button>
+    </div>
+    <div>@name</div>
+</div>
+@code {
+    private string userName { get; set; }
+    private string password { get; set; }
+
+    private string name { get; set; }
+    private async Task OnClick()
+    {
+        AuthClient authClient = ApiClientsFactory.AuthClient();
+        var res = await authClient.LoginAsync(new UserLoginRequestDTO() { UserName = userName, Password = password });
+        if (!res.Success || res.Data == null)
+        {
+            name = "Epic Fail";
+            return;
+        }
+        name = $"Hola! {res.Data.Name}";
+    }
+
+}
