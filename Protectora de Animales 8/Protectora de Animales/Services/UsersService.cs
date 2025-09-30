@@ -139,11 +139,11 @@ namespace Services
             User? user = userRepository.Get(id);
             if (user != null)
             {
-                user.Name = userDTO.Name.IsNullOrEmpty() ? user.Name : userDTO.Name;
-                user.SurName = userDTO.SurName.IsNullOrEmpty() ? user.SurName : userDTO.SurName;
-                user.Dni = userDTO.DNI.IsNullOrEmpty() ? user.Dni : userDTO.DNI;
+                user.Name = string.IsNullOrEmpty(userDTO.Name) ? user.Name : userDTO.Name;
+                user.SurName = string.IsNullOrEmpty(userDTO.SurName) ? user.SurName : userDTO.SurName;
+                user.Dni = string.IsNullOrEmpty(userDTO.DNI) ? user.Dni : userDTO.DNI;
                 user.UserType = string.IsNullOrEmpty(userDTO.UserType) ? user.UserType : EnumConversion.StringToUserType(userDTO.UserType);
-                user.UserName = userDTO.UserName.IsNullOrEmpty() ? user.UserName : userDTO.UserName;
+                user.UserName = string.IsNullOrEmpty(userDTO.UserName) ? user.UserName : userDTO.UserName;
                 
                 userRepository.Update(user);
                 return user.ToDTO();

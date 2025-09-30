@@ -9,7 +9,7 @@ namespace Infrastructure.API
         {
             _apiHttpClient = apiHttpClient;
         }
-        async public Task<ApiResult<UserDTO>> LoginAsync(UserLoginRequestDTO userLogin)
+        async public Task<ApiResult<UserLoginResponseDTO>> LoginAsync(UserLoginRequestDTO userLogin)
         {
             var loginResult = await _apiHttpClient.PostAsync<UserLoginResponseDTO>(
                 "/auth/login",
@@ -17,11 +17,11 @@ namespace Infrastructure.API
                 );
             if (loginResult.Success)
             {
-                return ApiResult<UserDTO>.FromSuccess(loginResult.Data.User);
+                return loginResult;
             }
             else
             {
-                return ApiResult<UserDTO>.FromError("Fallo de login: " + loginResult.Message, null, loginResult.StatusCode);
+                return ApiResult<UserLoginResponseDTO>.FromError("Fallo de login: " + loginResult.Message, null, loginResult.StatusCode);
             }
         }
 

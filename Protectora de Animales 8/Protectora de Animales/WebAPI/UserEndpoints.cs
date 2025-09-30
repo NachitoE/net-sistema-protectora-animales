@@ -183,7 +183,7 @@ namespace WebAPI
                 {
                     UsersService userService = new UsersService();
                     UserDTO? userDTO = userService.ModifyUser(id, dto);
-                    if(userDTO == null) throw new ArgumentException("No se pudo modificar el usuario");
+                    if (userDTO == null) throw new ArgumentException("No se pudo modificar el usuario");
                     return Results.Ok(userDTO);
                 }
                 catch (ArgumentException ex)
@@ -191,6 +191,7 @@ namespace WebAPI
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
+                .RequireAuthorization("AdminOnly")
                 .WithName("UpdateUser")
                 .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)

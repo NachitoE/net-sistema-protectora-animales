@@ -7,7 +7,7 @@ namespace WebAPI
     {
         public static void MapAuthEndpoints(this WebApplication app)
         {
-            app.MapPost("auth/login", (UserLoginRequestDTO loginReqDTO) =>
+            app.MapPost("auth/login", (UserLoginRequestDTO loginReqDTO, JwtService jwtService) =>
             {
                 try
                 {
@@ -15,20 +15,21 @@ namespace WebAPI
                     UserLoginResponseDTO loginResponse = authService.Login(loginReqDTO);
                     if (loginResponse == null || loginResponse.User == null)
                         throw new ArgumentException("La data del login no es correcta o el usuario no existe");
-                    return Results.Ok(loginResponse);
+
+                    var token = jwtService.GenerateToken(loginResponse.User);
+                    return Results.Ok(new UserLoginResponseDTO()
+                    {
+                        User = loginResponse.User,
+                        Token = token
+                    });
                 }
                 catch (ArgumentException ex)
                 {
-                    return Results.NotFound(new UserLoginResponseDTO()
-                    {
-                        User = null,
-                        Message = ex.Message,
-                        Success = false
-                    });
+                    return Results.NotFound(new { error = ex.Message });
                 }
             })
                 .WithName("Login")
-                .Produces(StatusCodes.Status200OK)
+                .Produces<UserDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound)
                 .WithOpenApi();
 

@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text;
 
-
 namespace Infrastructure.API
 {
     public class APIHttpClient : IApiHttpClient, IDisposable
@@ -13,13 +12,18 @@ namespace Infrastructure.API
         public APIHttpClient(string baseUrl)
         {
             _baseUrl = baseUrl ?? throw new ArgumentNullException(nameof(baseUrl));
+            
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri(_baseUrl),
                 Timeout = TimeSpan.FromSeconds(30)
             };
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            // añadir auth token
+            AuthHeaderRegistry.Register(_httpClient);
         }
+
 
         public async Task<ApiResult<T>> GetAsync<T>(string endpoint)
         {
@@ -55,7 +59,6 @@ namespace Infrastructure.API
                 return ApiResult<bool>.FromSuccess(true, "Recurso eliminado exitosamente");
             }
 
-            // DELETE 404 => No existe => success?
             if (result.StatusCode == HttpStatusCode.NotFound)
             {
                 return ApiResult<bool>.FromSuccess(false, "Recurso no encontrado");
