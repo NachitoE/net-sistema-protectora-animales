@@ -48,7 +48,7 @@ else // no loggeado
         isLoading = false;
         StateHasChanged();
     }
-    private async void OnLoginSuccess(UserDTO user, string token)
+    private void OnLoginSuccess(UserDTO user, string token)
     {
         //save token
         new BlazorTokenStorage(jsRuntime).StoreToken(token);
