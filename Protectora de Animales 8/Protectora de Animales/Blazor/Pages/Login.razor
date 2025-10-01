@@ -20,7 +20,7 @@
     private string status { get; set; }
 
     [Parameter]
-    public Action<UserDTO>? OnLoginSuccess { get; set; }
+    public Action<UserDTO, string>? OnLoginSuccess { get; set; }
 
     private async Task OnClick()
     {
@@ -34,10 +34,8 @@
         }
         string token = res.Data.Token;
         if (OnLoginSuccess != null && !string.IsNullOrEmpty(token))
-        {
-            TokenBroker.SetToken(token);
-            OnLoginSuccess(res.Data.User);
-        };
+            OnLoginSuccess(res.Data.User!, token);
+
         status = "Algo terrible pasó. Vuelve a intentarlo";
     }
 

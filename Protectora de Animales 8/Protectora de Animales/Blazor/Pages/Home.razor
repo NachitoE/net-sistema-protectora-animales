@@ -2,7 +2,11 @@
 
 <PageTitle>Home</PageTitle>
 
-@if (loggedUser != null)
+@if(isLoading)
+{
+    <p>Cargando...</p>
+}
+else if(loggedUser != null)
 {
 
     <h1>Bienvenido, @loggedUser.SurName @loggedUser.Name!</h1>
@@ -15,14 +19,40 @@ else // no loggeado
 }
 
 
+@using Blazor.BlazorServices
 @code{
     @using DTOs
     @using Infrastructure.API;
+@inject IJSRuntime jsRuntime
 
     private UserDTO? loggedUser;
+    private bool isLoading = true;
 
-    private void OnLoginSuccess(UserDTO user)
+    protected override async Task OnInitializedAsync()
     {
+        isLoading = true;
+        //set token if exists
+        string? token = await new BlazorTokenStorage(jsRuntime).GetToken();
+        if (!string.IsNullOrEmpty(token))
+        {
+            TokenBroker.SetToken(token);
+        }
+        //get logged user
+        AuthClient authClient = ApiClientsFactory.AuthClient();
+        var result = await authClient.MeAsync();
+        if(result.Success && result.Data != null)
+        {
+            loggedUser = result.Data;
+
+        }
+        isLoading = false;
+        StateHasChanged();
+    }
+    private async void OnLoginSuccess(UserDTO user, string token)
+    {
+        //save token
+        await new BlazorTokenStorage(jsRuntime).StoreToken(token);
+        TokenBroker.SetToken(token);
         loggedUser = user;
         StateHasChanged();
     }
