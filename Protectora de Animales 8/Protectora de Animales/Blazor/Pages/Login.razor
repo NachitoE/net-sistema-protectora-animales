@@ -1,6 +1,6 @@
-﻿@page "/login"
-@using Infrastructure.API
+﻿@using Infrastructure.API
 @using DTOs
+
 <form>
     <div class="form-group">
         <label for="usernameInput">Usuario:</label>
@@ -12,23 +12,33 @@
     </div>
 </form>
 <button class="btn btn-primary mt-3" @onclick="@OnClick">Ingresar</button>
-<div>@name</div>
+<div>@status</div>
 @code {
     private string userName { get; set; }
     private string password { get; set; }
 
-    private string name { get; set; }
+    private string status { get; set; }
+
+    [Parameter]
+    public Action<UserDTO>? OnLoginSuccess { get; set; }
+
     private async Task OnClick()
     {
-        name = "Loading...";
+        status = "Entrando...";
         AuthClient authClient = ApiClientsFactory.AuthClient();
         var res = await authClient.LoginAsync(new UserLoginRequestDTO() { UserName = userName, Password = password });
         if (!res.Success || res.Data == null)
         {
-            name = "Epic Fail";
+            status = res.Message;
             return;
         }
-        name = $"Hola! {res.Data}";
+        string token = res.Data.Token;
+        if (OnLoginSuccess != null && !string.IsNullOrEmpty(token))
+        {
+            TokenBroker.SetToken(token);
+            OnLoginSuccess(res.Data.User);
+        };
+        status = "Algo terrible pasó. Vuelve a intentarlo";
     }
 
 }
