@@ -47,7 +47,36 @@ namespace WebAPI
                 .Produces<UserRegisterResponseDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
-        }
 
+
+            app.MapGet("auth/me", (HttpContext httpContext) =>
+            {
+                try
+                {
+                    var userId = httpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                    if (string.IsNullOrEmpty(userId))
+                        return Results.Unauthorized();
+
+                    var usersService = new UsersService();
+                    var me = usersService.Get(userId);
+                    if (me == null)
+                        return Results.NotFound(new { error = "Usuario no encontrado" });
+
+                    return Results.Ok(me);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+             .RequireAuthorization()
+             .WithName("Me")
+             .Produces<UserDTO>(StatusCodes.Status200OK)
+             .Produces(StatusCodes.Status401Unauthorized)
+             .Produces(StatusCodes.Status404NotFound)
+             .WithOpenApi();
+        }
     }
+
 }
+

@@ -35,6 +35,13 @@ namespace Infrastructure.API
                 return registerResponse;
 
         }
+        async public Task<ApiResult<UserDTO>> MeAsync()
+        {
+            var meResponse = await _apiHttpClient.GetAsync<UserDTO>(
+                "/auth/me"
+                );
+            return meResponse;
+        }
     }
 }
 

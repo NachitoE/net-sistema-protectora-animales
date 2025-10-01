@@ -16,7 +16,7 @@ namespace WindowsForms.BasicForms
         public fm_loggin()
         {
             InitializeComponent();
-            Session.LogOff();
+            TokenBroker.Clear();
         }
 
         private async void btn_loggin_Click(object sender, EventArgs e)

@@ -16,14 +16,17 @@ namespace WindowsForms.NewFolder1
 
         private async void ShowCaretakerAnimalsFormLoad(object sender, EventArgs e)
         {
-            UserDTO? user = Session.CurrentLoggedUser;
-            if (user == null)
+            var authClient = ApiClientsFactory.AuthClient();
+            var thisUserResult = await authClient.MeAsync();
+            UserDTO thisUser = thisUserResult.Data;
+            if (!thisUserResult.Success || thisUser == null)
             {
                 MessageBox.Show("No se detectó al usuario loggeado", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+                return;
             }
             UserDTOClient userClient = ApiClientsFactory.UserClient();
-            ApiResult<List<AnimalDTO>> caretakerAnimalsResult = await userClient.GetUserAnimalsAsync(user.Id);
+            ApiResult<List<AnimalDTO>> caretakerAnimalsResult = await userClient.GetUserAnimalsAsync(thisUser.Id);
             List<AnimalDTO> caretakerAnimals = caretakerAnimalsResult.Data ?? new List<AnimalDTO>();
             dgv_userAnimals.AutoGenerateColumns = false;
             dgv_userAnimals.Columns.Add("Name", "Nombre");
