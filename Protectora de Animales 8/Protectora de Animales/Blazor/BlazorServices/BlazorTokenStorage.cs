@@ -4,26 +4,26 @@ namespace Blazor.BlazorServices
 {
     public class BlazorTokenStorage
     {
-        private IJSRuntime _js = null;
+        private IJSInProcessRuntime _js = null;
         private const string TOKEN_ID = "authToken";
         private const string SET_ITEM = "localStorage.setItem";
         private const string GET_ITEM = "localStorage.getItem";
         private const string REMOVE_ITEM = "localStorage.removeItem";
         public BlazorTokenStorage(IJSRuntime js)
         {
-            _js = js;
+            _js = (IJSInProcessRuntime)js;
         }
-        public async Task StoreToken(string token)
+        public void StoreToken(string token)
         {
-            await _js.InvokeVoidAsync(SET_ITEM, TOKEN_ID, token);
+            _js.InvokeVoid(SET_ITEM, TOKEN_ID, token);
         }
-        public async Task<string?> GetToken()
+        public string? GetToken()
         {
-            return await _js.InvokeAsync<string?>(GET_ITEM, TOKEN_ID);
+            return _js.Invoke<string?>(GET_ITEM, TOKEN_ID);
         }
-        public async Task RemoveToken()
+        public void RemoveToken()
         {
-            await _js.InvokeVoidAsync(REMOVE_ITEM, TOKEN_ID);
+            _js.InvokeVoid(REMOVE_ITEM, TOKEN_ID);
         }
     }
 }
