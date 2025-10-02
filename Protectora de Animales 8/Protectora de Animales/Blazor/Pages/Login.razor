@@ -1,17 +1,18 @@
 ﻿@using Infrastructure.API
 @using DTOs
+@inject SessionService Service
 
 <form>
     <div class="form-group">
         <label for="usernameInput">Usuario:</label>
-        <input type="text" class="form-control" id="usernameInput" placeholder="Usuario" @bind="@userName">
+        <input type="text" class="form-control" id="usernameInput" placeholder="Usuario" @bind="@userName" @onkeydown=@HandleKey>
     </div>
     <div class="form-group">
         <label for="passwordInput">Contraseña:</label>
-        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" @bind="@password">
+        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" @bind="@password" @onkeydown=@HandleKey>
     </div>
 </form>
-<button class="btn btn-primary mt-3" @onclick="@OnClick">Ingresar</button>
+<button class="btn btn-primary mt-3" @onclick="@TryLogin">Ingresar</button>
 <div>@status</div>
 @code {
     private string userName { get; set; }
@@ -19,10 +20,11 @@
 
     private string status { get; set; }
 
-    [Parameter]
-    public Action<UserDTO, string>? OnLoginSuccess { get; set; }
-
-    private async Task OnClick()
+    private async Task HandleKey(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter") await TryLogin();    
+    }
+    private async Task TryLogin()
     {
         status = "Entrando...";
         AuthClient authClient = ApiClientsFactory.AuthClient();
@@ -33,8 +35,8 @@
             return;
         }
         string token = res.Data.Token;
-        if (OnLoginSuccess != null && !string.IsNullOrEmpty(token))
-            OnLoginSuccess(res.Data.User!, token);
+        if (!string.IsNullOrEmpty(token))
+            await Service.LoginAsync(token);
 
         status = "Algo terrible pasó. Vuelve a intentarlo";
     }

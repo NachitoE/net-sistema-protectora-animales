@@ -1,4 +1,7 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inject SessionService Session
+
+<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -10,3 +13,20 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+
+@code {
+    /*
+     * PARA AUTENTICACION EN CASCADA
+     *<CascadingAuthenticationState>
+     <CascadingValue Value="Session.Context" IsFixed="false">
+
+         </CascadingValue>
+</CascadingAuthenticationState>
+     */
+    protected override async Task OnInitializedAsync()
+    {
+        // reload session context
+        await Session.HydrateAsync();
+    }
+}

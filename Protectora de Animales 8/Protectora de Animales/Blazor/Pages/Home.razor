@@ -1,59 +1,28 @@
 ﻿@page "/"
+@inject SessionService Session
 
 <PageTitle>Home</PageTitle>
 
-@if(isLoading)
+
+@if (Session.Context.IsLoading)
 {
     <p>Cargando...</p>
 }
-else if(loggedUser != null)
+else if (Session.Context.IsAuthenticated)
 {
 
-    <h1>Bienvenido, @loggedUser.SurName @loggedUser.Name!</h1>
+    <h1>Bienvenido, @Session.Context.User.SurName @Session.Context.User.Name!</h1>
 
-    <p>Tipo de usuario: @loggedUser.UserType</p>
+    <p>Tipo de usuario: @Session.Context.User.UserType</p>
 }
 else // no loggeado
 {
-    <Login OnLoginSuccess="OnLoginSuccess" />
+    <Login/>
 }
 
-
-@using Blazor.BlazorServices
-@code{
-    @using DTOs
-    @using Infrastructure.API;
-    @inject IJSRuntime jsRuntime
-
-    private UserDTO? loggedUser;
-    private bool isLoading = true;
-
+@code {
     protected override async Task OnInitializedAsync()
     {
-        isLoading = true;
-        //set token if exists
-        string? token = new BlazorTokenStorage(jsRuntime).GetToken();
-        if (!string.IsNullOrEmpty(token))
-        {
-            TokenBroker.SetToken(token);
-        }
-        //get logged user
-        AuthClient authClient = ApiClientsFactory.AuthClient();
-        var result = await authClient.MeAsync();
-        if(result.Success && result.Data != null)
-        {
-            loggedUser = result.Data;
-
-        }
-        isLoading = false;
-        StateHasChanged();
-    }
-    private void OnLoginSuccess(UserDTO user, string token)
-    {
-        //save token
-        new BlazorTokenStorage(jsRuntime).StoreToken(token);
-        TokenBroker.SetToken(token);
-        loggedUser = user;
-        StateHasChanged();
+        Session.OnChanged += StateHasChanged;
     }
 }
