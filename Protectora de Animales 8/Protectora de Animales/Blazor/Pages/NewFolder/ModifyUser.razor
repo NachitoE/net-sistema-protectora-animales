@@ -1,0 +1,155 @@
+﻿@page "/modify-users"
+@using DTOs
+@using Infrastructure.API
+@inject IJSRuntime JSRuntime
+
+<h3>Modify Users</h3>
+
+@if (users == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Username</th>
+                    <th>DNI</th>
+                    <th>User Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in users)
+                {
+                    <tr>
+                        @if (editingUserId == user.Id)
+                        {
+                            <!-- Modo edición -->
+                            <td><input @bind="editUser.Name" class="form-control" /></td>
+                            <td><input @bind="editUser.SurName" class="form-control" /></td>
+                            <td><input @bind="editUser.UserName" class="form-control" /></td>
+                            <td><input @bind="editUser.DNI" class="form-control" /></td>
+                            <td>
+                                <select @bind="editUser.UserType" class="form-select">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Adoptante">Adoptante</option>
+                                    <option value="Voluntario">Voluntario</option>
+                                    <option value="Transito">Transito</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button @onclick="() => SaveUser(user.Id)" class="btn btn-success btn-sm me-1">Save</button>
+                                <button @onclick="CancelEdit" class="btn btn-secondary btn-sm">Cancel</button>
+                            </td>
+                        }
+                        else
+                        {
+                            <!-- Modo visualización -->
+                            <td>@user.Name</td>
+                            <td>@user.SurName</td>
+                            <td>@user.UserName</td>
+                            <td>@user.DNI</td>
+                            <td>@user.UserType</td>
+                            <td>
+                                <button @onclick="() => StartEdit(user)" class="btn btn-primary btn-sm me-1">Edit</button>
+                                <button @onclick="() => DeleteUser(user.Id)" class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    private List<UserDTO>? users;
+    private UserDTO editUser = new();
+    private string? editingUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUsers();
+    }
+
+    private async Task LoadUsers()
+    {
+        try
+        {
+            var userClient = ApiClientsFactory.UserClient();
+            var result = await userClient.GetAllAsync();
+            users = result.Data;
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"Error loading users: {ex.Message}");
+        }
+    }
+
+    private void StartEdit(UserDTO user)
+    {
+        editingUserId = user.Id;
+        editUser = new UserDTO
+        {
+            Id = user.Id,
+            Name = user.Name,
+            SurName = user.SurName,
+            UserName = user.UserName,
+            DNI = user.DNI,
+            UserType = user.UserType
+        };
+    }
+
+    private async Task SaveUser(string userId)
+    {
+        try
+        {
+            var userClient = ApiClientsFactory.UserClient();
+            await userClient.PutAsync(userId, editUser);
+            
+            // Actualizar la lista local
+            var userIndex = users!.FindIndex(u => u.Id == userId);
+            if (userIndex >= 0)
+            {
+                users[userIndex] = editUser;
+            }
+            
+            CancelEdit();
+            await JSRuntime.InvokeVoidAsync("alert", "User updated successfully!");
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"Error updating user: {ex.Message}");
+        }
+    }
+
+    private void CancelEdit()
+    {
+        editingUserId = null;
+        editUser = new UserDTO();
+    }
+
+    private async Task DeleteUser(string userId)
+    {
+        if (await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this user?"))
+        {
+            try
+            {
+                var userClient = ApiClientsFactory.UserClient();
+                await userClient.DeleteAsync(userId);
+                
+                users!.RemoveAll(u => u.Id == userId);
+                await JSRuntime.InvokeVoidAsync("alert", "User deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                await JSRuntime.InvokeVoidAsync("alert", $"Error deleting user: {ex.Message}");
+            }
+        }
+    }
+}

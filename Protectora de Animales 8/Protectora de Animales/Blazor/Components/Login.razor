@@ -22,7 +22,10 @@
 
     private async Task HandleKey(KeyboardEventArgs e)
     {
-        if (e.Key == "Enter") await TryLogin();    
+        if (e.Key == "Enter"){
+            await Task.Delay(1); //hack para evitar que el enter entre antes que el bindeo de datos
+            await TryLogin();    
+        }
     }
     private async Task TryLogin()
     {
