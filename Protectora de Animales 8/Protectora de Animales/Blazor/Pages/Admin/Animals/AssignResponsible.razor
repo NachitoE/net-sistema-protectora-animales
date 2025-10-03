@@ -6,13 +6,13 @@
 {
     <p>No autorizado</p>
 }
-else if (isLoading)
+else if (isAnimalLoading)
 {
     <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
 }
 else if (errorMessage != null)
 {
-    <div>ERROR: @errorMessage</div>
+    <div class="alert-danger">ERROR: @errorMessage</div>
 }
 else
 {
@@ -22,7 +22,7 @@ else
                  Hover="true"
                  Bordered="true"
                  Dense="true"
-                 RowClassFunc="@GetRowClass"
+                 RowClassFunc="@GetRowClassAnimal"
                  RowClass="pointer"
     >
         <Columns>
@@ -32,43 +32,105 @@ else
         </Columns>
     </MudDataGrid>
 }
+@if (isUserLoading && !isAnimalLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if(SelectedAnimal != null)
+{
+    <div class="mt-3">
+    <MudDataGrid Items="@availableUsersToAdopt"
+                 @bind-SelectedItem="SelectedUser"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClassUser"
+                 RowClass="pointer">
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Nombre" />
+            <PropertyColumn Property="x => x.SurName" Title="Apellido" />
 
+            <TemplateColumn Title="Cantidad Disponible">
+                <CellTemplate Context="row">
+                    @(remainingQuantityDict[row.Item])
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+
+    </MudDataGrid>
+        
+    </div>
+    <MudButton OnClick="@OnAssignClicked" Disabled="@isAssigning" Class="mt-5" Variant="Variant.Filled" Color="Color.Primary">Asignar</MudButton>
+<div class="alert-danger">@(errorAssigningMessage == null ? "" : $"ERROR: {errorAssigningMessage}")</div>
+
+}
 
 @code {
-    private bool isLoading = true;
+    private bool isAnimalLoading = true;
+    private bool isUserLoading = true;
     private string? errorMessage = null;
     private AnimalDTO? SelectedAnimal { get; set; }
+    private UserDTO? SelectedUser { get; set; }
     private List<AnimalDTO> availableAnimals = new();
+    private List<UserDTO> availableUsersToAdopt = new();
+    private Dictionary<UserDTO, int> remainingQuantityDict = new();
+    private string? errorAssigningMessage = null;
+    private bool isAssigning = false;
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await ApiClientsFactory.AnimalClient().GetAllAvailableAnimalsAsync();
-        isLoading = false;
-        if (!result.Success)
+        var aAnimalsResult = await ApiClientsFactory.AnimalClient().GetAllAvailableAnimalsAsync();
+        isAnimalLoading = false;
+        if (!aAnimalsResult.Success)
         {
-            errorMessage = result.Message;
+            errorMessage = aAnimalsResult.Message;
             return;
         }
-        availableAnimals = result.Data!.ToList();
+        availableAnimals = aAnimalsResult.Data!;
+
+        var aUsersResult = await ApiClientsFactory.UserClient().GetAvailableToAdoptAsync();
+
+        if (!aUsersResult.Success)
+        {
+            errorMessage = aUsersResult.Message;
+            isUserLoading = false;
+            return;
+        }
+        availableUsersToAdopt = aUsersResult.Data!;
+        //get remaining quantity and map to dict
+        foreach (UserDTO u in availableUsersToAdopt)
+        {
+            int value = await GetRemainingQuantity(u.Id);
+            remainingQuantityDict.Add(u, value);
+        }
+
+        isUserLoading = false;
     }
-    /*
-    private async Task OnCommittedItemChanges(UserDTO user)
+
+    private async void OnAssignClicked(MouseEventArgs args)
     {
-        var updateResult = await ApiClientsFactory.UserClient().PutAsync(user.Id, user);
-        if (updateResult.Success)
+        isAssigning = true;
+        var res = await ApiClientsFactory.AnimalClient().AssignResponsible(SelectedAnimal!.Id, SelectedUser!.Id);
+        if (!res.Success)
         {
-            Snackbar.Add($"Usuario {user.UserName} actualizado", Severity.Success);
+            errorAssigningMessage = res.Message;
+            isAssigning = false;
+            return;
         }
-        else
-        {
-            Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
-        }
+        Snackbar.Add("Responsable asignado correctamente", Severity.Success);
+        isAssigning = false;
+        StateHasChanged();
     }
 
-    private EventCallback<UserDTO> OnCommittedItemChangesHandler =>
-        EventCallback.Factory.Create<UserDTO>(this, OnCommittedItemChanges);
-        */
-
-    private string GetRowClass(AnimalDTO? animal, int index)
+    private string GetRowClassAnimal(AnimalDTO? animal, int index)
       => SelectedAnimal?.Id == animal?.Id ? "selected-row" : string.Empty;
+    private string GetRowClassUser(UserDTO? animal, int index)
+    => SelectedUser?.Id == animal?.Id ? "selected-row" : string.Empty;
+    private async Task<int> GetRemainingQuantity(string userId)
+    { 
+        var res = await ApiClientsFactory.UserClient().GetUserRemainingCapacity(userId);
+        int available = res.Data != null ? res.Data.RemainingCapacity : 0;
+        return available;
+    }
 }
