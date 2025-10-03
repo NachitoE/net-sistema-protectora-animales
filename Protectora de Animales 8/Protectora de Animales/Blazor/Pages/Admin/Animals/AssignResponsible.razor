@@ -1,0 +1,74 @@
+﻿@page "/assign-responsible"
+@inject ISnackbar Snackbar
+
+<h3>Asignar Responsable</h3>
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <div>ERROR: @errorMessage</div>
+}
+else
+{
+    <MudDataGrid Items="@availableAnimals"
+                 @bind-SelectedItem="SelectedAnimal"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClass"
+                 RowClass="pointer"
+    >
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Nombre" />
+            <PropertyColumn Property="x => x.Description" Title="Descripción" />
+            <PropertyColumn Property="x => x.BirthDate" Title="Fecha de Nacimiento" />
+        </Columns>
+    </MudDataGrid>
+}
+
+
+@code {
+    private bool isLoading = true;
+    private string? errorMessage = null;
+    private AnimalDTO? SelectedAnimal { get; set; }
+    private List<AnimalDTO> availableAnimals = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ApiClientsFactory.AnimalClient().GetAllAvailableAnimalsAsync();
+        isLoading = false;
+        if (!result.Success)
+        {
+            errorMessage = result.Message;
+            return;
+        }
+        availableAnimals = result.Data!.ToList();
+    }
+    /*
+    private async Task OnCommittedItemChanges(UserDTO user)
+    {
+        var updateResult = await ApiClientsFactory.UserClient().PutAsync(user.Id, user);
+        if (updateResult.Success)
+        {
+            Snackbar.Add($"Usuario {user.UserName} actualizado", Severity.Success);
+        }
+        else
+        {
+            Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
+        }
+    }
+
+    private EventCallback<UserDTO> OnCommittedItemChangesHandler =>
+        EventCallback.Factory.Create<UserDTO>(this, OnCommittedItemChanges);
+        */
+
+    private string GetRowClass(AnimalDTO? animal, int index)
+      => SelectedAnimal?.Id == animal?.Id ? "selected-row" : string.Empty;
+}

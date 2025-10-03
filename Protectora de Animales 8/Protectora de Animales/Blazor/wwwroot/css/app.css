@@ -101,3 +101,10 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+
+.selected-row {
+    background-color: #e3f2fd !important;
+}
+.pointer{
+    cursor: pointer
+}
