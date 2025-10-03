@@ -5,6 +5,7 @@
 @inject SessionService Session
 @inject ISnackbar Snackbar
 
+<h3>Modificar Usuarios</h3>
 @if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
 {
     <p>No autorizado</p>
