@@ -16,6 +16,7 @@ else if (errorMessage != null)
 }
 else
 {
+    <h4 class="mb-1">Seleccione el animal al que le quiere asignar un usuario:</h4>
     <MudDataGrid Items="@availableAnimals"
                  @bind-SelectedItem="SelectedAnimal"
                  SelectOnRowClick="true"
@@ -39,6 +40,7 @@ else
 else if(SelectedAnimal != null)
 {
     <div class="mt-3">
+        <h4 class="mb-1">Seleccione el usuario a asignar:</h4>
     <MudDataGrid Items="@availableUsersToAdopt"
                  @bind-SelectedItem="SelectedUser"
                  SelectOnRowClick="true"
@@ -108,7 +110,7 @@ else if(SelectedAnimal != null)
         isUserLoading = false;
     }
 
-    private async void OnAssignClicked(MouseEventArgs args)
+    private async Task OnAssignClicked(MouseEventArgs args)
     {
         isAssigning = true;
         var res = await ApiClientsFactory.AnimalClient().AssignResponsible(SelectedAnimal!.Id, SelectedUser!.Id);
@@ -120,7 +122,7 @@ else if(SelectedAnimal != null)
         }
         Snackbar.Add("Responsable asignado correctamente", Severity.Success);
         isAssigning = false;
-        StateHasChanged();
+        await Reset();
     }
 
     private string GetRowClassAnimal(AnimalDTO? animal, int index)
@@ -132,5 +134,14 @@ else if(SelectedAnimal != null)
         var res = await ApiClientsFactory.UserClient().GetUserRemainingCapacity(userId);
         int available = res.Data != null ? res.Data.RemainingCapacity : 0;
         return available;
+    }
+
+    private async Task Reset()
+    {
+        isAnimalLoading = true;
+        isUserLoading = true;
+        SelectedAnimal = null;
+        SelectedUser = null;
+        await OnInitializedAsync();
     }
 }
