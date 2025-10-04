@@ -55,7 +55,8 @@ namespace WindowsForms.menuAdmin.Animals
                     var user = dgv_users.Rows[usersDGVEventArgs.RowIndex].DataBoundItem as UserDTO;
                     if (user != null)
                     {
-                        if (usersWithRemainingCapacity.ContainsKey(user)){
+                        if (usersWithRemainingCapacity.ContainsKey(user))
+                        {
                             usersDGVEventArgs.Value = usersWithRemainingCapacity[user];
                         }
                     }

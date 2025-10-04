@@ -8,7 +8,7 @@ namespace DTOs
         public string Name { get; set; }
         public string Species { get; set; }
         public DateTime BirthDate { get; set; }
-        public string UserId { get; set; }
+        public string UserId { get; set; } = "";
         public string AnimalState { get; set; }
         public string Description { get; set; }
     }

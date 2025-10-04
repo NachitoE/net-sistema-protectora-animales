@@ -79,6 +79,7 @@
             btn_cancel.TabIndex = 2;
             btn_cancel.Text = "Cancelar";
             btn_cancel.UseVisualStyleBackColor = true;
+            btn_cancel.Click += btn_cancel_Click;
             // 
             // btn_accept
             // 

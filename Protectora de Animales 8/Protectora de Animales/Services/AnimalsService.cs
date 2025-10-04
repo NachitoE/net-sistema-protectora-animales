@@ -10,6 +10,10 @@ namespace Services
     {
         public AnimalDTO Add(AnimalDTO animalDTO)
         {
+            if (string.IsNullOrEmpty(animalDTO.AnimalState))
+            {
+                animalDTO.AnimalState = EnumConversion.AnimalStateToString(AnimalStateEn.Disponible);
+            }
             AnimalRepository animalRepository = new AnimalRepository();
             Animal createdAnimal = new Animal
             (
