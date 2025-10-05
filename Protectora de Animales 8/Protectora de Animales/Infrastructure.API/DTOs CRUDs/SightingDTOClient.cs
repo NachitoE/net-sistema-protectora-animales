@@ -1,4 +1,4 @@
-﻿using DTOs.Sighting;
+﻿using DTOs;
 using Helpers;
 
 

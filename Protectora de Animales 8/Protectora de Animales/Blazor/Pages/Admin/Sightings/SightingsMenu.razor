@@ -1,7 +1,264 @@
 ﻿@page "/sightings-menu"
+@inject ISnackbar Snackbar
 
-<h3>SightingsMenu</h3>
+<h3>Menú de Avistamientos</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">ERROR: @errorMessage</MudAlert>
+}
+else
+{
+    <MudPaper Class="pa-4 mb-4">
+        <MudStack Row="true" Spacing="2">
+            <MudButton OnClick="@FilterIncoming" 
+                       Variant="Variant.Filled" 
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.Inbox">
+                Nuevos
+            </MudButton>
+            <MudButton OnClick="@FilterSeen" 
+                       Variant="Variant.Filled" 
+                       Color="Color.Success"
+                       StartIcon="@Icons.Material.Filled.CheckCircle">
+                Atendidos
+            </MudButton>
+            <MudButton OnClick="@ShowAll" 
+                       Variant="Variant.Outlined" 
+                       Color="Color.Default"
+                       StartIcon="@Icons.Material.Filled.List">
+                Mostrar Todos
+            </MudButton>
+        </MudStack>
+    </MudPaper>
+
+    <MudDataGrid Items="@filteredSightings"
+                 @bind-SelectedItem="selectedSighting"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClass"
+                 RowClass="pointer">
+        <Columns>
+            <PropertyColumn Property="x => x.SightingAdressName" Title="Dirección" />
+            <PropertyColumn Property="x => x.SightingAdressNumber" Title="Número" />
+            <PropertyColumn Property="x => x.SightingDatetime" Title="Fecha" Format="dd/MM/yyyy HH:mm" />
+            <PropertyColumn Property="x => x.SightingDescription" Title="Descripción" />
+            <TemplateColumn Title="Estado">
+                <CellTemplate>
+                    @if (context.Item.SightingState == "Nuevo")
+                    {
+                        <MudChip Color="Color.Warning" Size="MudBlazor.Size.Small">@context.Item.SightingState</MudChip>
+                    }
+                    else if (context.Item.SightingState == "Atendido")
+                    {
+                        <MudChip Color="Color.Success" Size="MudBlazor.Size.Small">@context.Item.SightingState</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Color="Color.Default" Size="MudBlazor.Size.Small">@context.Item.SightingState</MudChip>
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+
+    @if (selectedSighting != null)
+    {
+        <MudPaper Class="pa-4 mt-4">
+            <MudStack Row="true" Spacing="2" Justify="Justify.FlexEnd">
+                <MudButton OnClick="@ConfirmSighting" 
+                           Disabled="@(isProcessing || selectedSighting.SightingState != "Nuevo")" 
+                           Variant="Variant.Filled" 
+                           Color="Color.Success"
+                           StartIcon="@Icons.Material.Filled.Check">
+                    @if (isProcessing && actionType == "confirm")
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Procesando...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Marcar como Atendido</MudText>
+                    }
+                </MudButton>
+                
+                <MudButton OnClick="@DeleteSighting" 
+                           Disabled="@isProcessing" 
+                           Variant="Variant.Filled" 
+                           Color="Color.Error"
+                           StartIcon="@Icons.Material.Filled.Delete">
+                    @if (isProcessing && actionType == "delete")
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">Eliminando...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Eliminar Avistamiento</MudText>
+                    }
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+    }
+}
 
 @code {
+    private bool isLoading = true;
+    private bool isProcessing = false;
+    private string? errorMessage = null;
+    private string? actionType = null;
+    private List<SightingDTO> allSightings = new();
+    private List<SightingDTO> filteredSightings = new();
+    private SightingDTO? selectedSighting = null;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSightings();
+    }
+
+    private async Task LoadSightings()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            var sightingClient = ApiClientsFactory.SightingClient();
+            var result = await sightingClient.GetAllAsync();
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al cargar los avistamientos";
+                return;
+            }
+
+            allSightings = result.Data;
+            filteredSightings = allSightings.ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void FilterIncoming()
+    {
+        filteredSightings = allSightings.Where(s => s.SightingState == "Nuevo").ToList();
+        selectedSighting = null;
+    }
+
+    private void FilterSeen()
+    {
+        filteredSightings = allSightings.Where(s => s.SightingState == "Atendido").ToList();
+        selectedSighting = null;
+    }
+
+    private void ShowAll()
+    {
+        filteredSightings = allSightings.ToList();
+        selectedSighting = null;
+    }
+
+    private async Task ConfirmSighting()
+    {
+        if (selectedSighting == null || isProcessing) return;
+
+        if (selectedSighting.SightingState != "Nuevo")
+        {
+            Snackbar.Add("Solo se pueden confirmar avistamientos con estado 'Nuevo'", Severity.Warning);
+            return;
+        }
+
+        try
+        {
+            isProcessing = true;
+            actionType = "confirm";
+            StateHasChanged();
+
+            var updatedSighting = new SightingDTO
+            {
+                Id = selectedSighting.Id,
+                SightingAdressName = selectedSighting.SightingAdressName,
+                SightingAdressNumber = selectedSighting.SightingAdressNumber,
+                SightingDatetime = selectedSighting.SightingDatetime,
+                SightingDescription = selectedSighting.SightingDescription,
+                SightingState = "Atendido"
+            };
+
+            var apiClient = ApiClientsFactory.SightingClient();
+            var result = await apiClient.PutAsync(selectedSighting.Id, updatedSighting);
+
+            if (!result.Success)
+            {
+                Snackbar.Add($"Error al actualizar: {result.Message}", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("El avistamiento ha sido marcado como atendido", Severity.Success);
+
+            await LoadSightings();
+            selectedSighting = null;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error inesperado: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isProcessing = false;
+            actionType = null;
+        }
+    }
+
+    private async Task DeleteSighting()
+    {
+        if (selectedSighting == null || isProcessing) return;
+
+        try
+        {
+            isProcessing = true;
+            actionType = "delete";
+            StateHasChanged();
+
+            var sightingClient = ApiClientsFactory.SightingClient();
+            var result = await sightingClient.DisableSighting(selectedSighting.Id);
+
+            if (!result.Success)
+            {
+                Snackbar.Add(result.Message ?? "Error al eliminar el avistamiento", Severity.Warning);
+                return;
+            }
+
+            Snackbar.Add("El avistamiento ha sido eliminado correctamente", Severity.Success);
+
+            await LoadSightings();
+            selectedSighting = null;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error inesperado: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isProcessing = false;
+            actionType = null;
+        }
+    }
+
+    private string GetRowClass(SightingDTO? sighting, int index)
+        => selectedSighting?.Id == sighting?.Id ? "selected-row" : string.Empty;
 }

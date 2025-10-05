@@ -1,4 +1,4 @@
-﻿using DTOs.Sighting;
+﻿using DTOs;
 using Infrastructure.API;
 using Infrastructure.API.DTOs_CRUDs;
 

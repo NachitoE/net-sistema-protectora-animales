@@ -1,5 +1,5 @@
 ﻿using Domain;
-using DTOs.Sighting;
+using DTOs;
 using Helpers;
 using Infrastructure.Data;
 

@@ -1,5 +1,5 @@
 ﻿
-using DTOs.Sighting;
+using DTOs;
 using Infrastructure.API;
 using System.Drawing;
 using static System.Runtime.InteropServices.JavaScript.JSType;

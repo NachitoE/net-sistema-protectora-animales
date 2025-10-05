@@ -1,6 +1,5 @@
 ﻿using Domain;
 using DTOs;
-using DTOs.Sighting;
 
 namespace Helpers
 {
