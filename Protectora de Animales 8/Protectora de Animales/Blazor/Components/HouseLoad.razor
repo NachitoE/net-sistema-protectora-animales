@@ -1,0 +1,54 @@
+﻿<h3>Carga de Casa</h3>
+
+@using System.ComponentModel.DataAnnotations
+
+<MudPaper Class="pa-4" Elevation="2">
+    <MudText Typo="Typo.h6" Class="mb-3">Información de Casa de Tránsito</MudText>
+    
+    <MudAlert Severity="Severity.Info" Dense="true" Class="mb-3">
+        Como usuario de tránsito, debe proporcionar información sobre su vivienda.
+    </MudAlert>
+
+    <MudGrid>
+        <MudItem xs="12" sm="8">
+            <MudTextField T="string" 
+                          Label="Dirección" 
+                          Required="true" 
+                          RequiredError="La dirección es obligatoria" 
+                          @bind-Value="@HouseData.Address"
+                          Immediate="true" />
+        </MudItem>
+        
+        <MudItem xs="12" sm="4">
+            <MudNumericField T="int" 
+                             Label="Número" 
+                             Required="true" 
+                             RequiredError="El número es obligatorio" 
+                             @bind-Value="@HouseData.AddressNumber"
+                             Min="1"
+                             Immediate="true" />
+        </MudItem>
+        
+        <MudItem xs="12" sm="6">
+            <MudNumericField T="int" 
+                             Label="Capacidad de Animales" 
+                             @bind-Value="@HouseData.Capacity"
+                             Min="1"
+                             Max="20"
+                             HelperText="Cantidad de animales que puede alojar"
+                             Immediate="true" />
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public HouseFormData HouseData { get; set; } = new HouseFormData();
+
+    public class HouseFormData
+    {
+        public string Address { get; set; } = string.Empty;
+        public int AddressNumber { get; set; } = 1;
+        public int Capacity { get; set; } = 1;
+    }
+}

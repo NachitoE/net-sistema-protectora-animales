@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace DTOs.Sighting
+namespace DTOs
 {
     public class SightingDTO
     {

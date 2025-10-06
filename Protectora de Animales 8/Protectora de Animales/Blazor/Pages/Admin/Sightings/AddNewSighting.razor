@@ -1,0 +1,185 @@
+﻿@page "/add-new-sighting"
+@using System.ComponentModel.DataAnnotations
+@inject ISnackbar Snackbar
+
+<h3>Registrar Nuevo Avistamiento</h3>
+
+<MudGrid>
+    <MudItem xs="12" sm="8" md="6">
+        <MudPaper Class="pa-4">
+            <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
+                <MudTextField T="string" 
+                              Label="Dirección del Avistamiento" 
+                              Required="true" 
+                              RequiredError="La dirección es obligatoria" 
+                              @bind-Value="@formData.SightingAddressName"
+                              Immediate="true" />
+                              
+                <MudTextField T="string" 
+                              Label="Número/Altura" 
+                              Required="true" 
+                              RequiredError="El número es obligatorio" 
+                              @bind-Value="@formData.SightingAddressNumber"
+                              Immediate="true" />
+                              
+                <MudDatePicker Label="Fecha del Avistamiento"
+                               Required="true"
+                               RequiredError="La fecha es obligatoria"
+                               @bind-Date="@formData.SightingDate"
+                               MaxDate="@DateTime.Today"
+                               MinDate="@minDate"
+                               DateFormat="dd/MM/yyyy"
+                               Immediate="true" />
+                               
+                <MudTimePicker Label="Hora del Avistamiento"
+                               Required="true"
+                               RequiredError="La hora es obligatoria"
+                               @bind-Time="@formData.SightingTime"
+                               Immediate="true"
+                               TimeFormat="HH:mm" />
+                
+                <MudTextField T="string" 
+                              Label="Descripción del Avistamiento" 
+                              Required="true" 
+                              RequiredError="La descripción es obligatoria" 
+                              @bind-Value="@formData.SightingDescription"
+                              Lines="5"
+                              Immediate="true"
+                              HelperText="Describe el animal avistado: raza, color, tamaño, comportamiento, etc." />
+                              
+                <MudAlert Severity="Severity.Info" Class="mt-2" Dense="true">
+                    <strong>Ejemplo de descripción:</strong><br/>
+                    Perro pequeño con manchas en la espalda vagando solo por la calle.
+                    Sociable, parece perdido. Toda descripción que recuerdes nos es de ayuda.
+                </MudAlert>
+            </MudForm>
+        </MudPaper>
+        
+        <MudButton OnClick="@SubmitReport" 
+                   Disabled="@(isLoading || !success)" 
+                   Class="mt-4" 
+                   Variant="Variant.Filled" 
+                   Color="Color.Primary"
+                   FullWidth="true">
+            @if (isLoading)
+            {
+                <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                <MudText Class="ms-2">Guardando...</MudText>
+            }
+            else
+            {
+                <MudText>Registrar Avistamiento</MudText>
+            }
+        </MudButton>
+    </MudItem>
+</MudGrid>
+
+@if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error" Class="mt-3">@errorMessage</MudAlert>
+}
+
+@code {
+    private bool success { get; set; }
+    private MudForm? form;
+    private AddNewSightingForm formData = new AddNewSightingForm();
+    private bool isLoading = false;
+    private string? errorMessage = null;
+    private DateTime minDate => DateTime.Today.AddDays(-2);
+
+    public class AddNewSightingForm
+    {
+        public string SightingAddressName { get; set; } = string.Empty;
+        public string SightingAddressNumber { get; set; } = string.Empty;
+        public DateTime? SightingDate { get; set; } = null;
+        public TimeSpan? SightingTime { get; set; } = null;
+        public string SightingDescription { get; set; } = string.Empty;
+    }
+
+    private async Task SubmitReport()
+    {
+        if (isLoading) return;
+
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (form != null)
+            {
+                await form.Validate();
+                if (!form.IsValid)
+                {
+                    errorMessage = "Complete todos los campos correctamente";
+                    return;
+                }
+            }
+
+            if (!formData.SightingDate.HasValue)
+            {
+                errorMessage = "Debe seleccionar una fecha válida";
+                return;
+            }
+
+            if (!formData.SightingTime.HasValue)
+            {
+                errorMessage = "Debe seleccionar una hora válida";
+                return;
+            }
+            DateTime sightingDateTime = formData.SightingDate.Value.Date + formData.SightingTime.Value;
+
+            // Validar que la fecha/hora no sea futura ni muy antigua
+            DateTime now = DateTime.Now;
+            DateTime minDate = now.AddDays(-2);
+
+            if (sightingDateTime > now)
+            {
+                errorMessage = "La fecha y hora no pueden ser futuras";
+                return;
+            }
+
+            if (sightingDateTime < minDate)
+            {
+                errorMessage = "La fecha y hora deben ser de los últimos 2 días";
+                return;
+            }
+
+            var request = new SightingRegisterDTO()
+            {
+                SightingAddressName = formData.SightingAddressName,
+                SightingAddressNumber = formData.SightingAddressNumber,
+                SightingDescription = formData.SightingDescription,
+                SightingDateTime = sightingDateTime
+            };
+
+            // Enviar al API
+            var apiClient = ApiClientsFactory.SightingClient();
+            var result = await apiClient.PostAsync(request);
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al guardar el avistamiento";
+                return;
+            }
+
+            Snackbar.Add($"Avistamiento guardado con éxito. ID: {result.Data.Id}", Severity.Success);
+
+               //clean
+            formData = new AddNewSightingForm();
+            if (form != null)
+            {
+                await form.ResetAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al guardar el avistamiento: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}

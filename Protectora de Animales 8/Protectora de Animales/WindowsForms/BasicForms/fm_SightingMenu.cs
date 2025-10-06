@@ -1,4 +1,4 @@
-﻿using DTOs.Sighting;
+﻿using DTOs;
 using Infrastructure.API;
 using Infrastructure.API.DTOs_CRUDs;
 
@@ -69,15 +69,6 @@ namespace WindowsForms.BasicForms
 
             var sighting = (SightingDTO)dgv_Sightings.CurrentRow.DataBoundItem;
 
-            if (sighting.SightingState != "Nuevo")
-            {
-                MessageBox.Show("Solo se pueden eliminar avistamientos con estado 'Nuevo'.",
-                                "Acción no permitida",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                return;
-            }
-
             var confirm = MessageBox.Show("¿Está seguro de eliminar este avistamiento?",
                                           "Confirmar eliminación",
                                           MessageBoxButtons.YesNo,
@@ -85,9 +76,19 @@ namespace WindowsForms.BasicForms
 
             if (confirm == DialogResult.No) return;
 
-            sighting.SightingState = "Eliminado";
             SightingDTOClient sightingClient = ApiClientsFactory.SightingClient();
-            await sightingClient.UpdateSighting(sighting.Id, "Eliminado");
+            var res = await sightingClient.DisableSighting(sighting.Id);
+
+            if (!res.Success)
+            {
+                MessageBox.Show(res.Message,
+                                "Acción no permitida",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            
 
             MessageBox.Show("El avistamiento ha sido eliminado correctamente.",
                             "Eliminado",

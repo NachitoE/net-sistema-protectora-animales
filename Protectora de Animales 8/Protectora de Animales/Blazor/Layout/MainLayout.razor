@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 @inject SessionService Session
 <div class="page">
     <div class="sidebar">
@@ -10,7 +11,7 @@
         <div class="top-row px-4">
             @if (Session.Context.IsAuthenticated)
             {
-                <a role="button" class="" @onclick=@Session.LogoutAsync>Cerrar Sesión</a>
+                <a role="button" class="" @onclick=@OnLogout>Cerrar Sesión</a>
             }
         </div>
         
@@ -27,5 +28,10 @@
         Session.OnChanged += StateHasChanged;
     }
 
+    private async Task OnLogout()
+    {
+        await Session.LogoutAsync();
+        NavigationManager.NavigateTo("/");
+    }
 
 }

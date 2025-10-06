@@ -1,0 +1,293 @@
+﻿@page "/register"
+@using System.ComponentModel.DataAnnotations
+@using DTOs.House
+@using Helpers
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+@if (Session?.Context?.IsLoading == true)
+{
+    <MudProgressCircular Indeterminate="true" />
+}
+else if (Session?.Context?.IsAuthenticated == true)
+{
+    <MudPaper Class="pa-4">
+        <MudText Typo="Typo.h6">Ya te encuentras loggeado, volviendo a home...</MudText>
+    </MudPaper>
+}
+else
+{
+    <MudPaper Class="pa-6" Elevation="3">
+        <MudText Typo="Typo.h4" Class="mb-4">Registro de Usuario</MudText>
+
+        <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6" Class="mb-2">Información Personal</MudText>
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField T="string"
+                                  Label="Nombre"
+                                  MaxLength="50"
+                                  Required="true"
+                                  RequiredError="El nombre es obligatorio"
+                                  @bind-Value="@formData.Name"
+                                  Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField T="string"
+                                  Label="Apellido"
+                                  MaxLength="50"
+                                  Required="true"
+                                  RequiredError="El apellido es obligatorio"
+                                  @bind-Value="@formData.SurName"
+                                  Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField T="string"
+                                  Label="DNI"
+                                  MaxLength="8"
+                                  Required="true"
+                                  RequiredError="El DNI es obligatorio"
+                                  @bind-Value="@formData.DNI"
+                                  Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudSelect T="string"
+                               Label="Tipo de Usuario"
+                               Required="true"
+                               RequiredError="Debe seleccionar un tipo de usuario"
+                               @bind-Value="@formData.UserType"
+                               Immediate="true">
+                        @foreach (var userType in userTypes)
+                        {
+                            <MudSelectItem Value="@userType">@userType</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6" Class="mb-2 mt-2">Credenciales</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string"
+                                  Label="Nombre de Usuario"
+                                  Required="true"
+                                  MaxLength="25"
+                                  RequiredError="El nombre de usuario es obligatorio"
+                                  @bind-Value="@formData.UserName"
+                                  Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField T="string"
+                                  Label="Contraseña"
+                                  Required="true"
+                                  MaxLength="25"
+                                  RequiredError="La contraseña es obligatoria"
+                                  @bind-Value="@formData.Password"
+                                  InputType="InputType.Password"
+                                  Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField T="string"
+                                  Label="Confirmar Contraseña"
+                                  MaxLength="25"
+                                  Required="true"
+                                  RequiredError="Debe confirmar la contraseña"
+                                  @bind-Value="@formData.PasswordCheck"
+                                  InputType="InputType.Password"
+                                  Validation="@(new Func<string, string?>(ValidatePasswordMatch))"
+                                  Immediate="true" />
+                </MudItem>
+
+                @if (formData.UserType == "Transito")
+                {
+                    <MudItem xs="12">
+                        <MudDivider Class="my-4" />
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        <HouseLoad HouseData="@houseData" />
+                    </MudItem>
+                }
+
+                <MudItem xs="12" Class="mt-4">
+                    <MudButton OnClick="@RegisterUser"
+                               Disabled="@(isLoading || !success)"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               FullWidth="true"
+                               Size="MudBlazor.Size.Large">
+                        @if (isLoading)
+                        {
+                            <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                            <MudText Class="ms-2">Registrando...</MudText>
+                        }
+                        else
+                        {
+                            <MudText>Registrar Usuario</MudText>
+                        }
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </MudPaper>
+}
+
+
+@if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error" Class="mt-3">@errorMessage</MudAlert>
+}
+
+@code {
+    private bool success { get; set; }
+    private MudForm? form;
+    private RegisterFormData formData = new RegisterFormData();
+    private HouseLoad.HouseFormData houseData = new HouseLoad.HouseFormData();
+    private bool isLoading = false;
+    private string? errorMessage = null;
+
+    private List<string> userTypes = new List<string> { "Adoptante", "Voluntario", "Transito" };
+
+    public class RegisterFormData
+    {
+        public string Name { get; set; } = string.Empty;
+        public string SurName { get; set; } = string.Empty;
+        public string DNI { get; set; } = string.Empty;
+        public string UserType { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string PasswordCheck { get; set; } = string.Empty;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        while (Session.Context.IsLoading)
+        {
+            await Task.Delay(100);
+        }
+        if (Session.Context.IsAuthenticated)
+        {
+            StateHasChanged();
+            await Task.Delay(2000);
+            NavigationManager.NavigateTo("/");
+        }
+    }
+    private string? ValidatePasswordMatch(string passwordCheck)
+    {
+        if (string.IsNullOrEmpty(passwordCheck))
+            return null;
+
+        if (passwordCheck != formData.Password)
+            return "Las contraseñas no coinciden";
+
+        return null;
+    }
+
+    private async Task RegisterUser()
+    {
+        if (isLoading) return;
+
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (form != null)
+            {
+                await form.Validate();
+                if (!form.IsValid)
+                {
+                    errorMessage = "Complete todos los campos correctamente";
+                    return;
+                }
+            }
+
+            if (formData.Password != formData.PasswordCheck)
+            {
+                errorMessage = "Las contraseñas no coinciden";
+                return;
+            }
+
+            var authClient = ApiClientsFactory.AuthClient();
+
+            var userRegDTO = new UserRegisterRequestDTO
+            {
+                Name = formData.Name,
+                SurName = formData.SurName,
+                DNI = formData.DNI,
+                UserType = formData.UserType,
+                UserName = formData.UserName,
+                Password = formData.Password
+            };
+
+            var userRegisterResponse = await authClient.RegisterAsync(userRegDTO);
+
+            if (!userRegisterResponse.Success || userRegisterResponse.Data == null)
+            {
+                errorMessage = userRegisterResponse.Message ?? "Error al registrar el usuario";
+                return;
+            }
+
+            if (formData.UserType == "Transito")
+            {
+                if (string.IsNullOrWhiteSpace(houseData.Address) || houseData.AddressNumber <= 0)
+                {
+                    errorMessage = "Debe completar la información de la casa de tránsito";
+                    return;
+                }
+
+                var houseClient = ApiClientsFactory.HouseClient();
+                var houseRegDTO = new HouseRegisterRequestDTO
+                {
+                    UserId = userRegisterResponse.Data.UserId,
+                    Address = houseData.Address,
+                    AddressNumber = houseData.AddressNumber,
+                    Capacity = houseData.Capacity
+                };
+
+                var houseResponse = await houseClient.PostAsync(houseRegDTO);
+
+                if (!houseResponse.Success)
+                {
+                    errorMessage = houseResponse.Message ?? "Error al registrar la casa";
+                    return;
+                }
+
+                Snackbar.Add("Usuario de tránsito y casa registrados exitosamente", Severity.Success);
+            }
+            else
+            {
+                Snackbar.Add("Usuario creado exitosamente", Severity.Success);
+            }
+
+            formData = new RegisterFormData();
+            houseData = new HouseLoad.HouseFormData();
+            if (form != null)
+            {
+                await form.ResetAsync();
+            }
+
+            await Task.Delay(2000);
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}

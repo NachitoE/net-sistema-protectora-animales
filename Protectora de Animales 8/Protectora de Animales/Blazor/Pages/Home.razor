@@ -18,10 +18,17 @@ else if (Session.Context.IsAuthenticated)
 }
 else // no loggeado
 {
-    <Login/>
+    <Login />
+    <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Center">
+        ¿Nuevo Aquí?
+        <MudLink Href="/register" Color="Color.Primary" Underline="Underline.Hover">
+            Registrarse
+        </MudLink>
+    </MudText>
 }
 
 @code {
+
     protected override async Task OnInitializedAsync()
     {
         Session.OnChanged += StateHasChanged;

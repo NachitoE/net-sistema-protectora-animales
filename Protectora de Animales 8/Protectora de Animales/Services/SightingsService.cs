@@ -1,5 +1,5 @@
 ﻿using Domain;
-using DTOs.Sighting;
+using DTOs;
 using Helpers;
 using Infrastructure.Data;
 
@@ -73,6 +73,31 @@ namespace Services
 
             bool updated = sightingRepository.Update(sightingToUpdate);
             return updated ? sightingToUpdate.ToDTO() : null;
+        }
+
+        /// <summary>
+        /// Deshabilita, si es posible, el Avistamiento
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>SightingBaseResponseDTO con un mensaje aclarando en caso de Success False</returns>
+        public SightingBaseResponseDTO Disable(string id)
+        {
+            SightingDTO sightingDTO = Get(id);
+            if (sightingDTO.SightingState != EnumConversion.SightingStateToString(Sighting.SightingState.Nuevo))
+            {
+                return new SightingBaseResponseDTO()
+                {
+                    Message = "Solo se pueden eliminar avistamientos con estado 'Nuevo'.",
+                    Success = false
+                };
+            }
+            sightingDTO.SightingState = EnumConversion.SightingStateToString(Sighting.SightingState.Eliminado);
+            var newSighting = Update(sightingDTO);
+            return new SightingBaseResponseDTO()
+            {
+                Sighting = newSighting,
+                Success = true
+            };
         }
     }
 }

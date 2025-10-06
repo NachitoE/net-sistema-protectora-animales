@@ -1,4 +1,5 @@
-﻿using DTOs.Sighting;
+﻿using DTOs;
+using Helpers;
 
 
 namespace Infrastructure.API.DTOs_CRUDs
@@ -20,6 +21,18 @@ namespace Infrastructure.API.DTOs_CRUDs
 
             return PutAsync(id, data);
         }
+
+        public Task<ApiResult<SightingDTO>> DisableSighting(string id)
+        {
+            var data = new
+            {
+                Id = id,
+                SightingState = "Eliminado" //type safety fix
+            };
+
+            return PutAsync(id, data);
+        }
+
     }
     
 }

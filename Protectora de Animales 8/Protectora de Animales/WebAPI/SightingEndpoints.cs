@@ -1,4 +1,5 @@
-﻿using DTOs.Sighting;
+﻿using DTOs;
+using Helpers;
 using Services;
 
 namespace WebAPI
@@ -34,7 +35,14 @@ namespace WebAPI
             app.MapPut("/sightings/{id}", (string id, SightingDTO dto) =>
             {
                 if (id != dto.Id) return Results.BadRequest("ID mismatch");
+            //Está intentando eliminar, medio hacky esto igual
+            if (dto.SightingState == EnumConversion.SightingStateToString(Domain.Sighting.SightingState.Eliminado))
+            {
+                var disabledBaseResponse = sightingsService.Disable(id);
+                return disabledBaseResponse.Success ? Results.Ok(disabledBaseResponse.Sighting) : Results.BadRequest( new { error = disabledBaseResponse.Message} );
+                }
                 var updated = sightingsService.Update(dto);
+                
                 return updated is not null ? Results.Ok(updated) : Results.NotFound();
             });
 
