@@ -36,6 +36,7 @@ else
                         <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
                         <MudSelectItem Value="@("Voluntario")">Voluntario</MudSelectItem>
                         <MudSelectItem Value="@("Transito")">Tránsito</MudSelectItem>
+                        <MudSelectItem Value="@("Adoptante")">Adoptante</MudSelectItem>
                     </MudSelect>
                 </EditTemplate>
             </PropertyColumn>
@@ -72,16 +73,27 @@ else
         if (user.UserType == EnumConversion.UserTypeToString(Domain.UserType.Transito))
         {
             var houseClient = ApiClientsFactory.HouseClient();
-            var existingHouseResult = await houseClient.GetHouseByUserId(user.Id);
+            var userClient = ApiClientsFactory.UserClient();
 
-            if (existingHouseResult.Success && existingHouseResult.Data != null)
+            var existingHouseResult = await houseClient.GetHouseByUserId(user.Id);
+            var userAnimals = await userClient.GetUserAnimalsAsync(user.Id);
+            int userAnimalsCount = userAnimals.Data.Count();
+            bool canUserAllocateAnimals = true;
+            bool hasHouse = existingHouseResult.Success && existingHouseResult.Data != null;
+            //si tiene 0 animales, nunca va a entrar acá
+            if (hasHouse && userAnimals.Success)
             {
-                //ya tiene casa asignada
+                canUserAllocateAnimals = userAnimalsCount < existingHouseResult.Data.Capacity;
+            }
+
+            //ya tiene casa asignada y puede alojar animales, usamos esa casa
+            if (hasHouse && canUserAllocateAnimals)
+            {
                 Snackbar.Add($"El usuario {user.UserName} ya tiene una casa asignada", Severity.Info);
             }
-            else //no tiene casa asignada, se la cargamos
+            else //no tiene casa asignada o su casa no cumple con las condiciones, se la cargamos
             {
-                var parameters = new DialogParameters { ["UserId"] = user.Id };
+                var parameters = new DialogParameters { ["UserId"] = user.Id, ["MinimumCapacity"] = userAnimalsCount };
                 var dialog = await DialogService.ShowAsync<HouseLoadDialog>("Asignar Casa", parameters);
                 var result = await dialog.Result;
 
@@ -91,7 +103,27 @@ else
                     return;
                 }
                 HouseRegisterRequestDTO houseRegReqDTO = (HouseRegisterRequestDTO)result.Data;
-                var loadHouseResult = await houseClient.PostAsync(houseRegReqDTO);
+                if (userAnimalsCount < houseRegReqDTO.Capacity)
+                {
+                   //aaa 
+                }
+                ApiResult<HouseDTO> loadHouseResult = default;
+                if (hasHouse)
+                {
+                    //actualizamos la casa existente
+                    HouseDTO houseDTO = new()
+                        {
+                            Address = houseRegReqDTO.Address,
+                            AddressNumber = houseRegReqDTO.AddressNumber,
+                            Capacity = houseRegReqDTO.Capacity
+                        };
+                    loadHouseResult = await houseClient.PutAsync(existingHouseResult.Data.Id, houseDTO);
+                }
+                else
+                {
+                    //creamos una nueva casa
+                    loadHouseResult = await houseClient.PostAsync(houseRegReqDTO);
+                }
                 if (!loadHouseResult.Success)
                 {
                     Snackbar.Add($"Error: {loadHouseResult.Message}", Severity.Error);
@@ -115,7 +147,6 @@ else
             return;
         }
         Snackbar.Add($"Usuario {updatedUser.UserName} actualizado", Severity.Success);
-        //si es transito verificar si necesita asignarsele una casa
         
 
     }

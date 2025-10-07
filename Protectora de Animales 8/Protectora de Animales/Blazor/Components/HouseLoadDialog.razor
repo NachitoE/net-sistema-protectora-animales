@@ -2,7 +2,7 @@
 
 <MudDialog>
     <DialogContent>
-        <HouseLoad @ref="houseLoadRef" HouseData="@houseData" />
+        <HouseLoad @ref="houseLoadRef" HouseData="@houseData" MinimumCapacity="@MinimumCapacity" />
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancelar</MudButton>
@@ -16,6 +16,8 @@
 
     [Parameter] 
     public string UserId { get; set; } = string.Empty;
+    [Parameter]
+    public int MinimumCapacity { get; set; } = 1;
 
     private HouseLoad? houseLoadRef;
     private HouseLoad.HouseFormData houseData = new();

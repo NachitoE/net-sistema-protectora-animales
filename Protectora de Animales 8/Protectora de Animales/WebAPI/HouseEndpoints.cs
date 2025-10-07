@@ -36,24 +36,44 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
-            app.MapPut("/houses/capacity", (HouseChangeCapacityDTO houseCapDTO) =>
+            app.MapPut("/houses/{id}", (string id, HouseDTO dto) =>
             {
                 try
                 {
-                    HousesService housesService = new HousesService();
-                    HouseBaseResponseDTO houseResponseDTO = housesService.ChangeCapacity(houseCapDTO);
-                    if (!houseResponseDTO.Success) throw new ArgumentException(houseResponseDTO.Message);
-                    return Results.Ok(housesService.Get(houseResponseDTO.HouseId));
+                    HousesService houseService  = new HousesService();
+                    HouseDTO? houseDTO = houseService.Modify(id, dto);
+                    if (houseDTO == null) throw new ArgumentException("No se pudo modificar el usuario");
+                    return Results.Ok(houseDTO);
                 }
                 catch (ArgumentException ex)
                 {
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-                .WithName("Update House Capacity")
+                .RequireAuthorization("AdminOnly")
+                .WithName("Update House")
                 .Produces<HouseDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
+
+            app.MapPut("/houses/capacity", (HouseChangeCapacityDTO houseCapDTO) =>
+                {
+                    try
+                    {
+                        HousesService housesService = new HousesService();
+                        HouseBaseResponseDTO houseResponseDTO = housesService.ChangeCapacity(houseCapDTO);
+                        if (!houseResponseDTO.Success) throw new ArgumentException(houseResponseDTO.Message);
+                        return Results.Ok(housesService.Get(houseResponseDTO.HouseId));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        return Results.BadRequest(new { error = ex.Message });
+                    }
+                })
+                    .WithName("Update House Capacity")
+                    .Produces<HouseDTO>(StatusCodes.Status200OK)
+                    .Produces(StatusCodes.Status400BadRequest)
+                    .WithOpenApi();
 
             app.MapPost("/houses", (HouseRegisterRequestDTO houseRegDTO) =>
             {
