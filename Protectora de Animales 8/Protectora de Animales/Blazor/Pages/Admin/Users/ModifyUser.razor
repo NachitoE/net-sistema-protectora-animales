@@ -1,5 +1,8 @@
 ﻿@page "/modify-users"
+@using DTOs.House
+@using Helpers;
 @inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
 <h3>Modificar Usuarios</h3>
 @if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
@@ -65,15 +68,45 @@ else
 
     private async Task OnCommittedItemChanges(UserDTO user)
     {
-        var updateResult = await ApiClientsFactory.UserClient().PutAsync(user.Id, user);
-        if (updateResult.Success)
+        //es transito? houseload form
+        if (user.UserType == EnumConversion.UserTypeToString(Domain.UserType.Transito))
         {
-            Snackbar.Add($"Usuario {user.UserName} actualizado", Severity.Success);
+            var parameters = new DialogParameters { ["UserId"] = user.Id };
+            var dialog = await DialogService.ShowAsync<HouseLoadDialog>("Asignar Casa", parameters);
+            var result = await dialog.Result;
+
+            if (result.Canceled || result.Data == null)
+            {
+                Snackbar.Add($"Algo mal salió en la carga de la casa", Severity.Error);
+                return;
+            }
+            HouseRegisterRequestDTO houseRegReqDTO = (HouseRegisterRequestDTO)result.Data;
+            var loadHouseResult = await ApiClientsFactory.HouseClient().PostAsync(houseRegReqDTO);
+            if (!loadHouseResult.Success)
+            {
+                Snackbar.Add($"Error: {loadHouseResult.Message}", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add($"Casa {loadHouseResult.Data.Address} {loadHouseResult.Data.AddressNumber} asignada a {user.UserName}", Severity.Success);
         }
-        else
+        //continue normal user update
+        var updateResult = await ApiClientsFactory.UserClient().PutAsync(user.Id, user);
+        if (!updateResult.Success)
         {
             Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
+            return;
         }
+        var updatedUser = updateResult.Data;
+        if (updatedUser == null)
+        {
+            Snackbar.Add($"Usuario {user.UserName} parece haber sido actualizado, pero algo pudo haber ocurrido", Severity.Warning);
+            return;
+        }
+        Snackbar.Add($"Usuario {user.UserName} actualizado", Severity.Success);
+        //si es transito verificar si necesita asignarsele una casa
+        
+
     }
 
     private EventCallback<UserDTO> OnCommittedItemChangesHandler =>
