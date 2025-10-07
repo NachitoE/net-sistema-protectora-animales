@@ -15,5 +15,10 @@ namespace Infrastructure.API.DTOs_CRUDs
             var res = await _apiHttpClient.PutAsync<HouseDTO>($"/{_endpoint}/capacity", houseChangeCapacityDTO);
             return res;
         }
+        public async Task<ApiResult<HouseDTO>> GetHouseByUserId(string userId)
+        { 
+            var res = await _apiHttpClient.GetAsync<HouseDTO>($"/{_endpoint}/user-house/{userId}");
+            return res;
+        }
     }
 }

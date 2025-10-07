@@ -71,24 +71,35 @@ else
         //es transito? houseload form
         if (user.UserType == EnumConversion.UserTypeToString(Domain.UserType.Transito))
         {
-            var parameters = new DialogParameters { ["UserId"] = user.Id };
-            var dialog = await DialogService.ShowAsync<HouseLoadDialog>("Asignar Casa", parameters);
-            var result = await dialog.Result;
+            var houseClient = ApiClientsFactory.HouseClient();
+            var existingHouseResult = await houseClient.GetHouseByUserId(user.Id);
 
-            if (result.Canceled || result.Data == null)
+            if (existingHouseResult.Success && existingHouseResult.Data != null)
             {
-                Snackbar.Add($"Algo mal salió en la carga de la casa", Severity.Error);
-                return;
+                //ya tiene casa asignada
+                Snackbar.Add($"El usuario {user.UserName} ya tiene una casa asignada", Severity.Info);
             }
-            HouseRegisterRequestDTO houseRegReqDTO = (HouseRegisterRequestDTO)result.Data;
-            var loadHouseResult = await ApiClientsFactory.HouseClient().PostAsync(houseRegReqDTO);
-            if (!loadHouseResult.Success)
+            else //no tiene casa asignada, se la cargamos
             {
-                Snackbar.Add($"Error: {loadHouseResult.Message}", Severity.Error);
-                return;
-            }
+                var parameters = new DialogParameters { ["UserId"] = user.Id };
+                var dialog = await DialogService.ShowAsync<HouseLoadDialog>("Asignar Casa", parameters);
+                var result = await dialog.Result;
 
-            Snackbar.Add($"Casa {loadHouseResult.Data.Address} {loadHouseResult.Data.AddressNumber} asignada a {user.UserName}", Severity.Success);
+                if (result.Canceled || result.Data == null)
+                {
+                    Snackbar.Add($"Algo mal salió en la carga de la casa", Severity.Error);
+                    return;
+                }
+                HouseRegisterRequestDTO houseRegReqDTO = (HouseRegisterRequestDTO)result.Data;
+                var loadHouseResult = await houseClient.PostAsync(houseRegReqDTO);
+                if (!loadHouseResult.Success)
+                {
+                    Snackbar.Add($"Error: {loadHouseResult.Message}", Severity.Error);
+                    return;
+                }
+
+                Snackbar.Add($"Casa {loadHouseResult.Data.Address} {loadHouseResult.Data.AddressNumber} asignada a {user.UserName}", Severity.Success);
+            }
         }
         //continue normal user update
         var updateResult = await ApiClientsFactory.UserClient().PutAsync(user.Id, user);
@@ -103,7 +114,7 @@ else
             Snackbar.Add($"Usuario {user.UserName} parece haber sido actualizado, pero algo pudo haber ocurrido", Severity.Warning);
             return;
         }
-        Snackbar.Add($"Usuario {user.UserName} actualizado", Severity.Success);
+        Snackbar.Add($"Usuario {updatedUser.UserName} actualizado", Severity.Success);
         //si es transito verificar si necesita asignarsele una casa
         
 

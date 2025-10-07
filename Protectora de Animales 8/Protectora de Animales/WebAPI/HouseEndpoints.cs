@@ -74,7 +74,30 @@ namespace WebAPI
                 }
             })
                 .WithName("Register House")
-                .Produces<UserDTO>(StatusCodes.Status201Created)
+                .Produces<HouseDTO>(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status400BadRequest)
+                .WithOpenApi();
+
+            app.MapGet("/houses/user-house/{userId}", (string userId) =>
+            {
+                try
+                {
+                    HousesService housesService = new HousesService();
+                    // un usuario puede tener solo 1 casa asignada
+                    var house = housesService.GetHouseBelongingToUser(userId);
+                    if (house == null)
+                    {
+                        throw new ArgumentException("El usuario no tiene una casa asignada");
+                    }
+                    return Results.Ok(house);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("Get House by userid")
+                .Produces<HouseDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
         }
