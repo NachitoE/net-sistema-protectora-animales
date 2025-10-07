@@ -45,6 +45,11 @@ else
                 </EditTemplate>
             </PropertyColumn>
             <PropertyColumn Property="x => x.Description" Title="Descripción"/>
+            <TemplateColumn Title="Usuario">
+                <CellTemplate>
+                    <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
             <TemplateColumn CellClass="d-flex justify-end">
                 <CellTemplate>
                     <MudIconButton Size="Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
