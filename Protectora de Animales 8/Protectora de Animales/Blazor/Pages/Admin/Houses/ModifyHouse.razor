@@ -75,40 +75,42 @@ else
         if (house.Capacity < 1)
         {
             Snackbar.Add("La capacidad debe ser al menos 1", Severity.Error);
+            await ReloadData();
             return;
         }
 
         var userClient = ApiClientsFactory.UserClient();
         var userAnimalsResult = await userClient.GetUserAnimalsAsync(house.UserId);
-        
+
         if (userAnimalsResult.Success)
         {
             int currentAnimalsCount = userAnimalsResult.Data.Count();
-            
             if (house.Capacity < currentAnimalsCount)
             {
                 Snackbar.Add($"No se puede reducir la capacidad a {house.Capacity}. El usuario actualmente tiene {currentAnimalsCount} animales asignados.", Severity.Error);
+                await ReloadData();
                 return;
             }
         }
 
         var houseClient = ApiClientsFactory.HouseClient();
         var updateResult = await houseClient.PutAsync(house.Id, house);
-        
+
         if (!updateResult.Success)
         {
             Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
+            await ReloadData();
             return;
         }
-        
-        var updatedHouse = updateResult.Data;
-        if (updatedHouse == null)
-        {
-            Snackbar.Add($"Casa en {house.Address} {house.AddressNumber} parece haber sido actualizada, pero algo pudo haber ocurrido", Severity.Warning);
-            return;
-        }
-        
-        Snackbar.Add($"Casa en {updatedHouse.Address} {updatedHouse.AddressNumber} actualizada exitosamente", Severity.Success);
+
+        Snackbar.Add($"Casa actualizada exitosamente", Severity.Success);
+    }
+
+    private async Task ReloadData()
+    {
+        var result = await ApiClientsFactory.HouseClient().GetAllAsync();
+        if (result.Success && result.Data != null)
+            elements = result.Data.ToList();
     }
 
     private EventCallback<HouseDTO> OnCommittedItemChangesHandler =>
