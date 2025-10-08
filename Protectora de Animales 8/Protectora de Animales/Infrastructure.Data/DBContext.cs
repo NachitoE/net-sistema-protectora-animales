@@ -217,6 +217,34 @@ namespace Infrastructure.Data
      }
  );
             });
+
+            modelBuilder.Entity<MedicalCheckUp>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.User)
+                    .IsRequired();
+
+                entity.HasOne(e => e.UserId)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId);
+
+                entity.Property(e => e.AnimalId)
+                    .IsRequired();
+
+                entity.HasOne(e => e.Animal)
+                    .WithMany()
+                    .HasForeignKey(e => e.AnimalId);
+
+                entity.Property(e => e.CheckUpDate)
+                    .IsRequired();
+
+                entity.Property(e => e.Observation)
+                    .IsRequired();
+
+            });
         }
     }
 }

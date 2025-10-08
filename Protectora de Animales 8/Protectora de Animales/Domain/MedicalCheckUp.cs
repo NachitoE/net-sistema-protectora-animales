@@ -33,6 +33,27 @@ namespace Domain
             get { return _observation; }
             set { _observation = value; }
         }
+        public string AnimalId
+        {
+            get { return _animalId; }
+            set { _animalId = value; }
+        }
+
+        public User User
+        {
+            get => _user;
+            set => _user = value;
+        }
+
+        private User? _user;
+
+        public Animal Animal
+        {
+            get => _animal;
+            set => _animal = value;
+        }
+
+        private Animal? _animal;
         #endregion
 
         #region Constructor
