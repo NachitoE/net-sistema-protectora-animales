@@ -1,0 +1,44 @@
+﻿@using DTOs.House
+
+<MudDialog>
+    <DialogContent>
+        <HouseLoad @ref="houseLoadRef" HouseData="@houseData" MinimumCapacity="@MinimumCapacity" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Asignar Casa</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    IMudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter] 
+    public string UserId { get; set; } = string.Empty;
+    [Parameter]
+    public int MinimumCapacity { get; set; } = 1;
+
+    private HouseLoad? houseLoadRef;
+    private HouseLoad.HouseFormData houseData = new();
+
+    private void Submit()
+    {
+        if (string.IsNullOrWhiteSpace(houseData.Address) || houseData.AddressNumber <= 0)
+        {
+            return;
+        }
+
+        var dto = new HouseRegisterRequestDTO
+        {
+            UserId = UserId,
+            Address = houseData.Address,
+            AddressNumber = houseData.AddressNumber,
+            Capacity = houseData.Capacity
+        };
+
+        MudDialog.Close(DialogResult.Ok(dto));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

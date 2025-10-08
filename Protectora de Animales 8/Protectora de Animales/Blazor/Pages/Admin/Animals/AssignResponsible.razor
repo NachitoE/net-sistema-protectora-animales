@@ -107,6 +107,11 @@ else if(SelectedAnimal != null)
         }
 
         isUserLoading = false;
+
+        if (availableAnimals.Count == 0 || availableUsersToAdopt.Count == 0)
+        {
+            errorMessage = $"No existen {(availableUsersToAdopt.Count == 0 && availableUsersToAdopt.Count == 0 ? "ni usuarios ni animales" : (availableUsersToAdopt.Count == 0 ? "usuarios" : "animales"))}  disponibles";
+        }
     }
 
     private async Task OnAssignClicked(MouseEventArgs args)

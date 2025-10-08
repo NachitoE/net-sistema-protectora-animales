@@ -31,7 +31,7 @@
 
     
 }
-else if(Session.CurrentUser.UserType == "Admin")
+        else if (Session.CurrentUser.UserType == "Admin") // ----- ADMIN -----
 {
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -41,6 +41,11 @@ else if(Session.CurrentUser.UserType == "Admin")
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="modify-users">
                     <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Modificar/Ver Usuarios
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="modify-animals">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Modificar/Ver Animales
                 </NavLink>
             </div>
             <div class="nav-item px-3">
@@ -63,8 +68,43 @@ else if(Session.CurrentUser.UserType == "Admin")
                     <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Registrar Avistamiento
                 </NavLink>
             </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="modify-houses">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Modificar/Ver Casas
+                </NavLink>
+            </div>
         }
-           
+        else if (Session.CurrentUser.UserType == "Transito") // ----- TRANSITO -----
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="my-animals">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mis Animales
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="sightings-menu">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Menú Avistamientos
+                </NavLink>
+            </div>
+        }
+        else if (Session.CurrentUser.UserType == "Voluntario") // ----- VOLUNTARIO -----
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="my-animals">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Mis Animales
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="sightings-menu">
+                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Menú Avistamientos
+                </NavLink>
+            </div>
+        }
+        else if (Session.CurrentUser.UserType == "Adoptante") // ----- ADOPTANTE -----
+        {
+            
+        }
+
     </nav>
 </div>
 @code {

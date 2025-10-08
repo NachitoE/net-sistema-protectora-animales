@@ -20,12 +20,12 @@
         </MudItem>
         
         <MudItem xs="12" sm="4">
-            <MudNumericField T="int" 
+            <MudNumericField T="int"
                              Label="Número" 
                              Required="true" 
                              RequiredError="El número es obligatorio" 
                              @bind-Value="@HouseData.AddressNumber"
-                             Min="1"
+                             HideSpinButtons="true"
                              Immediate="true" />
         </MudItem>
         
@@ -33,7 +33,7 @@
             <MudNumericField T="int" 
                              Label="Capacidad de Animales" 
                              @bind-Value="@HouseData.Capacity"
-                             Min="1"
+                             Min="@MinimumCapacity"
                              Max="20"
                              HelperText="Cantidad de animales que puede alojar"
                              Immediate="true" />
@@ -44,7 +44,13 @@
 @code {
     [Parameter]
     public HouseFormData HouseData { get; set; } = new HouseFormData();
+    [Parameter]
+    public int MinimumCapacity { get; set; } = 1;
 
+    protected override async Task OnInitializedAsync()
+    {
+        HouseData.Capacity = MinimumCapacity;
+    }
     public class HouseFormData
     {
         public string Address { get; set; } = string.Empty;

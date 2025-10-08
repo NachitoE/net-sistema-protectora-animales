@@ -44,6 +44,20 @@ namespace Services
             return null;
         }
 
+        public HouseDTO? Modify(string id, HouseDTO dto)
+        {
+            HouseRepository houseRepository = new HouseRepository();
+            var house = houseRepository.Get(id);
+            if (house == null) return null;
+            house.Address = dto.Address;
+            house.AddressNumber = dto.AddressNumber;
+            house.Capacity = dto.Capacity;
+            if (houseRepository.Update(house))
+            {
+                return house.ToDTO();
+            }
+            return null;
+        }
         public bool Delete(string id)
         {
             HouseRepository houseRepository = new HouseRepository();

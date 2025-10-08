@@ -1,0 +1,47 @@
+@using DTOs
+
+@if (UserData != null)
+{
+    <MudTooltip Text="@GetTooltipText()">
+        <MudText>@DisplayText</MudText>
+    </MudTooltip>
+}
+else if (!string.IsNullOrEmpty(UserId))
+{
+    <MudTooltip Text="@UserId">
+        <MudText>@UserId</MudText>
+    </MudTooltip>
+}
+else
+{
+    <MudText>N/A</MudText>
+}
+
+@code {
+    [Parameter]
+    public string? UserId { get; set; }
+
+    [Parameter]
+    public UserDTO? UserData { get; set; }
+
+    [Parameter]
+    public string? DisplayText { get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Si no se especifica DisplayText, usar UserId
+        DisplayText ??= UserId;
+        var userClient = ApiClientsFactory.UserClient();
+        var userList = await userClient.GetAsync(UserId);
+        if (userList.Success && userList.Data != null)
+        {
+            UserData = userList.Data;
+        }
+    }
+
+    private string GetTooltipText()
+    {
+        if (UserData == null) return UserId ?? "N/A";
+        return $"{UserData.Name} {UserData.SurName} ({UserData.UserName})";
+    }
+}

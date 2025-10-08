@@ -11,10 +11,20 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
+
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        @if (Session.Context.IsLoading)
+        {
+            <div class="loader-overlay">
+                <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Large" />
+            </div>
+        }
+        else
+        {
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        }
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
@@ -26,11 +36,25 @@
 <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
 <script src="_content/MudBlazor/MudBlazor.min.js?v=1"></script>
 
+<style>
+    .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(255,255,255,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+</style>
 
 @code {
     /*
      * PARA AUTENTICACION EN CASCADA
-     *<CascadingAuthenticationState>
+     *
      <CascadingValue Value="Session.Context" IsFixed="false">
 
          </CascadingValue>

@@ -1,0 +1,96 @@
+﻿@page "/modify-animals"
+@inject ISnackbar Snackbar
+
+<h3>Modificar Animales</h3>
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <div>ERROR: @errorMessage</div>
+}
+else
+{
+    <MudDataGrid Items="@elements"
+                 ReadOnly="false"
+                 EditMode="DataGridEditMode.Form"
+                 CommittedItemChanges="@OnCommittedItemChangesHandler"
+                 EditTrigger="DataGridEditTrigger.Manual"
+                 Bordered="true"
+                 Dense="true">
+        <Columns>
+            <PropertyColumn Property="x => x.Name" Title="Nombre" />
+            <PropertyColumn Property="x => x.Species" Title="Especie" >
+                <EditTemplate>
+                    <MudSelect @bind-Value="context.Item.Species" Required Margin="Margin.Dense">
+                        <MudSelectItem Value="@("Perro")">Perro</MudSelectItem>
+                        <MudSelectItem Value="@("Gato")">Gato</MudSelectItem>
+                        <MudSelectItem Value="@("Conejo")">Conejo</MudSelectItem>
+                        <MudSelectItem Value="@("Pájaro")">Pájaro</MudSelectItem>
+                    </MudSelect>
+                </EditTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.BirthDate" Title="Fecha nac." />
+            <PropertyColumn Property="x => x.AnimalState" Title="Estado">
+                <EditTemplate>
+                    <MudSelect @bind-Value="context.Item.AnimalState" Required Margin="Margin.Dense">
+                        <MudSelectItem Value="@("Adoptado")">Adoptado</MudSelectItem>
+                        <MudSelectItem Value="@("Disponible")">Disponible</MudSelectItem>
+                    </MudSelect>
+                </EditTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.Description" Title="Descripción"/>
+            <TemplateColumn Title="Usuario">
+                <CellTemplate>
+                    <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudIconButton Size="Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}
+
+
+@code {
+
+    private bool isLoading = true;
+    private string? errorMessage = null;
+    private List<AnimalDTO> elements = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ApiClientsFactory.AnimalClient().GetAllAsync();
+        isLoading = false;
+        if (!result.Success)
+        {
+            errorMessage = result.Message;
+            return;
+        }
+        elements = result.Data!.ToList();
+    }
+
+    private async Task OnCommittedItemChanges(AnimalDTO animal)
+    {
+        var updateResult = await ApiClientsFactory.AnimalClient().PutAsync(animal.Id, animal);
+        if (updateResult.Success)
+        {
+            Snackbar.Add($"Animal {animal.Name} actualizado", Severity.Success);
+        }
+        else
+        {
+            Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
+        }
+    }
+
+    private EventCallback<AnimalDTO> OnCommittedItemChangesHandler =>
+        EventCallback.Factory.Create<AnimalDTO>(this, OnCommittedItemChanges);
+}

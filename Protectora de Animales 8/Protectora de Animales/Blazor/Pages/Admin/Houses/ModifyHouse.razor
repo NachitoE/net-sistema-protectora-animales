@@ -1,0 +1,118 @@
+﻿@page "/modify-houses"
+@using DTOs.House
+@using Helpers;
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+<h3>Modificar Casas</h3>
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <div>ERROR: @errorMessage</div>
+}
+else
+{
+    <MudDataGrid Items="@elements"
+                 ReadOnly="false"
+                 EditMode="DataGridEditMode.Form"
+                 CommittedItemChanges="@OnCommittedItemChangesHandler"
+                 EditTrigger="DataGridEditTrigger.Manual"
+                 Bordered="true"
+                 Dense="true">
+        <Columns>
+            <PropertyColumn Property="x => x.Address" Title="Dirección" />
+            <PropertyColumn Property="x => x.AddressNumber" Title="Número" />
+            <PropertyColumn Property="x => x.Capacity" Title="Capacidad">
+                <EditTemplate>
+                    <MudNumericField @bind-Value="context.Item.Capacity" 
+                                     Min="1" 
+                                     Max="20" 
+                                     Required 
+                                     Margin="Margin.Dense" 
+                                     Label="Capacidad" />
+                </EditTemplate>
+            </PropertyColumn>
+            <TemplateColumn Title="Usuario">
+                <CellTemplate>
+                    <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudIconButton Size="Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private bool isLoading = true;
+    private string? errorMessage = null;
+    private List<HouseDTO> elements = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ApiClientsFactory.HouseClient().GetAllAsync();
+        isLoading = false;
+        if (!result.Success)
+        {
+            errorMessage = result.Message;
+            return;
+        }
+        elements = result.Data!.ToList();
+    }
+
+    private async Task OnCommittedItemChanges(HouseDTO house)
+    {
+        if (house.Capacity < 1)
+        {
+            Snackbar.Add("La capacidad debe ser al menos 1", Severity.Error);
+            await ReloadData();
+            return;
+        }
+
+        var userClient = ApiClientsFactory.UserClient();
+        var userAnimalsResult = await userClient.GetUserAnimalsAsync(house.UserId);
+
+        if (userAnimalsResult.Success)
+        {
+            int currentAnimalsCount = userAnimalsResult.Data.Count();
+            if (house.Capacity < currentAnimalsCount)
+            {
+                Snackbar.Add($"No se puede reducir la capacidad a {house.Capacity}. El usuario actualmente tiene {currentAnimalsCount} animales asignados.", Severity.Error);
+                await ReloadData();
+                return;
+            }
+        }
+
+        var houseClient = ApiClientsFactory.HouseClient();
+        var updateResult = await houseClient.PutAsync(house.Id, house);
+
+        if (!updateResult.Success)
+        {
+            Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
+            await ReloadData();
+            return;
+        }
+
+        Snackbar.Add($"Casa actualizada exitosamente", Severity.Success);
+    }
+
+    private async Task ReloadData()
+    {
+        var result = await ApiClientsFactory.HouseClient().GetAllAsync();
+        if (result.Success && result.Data != null)
+            elements = result.Data.ToList();
+    }
+
+    private EventCallback<HouseDTO> OnCommittedItemChangesHandler =>
+        EventCallback.Factory.Create<HouseDTO>(this, OnCommittedItemChanges);
+}

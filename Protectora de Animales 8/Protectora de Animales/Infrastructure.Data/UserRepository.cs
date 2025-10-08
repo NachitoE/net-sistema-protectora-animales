@@ -41,6 +41,7 @@ namespace Infrastructure.Data
                 existingUser.Dni = u.Dni;
                 existingUser.UserName = u.UserName;
                 existingUser.Password = u.Password;
+                existingUser.UserType = u.UserType;
                 context.SaveChanges();
                 return true;
             }
