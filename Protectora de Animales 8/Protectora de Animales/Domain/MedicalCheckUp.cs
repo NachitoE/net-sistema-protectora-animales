@@ -57,13 +57,13 @@ namespace Domain
         #endregion
 
         #region Constructor
-        public MedicalCheckUp(string idSeguimiento, string userId, DateTime fechaSeguimiento, string observacion, string animalId)
+        public MedicalCheckUp(string id, string userId, DateTime checkUpDate, string observation, string animalId)
         {
-            _id = idSeguimiento;
-            _userId = userId;
-            _checkUpDate = fechaSeguimiento;
-            _observation = observacion;
-            _animalId = animalId;
+            Id = id;
+            UserId = userId;
+            CheckUpDate = checkUpDate;
+            Observation = observation;
+            AnimalId = animalId;
         }
         #endregion
 

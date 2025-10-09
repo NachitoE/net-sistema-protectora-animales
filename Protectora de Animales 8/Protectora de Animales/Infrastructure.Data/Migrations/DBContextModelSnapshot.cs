@@ -164,6 +164,78 @@ namespace Infrastructure.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.MedicalCheckUp", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AnimalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CheckUpDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Observation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MedicalCheckUps");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "mc-1",
+                            AnimalId = "7",
+                            CheckUpDate = new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Control de rutina. Vacunas al día. Estado general excelente.",
+                            UserId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "mc-2",
+                            AnimalId = "5",
+                            CheckUpDate = new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.",
+                            UserId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "mc-3",
+                            AnimalId = "4",
+                            CheckUpDate = new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.",
+                            UserId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "mc-4",
+                            AnimalId = "1",
+                            CheckUpDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.",
+                            UserId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "mc-5",
+                            AnimalId = "2",
+                            CheckUpDate = new DateTime(2024, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
+                            UserId = "user-3"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Sighting", b =>
                 {
                     b.Property<string>("Id")
@@ -350,6 +422,25 @@ namespace Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.MedicalCheckUp", b =>
+                {
+                    b.HasOne("Domain.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
 
                     b.Navigation("User");
                 });

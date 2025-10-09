@@ -20,8 +20,6 @@ namespace Infrastructure.Data
         {
             DBContext context = CreateContext();
             return context.MedicalCheckUps
-                .Include(c => c.User)
-                .Include(c => c.Animal)
                 .FirstOrDefault(c => c.Id == id);
         }
 
@@ -29,8 +27,6 @@ namespace Infrastructure.Data
         {
             DBContext context = CreateContext();
             return context.MedicalCheckUps
-                .Include(c => c.User)
-                .Include(c => c.Animal)
                 .ToList();
         }
 

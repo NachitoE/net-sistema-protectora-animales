@@ -225,10 +225,10 @@ namespace Infrastructure.Data
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.User)
+                entity.Property(e => e.UserId)
                     .IsRequired();
 
-                entity.HasOne(e => e.UserId)
+                entity.HasOne(e => e.User)
                     .WithMany()
                     .HasForeignKey(e => e.UserId);
 
@@ -244,7 +244,42 @@ namespace Infrastructure.Data
 
                 entity.Property(e => e.Observation)
                     .IsRequired();
-
+                entity.HasData(
+                new MedicalCheckUp(
+                    "mc-1",
+                    "user-3",
+                    new DateTime(2024, 11, 15),
+                    "Control de rutina. Vacunas al día. Estado general excelente.",
+                    "7"
+                ),
+                new MedicalCheckUp(
+                    "mc-2",
+                    "user-3",
+                    new DateTime(2024, 10, 20),
+                    "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.",
+                    "5"
+                ),
+                new MedicalCheckUp(
+                    "mc-3",
+                    "user-3",
+                    new DateTime(2024, 12, 5),
+                    "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.",
+                    "4"
+                ),
+                new MedicalCheckUp(
+                    "mc-4",
+                    "user-3",
+                    new DateTime(2024, 9, 10),
+                    "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.",
+                    "1"
+                ),
+                new MedicalCheckUp(
+                    "mc-5",
+                    "user-3",
+                    new DateTime(2024, 8, 25),
+                    "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
+                    "2"
+                ));
             });
         }
     }
