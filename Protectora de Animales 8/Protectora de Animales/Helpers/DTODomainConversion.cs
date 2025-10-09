@@ -70,6 +70,17 @@ namespace Helpers
                 SightingDescription = sighting.SightingDescription,
                 SightingState = Helpers.EnumConversion.SightingStateToString(sighting.Sightingstate)
             };
-        } 
+        }
+        public static MedicalCheckUpDTO ToDTO(this MedicalCheckUp checkUp)
+        {
+            return new MedicalCheckUpDTO
+            {
+                Id = checkUp.Id,
+                UserId = checkUp.UserId,
+                CheckUpDate = checkUp.CheckUpDate,
+                Observation = checkUp.Observation,
+                AnimalId = checkUp.AnimalId
+            };
+        }
     }
 }

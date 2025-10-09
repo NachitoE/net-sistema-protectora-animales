@@ -14,6 +14,7 @@ namespace Infrastructure.Data
 
         public DbSet<House> Houses { get; set; }
         public DbSet<Sighting> Sightings { get; set; }
+        public DbSet<MedicalCheckUp> MedicalCheckUps { get; set; }
 
         internal DBContext()
         {

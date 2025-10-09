@@ -1,10 +1,7 @@
-using System;
-
-namespace DTOs
+﻿namespace DTOs
 {
-    public class MedicalCheckUpDTO
+    public class MedicalCheckUpRegisterDTO
     {
-        public string Id { get; set; }
         public string UserId { get; set; }
         public DateTime CheckUpDate { get; set; }
         public string Observation { get; set; }
