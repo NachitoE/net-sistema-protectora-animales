@@ -15,6 +15,7 @@ namespace Infrastructure.API
         public static HouseDTOClient HouseClient() => new HouseDTOClient(new APIHttpClient(BASE_URL));
         public static SightingDTOClient SightingClient() => new SightingDTOClient(new APIHttpClient(BASE_URL));
         public static AdoptionDTOClient AdoptionClient() => new AdoptionDTOClient(new APIHttpClient(BASE_URL));
+        public static MedicalCheckUpDTOClient MedicalCheckUpClient() => new MedicalCheckUpDTOClient(new APIHttpClient(BASE_URL));
         public static AuthClient AuthClient() => new AuthClient(new APIHttpClient(BASE_URL));
 
 

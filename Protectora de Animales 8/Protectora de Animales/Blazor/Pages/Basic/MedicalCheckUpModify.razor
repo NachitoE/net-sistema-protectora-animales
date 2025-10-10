@@ -1,11 +1,10 @@
-﻿@page "/modify-houses"
+﻿@page "/modify-medical-checkups"
 @using DTOs.House
-@using DTOs
 @using Helpers;
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 
-<h3>Modificar Casas</h3>
+<h3>Modificar Registros Médicos</h3>
 @if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
 {
     <p>No autorizado</p>
@@ -28,21 +27,18 @@ else
                  Bordered="true"
                  Dense="true">
         <Columns>
-            <PropertyColumn Property="x => x.Address" Title="Dirección" />
-            <PropertyColumn Property="x => x.AddressNumber" Title="Número" />
-            <PropertyColumn Property="x => x.Capacity" Title="Capacidad">
-                <EditTemplate>
-                    <MudNumericField @bind-Value="context.Item.Capacity" 
-                                     Min="1" 
-                                     Max="20" 
-                                     Required 
-                                     Margin="Margin.Dense" 
-                                     Label="Capacidad" />
-                </EditTemplate>
+            <PropertyColumn Property="x => x.Id" Title="Id" Editable="false"/>
+            <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha de Chequeo" />
+            <PropertyColumn Property="x => x.Observation" Title="Observación">
             </PropertyColumn>
-            <TemplateColumn Title="Usuario">
+            <TemplateColumn Title="Usuario" Editable="false">
                 <CellTemplate>
                     <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Animal" Editable="false">
+                <CellTemplate>
+                    <AnimalTooltip AnimalId="@context.Item.AnimalId" />
                 </CellTemplate>
             </TemplateColumn>
             <TemplateColumn CellClass="d-flex justify-end">
@@ -57,11 +53,11 @@ else
 @code {
     private bool isLoading = true;
     private string? errorMessage = null;
-    private List<HouseDTO> elements = new();
+    private List<MedicalCheckUpDTO> elements = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await ApiClientsFactory.HouseClient().GetAllAsync();
+        var result = await ApiClientsFactory.MedicalCheckUpClient().GetAllAsync();
         isLoading = false;
         if (!result.Success)
         {
@@ -71,8 +67,9 @@ else
         elements = result.Data!.ToList();
     }
 
-    private async Task OnCommittedItemChanges(HouseDTO house)
+    private async Task OnCommittedItemChanges(MedicalCheckUpDTO medicalCheck)
     {
+        /*
         if (house.Capacity < 1)
         {
             Snackbar.Add("La capacidad debe ser al menos 1", Severity.Error);
@@ -105,15 +102,16 @@ else
         }
 
         Snackbar.Add($"Casa actualizada exitosamente", Severity.Success);
+        */
     }
 
     private async Task ReloadData()
     {
-        var result = await ApiClientsFactory.HouseClient().GetAllAsync();
+        var result = await ApiClientsFactory.MedicalCheckUpClient().GetAllAsync();
         if (result.Success && result.Data != null)
             elements = result.Data.ToList();
     }
 
-    private EventCallback<HouseDTO> OnCommittedItemChangesHandler =>
-        EventCallback.Factory.Create<HouseDTO>(this, OnCommittedItemChanges);
+    private EventCallback<MedicalCheckUpDTO> OnCommittedItemChangesHandler =>
+        EventCallback.Factory.Create<MedicalCheckUpDTO>(this, OnCommittedItemChanges);
 }

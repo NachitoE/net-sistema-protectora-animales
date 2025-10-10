@@ -1,0 +1,70 @@
+@using DTOs
+
+@if (AnimalData != null)
+{
+    <MudTooltip Text="@GetTooltipText()">
+        <MudText>@DisplayText</MudText>
+    </MudTooltip>
+}
+else if (!string.IsNullOrEmpty(AnimalId))
+{
+    <MudTooltip Text="@AnimalId">
+        <MudText>@AnimalId</MudText>
+    </MudTooltip>
+}
+else
+{
+    <MudText>N/A</MudText>
+}
+
+@code {
+    [Parameter]
+    public string? AnimalId { get; set; }
+
+    [Parameter]
+    public AnimalDTO? AnimalData { get; set; }
+
+    [Parameter]
+    public string? DisplayText { get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        // Si no se especifica DisplayText, usar AnimalId
+        DisplayText ??= AnimalId;
+        
+        if (!string.IsNullOrEmpty(AnimalId))
+        {
+            var animalClient = ApiClientsFactory.AnimalClient();
+            var animalResult = await animalClient.GetAsync(AnimalId);
+            if (animalResult.Success && animalResult.Data != null)
+            {
+                AnimalData = animalResult.Data;
+            }
+        }
+    }
+
+    private string GetTooltipText()
+    {
+        if (AnimalData == null) return AnimalId ?? "N/A";
+        
+        var age = CalculateAge(AnimalData.BirthDate);
+        return $"{AnimalData.Name} - {AnimalData.Species} ({age}) - {AnimalData.AnimalState}";
+    }
+
+    private string CalculateAge(DateTime birthDate)
+    {
+        var today = DateTime.Today;
+        var age = today.Year - birthDate.Year;
+        if (birthDate.Date > today.AddYears(-age)) age--;
+        
+        if (age == 0)
+        {
+            var months = today.Month - birthDate.Month;
+            if (today.Day < birthDate.Day) months--;
+            if (months <= 0) months = today.Month + (12 - birthDate.Month);
+            return $"{months} meses";
+        }
+        
+        return age == 1 ? "1 año" : $"{age} años";
+    }
+}
