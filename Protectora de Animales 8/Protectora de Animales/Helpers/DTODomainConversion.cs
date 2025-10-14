@@ -82,5 +82,18 @@ namespace Helpers
                 AnimalId = checkUp.AnimalId
             };
         }
+        public static AdoptionDTO ToDTO(this Adoption adoption)
+        {
+            return new AdoptionDTO
+            {
+                Id = adoption.Id,
+                UserId = adoption.UserId,
+                AnimalId = adoption.AnimalId,
+                AdoptionRequestDate = adoption.AdoptionRequestDate,
+                AdoptionResponseDate = adoption.AdoptionResponseDate,
+                State = EnumConversion.AdoptionStateToString(adoption.State),
+                Description = adoption.Description
+            };
+        }
     }
 }

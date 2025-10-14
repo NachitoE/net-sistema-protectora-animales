@@ -7,8 +7,9 @@ namespace DTOs
         public string Id { get; set; }
         public string AnimalId { get; set; }
         public string UserId { get; set; }
-        public DateTime AdoptionDate { get; set; }
-        public string Status { get; set; }
-        public string Comments { get; set; }
+        public DateTime AdoptionRequestDate { get; set; }
+        public DateTime? AdoptionResponseDate { get; set; }
+        public string State { get; set; }
+        public string Description { get; set; }
     }
 }
