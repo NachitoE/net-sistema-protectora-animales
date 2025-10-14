@@ -22,6 +22,104 @@ namespace Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Adoption", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("AdoptionRequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("AdoptionResponseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("AnimalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Pendiente");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Adoptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adoption-1",
+                            AdoptionRequestDate = new DateTime(2024, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "1",
+                            Description = "Interesada en adoptar a Firulais. Tengo experiencia con perros.",
+                            State = "Pendiente",
+                            UserId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "adoption-2",
+                            AdoptionRequestDate = new DateTime(2024, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdoptionResponseDate = new DateTime(2024, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "2",
+                            Description = "Solicitud aprobada. El gato ya se encuentra en su nuevo hogar.",
+                            State = "Aprobada",
+                            UserId = "user-5"
+                        },
+                        new
+                        {
+                            Id = "adoption-3",
+                            AdoptionRequestDate = new DateTime(2024, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdoptionResponseDate = new DateTime(2024, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "3",
+                            Description = "No cuenta con espacio adecuado para conejos.",
+                            State = "Rechazada",
+                            UserId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "adoption-4",
+                            AdoptionRequestDate = new DateTime(2024, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "6",
+                            Description = "Familia con niños pequeños, buscan un conejo tranquilo.",
+                            State = "Pendiente",
+                            UserId = "user-7"
+                        },
+                        new
+                        {
+                            Id = "adoption-5",
+                            AdoptionRequestDate = new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "1",
+                            Description = "Vivo sola y trabajo desde casa. Puedo darle mucho tiempo y atención.",
+                            State = "Pendiente",
+                            UserId = "user-8"
+                        },
+                        new
+                        {
+                            Id = "adoption-6",
+                            AdoptionRequestDate = new DateTime(2024, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdoptionResponseDate = new DateTime(2024, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "2",
+                            Description = "Primera solicitud rechazada por falta de documentación.",
+                            State = "Rechazada",
+                            UserId = "user-2"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Animal", b =>
                 {
                     b.Property<string>("Id")
@@ -71,11 +169,12 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "2",
-                            AnimalState = "Disponible",
+                            AnimalState = "Adoptado",
                             BirthDate = new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Miau",
-                            Species = "Gato"
+                            Species = "Gato",
+                            UserId = "user-5"
                         },
                         new
                         {
@@ -403,7 +502,70 @@ namespace Infrastructure.Data.Migrations
                             UserName = "niko",
                             UserStatus = "Active",
                             UserType = "Transito"
+                        },
+                        new
+                        {
+                            Id = "user-5",
+                            Dni = "33445566",
+                            Name = "Martín",
+                            Password = "123",
+                            SurName = "González",
+                            UserName = "martin",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-6",
+                            Dni = "44556677",
+                            Name = "Laura",
+                            Password = "123",
+                            SurName = "Fernández",
+                            UserName = "laura",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-7",
+                            Dni = "55667788",
+                            Name = "Diego",
+                            Password = "123",
+                            SurName = "Rodríguez",
+                            UserName = "diego",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-8",
+                            Dni = "66778899",
+                            Name = "Sofía",
+                            Password = "123",
+                            SurName = "López",
+                            UserName = "sofia",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
                         });
+                });
+
+            modelBuilder.Entity("Domain.Adoption", b =>
+                {
+                    b.HasOne("Domain.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Animal", b =>

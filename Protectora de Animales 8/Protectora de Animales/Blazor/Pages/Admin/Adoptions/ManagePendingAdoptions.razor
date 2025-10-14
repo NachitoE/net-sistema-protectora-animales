@@ -1,0 +1,154 @@
+﻿@page "/manage-pending-adoptions"
+@using DTOs
+@inject ISnackbar Snackbar
+
+<h3>Panel de Adopciones Pendientes</h3>
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">@errorMessage</MudAlert>
+}
+else
+{
+    <MudPaper Class="pa-4 mb-4">
+        <MudStack Row="true" Spacing="2">
+            <MudButton OnClick="@ShowPending" Variant="Variant.Filled" Color="Color.Warning">Pendientes</MudButton>
+            <MudButton OnClick="@ShowApproved" Variant="Variant.Filled" Color="Color.Success">Aprobadas</MudButton>
+            <MudButton OnClick="@ShowRejected" Variant="Variant.Filled" Color="Color.Error">Rechazadas</MudButton>
+            <MudButton OnClick="@ShowAll" Variant="Variant.Outlined" Color="Color.Default">Mostrar Todas</MudButton>
+        </MudStack>
+    </MudPaper>
+
+    <MudDataGrid Items="@filteredAdoptions"
+                 Bordered="true"
+                 Dense="true"
+                 Hover="true"
+                 RowClass="pointer">
+        <Columns>
+            <TemplateColumn Title="Animal">
+                <CellTemplate>
+                    <AnimalTooltip AnimalId="@context.Item.AnimalId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Usuario">
+                <CellTemplate>
+                    <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.AdoptionRequestDate" Title="Fecha Solicitud" />
+            <PropertyColumn Property="x => x.AdoptionResponseDate" Title="Fecha Respuesta" />
+            <PropertyColumn Property="x => x.State" Title="Estado">
+                <CellTemplate>
+                    @if (context.Item.State == "Pendiente")
+                    {
+                        <MudChip Color="Color.Warning" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else if (context.Item.State == "Aprobada")
+                    {
+                        <MudChip Color="Color.Success" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else if (context.Item.State == "Rechazada")
+                    {
+                        <MudChip Color="Color.Error" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Color="Color.Default" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.Description" Title="Descripción" />
+            <TemplateColumn Title="Acciones">
+                <CellTemplate>
+                    @if (context.Item.State == "Pendiente")
+                    {
+                        <MudButton Class="accordion-button" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" OnClick="@(() => OnApprove(context.Item))">Aprobar</MudButton>
+                        <MudButton Class="mt-2 accordion-button" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small" OnClick="@(() => OnReject(context.Item))">Rechazar</MudButton>
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private bool isLoading = true;
+    private string? errorMessage = null;
+    private List<AdoptionDTO> allAdoptions = new();
+    private List<AdoptionDTO> filteredAdoptions = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAdoptions();
+    }
+
+    private async Task LoadAdoptions()
+    {
+        isLoading = true;
+        errorMessage = null;
+        var result = await ApiClientsFactory.AdoptionClient().GetAllAsync();
+        isLoading = false;
+        if (!result.Success || result.Data == null)
+        {
+            errorMessage = result.Message ?? "Error al cargar las adopciones";
+            return;
+        }
+        allAdoptions = result.Data;
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Pendiente").ToList();
+    }
+
+    private void ShowPending()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Pendiente").ToList();
+    }
+
+    private void ShowApproved()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Aprobada").ToList();
+    }
+
+    private void ShowRejected()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Rechazada").ToList();
+    }
+
+    private void ShowAll()
+    {
+        filteredAdoptions = allAdoptions.ToList();
+    }
+
+    private async Task OnApprove(AdoptionDTO adoption)
+    {
+        adoption.State = "Aprobada";
+        adoption.AdoptionResponseDate = DateTime.Now;
+        var result = await ApiClientsFactory.AdoptionClient().PutAsync(adoption.Id, adoption);
+        if (!result.Success)
+        {
+            Snackbar.Add($"Error al aprobar: {result.Message}", Severity.Error);
+            return;
+        }
+        Snackbar.Add("Adopción aprobada", Severity.Success);
+        await LoadAdoptions();
+    }
+
+    private async Task OnReject(AdoptionDTO adoption)
+    {
+        adoption.State = "Rechazada";
+        adoption.AdoptionResponseDate = DateTime.Now;
+        var result = await ApiClientsFactory.AdoptionClient().PutAsync(adoption.Id, adoption);
+        if (!result.Success)
+        {
+            Snackbar.Add($"Error al rechazar: {result.Message}", Severity.Error);
+            return;
+        }
+        Snackbar.Add("Adopción rechazada", Severity.Success);
+        await LoadAdoptions();
+    }
+}

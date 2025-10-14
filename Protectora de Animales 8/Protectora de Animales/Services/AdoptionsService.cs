@@ -5,9 +5,6 @@ using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Domain.Animal;
 
 namespace Services
 {
@@ -15,56 +12,50 @@ namespace Services
     {
         public AdoptionDTO Add(AdoptionRequestDTO adoptionReqDTO)
         {
-            AdoptionRepository adoptionRepository = new AdoptionRepository();
-            Adoption createdAdoption = new Adoption
-            (
+            var repo = new AdoptionRepository();
+            var adoption = new Adoption(
                 Guid.NewGuid().ToString(),
                 adoptionReqDTO.AnimalId,
                 adoptionReqDTO.UserId,
-                adoptionReqDTO.AdoptionRequestDate,
+                adoptionReqDTO.AdoptionRequestDate ?? DateTime.Now,
                 AdoptionStateEn.Pendiente,
                 adoptionReqDTO.Description
             );
-
-            adoptionRepository.Add(createdAdoption);
-
-            return createdAdoption.ToDTO();
+            repo.Add(adoption);
+            return adoption.ToDTO();
         }
 
-        public AnimalDTO? Get(string id)
+        public AdoptionDTO? Get(string id)
         {
-            var animalRepository = new AnimalRepository();
-            Animal? animal = animalRepository.Get(id);
+            var repo = new AdoptionRepository();
+            var adoption = repo.Get(id);
+            return adoption?.ToDTO();
+        }
 
-            if (animal != null)
-            {
-                return animal.ToDTO();
-            }
-            return null;
+        public List<AdoptionDTO> GetAll()
+        {
+            var repo = new AdoptionRepository();
+            return repo.GetAll().Select(a => a.ToDTO()).ToList();
+        }
+
+        public bool Update(string id, AdoptionDTO dto)
+        {
+            var repo = new AdoptionRepository();
+            var adoption = repo.Get(id);
+            if (adoption == null) return false;
+            adoption.AnimalId = dto.AnimalId;
+            adoption.UserId = dto.UserId;
+            adoption.AdoptionRequestDate = dto.AdoptionRequestDate;
+            adoption.AdoptionResponseDate = dto.AdoptionResponseDate;
+            adoption.State = Enum.TryParse<AdoptionStateEn>(dto.State, out var state) ? state : adoption.State;
+            adoption.Description = dto.Description;
+            return repo.Update(adoption);
         }
 
         public bool Delete(string id)
         {
-            AnimalRepository animalRepository = new AnimalRepository();
-            return animalRepository.Delete(id);
-        }
-
-        public List<AnimalDTO> GetAll()
-        {
-            AnimalRepository animalRepository = new AnimalRepository();
-            var animalsDomain = animalRepository.GetAll();
-            var allAnimalDTOs = animalsDomain.Select((animal) =>
-                animal.ToDTO()
-            ).ToList();
-            return allAnimalDTOs;
-        }
-
-        public List<AnimalDTO> GetAvailableAnimals()
-        {
-            return
-                GetAll()
-                .Where((animalDTO) => animalDTO.AnimalState == EnumConversion.AnimalStateToString(AnimalStateEn.Disponible))
-                .ToList();
+            var repo = new AdoptionRepository();
+            return repo.Delete(id);
         }
     }
 }

@@ -74,12 +74,12 @@ namespace Domain
         #endregion
 
         #region Constructor
-        public Adoption(string id, string animalId, string userId, DateTime adoptionDate, AdoptionStateEn state, string description)
+        public Adoption(string id, string animalId, string userId, DateTime adoptionRequestDate, AdoptionStateEn state, string description)
             {
                 Id = id;
                 AnimalId = animalId;
                 UserId = userId;
-                AdoptionRequestDate = adoptionDate;
+                AdoptionRequestDate = adoptionRequestDate;
                 State = state;
                 Description = description;
             }

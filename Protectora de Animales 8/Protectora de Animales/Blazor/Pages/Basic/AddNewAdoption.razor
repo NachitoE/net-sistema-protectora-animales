@@ -1,0 +1,46 @@
+﻿@page "/add-new-adoption"
+@using DTOs
+@inject ISnackbar Snackbar
+
+<h3>Registrar Nueva Adopción</h3>
+<MudPaper Class="pa-4" Elevation="2">
+    <MudForm @ref="form">
+        <MudTextField @bind-Value="adoptionRequest.AnimalId" Label="ID Animal" Required="true" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="adoptionRequest.UserId" Label="ID Usuario" Required="true" Margin="Margin.Dense" />
+        <MudDatePicker @bind-Date="adoptionRequest.AdoptionRequestDate" Label="Fecha Solicitud" Required="true" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="adoptionRequest.Description" Label="Descripción" Margin="Margin.Dense" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OnSubmit" Disabled="@isSubmitting">
+            Registrar
+        </MudButton>
+    </MudForm>
+</MudPaper>
+
+@code {
+    private MudForm? form;
+    private AdoptionRequestDTO adoptionRequest = new AdoptionRequestDTO
+    {
+        AdoptionRequestDate = DateTime.Today
+    };
+    private bool isSubmitting = false;
+
+    private async Task OnSubmit()
+    {
+        await form?.Validate();
+        if (form is null || !form.IsValid)
+            return;
+
+        isSubmitting = true;
+        var result = await ApiClientsFactory.AdoptionClient().PostAsync(adoptionRequest);
+        isSubmitting = false;
+
+        if (!result.Success)
+        {
+            Snackbar.Add($"Error: {result.Message}", Severity.Error);
+            return;
+        }
+        Snackbar.Add("Adopción registrada exitosamente", Severity.Success);
+        adoptionRequest = new AdoptionRequestDTO { AdoptionRequestDate = DateTime.Today };
+        StateHasChanged();
+    }
+}

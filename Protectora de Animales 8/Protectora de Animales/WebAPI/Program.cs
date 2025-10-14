@@ -73,5 +73,6 @@ app.MapAnimalEndpoints();
 app.MapHouseEndpoints();
 app.MapSightingEndpoints();
 app.MapMedicalCheckUpEndpoints();
+app.MapAdoptionEndpoints();
 
 app.Run();
