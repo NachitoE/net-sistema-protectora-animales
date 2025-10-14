@@ -36,6 +36,11 @@ namespace Domain
             set { _adoptionRequestDate = value; }
         }
 
+        public DateTime? AdoptionResponseDate
+        {
+            get { return _adoptionResponseDate; }
+            set { _adoptionResponseDate = value; }
+        }
         public AdoptionStateEn State //TODO: enum?
         {
             get { return _state; }

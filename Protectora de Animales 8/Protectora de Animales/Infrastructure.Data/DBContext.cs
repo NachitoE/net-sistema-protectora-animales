@@ -73,9 +73,14 @@ namespace Infrastructure.Data
                 new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123", UserStatus.Active),
                 new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123", UserStatus.Active),
                 new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123", UserStatus.Active),
-                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123", UserStatus.Active));
-               
-            });
+                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123", UserStatus.Active),
+                //more adoptants
+                new User("user-5", "Martín", "González", "33445566", UserType.Adoptante, "martin", "123", UserStatus.Active),
+                new User("user-6", "Laura", "Fernández", "44556677", UserType.Adoptante, "laura", "123", UserStatus.Active),
+                new User("user-7", "Diego", "Rodríguez", "55667788", UserType.Adoptante, "diego", "123", UserStatus.Active),
+                new User("user-8", "Sofía", "López", "66778899", UserType.Adoptante, "sofia", "123", UserStatus.Active)
+                );
+        });
 
 
             //----- ANIMAL -----
@@ -117,7 +122,7 @@ namespace Infrastructure.Data
                 //seeding data
                 entity.HasData(
                     new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
-                    new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-5", Animal.AnimalStateEn.Disponible, "Como es el bichito"),
                     new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
                     new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.Adoptado, ""),
                     new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
@@ -280,6 +285,98 @@ namespace Infrastructure.Data
                     "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
                     "2"
                 ));
+            });
+
+            modelBuilder.Entity<Adoption>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AdoptionRequestDate)
+                    .IsRequired();
+
+                entity.Property(e => e.AdoptionResponseDate);
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasConversion<string>()
+                    .HasDefaultValue(AdoptionStateEn.Pendiente);
+
+                entity.Property(e => e.AnimalId)
+                   .IsRequired();
+
+                entity.HasOne(e => e.Animal)
+                    .WithMany()
+                    .HasForeignKey(e => e.AnimalId);
+
+                entity.Property(e => e.UserId)
+                   .IsRequired();
+
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId);
+
+                // seeding data
+                entity.HasData(
+        new Adoption(
+            "adoption-1",
+            "1",  // Firulais
+            "user-2",  // Camila
+            new DateTime(2024, 9, 15),
+            AdoptionStateEn.Pendiente,
+            "Interesada en adoptar a Firulais. Tengo experiencia con perros."
+        ),
+        new Adoption(
+            "adoption-2",
+            "2",  // Miau
+            "user-5",  // Martín
+            new DateTime(2024, 10, 5),
+            AdoptionStateEn.Aprobada,
+            "Solicitud aprobada. El gato ya se encuentra en su nuevo hogar."
+        )
+        {
+            AdoptionResponseDate = new DateTime(2024, 10, 8)
+        },
+        new Adoption(
+            "adoption-3",
+            "3",  // Bunny
+            "user-6",  // Laura
+            new DateTime(2024, 10, 12),
+            AdoptionStateEn.Rechazada,
+            "No cuenta con espacio adecuado para conejos."
+        )
+        {
+            AdoptionResponseDate = new DateTime(2024, 10, 14)
+        },
+        new Adoption(
+            "adoption-4",
+            "6",  // Coco
+            "user-7",  // Diego
+            new DateTime(2024, 10, 18),
+            AdoptionStateEn.Pendiente,
+            "Familia con niños pequeños, buscan un conejo tranquilo."
+        ),
+        new Adoption(
+            "adoption-5",
+            "1",  // Firulais (otra solicitud)
+            "user-8",  // Sofía
+            new DateTime(2024, 10, 20),
+            AdoptionStateEn.Pendiente,
+            "Vivo sola y trabajo desde casa. Puedo darle mucho tiempo y atención."
+        ),
+        new Adoption(
+            "adoption-6",
+            "2",  // Miau (solicitud anterior)
+            "user-2",  // Camila
+            new DateTime(2024, 9, 1),
+            AdoptionStateEn.Rechazada,
+            "Primera solicitud rechazada por falta de documentación."
+        )
+        {
+            AdoptionResponseDate = new DateTime(2024, 9, 3)
+                });
             });
         }
     }
