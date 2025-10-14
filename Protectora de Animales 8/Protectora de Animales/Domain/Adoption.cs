@@ -6,34 +6,37 @@ namespace Domain
     {
         #region Fields/Properties
         private string _id;
-        private string _animalId;
-        private string _userId;
-        private DateTime _adoptionDate;
-        private string _state;
+        private string? _animalId;
+        private string? _userId;
+        private DateTime _adoptionRequestDate;
+        private DateTime? _adoptionResponseDate;
+        private AdoptionStateEn _state;
         private string _description;
+        private User? _user;
+        private Animal? _animal;
         public string Id
         {
             get { return _id; }
             set { _id = value; }
         }
-        public string AnimalID
+        public string AnimalId
         {
             get { return _animalId; }
             set { _animalId = value; }
         }
-        public string UserID
+        public string UserId
         {
             get { return _userId; }
             set { _userId = value; }
         }
 
-        public DateTime AdoptionDate
+        public DateTime AdoptionRequestDate
         {
-            get { return _adoptionDate; }
-            set { _adoptionDate = value; }
+            get { return _adoptionRequestDate; }
+            set { _adoptionRequestDate = value; }
         }
 
-        public string State //TODO: enum?
+        public AdoptionStateEn State //TODO: enum?
         {
             get { return _state; }
             set { _state = value; }
@@ -46,17 +49,17 @@ namespace Domain
 
         }
 
-        public Animal Animal
+        public Animal? Animal
         {
-            get => default;
+            get => _animal;
             set
             {
             }
         }
 
-        public User User
+        public User? User
         {
-            get => default;
+            get => _user;
             set
             {
             }
@@ -66,17 +69,23 @@ namespace Domain
         #endregion
 
         #region Constructor
-        public Adoption(string idAdopcion, string animalId, string userID, DateTime fechaAdopcion, string estado, string descripcion)
+        public Adoption(string id, string animalId, string userId, DateTime adoptionDate, AdoptionStateEn state, string description)
             {
-                _id = idAdopcion;
-                _animalId = animalId;
-                _userId = userID;
-                _adoptionDate = fechaAdopcion;
-                _state = estado;
-                _description = descripcion;
+                Id = id;
+                AnimalId = animalId;
+                UserId = userId;
+                AdoptionRequestDate = adoptionDate;
+                State = state;
+                Description = description;
             }
             #endregion
 
        
+    }
+    public enum AdoptionStateEn
+    {
+        Pendiente,
+        Aprobada,
+        Rechazada
     }
 }

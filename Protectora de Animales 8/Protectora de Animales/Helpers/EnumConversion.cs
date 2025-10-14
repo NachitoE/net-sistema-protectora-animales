@@ -40,6 +40,13 @@ namespace Helpers
                 return result;
             throw new ArgumentException($"Invalid user status: {userStatus}");
         }
+        public static string AdoptionStateToString(AdoptionStateEn state) => state.ToString();
+        public static AdoptionStateEn StringToAdoptionState(string state)
+        {
+            if (Enum.TryParse<AdoptionStateEn>(state, true, out var result))
+                return result;
+            throw new ArgumentException($"Invalid adoption state: {state}");
+        }
     }
 }
 
