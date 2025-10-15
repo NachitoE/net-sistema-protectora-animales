@@ -52,6 +52,7 @@ namespace WebAPI
 
             app.MapPut("/adoptions/{id}", (string id, AdoptionDTO dto) =>
             {
+
                 //TODO: hacer el catch de que si se está confirmando la adopción que se tome el animal etc, es otro endpoint?
                 var service = new AdoptionsService();
                 var updated = service.Update(id, dto);

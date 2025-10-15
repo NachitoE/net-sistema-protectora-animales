@@ -5,7 +5,9 @@
 <h3>Registrar Nueva Adopción</h3>
 <MudPaper Class="pa-4" Elevation="2">
     <MudForm @ref="form">
+        <p>Asignación Animal</p>
         <AnimalSelector OnAnimalSelected="OnAnimalSelected" LoadMethod="AnimalSelector.AnimalClientLoadMethod.Available"></AnimalSelector>
+        <div class="mb-2"></div>
         <MudDatePicker @bind-Date="adoptionRequest.AdoptionRequestDate" Label="Fecha Solicitud" Required="true" Margin="Margin.Dense" />
         <MudTextField @bind-Value="adoptionRequest.Description" Label="Descripción" Margin="Margin.Dense" />
 
