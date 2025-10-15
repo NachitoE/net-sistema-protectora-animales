@@ -1,7 +1,9 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 
@@ -67,6 +69,28 @@ namespace Services
             {
                 return null;
             }
+        }
+
+
+        public string? GetTokenFromRequest(HttpContext ctx)
+        {
+            var authHeader = ctx.Request.Headers["Authorization"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+            {
+                return authHeader.Substring("Bearer ".Length);
+            }
+            return null;
+        }
+        public string? GetTokenFromHeader(string authorizationHeader)
+        {
+            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+                return null; //not found authHeader or not bearer
+            return authorizationHeader.Substring("Bearer ".Length).Trim();
+        }
+        public string? GetUserIdFromToken(string token)
+        {
+            var principal = ValidateToken(token);
+            return principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
     }
 }

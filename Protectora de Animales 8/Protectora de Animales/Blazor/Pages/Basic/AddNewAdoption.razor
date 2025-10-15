@@ -5,8 +5,7 @@
 <h3>Registrar Nueva Adopción</h3>
 <MudPaper Class="pa-4" Elevation="2">
     <MudForm @ref="form">
-        <MudTextField @bind-Value="adoptionRequest.AnimalId" Label="ID Animal" Required="true" Margin="Margin.Dense" />
-        <MudTextField @bind-Value="adoptionRequest.UserId" Label="ID Usuario" Required="true" Margin="Margin.Dense" />
+        <AnimalSelector OnAnimalSelected="OnAnimalSelected" LoadMethod="AnimalSelector.AnimalClientLoadMethod.Available"></AnimalSelector>
         <MudDatePicker @bind-Date="adoptionRequest.AdoptionRequestDate" Label="Fecha Solicitud" Required="true" Margin="Margin.Dense" />
         <MudTextField @bind-Value="adoptionRequest.Description" Label="Descripción" Margin="Margin.Dense" />
 
@@ -42,5 +41,10 @@
         Snackbar.Add("Adopción registrada exitosamente", Severity.Success);
         adoptionRequest = new AdoptionRequestDTO { AdoptionRequestDate = DateTime.Today };
         StateHasChanged();
+    }
+
+    private void OnAnimalSelected(AnimalDTO? animal)
+    {
+        adoptionRequest.AnimalId = animal != null ? animal.Id : "";
     }
 }

@@ -29,10 +29,20 @@ namespace WebAPI
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
 
-            app.MapPost("/adoptions", (AdoptionRequestDTO dto) =>
+            app.MapPost("/adoptions", (AdoptionRequestDTO dto, JwtService jwtService, HttpContext ctx) =>
             {
-                var service = new AdoptionsService();
-                var created = service.Add(dto);
+                var adoptionServ = new AdoptionsService();
+                string? token = jwtService.GetTokenFromRequest(ctx);
+                if(token == null)
+                    return Results.Unauthorized();
+                string? userId = jwtService.GetUserIdFromToken(token);
+                if(userId == null)
+                    return Results.Unauthorized();
+
+                dto.UserId = userId;
+                var created = adoptionServ.Add(dto);
+                //TODO: validar que solo sea adoptante
+
                 return Results.Created($"/adoptions/{created.Id}", created);
             })
             .WithName("Crear Adopcion")
@@ -42,6 +52,7 @@ namespace WebAPI
 
             app.MapPut("/adoptions/{id}", (string id, AdoptionDTO dto) =>
             {
+                //TODO: hacer el catch de que si se está confirmando la adopción que se tome el animal etc, es otro endpoint?
                 var service = new AdoptionsService();
                 var updated = service.Update(id, dto);
                 if (!updated)
