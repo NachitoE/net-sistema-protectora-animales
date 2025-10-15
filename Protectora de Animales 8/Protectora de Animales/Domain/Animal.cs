@@ -30,7 +30,6 @@ namespace Domain
         }
         private string _name;
         
-        //TODO: Species es una clase aparte?
         public SpeciesEn Species
         {
             get

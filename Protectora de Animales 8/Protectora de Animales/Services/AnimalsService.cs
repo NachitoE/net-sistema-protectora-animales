@@ -232,7 +232,12 @@ namespace Services
         public AnimalDTO? AssignResponsible(string id, string userId)
         {
             var animalRepository = new AnimalRepository();
-            // TODO: validar que usuario existe?
+            var userService = new UsersService();
+            var existingUser = userService.Get(userId); // Verifica que el usuario exista, lanza excepción si no
+            if(existingUser == null)
+            {
+                throw new Exception("userId no pertenece a un usuario existente");
+            }
             Animal? animal = animalRepository.Get(id);
             if (animal != null)
             {
@@ -241,7 +246,7 @@ namespace Services
                 animalRepository.Update(animal);
                 return animal.ToDTO();
             }
-            return null;
+            throw new Exception("id no pertenece a un animal existente");
         }
 
         public List<AnimalDTO> GetByCriteria(AnimalDTO criteria)
