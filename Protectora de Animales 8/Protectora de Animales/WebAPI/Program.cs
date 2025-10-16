@@ -36,7 +36,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
-        policy.RequireRole("Admin", "Administrador"));
+        policy.RequireRole("Admin"));
+    options.AddPolicy("AdopterOnly", policy =>
+        policy.RequireRole("Adoptante"));
+    options.AddPolicy("AdopterOrAdminOnly", policy =>
+        policy.RequireRole("Adoptante", "Admin"));
 });
 
 // Agregar servicios CORS

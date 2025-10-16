@@ -44,7 +44,7 @@ namespace WebAPI
 
                 return Results.Created($"/adoptions/{created.Id}", created);
             })
-             //TODO: Require auth -> adopter/admin
+            .RequireAuthorization("AdopterOrAdminOnly")
             .WithName("Crear Adopcion")
             .Produces<AdoptionDTO>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
