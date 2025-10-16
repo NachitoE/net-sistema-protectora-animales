@@ -111,6 +111,7 @@ namespace Services
             adoptionDomain.State = newState;
             repo.Update(adoptionDomain);
             //asignar adoptante como responsable de animal, se rechazan las demás adopciones pendientes de ese animal
+            if(newState == AdoptionStateEn.Rechazada) return adoptionDomain.ToDTO();
             animalService.AssignResponsible(animal.Id, adoptionDomain.UserId);
             
             
