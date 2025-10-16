@@ -1,5 +1,6 @@
 ﻿using DTOs;
 using Services;
+using WebAPI.Dependencies;
 
 namespace WebAPI
 {
@@ -29,14 +30,11 @@ namespace WebAPI
             .Produces(StatusCodes.Status404NotFound)
             .WithOpenApi();
 
-            app.MapPost("/adoptions", (AdoptionRequestDTO dto, JwtService jwtService, HttpContext ctx) =>
+            app.MapPost("/adoptions", (AdoptionRequestDTO dto, ICurrentUser currentUser) =>
             {
                 var adoptionServ = new AdoptionsService();
-                string? token = jwtService.GetTokenFromRequest(ctx);
-                if(token == null)
-                    return Results.Unauthorized();
-                string? userId = jwtService.GetUserIdFromToken(token);
-                if(userId == null)
+                string? userId = currentUser.UserId;
+                if (userId == null)
                     return Results.Unauthorized();
 
                 dto.UserId = userId;

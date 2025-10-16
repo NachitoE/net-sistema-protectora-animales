@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using WebAPI;
 using Services;
+using WebAPI.Dependencies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -49,7 +50,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+//---- JWT / AUTH SERVICES
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 
 var app = builder.Build();
 

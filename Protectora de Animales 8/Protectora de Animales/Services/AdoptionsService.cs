@@ -19,7 +19,7 @@ namespace Services
                 adoptionReqDTO.UserId,
                 adoptionReqDTO.AdoptionRequestDate ?? DateTime.Now,
                 AdoptionStateEn.Pendiente,
-                adoptionReqDTO.Description
+                adoptionReqDTO.Description ?? ""
             );
             repo.Add(adoption);
             return adoption.ToDTO();
