@@ -1,5 +1,6 @@
 ﻿@page "/manage-pending-adoptions"
 @using DTOs
+@using DTOs.Adoption
 @inject ISnackbar Snackbar
 
 <h3>Panel de Adopciones Pendientes</h3>
@@ -126,9 +127,12 @@ else
 
     private async Task OnApprove(AdoptionDTO adoption)
     {
-        adoption.State = "Aprobada";
-        adoption.AdoptionResponseDate = DateTime.Now;
-        var result = await ApiClientsFactory.AdoptionClient().PutAsync(adoption.Id, adoption);
+        AdoptionRejectApproveDTO approveRejectDTO = new()
+        {
+            Approved = true,
+            AdoptionResponseDate = DateTime.Now
+        };
+        var result = await ApiClientsFactory.AdoptionClient().ApproveOrRejectPendingAsync(adoption.Id, approveRejectDTO);
         if (!result.Success)
         {
             Snackbar.Add($"Error al aprobar: {result.Message}", Severity.Error);
@@ -140,9 +144,12 @@ else
 
     private async Task OnReject(AdoptionDTO adoption)
     {
-        adoption.State = "Rechazada";
-        adoption.AdoptionResponseDate = DateTime.Now;
-        var result = await ApiClientsFactory.AdoptionClient().PutAsync(adoption.Id, adoption);
+        AdoptionRejectApproveDTO approveRejectDTO = new()
+        {
+            Approved = false,
+            AdoptionResponseDate = DateTime.Now
+        };
+        var result = await ApiClientsFactory.AdoptionClient().ApproveOrRejectPendingAsync(adoption.Id, approveRejectDTO);
         if (!result.Success)
         {
             Snackbar.Add($"Error al rechazar: {result.Message}", Severity.Error);

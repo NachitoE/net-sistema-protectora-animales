@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using DTOs.Adoption;
 using Services;
 using WebAPI.Dependencies;
 
@@ -43,6 +44,7 @@ namespace WebAPI
 
                 return Results.Created($"/adoptions/{created.Id}", created);
             })
+             //TODO: Require auth -> adopter/admin
             .WithName("Crear Adopcion")
             .Produces<AdoptionDTO>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
@@ -50,14 +52,13 @@ namespace WebAPI
 
             app.MapPut("/adoptions/{id}", (string id, AdoptionDTO dto) =>
             {
-
-                //TODO: hacer el catch de que si se está confirmando la adopción que se tome el animal etc, es otro endpoint?
                 var service = new AdoptionsService();
                 var updated = service.Update(id, dto);
                 if (!updated)
                     return Results.NotFound();
                 return Results.Ok(dto);
             })
+            .RequireAuthorization("AdminOnly")
             .WithName("Update Adopcion")
             .Produces<AdoptionDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
@@ -74,6 +75,32 @@ namespace WebAPI
             .WithName("Delete Adopcion")
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
+            .WithOpenApi();
+
+            app.MapPut("/adoptions/{id}/approve-reject", (string id, AdoptionRejectApproveDTO dto) =>
+            {
+                var service = new AdoptionsService();
+                try
+                {
+                    var updatedDTO = service.ApproveOrRejectPendingAdoption(id, dto);
+                    if (updatedDTO == null)
+                        return Results.NotFound();
+                    return Results.Ok(dto);
+                }
+                catch(NotFoundException ex)
+                {
+                    return Results.NotFound(new { error = ex.Message });
+                }
+                catch(DomainException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+            .RequireAuthorization("AdminOnly")
+            .WithName("Rechazar o aprobar Adopcion")
+            .Produces<AdoptionDTO>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
         }
     }

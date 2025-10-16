@@ -124,7 +124,7 @@ namespace WebAPI
                     AnimalDTO? assigned = animalService.AssignResponsible(id, userId);
                     return assigned != null ? Results.Ok(assigned) : Results.NotFound();
                 }
-                catch (Exception ex)
+                catch (DomainException ex)
                 {
                     return Results.BadRequest(new { error = ex.Message });
                 }

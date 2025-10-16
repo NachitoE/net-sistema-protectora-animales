@@ -1,4 +1,5 @@
 ﻿using DTOs;
+using DTOs.Adoption;
 
 
 namespace Infrastructure.API
@@ -18,6 +19,10 @@ namespace Infrastructure.API
         public async Task<ApiResult<AdoptionDTO>> PostAsync(AdoptionRequestDTO data)
         {
             return await base.PostAsync(data);
+        }
+        public async Task<ApiResult<AdoptionDTO>> ApproveOrRejectPendingAsync(string id, AdoptionRejectApproveDTO data)
+        {
+            return await _apiHttpClient.PutAsync<AdoptionDTO>($"{_endpoint}/{id}/approve-reject", data);
         }
     }
 }

@@ -236,7 +236,7 @@ namespace Services
             var existingUser = userService.Get(userId); // Verifica que el usuario exista, lanza excepción si no
             if(existingUser == null)
             {
-                throw new Exception("userId no pertenece a un usuario existente");
+                throw new DomainException("userId no pertenece a un usuario existente");
             }
             Animal? animal = animalRepository.Get(id);
             if (animal != null)
@@ -244,9 +244,14 @@ namespace Services
                 animal.UserId = userId;
                 animal.AnimalState = AnimalStateEn.Adoptado;
                 animalRepository.Update(animal);
+
+                // rechazar adopciones pendientes para ese animal
+                var adoptionServ = new AdoptionsService();
+                adoptionServ.RejectPendingAdoptionsByAnimalId(animal.Id);
+
                 return animal.ToDTO();
             }
-            throw new Exception("id no pertenece a un animal existente");
+            throw new DomainException("id no pertenece a un animal existente");
         }
 
         public List<AnimalDTO> GetByCriteria(AnimalDTO criteria)
