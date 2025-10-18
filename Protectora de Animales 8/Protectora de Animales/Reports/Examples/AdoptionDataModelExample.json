@@ -1,0 +1,39 @@
+{
+    "Header": "Reporte de Solicitudes de Adopción - Octubre 2025",
+    "Footer": "Generado automáticamente por el sistema de adopciones",
+    "Content": "Este reporte contiene el detalle de las solicitudes de adopción realizadas en el período indicado.",
+    "Adoptions": [
+        {
+            "AnimalName": "Luna",
+            "AdopterUserName": "juan.perez",
+            "AdoptionRequestDate": "2025-10-01T10:30:00",
+            "AdoptionResponseDate": "2025-10-03T15:45:00",
+            "State": "Aprobada",
+            "Description": "Perra mestiza de tamaño mediano, 2 años de edad."
+        },
+        {
+            "AnimalName": "Simba",
+            "AdopterUserName": "maria.gomez",
+            "AdoptionRequestDate": "2025-10-05T14:10:00",
+            "AdoptionResponseDate": null,
+            "State": "Pendiente",
+            "Description": "Gato atigrado, macho, aproximadamente 6 meses."
+        },
+        {
+            "AnimalName": "Rocky",
+            "AdopterUserName": "carlos.rodriguez",
+            "AdoptionRequestDate": "2025-09-28T09:00:00",
+            "AdoptionResponseDate": "2025-10-02T11:20:00",
+            "State": "Rechazada",
+            "Description": "Pitbull adulto, requiere hogar sin otros animales."
+        },
+        {
+            "AnimalName": "Mila",
+            "AdopterUserName": "sofia.lopez",
+            "AdoptionRequestDate": "2025-10-10T17:00:00",
+            "AdoptionResponseDate": null,
+            "State": "Pendiente",
+            "Description": "Coneja blanca, dócil y acostumbrada al contacto humano."
+        }
+    ]
+}
