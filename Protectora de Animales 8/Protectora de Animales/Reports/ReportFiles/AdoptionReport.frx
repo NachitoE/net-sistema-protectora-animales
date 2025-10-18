@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2025 19:50:18" ReportInfo.Modified="10/18/2025 09:32:29" ReportInfo.CreatorVersion="2026.1.0.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2025 19:50:18" ReportInfo.Modified="10/18/2025 09:36:17" ReportInfo.CreatorVersion="2026.1.0.0">
   <Dictionary>
     <JsonDataSourceConnection Name="Connection" ConnectionString="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">
       <JsonTableDataSource Name="JSON" DataType="FastReport.Utils.Json.JsonArray" Enabled="true" TableName="JSON">
@@ -33,7 +33,15 @@
     <PageHeaderBand Name="PageHeader1" Top="79.6" Width="718.2" Height="47.25">
       <TextObject Name="Text3" Left="18.9" Top="9.45" Width="680.4" Height="28.35" Text="[JSON.item.Header]" Font="Segoe UI, 16pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="130.85" Width="718.2" Height="75.6" DataSource="Adoptions">
+    <ColumnHeaderBand Name="ColumnHeader1" Top="130.85" Width="718.2" Height="85.05">
+      <TextObject Name="Text11" Left="538.65" Top="18.9" Width="160.65" Height="18.9" CanGrow="true" Text="Descripción" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="18.9" Top="18.9" Width="94.5" Height="18.9" CanGrow="true" Text="Nombre de animal" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Left="122.85" Top="18.9" Width="94.5" Height="18.9" CanGrow="true" Text="Nombre de adoptante solicitante" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="226.8" Top="18.9" Width="94.5" Height="18.9" CanGrow="true" Text="Fecha de solicitud de adopción" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="Text15" Left="330.75" Top="18.9" Width="94.5" Height="18.9" CanGrow="true" Text="Fecha de respuesta de adopción" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="434.7" Top="18.9" Width="94.5" Height="18.9" CanGrow="true" Text="Estado" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="219.9" Width="718.2" Height="75.6" DataSource="Adoptions">
       <TextObject Name="Text10" Left="538.65" Top="28.35" Width="160.65" Height="18.9" CanGrow="true" Text="[JSON.item.Adoptions.item.Description]" Font="Segoe UI, 10pt"/>
       <TextObject Name="Text5" Left="18.9" Top="28.35" Width="94.5" Height="18.9" CanGrow="true" Text="[JSON.item.Adoptions.item.AnimalName]" Font="Segoe UI, 10pt"/>
       <TextObject Name="Text6" Left="122.85" Top="28.35" Width="94.5" Height="18.9" CanGrow="true" Text="[JSON.item.Adoptions.item.AdopterUserName]" Font="Segoe UI, 10pt"/>
@@ -41,7 +49,7 @@
       <TextObject Name="Text8" Left="330.75" Top="28.35" Width="94.5" Height="18.9" CanGrow="true" Text="[JSON.item.Adoptions.item.AdoptionResponseDate]" Font="Segoe UI, 10pt"/>
       <TextObject Name="Text9" Left="434.7" Top="28.35" Width="94.5" Height="18.9" CanGrow="true" Text="[JSON.item.Adoptions.item.State]" Font="Segoe UI, 10pt"/>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="210.45" Width="718.2" Height="47.25">
+    <PageFooterBand Name="PageFooter1" Top="299.5" Width="718.2" Height="47.25">
       <TextObject Name="Text4" Top="9.45" Width="680.4" Height="37.8" Text="[JSON.item.Footer]" HorzAlign="Center" Font="Segoe UI, 10pt"/>
     </PageFooterBand>
   </ReportPage>
