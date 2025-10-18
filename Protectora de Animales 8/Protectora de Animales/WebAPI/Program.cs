@@ -83,5 +83,6 @@ app.MapHouseEndpoints();
 app.MapSightingEndpoints();
 app.MapMedicalCheckUpEndpoints();
 app.MapAdoptionEndpoints();
+app.MapReportEndpoints();
 
 app.Run();

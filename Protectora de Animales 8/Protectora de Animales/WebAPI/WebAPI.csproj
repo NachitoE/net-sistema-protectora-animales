@@ -22,4 +22,12 @@
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 
+    <ItemGroup>
+	    <!-- Copia TODO lo de Reports del proyecto Reportes al output de la WebAPI -->
+	    <Content Include="..\Reportes\Reports\**\*.*">
+		    <Link>Reports\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    </Content>
+    </ItemGroup>
 </Project>

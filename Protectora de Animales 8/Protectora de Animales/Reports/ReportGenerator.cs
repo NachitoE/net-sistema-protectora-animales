@@ -14,11 +14,15 @@ namespace Reports
         public ReportGenerator(string reportFileName)
         {
             string basePath = AppContext.BaseDirectory;
-            _reportPath = Path.Combine(basePath, "Reports", "ReportFiles", $"{reportFileName}.frx");
+            _reportPath = Path.Combine(basePath, "ReportFiles", $"{reportFileName}.frx");
         }
         public byte[] GenerateReportPDF(string jsonData)
         {
             using var report = new Report();
+            if (!File.Exists(_reportPath))
+            {
+                throw new FileNotFoundException($"Report file not found: {_reportPath}");
+            }
             report.Load(_reportPath);
 
             var csb = new JsonDataSourceConnectionStringBuilder
@@ -27,15 +31,14 @@ namespace Reports
                 Encoding = "utf-8",
             };
 
-            var jsonConn = new JsonDataSourceConnection
-            {
-                Name = "JSON",
-                ConnectionString = csb.ToString()
-            };
+            var jsonConn = report.Dictionary.Connections
+                .OfType<JsonDataSourceConnection>()
+                .FirstOrDefault();
 
-            //create connections + tables
-            report.Dictionary.Connections.Clear();
-            report.Dictionary.Connections.Add(jsonConn);
+            if (jsonConn == null)
+                throw new InvalidOperationException("No existe una conexión llamada 'JSON' en el .frx");
+
+            jsonConn.ConnectionString = csb.ToString();
             jsonConn.CreateAllTables();
 
             // export pdf
