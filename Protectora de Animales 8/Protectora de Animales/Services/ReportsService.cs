@@ -2,12 +2,14 @@
 using Infrastructure.Data;
 using Domain;
 using Helpers;
+using Reports;
+using System.Text.Json;
 
 namespace Services
 {
     public class ReportsService
     {
-        public AdoptionDataModel GenerateCurrentMonthAdoptionReport()
+        public byte[] GenerateCurrentMonthAdoptionReport()
         {
             int currMonth = DateTime.Now.Month;
             string currMonthStr = currMonth.ToString("MMMM");
@@ -24,7 +26,10 @@ namespace Services
                 .ToList();
 
             dataModel.Adoptions = adoptions;
-            return dataModel;
+
+            var report = new ReportGenerator(reportFileName: "AdoptionReport");
+            string serializedDataModel = JsonSerializer.Serialize(dataModel);
+            return report.GenerateReportPDF(serializedDataModel);
         }
 
         private AdoptionRowModel CreateAdoptionRowModel(Adoption adoption)
