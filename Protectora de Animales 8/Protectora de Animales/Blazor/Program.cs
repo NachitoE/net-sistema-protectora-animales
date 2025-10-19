@@ -1,5 +1,6 @@
 using Blazor;
 using Blazor.BlazorServices;
+using Infrastructure.API.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -18,5 +19,7 @@ builder.Services.AddScoped<SessionService>();
 // Provider para AuthorizeView y [Authorize]
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, SessionAuthStateProvider>();
+
+builder.Services.AddScoped<IDownloadHandler, BlazorDownloadHandler>();
 
 await builder.Build().RunAsync();

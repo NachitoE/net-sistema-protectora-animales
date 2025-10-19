@@ -1,0 +1,11 @@
+﻿@page "/reports-menu"
+@inject IDownloadHandler DownloadHandler;
+
+<MudButton OnClick="OnDownloadClick">Descargar Adopciones de este mes</MudButton>
+@code {
+    private async Task OnDownloadClick()
+    {
+        var reportCli = ApiClientsFactory.ReportClient(DownloadHandler);
+        await reportCli.DownloadAdoptionMonthReportAsync();
+    }
+}

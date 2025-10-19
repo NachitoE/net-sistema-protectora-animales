@@ -4,13 +4,14 @@
     {
         public static void MapReportEndpoints(this WebApplication app)
         {
-            app.MapGet("/reports/adoptions/current-month", () =>
+            app.MapGet("/reports/adoptions/current-month", (HttpResponse resp) =>
             {
                 try
                 {
                     var reportsService = new Services.ReportsService();
                     byte[] pdfBytes = reportsService.GenerateCurrentMonthAdoptionReport();
-                    return Results.File(pdfBytes, "application/pdf", "AdoptionReport_CurrentMonth.pdf");
+                    resp.Headers.Append("Access-Control-Expose-Headers", "Content-Disposition, Content-Type");
+                    return Results.File(pdfBytes, "application/pdf", fileDownloadName: $"AdoptionReport_{DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss")}.pdf");
                 }
                 catch(FileNotFoundException ex)
                 {

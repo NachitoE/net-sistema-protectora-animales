@@ -1,9 +1,6 @@
 ﻿using Infrastructure.API.DTOs_CRUDs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infrastructure.API.Interfaces;
+using Infrastructure.API.Other;
 
 namespace Infrastructure.API
 {
@@ -17,6 +14,7 @@ namespace Infrastructure.API
         public static AdoptionDTOClient AdoptionClient() => new AdoptionDTOClient(new APIHttpClient(BASE_URL));
         public static MedicalCheckUpDTOClient MedicalCheckUpClient() => new MedicalCheckUpDTOClient(new APIHttpClient(BASE_URL));
         public static AuthClient AuthClient() => new AuthClient(new APIHttpClient(BASE_URL));
+        public static ReportClient ReportClient(IDownloadHandler downloadHandler) => new ReportClient(new APIHttpClient(BASE_URL), downloadHandler);
 
 
     }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DTOs;
+using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 
@@ -171,6 +172,38 @@ namespace Infrastructure.API
         public void Dispose()
         {
             _httpClient?.Dispose();
+        }
+
+        public async Task<ApiResult<DownloadFile>> DownloadAsync(string endpoint)
+        {
+            try
+            {
+                using var res = await _httpClient.GetAsync(endpoint, HttpCompletionOption.ResponseHeadersRead);
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    var error = await res.Content.ReadAsStringAsync();
+                    return ApiResult<DownloadFile>.FromError(error, statusCode: res.StatusCode);
+                }
+
+                var fileName = res.Content.Headers.ContentDisposition?.FileNameStar
+               ?? res.Content.Headers.ContentDisposition?.FileName?.Trim('"')
+               ?? "download.bin";
+
+                var contentType = res.Content.Headers.ContentType?.MediaType ?? "application/octet-stream";
+                var bytes = await res.Content.ReadAsByteArrayAsync();
+
+                return ApiResult<DownloadFile>.FromSuccess(new DownloadFile
+                {
+                    Content = bytes,
+                    FileName = fileName,
+                    ContentType = contentType
+                });
+            }
+            catch (Exception ex)
+            {
+                return ApiResult<DownloadFile>.FromError($"Error al descargar archivo: {ex.Message}");
+            }
         }
     }
 }
