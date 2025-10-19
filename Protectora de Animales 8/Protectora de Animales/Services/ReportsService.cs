@@ -11,8 +11,9 @@ namespace Services
     {
         public byte[] GenerateCurrentMonthAdoptionReport()
         {
-            int currMonth = DateTime.Now.Month;
-            string currMonthStr = currMonth.ToString("MMMM");
+            DateTime now = DateTime.Now;
+            int currMonth = now.Month;
+            string currMonthStr = now.ToString("MMMM");
             AdoptionDataModel dataModel = new AdoptionDataModel()
             {
                 Header = $"Reporte de solicitudes de Adopción - {currMonthStr}",
