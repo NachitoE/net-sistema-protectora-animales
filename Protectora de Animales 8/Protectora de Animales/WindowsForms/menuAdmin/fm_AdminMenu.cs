@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.API;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsForms.BasicForms;
+using WindowsForms.Handlers;
 using WindowsForms.menuAdmin.Animals;
 using WindowsForms.menuAdmin.Houses;
 using WindowsForms.menuAdmin.Users;
@@ -68,6 +70,12 @@ namespace WindowsForms.menuAdmin
             var menuredir = new fm_HouseChangeCapacity();
             menuredir.ShowDialog();
             this.Show();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            var cli = ApiClientsFactory.ReportClient(new WinFormDownloadHandler());
+            await cli.DownloadAdoptionMonthReportAsync();
         }
     }
 }

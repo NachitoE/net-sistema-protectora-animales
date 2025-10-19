@@ -31,11 +31,12 @@
             pb_headerPic = new PictureBox();
             lb_MenuTitle = new Label();
             btn_menuAdoptions = new Button();
-            btn_menuAnimals = new Button();
             btn_menuSightings = new Button();
             btn_menuReports = new Button();
             btn_menuUsers = new Button();
             btn_FosterHouses = new Button();
+            btn_debugDownload = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).BeginInit();
             SuspendLayout();
             // 
@@ -70,16 +71,6 @@
             btn_menuAdoptions.Text = "Adopciones";
             btn_menuAdoptions.UseVisualStyleBackColor = true;
             btn_menuAdoptions.Click += btn_menuAdoptions_Click;
-            // 
-            // btn_menuAnimals
-            // 
-            btn_menuAnimals.Location = new Point(93, 189);
-            btn_menuAnimals.Name = "btn_menuAnimals";
-            btn_menuAnimals.Size = new Size(250, 23);
-            btn_menuAnimals.TabIndex = 3;
-            btn_menuAnimals.Text = "Animales";
-            btn_menuAnimals.UseVisualStyleBackColor = true;
-            btn_menuAnimals.Click += btn_menuAnimals_Click;
             // 
             // btn_menuSightings
             // 
@@ -121,17 +112,37 @@
             btn_FosterHouses.UseVisualStyleBackColor = true;
             btn_FosterHouses.Click += btn_FosterHouses_Click;
             // 
+            // btn_debugDownload
+            // 
+            btn_debugDownload.Location = new Point(93, 189);
+            btn_debugDownload.Name = "btn_debugDownload";
+            btn_debugDownload.Size = new Size(250, 23);
+            btn_debugDownload.TabIndex = 8;
+            btn_debugDownload.Text = "Adopciones";
+            btn_debugDownload.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(93, 334);
+            button1.Name = "button1";
+            button1.Size = new Size(250, 23);
+            button1.TabIndex = 9;
+            button1.Text = "DEBUG DOWNLOAD";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // fm_AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(426, 400);
+            Controls.Add(button1);
             Controls.Add(btn_FosterHouses);
             Controls.Add(btn_menuUsers);
             Controls.Add(btn_menuReports);
             Controls.Add(btn_menuSightings);
-            Controls.Add(btn_menuAnimals);
             Controls.Add(btn_menuAdoptions);
+            Controls.Add(btn_debugDownload);
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerPic);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -147,10 +158,11 @@
         private PictureBox pb_headerPic;
         private Label lb_MenuTitle;
         private Button btn_menuAdoptions;
-        private Button btn_menuAnimals;
         private Button btn_menuSightings;
         private Button btn_menuReports;
         private Button btn_menuUsers;
         private Button btn_FosterHouses;
+        private Button btn_debugDownload;
+        private Button button1;
     }
 }
