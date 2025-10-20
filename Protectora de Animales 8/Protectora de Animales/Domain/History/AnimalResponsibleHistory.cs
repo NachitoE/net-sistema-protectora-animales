@@ -38,5 +38,19 @@
             set => _animal = value;
         }
         private Animal _animal;
+
+        public AnimalResponsibleHistory
+        (
+            string id,
+            DateTime assignedDate,
+            string responsibleId,
+            string animalId
+        )
+        {
+            Id = id;
+            AssignedDate = assignedDate;
+            ResponsibleId = responsibleId;
+            AnimalId = animalId;
+        }
     }
 }

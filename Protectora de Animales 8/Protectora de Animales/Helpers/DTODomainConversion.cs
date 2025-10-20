@@ -1,5 +1,6 @@
 ﻿using Domain;
 using DTOs;
+using DTOs.History;
 
 namespace Helpers
 {
@@ -92,6 +93,17 @@ namespace Helpers
                 AdoptionResponseDate = adoption.AdoptionResponseDate,
                 State = EnumConversion.AdoptionStateToString(adoption.State),
                 Description = adoption.Description
+            };
+        }
+
+        public static AnimalResponsibleHistoryDTO ToDTO(this Domain.History.AnimalResponsibleHistory animalRH)
+        {
+            return new AnimalResponsibleHistoryDTO
+            {
+                Id = animalRH.Id,
+                AssignedDate = animalRH.AssignedDate,
+                ResponsibleId = animalRH.ResponsibleId,
+                AnimalId = animalRH.AnimalId
             };
         }
     }

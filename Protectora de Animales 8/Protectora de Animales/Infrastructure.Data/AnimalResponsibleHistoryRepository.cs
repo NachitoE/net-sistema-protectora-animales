@@ -63,5 +63,14 @@ namespace Infrastructure.Data
             }
             return false;
         }
+
+        public List<AnimalResponsibleHistory> GetByAnimalId(string animalId)
+        {
+            DBContext context = CreateContext();
+            var animalRHs = context.AnimalResponsibleHistories
+                .Where(arh => arh.AnimalId == animalId)
+                .ToList();
+            return animalRHs;
+        }
     }
 }
