@@ -1,0 +1,224 @@
+﻿@page "/add-new-medical-checkup"
+@using DTOs
+@inject ISnackbar Snackbar
+
+<h3>Registrar Nuevo Chequeo Médico</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else
+{
+    <MudPaper Class="pa-4" Elevation="2">
+        <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
+            
+            <h5 class="mb-2">Seleccionar Animal</h5>
+            <AnimalSelector OnAnimalSelected="OnAnimalSelected" 
+                            LoadMethod="AnimalSelector.AnimalClientLoadMethod.All">
+            </AnimalSelector>
+
+            <div class="mt-4 mb-2">
+                <h5>Seleccionar Veterinario Responsable</h5>
+            </div>
+            <UserSelector OnUserSelected="OnUserSelected" 
+                          LoadMethod="UserSelector.UserClientLoadMethod.All">
+            </UserSelector>
+
+            <div class="mt-4"></div>
+            <MudDatePicker Label="Fecha del Chequeo"
+                           Required="true"
+                           RequiredError="La fecha es obligatoria"
+                           @bind-Date="@formData.CheckUpDate"
+                           MaxDate="@DateTime.Today"
+                           MinDate="@minDate"
+                           DateFormat="dd/MM/yyyy"
+                           Immediate="true"
+                           Margin="Margin.Dense" />
+                               
+            <MudTimePicker Label="Hora del Chequeo"
+                           Required="true"
+                           RequiredError="La hora es obligatoria"
+                           @bind-Time="@formData.CheckUpTime"
+                           Immediate="true"
+                           TimeFormat="HH:mm"
+                           Margin="Margin.Dense" />
+                
+            <MudTextField T="string" 
+                          Label="Observaciones del Chequeo" 
+                          Required="true" 
+                          RequiredError="Las observaciones son obligatorias" 
+                          @bind-Value="@formData.Observation"
+                          Lines="5"
+                          Immediate="true"
+                          Margin="Margin.Dense"
+                          HelperText="Describe el estado de salud, tratamientos aplicados, vacunas, etc." />
+                              
+            <MudAlert Severity="Severity.Info" Class="mt-2 mb-3" Dense="true">
+                <strong>Ejemplo de observación:</strong><br/>
+                Vacunación antirrábica aplicada. Estado de salud general: excelente. 
+                Peso: 12kg. Próximo control en 6 meses.
+            </MudAlert>
+
+            <MudButton OnClick="@SubmitCheckUp" 
+                       Disabled="@(isLoading || !success || string.IsNullOrEmpty(selectedAnimalId) || string.IsNullOrEmpty(selectedUserId))" 
+                       Variant="Variant.Filled" 
+                       Color="Color.Primary"
+                       FullWidth="true">
+                @if (isLoading)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Guardando...</MudText>
+                }
+                else
+                {
+                    <MudText>Registrar Chequeo Médico</MudText>
+                }
+            </MudButton>
+        </MudForm>
+    </MudPaper>
+
+    @if (errorMessage != null)
+    {
+        <MudAlert Severity="Severity.Error" Class="mt-3">@errorMessage</MudAlert>
+    }
+}
+
+@code {
+    private bool success { get; set; }
+    private MudForm? form;
+    private AddNewMedicalCheckUpForm formData = new AddNewMedicalCheckUpForm();
+    private bool isLoading = false;
+    private string? errorMessage = null;
+    private DateTime minDate => DateTime.Today.AddMonths(-6);
+    private string selectedAnimalId = string.Empty;
+    private string selectedUserId = string.Empty;
+
+    public class AddNewMedicalCheckUpForm
+    {
+        public DateTime? CheckUpDate { get; set; } = null;
+        public TimeSpan? CheckUpTime { get; set; } = null;
+        public string Observation { get; set; } = string.Empty;
+    }
+
+    private void OnAnimalSelected(AnimalDTO? animal)
+    {
+        selectedAnimalId = animal?.Id ?? string.Empty;
+        if (form != null)
+        {
+            form.Validate();
+            StateHasChanged();
+        }
+    }
+
+    private void OnUserSelected(UserDTO? user)
+    {
+        selectedUserId = user?.Id ?? string.Empty;
+        if (form != null)
+        {
+            form.Validate();
+            StateHasChanged();
+        }
+    }
+
+    private async Task SubmitCheckUp()
+    {
+        if (isLoading) return;
+
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (form != null)
+            {
+                await form.Validate();
+                if (!form.IsValid)
+                {
+                    errorMessage = "Complete todos los campos correctamente";
+                    return;
+                }
+            }
+
+            if (string.IsNullOrEmpty(selectedAnimalId))
+            {
+                errorMessage = "Debe seleccionar un animal";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedUserId))
+            {
+                errorMessage = "Debe seleccionar un veterinario";
+                return;
+            }
+
+            if (!formData.CheckUpDate.HasValue)
+            {
+                errorMessage = "Debe seleccionar una fecha válida";
+                return;
+            }
+
+            if (!formData.CheckUpTime.HasValue)
+            {
+                errorMessage = "Debe seleccionar una hora válida";
+                return;
+            }
+
+            DateTime checkUpDateTime = formData.CheckUpDate.Value.Date + formData.CheckUpTime.Value;
+
+            DateTime now = DateTime.Now;
+            DateTime minDate = now.AddMonths(-6);
+
+            if (checkUpDateTime > now)
+            {
+                errorMessage = "La fecha y hora no pueden ser futuras";
+                return;
+            }
+
+            if (checkUpDateTime < minDate)
+            {
+                errorMessage = "La fecha y hora deben ser de los últimos 6 meses";
+                return;
+            }
+
+            var request = new MedicalCheckUpRegisterDTO()
+            {
+                AnimalId = selectedAnimalId,
+                UserId = selectedUserId,
+                CheckUpDate = checkUpDateTime,
+                Observation = formData.Observation
+            };
+
+            var apiClient = ApiClientsFactory.MedicalCheckUpClient();
+            var result = await apiClient.PostAsync(request);
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al guardar el chequeo médico";
+                return;
+            }
+
+            Snackbar.Add($"Chequeo médico guardado con éxito. ID: {result.Data.Id}", Severity.Success);
+
+            // Limpiar formulario
+            formData = new AddNewMedicalCheckUpForm();
+            selectedAnimalId = string.Empty;
+            selectedUserId = string.Empty;
+            if (form != null)
+            {
+                await form.ResetAsync();
+            }
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al guardar el chequeo médico: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}

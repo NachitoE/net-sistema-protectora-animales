@@ -1,11 +1,43 @@
 ﻿@page "/reports-menu"
 @inject IDownloadHandler DownloadHandler;
 
-<MudButton OnClick="OnDownloadClick">Descargar Adopciones de este mes</MudButton>
+<MudButton 
+    
+    Variant="Variant.Filled"
+           Color="Color.Primary"
+    StartIcon="@GetCurrentIcon("ADOPTION_MONTH_REPORT")"
+           Disabled="@(!GetButtonActiveStatus("ADOPTION_MONTH_REPORT"))"
+               OnClick="OnDownloadClickAdoptionMonthReport">Descargar Adopciones de este mes</MudButton>
 @code {
-    private async Task OnDownloadClick()
+    private bool isDownloadingAdoptionMonthReport = false;
+    private async Task OnDownloadClickAdoptionMonthReport()
     {
+        isDownloadingAdoptionMonthReport = true;
         var reportCli = ApiClientsFactory.ReportClient(DownloadHandler);
-        await reportCli.DownloadAdoptionMonthReportAsync();
+        var res = await reportCli.DownloadAdoptionMonthReportAsync();
+        if (!res.Success)
+        {
+            Snackbar.Add("Error al descargar el reporte de adopciones del mes: " + res.Message, Severity.Error);
+        }
+        isDownloadingAdoptionMonthReport = false;
     }
+    private string GetCurrentIcon(string btnId)
+    {
+        if(btnId == "ADOPTION_MONTH_REPORT" && isDownloadingAdoptionMonthReport)
+        {
+            return Icons.Material.Filled.Downloading;
+        }
+        //another button check
+        return Icons.Material.Filled.Download;
+    }
+    private bool GetButtonActiveStatus(string btnId)
+    {
+        if (btnId == "ADOPTION_MONTH_REPORT" && isDownloadingAdoptionMonthReport)
+        {
+            return false;
+        }
+        //another button check
+        return true;
+    }
+
 }
