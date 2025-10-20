@@ -31,11 +31,6 @@ else
             <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha de Chequeo" />
             <PropertyColumn Property="x => x.Observation" Title="Observación">
             </PropertyColumn>
-            <TemplateColumn Title="Usuario" Editable="false">
-                <CellTemplate>
-                    <UserTooltip UserId="@context.Item.UserId" />
-                </CellTemplate>
-            </TemplateColumn>
             <TemplateColumn Title="Animal" Editable="false">
                 <CellTemplate>
                     <AnimalTooltip AnimalId="@context.Item.AnimalId" />

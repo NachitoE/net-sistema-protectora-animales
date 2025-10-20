@@ -76,7 +76,6 @@ namespace Helpers
             return new MedicalCheckUpDTO
             {
                 Id = checkUp.Id,
-                UserId = checkUp.UserId,
                 CheckUpDate = checkUp.CheckUpDate,
                 Observation = checkUp.Observation,
                 AnimalId = checkUp.AnimalId

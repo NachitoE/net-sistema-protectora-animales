@@ -18,13 +18,6 @@ else
                             LoadMethod="AnimalSelector.AnimalClientLoadMethod.All">
             </AnimalSelector>
 
-            <div class="mt-4 mb-2">
-                <h5>Seleccionar Veterinario Responsable</h5>
-            </div>
-            <UserSelector OnUserSelected="OnUserSelected" 
-                          LoadMethod="UserSelector.UserClientLoadMethod.All">
-            </UserSelector>
-
             <div class="mt-4"></div>
             <MudDatePicker Label="Fecha del Chequeo"
                            Required="true"
@@ -61,7 +54,7 @@ else
             </MudAlert>
 
             <MudButton OnClick="@SubmitCheckUp" 
-                       Disabled="@(isLoading || !success || string.IsNullOrEmpty(selectedAnimalId) || string.IsNullOrEmpty(selectedUserId))" 
+                       Disabled="@(isLoading)" 
                        Variant="Variant.Filled" 
                        Color="Color.Primary"
                        FullWidth="true">
@@ -92,7 +85,6 @@ else
     private string? errorMessage = null;
     private DateTime minDate => DateTime.Today.AddMonths(-6);
     private string selectedAnimalId = string.Empty;
-    private string selectedUserId = string.Empty;
 
     public class AddNewMedicalCheckUpForm
     {
@@ -104,16 +96,6 @@ else
     private void OnAnimalSelected(AnimalDTO? animal)
     {
         selectedAnimalId = animal?.Id ?? string.Empty;
-        if (form != null)
-        {
-            form.Validate();
-            StateHasChanged();
-        }
-    }
-
-    private void OnUserSelected(UserDTO? user)
-    {
-        selectedUserId = user?.Id ?? string.Empty;
         if (form != null)
         {
             form.Validate();
@@ -144,12 +126,6 @@ else
             if (string.IsNullOrEmpty(selectedAnimalId))
             {
                 errorMessage = "Debe seleccionar un animal";
-                return;
-            }
-
-            if (string.IsNullOrEmpty(selectedUserId))
-            {
-                errorMessage = "Debe seleccionar un veterinario";
                 return;
             }
 
@@ -185,7 +161,6 @@ else
             var request = new MedicalCheckUpRegisterDTO()
             {
                 AnimalId = selectedAnimalId,
-                UserId = selectedUserId,
                 CheckUpDate = checkUpDateTime,
                 Observation = formData.Observation
             };
@@ -204,7 +179,6 @@ else
             // Limpiar formulario
             formData = new AddNewMedicalCheckUpForm();
             selectedAnimalId = string.Empty;
-            selectedUserId = string.Empty;
             if (form != null)
             {
                 await form.ResetAsync();
