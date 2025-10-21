@@ -245,6 +245,9 @@ namespace Infrastructure.Data
 
                 entity.Property(e => e.Observation)
                     .IsRequired();
+
+                entity.Ignore("UserId"); //ef keeps creating a column for UserId otherwise
+
                 entity.HasData(
                 new MedicalCheckUp(
                     "mc-1",

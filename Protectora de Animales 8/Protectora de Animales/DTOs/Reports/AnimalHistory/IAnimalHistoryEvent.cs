@@ -9,6 +9,6 @@ namespace DTOs.Reports.AnimalHistory
     public interface IAnimalHistoryEvent
     {
         public string Description { get; }
-        public DateTime Date { get; }
+        public string Date { get; }
     }
 }

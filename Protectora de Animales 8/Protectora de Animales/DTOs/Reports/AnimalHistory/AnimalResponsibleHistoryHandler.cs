@@ -11,8 +11,8 @@ namespace DTOs.Reports.AnimalHistory
     {
         private readonly UserDTO _responsibleData;
         private readonly AnimalResponsibleHistoryDTO _responsibleHistoryDTO;
-        public string Description => $"Encargado al {_responsibleData.UserType} {_responsibleData.Name + _responsibleData.SurName}";
-        public DateTime Date => _responsibleHistoryDTO.AssignedDate;
+        public string Description => $"Encargado al {_responsibleData.UserType} {_responsibleData.Name} {_responsibleData.SurName}";
+        public string Date => _responsibleHistoryDTO.AssignedDate.ToString("dd/MM/yyyy HH:mm:ss");
 
         public AnimalResponsibleHistoryHandler(UserDTO animalResponsibleData, AnimalResponsibleHistoryDTO responsibleHistoryDTO)
         {

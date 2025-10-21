@@ -65,8 +65,8 @@ namespace Services
                     animalEvents.Add(aRHHandler);
                 }
                 //get medical records/check ups
-                medicalCheckUpServ.GetByAnimalId(animal.Id);
-                foreach(var medicalRecord in medicalCheckUpServ.GetByAnimalId(animal.Id))
+                var medicalCheckUps = medicalCheckUpServ.GetByAnimalId(animal.Id);
+                foreach(var medicalRecord in medicalCheckUps)
                 {
                     var medicalInfoHandler = new AnimalMedicalInfoHandler(medicalRecord);
                     animalEvents.Add(medicalInfoHandler);

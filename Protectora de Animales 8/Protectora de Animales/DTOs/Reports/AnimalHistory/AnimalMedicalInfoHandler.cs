@@ -10,7 +10,7 @@ namespace DTOs.Reports.AnimalHistory
     {
         private MedicalCheckUpDTO _medicalData;
         public string Description => _medicalData.Observation;
-        public DateTime Date => _medicalData.CheckUpDate;
+        public string Date => _medicalData.CheckUpDate.ToString("dd/MM/yyyy HH:mm:ss");
         public AnimalMedicalInfoHandler(MedicalCheckUpDTO medicalData)
         {
             _medicalData = medicalData;

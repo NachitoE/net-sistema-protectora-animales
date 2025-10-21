@@ -33,8 +33,6 @@ namespace Domain
             set { _animalId = value; }
         }
 
-        private User? _user;
-
         public Animal Animal
         {
             get => _animal;

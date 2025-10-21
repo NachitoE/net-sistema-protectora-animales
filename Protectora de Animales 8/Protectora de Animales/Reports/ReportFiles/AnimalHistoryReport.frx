@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="10/17/2025 19:50:18" ReportInfo.Modified="10/21/2025 16:33:46" ReportInfo.CreatorVersion="2026.1.0.0">
+  <Dictionary>
+    <JsonDataSourceConnection Name="Connection" ConnectionString="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">
+      <JsonTableDataSource Name="JSON1" Alias="JSON" DataType="FastReport.Utils.Json.JsonArray" Enabled="true" TableName="JSON">
+        <Column Name="index" DataType="System.Int32"/>
+        <Column Name="item" DataType="FastReport.JsonBase">
+          <Column Name="Header" DataType="System.String"/>
+          <Column Name="Footer" DataType="System.String"/>
+          <JsonTableDataSource Name="AnimalHistories" DataType="FastReport.JsonBase" Enabled="true">
+            <Column Name="index" DataType="System.Int32"/>
+            <Column Name="item" DataType="FastReport.JsonBase">
+              <Column Name="AnimalName" DataType="System.String"/>
+              <JsonTableDataSource Name="Events" DataType="FastReport.JsonBase" Enabled="true">
+                <Column Name="index" DataType="System.Int32"/>
+                <Column Name="item" DataType="FastReport.JsonBase">
+                  <Column Name="Description" DataType="System.String"/>
+                  <Column Name="Date" DataType="System.String"/>
+                </Column>
+                <Column Name="array" DataType="FastReport.JsonBase"/>
+              </JsonTableDataSource>
+            </Column>
+            <Column Name="array" DataType="FastReport.JsonBase"/>
+          </JsonTableDataSource>
+        </Column>
+        <Column Name="array" DataType="FastReport.JsonBase"/>
+      </JsonTableDataSource>
+    </JsonDataSourceConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6">
+      <TextObject Name="Text1" Left="18.9" Top="9.45" Width="680.4" Height="37.8" Text="Reporte de Historial de Animales" Font="Segoe UI, 16pt, style=Bold"/>
+      <TextObject Name="Text2" Left="-9450" Top="-9450" Width="680.4" Height="37.8" Text="Reporte de Adopciones" Font="Segoe UI, 16pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="79.6" Width="718.2" Height="47.25">
+      <TextObject Name="Text3" Left="18.9" Top="9.45" Width="680.4" Height="28.35" Text="[JSON.item.Header]" Font="Segoe UI, 16pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="130.85" Width="718.2" Height="75.6" DataSource="AnimalHistories">
+      <TextObject Name="Text5" Left="18.9" Top="28.35" Width="94.5" Height="18.9" Text="[JSON.item.AnimalHistories.item.AnimalName]" Font="Segoe UI, 10pt"/>
+      <DataBand Name="Data2" Top="210.45" Width="718.2" Height="66.15" DataSource="Events">
+        <TextObject Name="Text7" Left="236.25" Top="18.9" Width="453.6" Height="18.9" Text="[JSON.item.AnimalHistories.item.Events.item.Date]" Font="Segoe UI, 10pt"/>
+        <TextObject Name="Text6" Left="18.9" Top="9.45" Width="179.55" Height="47.25" CanGrow="true" Text="[JSON.item.AnimalHistories.item.Events.item.Description]" Font="Segoe UI, 10pt"/>
+        <LineObject Name="Line1" Left="207.9" Top="9.45" Height="47.25"/>
+      </DataBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="280.6" Width="718.2" Height="47.25">
+      <TextObject Name="Text4" Top="9.45" Width="680.4" Height="37.8" Text="[JSON.item.Footer]" HorzAlign="Center" Font="Segoe UI, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -226,6 +226,125 @@ namespace Infrastructure.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Domain.History.AnimalResponsibleHistory", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AnimalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("AssignedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsibleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("ResponsibleId");
+
+                    b.ToTable("AnimalResponsibleHistories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "arh-1",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "arh-2",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "arh-3",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2024, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-5"
+                        },
+                        new
+                        {
+                            Id = "arh-4",
+                            AnimalId = "5",
+                            AssignedDate = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-7"
+                        },
+                        new
+                        {
+                            Id = "arh-5",
+                            AnimalId = "5",
+                            AssignedDate = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "arh-6",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "arh-7",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-8"
+                        },
+                        new
+                        {
+                            Id = "arh-8",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-4"
+                        },
+                        new
+                        {
+                            Id = "arh-9",
+                            AnimalId = "7",
+                            AssignedDate = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "arh-10",
+                            AnimalId = "7",
+                            AssignedDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "arh-11",
+                            AnimalId = "1",
+                            AssignedDate = new DateTime(2023, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-5"
+                        },
+                        new
+                        {
+                            Id = "arh-12",
+                            AnimalId = "1",
+                            AssignedDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-8"
+                        },
+                        new
+                        {
+                            Id = "arh-13",
+                            AnimalId = "3",
+                            AssignedDate = new DateTime(2024, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-7"
+                        });
+                });
+
             modelBuilder.Entity("Domain.House", b =>
                 {
                     b.Property<string>("Id")
@@ -564,6 +683,25 @@ namespace Infrastructure.Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.History.AnimalResponsibleHistory", b =>
+                {
+                    b.HasOne("Domain.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Responsible");
                 });
 
             modelBuilder.Entity("Domain.House", b =>

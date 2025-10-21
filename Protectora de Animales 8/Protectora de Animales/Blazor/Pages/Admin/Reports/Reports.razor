@@ -8,8 +8,16 @@
     StartIcon="@GetCurrentIcon("ADOPTION_MONTH_REPORT")"
            Disabled="@(!GetButtonActiveStatus("ADOPTION_MONTH_REPORT"))"
                OnClick="OnDownloadClickAdoptionMonthReport">Descargar Adopciones de este mes</MudButton>
+
+<MudButton Variant="Variant.Filled"
+           Color="Color.Primary"
+           StartIcon="@GetCurrentIcon("ANIMALS_HISTORY_REPORT")"
+           Disabled="@(!GetButtonActiveStatus("ANIMALS_HISTORY_REPORT"))"
+           OnClick="OnDownloadClickAnimalHistoriesReport">Descargar historial de animales de este mes</MudButton>
+
 @code {
     private bool isDownloadingAdoptionMonthReport = false;
+    private bool isDownloadingAnimalHistoriesReport = false;
     private async Task OnDownloadClickAdoptionMonthReport()
     {
         isDownloadingAdoptionMonthReport = true;
@@ -21,9 +29,24 @@
         }
         isDownloadingAdoptionMonthReport = false;
     }
+    private async Task OnDownloadClickAnimalHistoriesReport()
+    {
+        isDownloadingAnimalHistoriesReport = true;
+        var reportCli = ApiClientsFactory.ReportClient(DownloadHandler);
+        var res = await reportCli.DownloadAnimalsHistoryAsync();
+        if (!res.Success)
+        {
+            Snackbar.Add("Error al descargar el reporte de historial de animales: " + res.Message, Severity.Error);
+        }
+        isDownloadingAnimalHistoriesReport = false;
+    }
     private string GetCurrentIcon(string btnId)
     {
         if(btnId == "ADOPTION_MONTH_REPORT" && isDownloadingAdoptionMonthReport)
+        {
+            return Icons.Material.Filled.Downloading;
+        }
+        if (btnId == "ANIMALS_HISTORY_REPORT" && isDownloadingAnimalHistoriesReport)
         {
             return Icons.Material.Filled.Downloading;
         }
@@ -33,6 +56,10 @@
     private bool GetButtonActiveStatus(string btnId)
     {
         if (btnId == "ADOPTION_MONTH_REPORT" && isDownloadingAdoptionMonthReport)
+        {
+            return false;
+        }
+        if (btnId == "ANIMALS_HISTORY_REPORT" && isDownloadingAnimalHistoriesReport)
         {
             return false;
         }
