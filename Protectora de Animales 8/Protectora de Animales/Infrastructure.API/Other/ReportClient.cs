@@ -18,7 +18,11 @@ namespace Infrastructure.API.Other
 
             return await HandleDownloadReportAsync($"/{_endpoint}/adoptions/current-month");
         }
+        public async Task<ApiResult<DownloadFile>> DownloadAnimalsHistory()
+        {
 
+            return await HandleDownloadReportAsync($"/{_endpoint}/animals/history");
+        }
         private async Task<ApiResult<DownloadFile>> HandleDownloadReportAsync(string finalEndpoint)
         {
             var result = await _apiHttpClient.DownloadAsync(finalEndpoint);

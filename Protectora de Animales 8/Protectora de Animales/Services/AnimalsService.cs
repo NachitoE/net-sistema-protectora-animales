@@ -3,6 +3,7 @@ using DTOs;
 using Infrastructure.Data;
 using Helpers;
 using static Domain.Animal;
+using DTOs.History;
 
 namespace Services
 {
@@ -248,6 +249,15 @@ namespace Services
                 // rechazar adopciones pendientes para ese animal
                 var adoptionServ = new AdoptionsService();
                 adoptionServ.RejectPendingAdoptionsByAnimalId(animal.Id);
+
+                // crear historial
+                var animalRHService = new AnimalResponsibleHistoriesService();
+                animalRHService.Add(new AnimalResponsibleHistoryDTO
+                {
+                    AnimalId = animal.Id,
+                    ResponsibleId = userId,
+                    AssignedDate = DateTime.Now
+                });
 
                 return animal.ToDTO();
             }
