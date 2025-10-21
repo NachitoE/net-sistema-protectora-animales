@@ -28,46 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lb_EnConstruccion = new Label();
-            pb_UnderConstructionImg = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pb_UnderConstructionImg).BeginInit();
+            lb_MedicalCheckup = new Label();
+            pb_Background = new PictureBox();
+            dgv_User = new DataGridView();
+            btn_AcceptChanges = new Button();
+            ((System.ComponentModel.ISupportInitialize)pb_Background).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_User).BeginInit();
             SuspendLayout();
             // 
-            // lb_EnConstruccion
+            // lb_MedicalCheckup
             // 
-            lb_EnConstruccion.AutoSize = true;
-            lb_EnConstruccion.BackColor = Color.Gold;
-            lb_EnConstruccion.Location = new Point(201, 458);
-            lb_EnConstruccion.Margin = new Padding(4, 0, 4, 0);
-            lb_EnConstruccion.Name = "lb_EnConstruccion";
-            lb_EnConstruccion.Size = new Size(421, 15);
-            lb_EnConstruccion.TabIndex = 3;
-            lb_EnConstruccion.Text = "¡EL EQUIPO ESTÁ TRABAJANDO PARA RESOLVERLO LO MÁS PRONTO POSIBLE!";
+            lb_MedicalCheckup.AutoSize = true;
+            lb_MedicalCheckup.BackColor = Color.OliveDrab;
+            lb_MedicalCheckup.ForeColor = SystemColors.ButtonHighlight;
+            lb_MedicalCheckup.Location = new Point(373, 19);
+            lb_MedicalCheckup.Margin = new Padding(4, 0, 4, 0);
+            lb_MedicalCheckup.Name = "lb_MedicalCheckup";
+            lb_MedicalCheckup.Size = new Size(125, 15);
+            lb_MedicalCheckup.TabIndex = 8;
+            lb_MedicalCheckup.Text = "CHEQUEOS MEDICOS:";
             // 
-            // pb_UnderConstructionImg
+            // pb_Background
             // 
-            pb_UnderConstructionImg.Image = Properties.Resources.en_construcción__1_1;
-            pb_UnderConstructionImg.Location = new Point(0, 47);
-            pb_UnderConstructionImg.Margin = new Padding(4, 3, 4, 3);
-            pb_UnderConstructionImg.Name = "pb_UnderConstructionImg";
-            pb_UnderConstructionImg.Size = new Size(934, 377);
-            pb_UnderConstructionImg.SizeMode = PictureBoxSizeMode.Zoom;
-            pb_UnderConstructionImg.TabIndex = 2;
-            pb_UnderConstructionImg.TabStop = false;
+            pb_Background.BackColor = Color.OliveDrab;
+            pb_Background.Location = new Point(68, 53);
+            pb_Background.Margin = new Padding(4, 3, 4, 3);
+            pb_Background.Name = "pb_Background";
+            pb_Background.Size = new Size(773, 404);
+            pb_Background.TabIndex = 13;
+            pb_Background.TabStop = false;
+            // 
+            // dgv_User
+            // 
+            dgv_User.BackgroundColor = SystemColors.ButtonHighlight;
+            dgv_User.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv_User.Location = new Point(87, 70);
+            dgv_User.Margin = new Padding(4, 3, 4, 3);
+            dgv_User.Name = "dgv_User";
+            dgv_User.RowHeadersWidth = 51;
+            dgv_User.Size = new Size(733, 366);
+            dgv_User.TabIndex = 16;
+            // 
+            // btn_AcceptChanges
+            // 
+            btn_AcceptChanges.Location = new Point(815, 484);
+            btn_AcceptChanges.Name = "btn_AcceptChanges";
+            btn_AcceptChanges.Size = new Size(97, 23);
+            btn_AcceptChanges.TabIndex = 17;
+            btn_AcceptChanges.Text = "aceptar";
+            btn_AcceptChanges.UseVisualStyleBackColor = true;
+            btn_AcceptChanges.Click += btn_AcceptChanges_Click;
             // 
             // fm_AnimalsMedicalCheckUp
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(933, 519);
-            Controls.Add(lb_EnConstruccion);
-            Controls.Add(pb_UnderConstructionImg);
+            Controls.Add(btn_AcceptChanges);
+            Controls.Add(dgv_User);
+            Controls.Add(pb_Background);
+            Controls.Add(lb_MedicalCheckup);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             MaximizeBox = false;
             Name = "fm_AnimalsMedicalCheckUp";
             Text = "fm_AnimalsMedicalCheckUp";
-            ((System.ComponentModel.ISupportInitialize)pb_UnderConstructionImg).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_Background).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgv_User).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -75,7 +102,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lb_EnConstruccion;
-        private System.Windows.Forms.PictureBox pb_UnderConstructionImg;
+        private Label lb_MedicalCheckup;
+        private PictureBox pb_Background;
+        private DataGridView dgv_User;
+        private Button btn_AcceptChanges;
     }
 }

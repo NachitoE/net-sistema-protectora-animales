@@ -34,6 +34,7 @@
             btn_asignResp = new Button();
             pb_headerpic = new PictureBox();
             btn_AnimalModify = new Button();
+            btn_mC = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerpic).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             // 
             // btn_AddNewAnimal
             // 
-            btn_AddNewAnimal.Location = new Point(59, 212);
+            btn_AddNewAnimal.Location = new Point(73, 187);
             btn_AddNewAnimal.Margin = new Padding(4, 3, 4, 3);
             btn_AddNewAnimal.Name = "btn_AddNewAnimal";
             btn_AddNewAnimal.Size = new Size(289, 32);
@@ -64,7 +65,7 @@
             // 
             // btn_ShowAllAnimals
             // 
-            btn_ShowAllAnimals.Location = new Point(59, 276);
+            btn_ShowAllAnimals.Location = new Point(73, 350);
             btn_ShowAllAnimals.Margin = new Padding(4, 3, 4, 3);
             btn_ShowAllAnimals.Name = "btn_ShowAllAnimals";
             btn_ShowAllAnimals.Size = new Size(289, 32);
@@ -75,7 +76,7 @@
             // 
             // btn_asignResp
             // 
-            btn_asignResp.Location = new Point(59, 153);
+            btn_asignResp.Location = new Point(73, 133);
             btn_asignResp.Margin = new Padding(4, 3, 4, 3);
             btn_asignResp.Name = "btn_asignResp";
             btn_asignResp.Size = new Size(289, 32);
@@ -98,7 +99,7 @@
             // 
             // btn_AnimalModify
             // 
-            btn_AnimalModify.Location = new Point(59, 343);
+            btn_AnimalModify.Location = new Point(73, 293);
             btn_AnimalModify.Margin = new Padding(4, 3, 4, 3);
             btn_AnimalModify.Name = "btn_AnimalModify";
             btn_AnimalModify.Size = new Size(289, 32);
@@ -107,11 +108,22 @@
             btn_AnimalModify.UseVisualStyleBackColor = true;
             btn_AnimalModify.Click += btn_AnimalModify_Click;
             // 
+            // btn_mC
+            // 
+            btn_mC.Location = new Point(73, 240);
+            btn_mC.Name = "btn_mC";
+            btn_mC.Size = new Size(289, 35);
+            btn_mC.TabIndex = 15;
+            btn_mC.Text = "Chequeos Medicos";
+            btn_mC.UseVisualStyleBackColor = true;
+            btn_mC.Click += btn_mC_Click;
+            // 
             // fm_AdminAnimalMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(438, 425);
+            Controls.Add(btn_mC);
             Controls.Add(btn_AnimalModify);
             Controls.Add(btn_AddNewAnimal);
             Controls.Add(btn_ShowAllAnimals);
@@ -136,5 +148,7 @@
         private System.Windows.Forms.Button btn_ShowAllAnimals;
         public System.Windows.Forms.Button btn_asignResp;
         private System.Windows.Forms.Button btn_AnimalModify;
+        public Button btn_MedicalCheckup;
+        private Button btn_mC;
     }
 }

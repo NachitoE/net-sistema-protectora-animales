@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsForms.BasicForms;
 
 namespace WindowsForms.menuAdmin.Animals
 {
@@ -49,6 +50,14 @@ namespace WindowsForms.menuAdmin.Animals
             menuredir.ShowDialog();
             this.Show();
 
+        }
+
+        private void btn_mC_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_AnimalsMedicalCheckUp();
+            menuredir.ShowDialog();
+            this.Show();
         }
     }
 }

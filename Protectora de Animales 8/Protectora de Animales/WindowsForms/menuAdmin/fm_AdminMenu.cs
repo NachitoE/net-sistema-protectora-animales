@@ -72,7 +72,7 @@ namespace WindowsForms.menuAdmin
             this.Show();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void btn_DebugDownload_Click(object sender, EventArgs e)
         {
             var cli = ApiClientsFactory.ReportClient(new WinFormDownloadHandler());
             await cli.DownloadAdoptionMonthReportAsync();

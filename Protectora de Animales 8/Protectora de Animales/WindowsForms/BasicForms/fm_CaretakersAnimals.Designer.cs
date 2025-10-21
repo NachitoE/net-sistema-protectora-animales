@@ -47,6 +47,7 @@
             // 
             // dgv_userAnimals
             // 
+            dgv_userAnimals.BackgroundColor = SystemColors.ButtonHighlight;
             dgv_userAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_userAnimals.Location = new Point(206, 14);
             dgv_userAnimals.Margin = new Padding(4, 3, 4, 3);
@@ -54,7 +55,7 @@
             dgv_userAnimals.Size = new Size(665, 403);
             dgv_userAnimals.TabIndex = 9;
             // 
-            // CaretakersAnimals
+            // fm_CaretakersAnimals
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -62,7 +63,7 @@
             Controls.Add(dgv_userAnimals);
             Controls.Add(pb_headerpic);
             Margin = new Padding(4, 3, 4, 3);
-            Name = "CaretakersAnimals";
+            Name = "fm_CaretakersAnimals";
             Text = "CaretakersAnimals";
             ((System.ComponentModel.ISupportInitialize)pb_headerpic).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_userAnimals).EndInit();
