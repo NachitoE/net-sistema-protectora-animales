@@ -397,110 +397,32 @@ namespace Infrastructure.Data
 
                 // Seeding data con múltiples adopciones para algunos animales
                 entity.HasData(
-                    // Historial de Miau (Animal "2") - 3 adopciones diferentes
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-1",
-                        AnimalId = "2",  // Miau
-                        ResponsibleId = "user-2",  // Primera adopción con Camila (rechazada después)
-                        AssignedDate = new DateTime(2023, 12, 15)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-2",
-                        AnimalId = "2",  // Miau
-                        ResponsibleId = "user-6",  // Segunda adopción con Laura (devuelto)
-                        AssignedDate = new DateTime(2024, 3, 20)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-3",
-                        AnimalId = "2",  // Miau
-                        ResponsibleId = "user-5",  // Adopción actual con Martín González
-                        AssignedDate = new DateTime(2024, 10, 8)
-                    },
+                    // Miau (Animal "2")
+                    new AnimalResponsibleHistory("arh-1", new DateTime(2023, 12, 15), "user-2", "2"),
+                    new AnimalResponsibleHistory("arh-2", new DateTime(2024, 3, 20), "user-6", "2"),
+                    new AnimalResponsibleHistory("arh-3", new DateTime(2024, 10, 8), "user-5", "2"),
 
-                    // Historial de Rex (Animal "5") - 2 adopciones
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-4",
-                        AnimalId = "5",  // Rex
-                        ResponsibleId = "user-7",  // Primera adopción con Diego (devuelto)
-                        AssignedDate = new DateTime(2024, 2, 10)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-5",
-                        AnimalId = "5",  // Rex
-                        ResponsibleId = "user-2",  // Adopción actual con Camila Stella
-                        AssignedDate = new DateTime(2024, 7, 20)
-                    },
+                    // Rex (Animal "5")
+                    new AnimalResponsibleHistory("arh-4", new DateTime(2024, 2, 10), "user-7", "5"),
+                    new AnimalResponsibleHistory("arh-5", new DateTime(2024, 7, 20), "user-2", "5"),
 
-                    // Historial de Lola (Animal "4") - múltiples responsables
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-6",
-                        AnimalId = "4",  // Lola
-                        ResponsibleId = "user-3",  // Primero bajo cuidado de Ignacio (Voluntario)
-                        AssignedDate = new DateTime(2024, 4, 5)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-7",
-                        AnimalId = "4",  // Lola
-                        ResponsibleId = "user-8",  // Adopción temporal con Sofía (devuelto)
-                        AssignedDate = new DateTime(2024, 6, 12)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-8",
-                        AnimalId = "4",  // Lola
-                        ResponsibleId = "user-4",  // Adopción actual con Nicolás Salerno (Tránsito)
-                        AssignedDate = new DateTime(2024, 8, 15)
-                    },
+                    // Lola (Animal "4")
+                    new AnimalResponsibleHistory("arh-6", new DateTime(2024, 4, 5), "user-3", "4"),
+                    new AnimalResponsibleHistory("arh-7", new DateTime(2024, 6, 12), "user-8", "4"),
+                    new AnimalResponsibleHistory("arh-8", new DateTime(2024, 8, 15), "user-4", "4"),
 
-                    // Historial de Pepi (Animal "7") - 2 adopciones
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-9",
-                        AnimalId = "7",  // Pepi
-                        ResponsibleId = "user-6",  // Primera adopción con Laura (devuelto)
-                        AssignedDate = new DateTime(2024, 1, 25)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-10",
-                        AnimalId = "7",  // Pepi
-                        ResponsibleId = "user-3",  // Adopción actual con Ignacio Esteves (Voluntario)
-                        AssignedDate = new DateTime(2024, 9, 10)
-                    },
+                    // Pepi (Animal "7")
+                    new AnimalResponsibleHistory("arh-9", new DateTime(2024, 1, 25), "user-6", "7"),
+                    new AnimalResponsibleHistory("arh-10", new DateTime(2024, 9, 10), "user-3", "7"),
 
-                    // Historial de Firulais (Animal "1") - aunque actualmente disponible, tuvo adopciones previas
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-11",
-                        AnimalId = "1",  // Firulais
-                        ResponsibleId = "user-5",  // Primera adopción con Martín (devuelto)
-                        AssignedDate = new DateTime(2023, 8, 10)
-                    },
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-12",
-                        AnimalId = "1",  // Firulais
-                        ResponsibleId = "user-8",  // Segunda adopción con Sofía (devuelto)
-                        AssignedDate = new DateTime(2024, 1, 15)
-                    },
+                    // Firulais (Animal "1")
+                    new AnimalResponsibleHistory("arh-11", new DateTime(2023, 8, 10), "user-5", "1"),
+                    new AnimalResponsibleHistory("arh-12", new DateTime(2024, 1, 15), "user-8", "1"),
 
-                    // Historial de Bunny (Animal "3") - aunque disponible, tuvo una adopción previa
-                    new AnimalResponsibleHistory
-                    {
-                        Id = "arh-13",
-                        AnimalId = "3",  // Bunny
-                        ResponsibleId = "user-7",  // Adopción previa con Diego (devuelto)
-                        AssignedDate = new DateTime(2024, 5, 8)
-                    }
+                    // Bunny (Animal "3")
+                    new AnimalResponsibleHistory("arh-13", new DateTime(2024, 5, 8), "user-7", "3")
                 );
-            });
+        });
         }
     }
 }
