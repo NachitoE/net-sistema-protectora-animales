@@ -20,7 +20,7 @@ namespace WindowsForms.menuAdopter
         private void btn_AdopterInfo_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var menuredir = new fm_AdopterRequisites();
+            var menuredir = new fm_NewAdoptionRequest();
             menuredir.ShowDialog();
             this.Show();
 

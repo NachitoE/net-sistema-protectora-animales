@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsForms.menuAdopter
@@ -17,9 +10,33 @@ namespace WindowsForms.menuAdopter
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btn_AcceptRequisites_Click(object? sender, EventArgs e)
         {
+            if (!ckb_TermsofAdoption.Checked)
+            {
+                MessageBox.Show(
+                    "Debe leer y aceptar los requisitos de adopción antes de continuar.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
 
+            MessageBox.Show(
+                "¡Gracias! Puede continuar con el proceso de adopción.",
+                "Confirmación",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void ckb_TermsofAdoption_CheckedChanged(object sender, EventArgs e)
+        {
+            btn_AcceptRequisites.Enabled = ckb_TermsofAdoption.Checked;
         }
     }
 }

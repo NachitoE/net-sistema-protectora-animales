@@ -117,16 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Al adoptar se le requerirá:
-
-*Espacio suficiente y entorno adaptado a las necesidades particulares de cada animal.
-
-*Evidencia de capacidad económica suficiente para 
-solventar la proteccion del animal a adoptar
-
-*Se le recuerda al usuario que uno de nuestros empleados  
-acudirá a su domicilio para corroborar los puntos antes listados(SIN EXCEPCIÓN)
-</value>
-  </data>
 </root>

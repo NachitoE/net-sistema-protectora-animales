@@ -64,7 +64,7 @@
             btn_AdopterInfo.Name = "btn_AdopterInfo";
             btn_AdopterInfo.Size = new Size(250, 23);
             btn_AdopterInfo.TabIndex = 2;
-            btn_AdopterInfo.Text = "Requisitos para adoptar";
+            btn_AdopterInfo.Text = "Nueva Adopción";
             btn_AdopterInfo.UseVisualStyleBackColor = true;
             btn_AdopterInfo.Click += btn_AdopterInfo_Click;
             // 
