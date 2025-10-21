@@ -1,4 +1,4 @@
-﻿namespace WindowsForms.menuAdmin.Adoptions
+﻿namespace WindowsForms.BasicForms
 {
     partial class fm_ManageAdoptions
     {

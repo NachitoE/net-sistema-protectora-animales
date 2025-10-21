@@ -1,4 +1,5 @@
 ﻿using WindowsForms.menuAdmin.Adoptions;
+using WindowsForms.BasicForms;
 
 namespace WindowsForms.menuAdmin
 {

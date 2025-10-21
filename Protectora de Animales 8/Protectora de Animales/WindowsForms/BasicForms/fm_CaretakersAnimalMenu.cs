@@ -26,5 +26,12 @@ namespace WindowsForms.menuFoster
             this.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var menuredir = new fm_AddMedicalCheckup();
+            menuredir.ShowDialog();
+            this.Show();
+        }
     }
 }

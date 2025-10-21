@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsForms.menuAdmin.Adoptions
+namespace WindowsForms.BasicForms
 {
     public partial class fm_ManageAdoptions : Form
     {
