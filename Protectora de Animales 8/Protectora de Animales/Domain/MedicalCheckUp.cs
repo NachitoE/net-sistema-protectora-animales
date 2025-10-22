@@ -6,7 +6,6 @@ namespace Domain
     {
         #region Fields/Properties
         private string _id;
-        private string _userId;
         private DateTime _checkUpDate;
         private string _observation;
         private string _animalId;
@@ -15,11 +14,6 @@ namespace Domain
         {
             get { return _id; }
             set { _id = value; }
-        }
-        public string UserId
-        {
-            get { return _userId; }
-            set { _userId = value; }
         }
 
         public DateTime CheckUpDate
@@ -39,14 +33,6 @@ namespace Domain
             set { _animalId = value; }
         }
 
-        public User User
-        {
-            get => _user;
-            set => _user = value;
-        }
-
-        private User? _user;
-
         public Animal Animal
         {
             get => _animal;
@@ -57,56 +43,13 @@ namespace Domain
         #endregion
 
         #region Constructor
-        public MedicalCheckUp(string id, string userId, DateTime checkUpDate, string observation, string animalId)
+        public MedicalCheckUp(string id, DateTime checkUpDate, string observation, string animalId)
         {
             Id = id;
-            UserId = userId;
             CheckUpDate = checkUpDate;
             Observation = observation;
             AnimalId = animalId;
         }
         #endregion
-
-
-        #region CRUD
-        /*
-    public void crearSeguimiento()
-        {
-            int idSeguimiento = 0;
-            DateTime fechaSeguimiento = DateTime.Now;
-            Console.WriteLine("Ingrese la observación: ");
-            string observacion = Console.ReadLine();
-            User usuario = new User();
-            Animal animal = new Animal(); 
-            Seguimiento seguimiento = new Seguimiento(idSeguimiento,usuario,fechaSeguimiento, observacion, animal);
-            Console.WriteLine("El seguimiento ha sido creado.");
-
-        }
-        public void mostrarSeguimiento(Seguimiento seguimiento)
-        {
-            Console.WriteLine($"ID de seguimiento: {seguimiento.ID}");
-            Console.WriteLine($"Fecha de seguimiento: {seguimiento.FechaSeguimiento}");
-            Console.WriteLine($"Observación: {seguimiento.Observacion}");
-            Console.WriteLine($"Usuario: {seguimiento.Usuario.Name} ({seguimiento.Usuario.DNI})");
-           // Console.WriteLine($"Animal: {seguimiento.Animal.Name} ({seguimiento.Animal.Species})");
-
-
-        }
-        public void modificarSeguimiento(Seguimiento seguimiento)
-        {
-            Console.WriteLine("Ingrese la nueva observación: ");
-            string nuevaObservacion = Console.ReadLine();
-            seguimiento.Observacion = nuevaObservacion;
-            Console.WriteLine("El seguimiento ha sido modificado.");
-        }
-        public void eliminarSeguimiento(Seguimiento seguimiento)
-        {
-            //Que hago acá?
-            Console.WriteLine("El seguimiento ha sido eliminado.");
-        }
-    }
-        */
-        #endregion
-
     }
 }

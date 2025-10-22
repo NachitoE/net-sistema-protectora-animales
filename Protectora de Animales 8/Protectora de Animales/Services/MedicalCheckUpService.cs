@@ -13,7 +13,6 @@ namespace Services
             MedicalCheckUp createdCheckUp = new MedicalCheckUp
             (
                 Guid.NewGuid().ToString(),
-                checkUpRegDTO.UserId,
                 checkUpRegDTO.CheckUpDate,
                 checkUpRegDTO.Observation,
                 checkUpRegDTO.AnimalId
@@ -42,7 +41,6 @@ namespace Services
             var checkUp = checkUpRepository.Get(id);
             if (checkUp == null) return null;
 
-            checkUp.UserId = dto.UserId;
             checkUp.CheckUpDate = dto.CheckUpDate;
             checkUp.Observation = dto.Observation;
             checkUp.AnimalId = dto.AnimalId;
@@ -77,17 +75,6 @@ namespace Services
                 .Select(c => c.ToDTO())
                 .ToList();
             return checkUpsByAnimal;
-        }
-
-        public List<MedicalCheckUpDTO> GetByUserId(string userId)
-        {
-            MedicalCheckUpRepository checkUpRepository = new MedicalCheckUpRepository();
-            var allCheckUps = checkUpRepository.GetAll();
-            var checkUpsByUser = allCheckUps
-                .Where(c => c.UserId == userId)
-                .Select(c => c.ToDTO())
-                .ToList();
-            return checkUpsByUser;
         }
     }
 }

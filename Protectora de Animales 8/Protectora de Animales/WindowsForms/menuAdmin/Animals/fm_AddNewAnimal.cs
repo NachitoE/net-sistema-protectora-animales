@@ -31,7 +31,7 @@ namespace WindowsForms.menuAdmin.Animals
 
                 DateTime BirthDate = DateTime.Parse(mtb_AnimalBd.Text);
                 string UserId = "";
-                AnimalStateEn AnimalState = AnimalStateEn.Disponible;
+                AnimalStateEn AnimalState = AnimalStateEn.ARevisar;
                 string Description = tb_AnimalDescription.Text;
 
                 AnimalDTO newAnimal = new AnimalDTO() {

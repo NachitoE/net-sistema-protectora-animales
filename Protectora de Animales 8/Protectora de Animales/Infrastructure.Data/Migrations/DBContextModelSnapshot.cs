@@ -160,7 +160,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "1",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Firulais",
@@ -179,7 +179,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "3",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Bunny",
@@ -188,7 +188,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "4",
-                            AnimalState = "Adoptado",
+                            AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "",
                             Name = "Lola",
@@ -208,7 +208,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "6",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Coco",
@@ -217,12 +217,131 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "7",
-                            AnimalState = "Adoptado",
+                            AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Pepi",
                             Species = "Pajaro",
                             UserId = "user-3"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.History.AnimalResponsibleHistory", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AnimalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("AssignedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsibleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("ResponsibleId");
+
+                    b.ToTable("AnimalResponsibleHistories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "arh-1",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "arh-2",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "arh-3",
+                            AnimalId = "2",
+                            AssignedDate = new DateTime(2024, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-5"
+                        },
+                        new
+                        {
+                            Id = "arh-4",
+                            AnimalId = "5",
+                            AssignedDate = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-7"
+                        },
+                        new
+                        {
+                            Id = "arh-5",
+                            AnimalId = "5",
+                            AssignedDate = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "arh-6",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "arh-7",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-8"
+                        },
+                        new
+                        {
+                            Id = "arh-8",
+                            AnimalId = "4",
+                            AssignedDate = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-4"
+                        },
+                        new
+                        {
+                            Id = "arh-9",
+                            AnimalId = "7",
+                            AssignedDate = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "arh-10",
+                            AnimalId = "7",
+                            AssignedDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "arh-11",
+                            AnimalId = "1",
+                            AssignedDate = new DateTime(2023, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-5"
+                        },
+                        new
+                        {
+                            Id = "arh-12",
+                            AnimalId = "1",
+                            AssignedDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-8"
+                        },
+                        new
+                        {
+                            Id = "arh-13",
+                            AnimalId = "3",
+                            AssignedDate = new DateTime(2024, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-7"
                         });
                 });
 
@@ -280,15 +399,9 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("MedicalCheckUps");
 
@@ -298,40 +411,35 @@ namespace Infrastructure.Data.Migrations
                             Id = "mc-1",
                             AnimalId = "7",
                             CheckUpDate = new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Observation = "Control de rutina. Vacunas al día. Estado general excelente.",
-                            UserId = "user-3"
+                            Observation = "Control de rutina. Vacunas al día. Estado general excelente."
                         },
                         new
                         {
                             Id = "mc-2",
                             AnimalId = "5",
                             CheckUpDate = new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Observation = "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.",
-                            UserId = "user-3"
+                            Observation = "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses."
                         },
                         new
                         {
                             Id = "mc-3",
                             AnimalId = "4",
                             CheckUpDate = new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Observation = "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.",
-                            UserId = "user-3"
+                            Observation = "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual."
                         },
                         new
                         {
                             Id = "mc-4",
                             AnimalId = "1",
                             CheckUpDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Observation = "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.",
-                            UserId = "user-3"
+                            Observation = "Control pre-adopción. Animal en condiciones óptimas para ser adoptado."
                         },
                         new
                         {
                             Id = "mc-5",
                             AnimalId = "2",
                             CheckUpDate = new DateTime(2024, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Observation = "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
-                            UserId = "user-3"
+                            Observation = "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general."
                         });
                 });
 
@@ -577,6 +685,25 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.History.AnimalResponsibleHistory", b =>
+                {
+                    b.HasOne("Domain.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.User", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Responsible");
+                });
+
             modelBuilder.Entity("Domain.House", b =>
                 {
                     b.HasOne("Domain.User", "User")
@@ -596,15 +723,7 @@ namespace Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Animal");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

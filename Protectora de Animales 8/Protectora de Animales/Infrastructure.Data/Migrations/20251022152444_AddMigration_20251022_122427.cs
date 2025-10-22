@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMigration_20251014_160839 : Migration
+    public partial class AddMigration_20251022_122427 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -120,11 +120,36 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AnimalResponsibleHistories",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AssignedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResponsibleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AnimalId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnimalResponsibleHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnimalResponsibleHistories_Animals_AnimalId",
+                        column: x => x.AnimalId,
+                        principalTable: "Animals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AnimalResponsibleHistories_Users_ResponsibleId",
+                        column: x => x.ResponsibleId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicalCheckUps",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CheckUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Observation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AnimalId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -138,12 +163,6 @@ namespace Infrastructure.Data.Migrations
                         principalTable: "Animals",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedicalCheckUps_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -151,9 +170,9 @@ namespace Infrastructure.Data.Migrations
                 columns: new[] { "Id", "AnimalState", "BirthDate", "Description", "Name", "Species", "UserId" },
                 values: new object[,]
                 {
-                    { "1", "Disponible", new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Firulais", "Perro", null },
-                    { "3", "Disponible", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Bunny", "Conejo", null },
-                    { "6", "Disponible", new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Coco", "Conejo", null }
+                    { "1", "ARevisar", new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Firulais", "Perro", null },
+                    { "3", "ARevisar", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Bunny", "Conejo", null },
+                    { "6", "ARevisar", new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Coco", "Conejo", null }
                 });
 
             migrationBuilder.InsertData(
@@ -203,14 +222,24 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AnimalResponsibleHistories",
+                columns: new[] { "Id", "AnimalId", "AssignedDate", "ResponsibleId" },
+                values: new object[,]
+                {
+                    { "arh-11", "1", new DateTime(2023, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-5" },
+                    { "arh-12", "1", new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-8" },
+                    { "arh-13", "3", new DateTime(2024, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-7" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Animals",
                 columns: new[] { "Id", "AnimalState", "BirthDate", "Description", "Name", "Species", "UserId" },
                 values: new object[,]
                 {
                     { "2", "Adoptado", new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Miau", "Gato", "user-5" },
-                    { "4", "Adoptado", new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "Lola", "Gato", "user-4" },
+                    { "4", "BajoCuidado", new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "Lola", "Gato", "user-4" },
                     { "5", "Adoptado", new DateTime(2017, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Rex", "Perro", "user-2" },
-                    { "7", "Adoptado", new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Pepi", "Pajaro", "user-3" }
+                    { "7", "BajoCuidado", new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Pepi", "Pajaro", "user-3" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,8 +249,8 @@ namespace Infrastructure.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "MedicalCheckUps",
-                columns: new[] { "Id", "AnimalId", "CheckUpDate", "Observation", "UserId" },
-                values: new object[] { "mc-4", "1", new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.", "user-3" });
+                columns: new[] { "Id", "AnimalId", "CheckUpDate", "Observation" },
+                values: new object[] { "mc-4", "1", new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Control pre-adopción. Animal en condiciones óptimas para ser adoptado." });
 
             migrationBuilder.InsertData(
                 table: "Adoptions",
@@ -233,14 +262,31 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MedicalCheckUps",
-                columns: new[] { "Id", "AnimalId", "CheckUpDate", "Observation", "UserId" },
+                table: "AnimalResponsibleHistories",
+                columns: new[] { "Id", "AnimalId", "AssignedDate", "ResponsibleId" },
                 values: new object[,]
                 {
-                    { "mc-1", "7", new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Control de rutina. Vacunas al día. Estado general excelente.", "user-3" },
-                    { "mc-2", "5", new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.", "user-3" },
-                    { "mc-3", "4", new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.", "user-3" },
-                    { "mc-5", "2", new DateTime(2024, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.", "user-3" }
+                    { "arh-1", "2", new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-2" },
+                    { "arh-10", "7", new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-3" },
+                    { "arh-2", "2", new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-6" },
+                    { "arh-3", "2", new DateTime(2024, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-5" },
+                    { "arh-4", "5", new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-7" },
+                    { "arh-5", "5", new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-2" },
+                    { "arh-6", "4", new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-3" },
+                    { "arh-7", "4", new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-8" },
+                    { "arh-8", "4", new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-4" },
+                    { "arh-9", "7", new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "user-6" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MedicalCheckUps",
+                columns: new[] { "Id", "AnimalId", "CheckUpDate", "Observation" },
+                values: new object[,]
+                {
+                    { "mc-1", "7", new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Control de rutina. Vacunas al día. Estado general excelente." },
+                    { "mc-2", "5", new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses." },
+                    { "mc-3", "4", new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual." },
+                    { "mc-5", "2", new DateTime(2024, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general." }
                 });
 
             migrationBuilder.CreateIndex(
@@ -252,6 +298,16 @@ namespace Infrastructure.Data.Migrations
                 name: "IX_Adoptions_UserId",
                 table: "Adoptions",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimalResponsibleHistories_AnimalId",
+                table: "AnimalResponsibleHistories",
+                column: "AnimalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnimalResponsibleHistories_ResponsibleId",
+                table: "AnimalResponsibleHistories",
+                column: "ResponsibleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_UserId",
@@ -267,11 +323,6 @@ namespace Infrastructure.Data.Migrations
                 name: "IX_MedicalCheckUps_AnimalId",
                 table: "MedicalCheckUps",
                 column: "AnimalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MedicalCheckUps_UserId",
-                table: "MedicalCheckUps",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -279,6 +330,9 @@ namespace Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Adoptions");
+
+            migrationBuilder.DropTable(
+                name: "AnimalResponsibleHistories");
 
             migrationBuilder.DropTable(
                 name: "Houses");

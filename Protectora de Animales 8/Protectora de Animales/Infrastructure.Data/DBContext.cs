@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.History;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,6 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Sighting> Sightings { get; set; }
         public DbSet<Adoption> Adoptions { get; set; }
         public DbSet<MedicalCheckUp> MedicalCheckUps { get; set; }
+        public DbSet<AnimalResponsibleHistory> AnimalResponsibleHistories { get; set; }
 
         internal DBContext()
         {
@@ -60,7 +62,7 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
-                
+
                 entity.Property(e => e.UserStatus)
                     .IsRequired()
                     .HasDefaultValue(UserStatus.Active)
@@ -81,7 +83,7 @@ namespace Infrastructure.Data
                 new User("user-7", "Diego", "Rodríguez", "55667788", UserType.Adoptante, "diego", "123", UserStatus.Active),
                 new User("user-8", "Sofía", "López", "66778899", UserType.Adoptante, "sofia", "123", UserStatus.Active)
                 );
-        });
+            });
 
 
             //----- ANIMAL -----
@@ -120,15 +122,15 @@ namespace Infrastructure.Data
                     .HasForeignKey(e => e.UserId)
                     .IsRequired(false);
 
-                //seeding data
+                //seeding data (Adoptado solo si User es Adoptante; BajoCuidado si no; ARevisar si sin User)
                 entity.HasData(
-                    new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
+                    new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
                     new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-5", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
-                    new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
-                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.Adoptado, ""),
+                    new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
+                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.BajoCuidado, ""),
                     new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
-                    new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.Disponible, "Como es el bichito"),
-                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.Adoptado, "Como es el bichito"));
+                    new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
+                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.BajoCuidado, "Como es el bichito"));
             });
 
             //----- HOUSE -----
@@ -161,7 +163,8 @@ namespace Infrastructure.Data
             });
             //----- SIGHTING -----
             modelBuilder.Entity<Sighting>(entity =>
-            { entity.HasKey(e => e.Id);
+            {
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.SightingAddressName)
@@ -231,13 +234,6 @@ namespace Infrastructure.Data
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.UserId)
-                    .IsRequired();
-
-                entity.HasOne(e => e.User)
-                    .WithMany()
-                    .HasForeignKey(e => e.UserId);
-
                 entity.Property(e => e.AnimalId)
                     .IsRequired();
 
@@ -250,38 +246,36 @@ namespace Infrastructure.Data
 
                 entity.Property(e => e.Observation)
                     .IsRequired();
+
+                entity.Ignore("UserId"); //ef keeps creating a column for UserId otherwise
+
                 entity.HasData(
                 new MedicalCheckUp(
                     "mc-1",
-                    "user-3",
                     new DateTime(2024, 11, 15),
                     "Control de rutina. Vacunas al día. Estado general excelente.",
                     "7"
                 ),
                 new MedicalCheckUp(
                     "mc-2",
-                    "user-3",
                     new DateTime(2024, 10, 20),
                     "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.",
                     "5"
                 ),
                 new MedicalCheckUp(
                     "mc-3",
-                    "user-3",
                     new DateTime(2024, 12, 5),
                     "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.",
                     "4"
                 ),
                 new MedicalCheckUp(
                     "mc-4",
-                    "user-3",
                     new DateTime(2024, 9, 10),
                     "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.",
                     "1"
                 ),
                 new MedicalCheckUp(
                     "mc-5",
-                    "user-3",
                     new DateTime(2024, 8, 25),
                     "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
                     "2"
@@ -377,7 +371,61 @@ namespace Infrastructure.Data
         )
         {
             AdoptionResponseDate = new DateTime(2024, 9, 3)
-                });
+        });
+            });
+
+            //----- ANIMAL RESPONSIBLE HISTORY -----
+            modelBuilder.Entity<AnimalResponsibleHistory>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AssignedDate)
+                    .IsRequired();
+
+                entity.Property(e => e.ResponsibleId)
+                    .IsRequired();
+
+                entity.HasOne(e => e.Responsible)
+                    .WithMany()
+                    .HasForeignKey(e => e.ResponsibleId);
+
+                entity.Property(e => e.AnimalId)
+                    .IsRequired();
+
+                entity.HasOne(e => e.Animal)
+                    .WithMany()
+                    .HasForeignKey(e => e.AnimalId);
+
+                // Seeding data con múltiples adopciones para algunos animales
+                entity.HasData(
+                    // Miau (Animal "2")
+                    new AnimalResponsibleHistory("arh-1", new DateTime(2023, 12, 15), "user-2", "2"),
+                    new AnimalResponsibleHistory("arh-2", new DateTime(2024, 3, 20), "user-6", "2"),
+                    new AnimalResponsibleHistory("arh-3", new DateTime(2024, 10, 8), "user-5", "2"),
+
+                    // Rex (Animal "5")
+                    new AnimalResponsibleHistory("arh-4", new DateTime(2024, 2, 10), "user-7", "5"),
+                    new AnimalResponsibleHistory("arh-5", new DateTime(2024, 7, 20), "user-2", "5"),
+
+                    // Lola (Animal "4")
+                    new AnimalResponsibleHistory("arh-6", new DateTime(2024, 4, 5), "user-3", "4"),
+                    new AnimalResponsibleHistory("arh-7", new DateTime(2024, 6, 12), "user-8", "4"),
+                    new AnimalResponsibleHistory("arh-8", new DateTime(2024, 8, 15), "user-4", "4"),
+
+                    // Pepi (Animal "7")
+                    new AnimalResponsibleHistory("arh-9", new DateTime(2024, 1, 25), "user-6", "7"),
+                    new AnimalResponsibleHistory("arh-10", new DateTime(2024, 9, 10), "user-3", "7"),
+
+                    // Firulais (Animal "1")
+                    new AnimalResponsibleHistory("arh-11", new DateTime(2023, 8, 10), "user-5", "1"),
+                    new AnimalResponsibleHistory("arh-12", new DateTime(2024, 1, 15), "user-8", "1"),
+
+                    // Bunny (Animal "3")
+                    new AnimalResponsibleHistory("arh-13", new DateTime(2024, 5, 8), "user-7", "3")
+                );
             });
         }
     }

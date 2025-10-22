@@ -14,18 +14,18 @@ echo.
 REM ==============================
 REM Si se pasa "clean" como primer argumento -> borrar migraciones previas
 REM ==============================
-if /i "%~1"=="clean" (
-    echo ===============================
-    echo Borrando todas las migraciones previas...
-    echo ===============================
-    if exist "Infrastructure.Data\Migrations" (
-        rmdir /s /q "Infrastructure.Data\Migrations"
-        echo [OK] Carpeta de migraciones eliminada.
-    ) else (
-        echo [WARN] No se encontró carpeta de migraciones.
-    )
-    shift
+
+echo ===============================
+echo Borrando todas las migraciones previas...
+echo ===============================
+if exist "Infrastructure.Data\Migrations" (
+	rmdir /s /q "Infrastructure.Data\Migrations"
+	echo [OK] Carpeta de migraciones eliminada.
+) else (
+	echo [WARN] No se encontró carpeta de migraciones.
 )
+shift
+
 
 REM ==============================
 REM Generar timestamp yyyyMMdd_HHmmss
@@ -44,7 +44,7 @@ set "migrationName=%baseName%_%stamp%"
 echo ===============================
 echo Eliminando base de datos...
 echo ===============================
-dotnet ef database drop -p "Infrastructure.Data" -s "WebAPI" -f
+dotnet ef database drop -f -p "Infrastructure.Data" -s "WebAPI" -f
 if errorlevel 1 goto :fail
 
 echo ===============================

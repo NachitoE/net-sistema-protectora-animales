@@ -104,29 +104,6 @@ namespace WebAPI
             .Produces<List<MedicalCheckUpDTO>>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
 
-            checkUpsGroup.MapGet("/user/{userId}", (string userId) =>
-            {
-                try
-                {
-                    MedicalCheckUpService checkUpService = new MedicalCheckUpService();
-                    var checkUps = checkUpService.GetByUserId(userId);
-                    if (checkUps == null || checkUps.Count == 0)
-                    {
-                        throw new ArgumentException("No se encontraron controles médicos realizados por este usuario");
-                    }
-                    return Results.Ok(checkUps);
-                }
-                catch (ArgumentException ex)
-                {
-                    return Results.BadRequest(new { error = ex.Message });
-                }
-            })
-            .WithName("GetMedicalCheckUpsByUser")
-            .WithSummary("Obtener controles médicos por usuario")
-            .WithDescription("Devuelve todos los controles médicos realizados por un veterinario específico")
-            .Produces<List<MedicalCheckUpDTO>>(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest);
-
             checkUpsGroup.MapDelete("/{id}", (string id) =>
             {
                 try

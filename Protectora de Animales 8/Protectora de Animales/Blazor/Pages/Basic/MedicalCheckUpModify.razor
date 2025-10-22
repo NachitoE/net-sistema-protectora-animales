@@ -5,7 +5,7 @@
 @inject IDialogService DialogService
 
 <h3>Modificar Registros Médicos</h3>
-@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+@if (!Session.IsAuthenticated || !(Session.Context.User.UserType == "Admin" || Session.Context.User.UserType == "Transito" || Session.Context.User.UserType == "Voluntario"))
 {
     <p>No autorizado</p>
 }
@@ -31,11 +31,6 @@ else
             <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha de Chequeo" />
             <PropertyColumn Property="x => x.Observation" Title="Observación">
             </PropertyColumn>
-            <TemplateColumn Title="Usuario" Editable="false">
-                <CellTemplate>
-                    <UserTooltip UserId="@context.Item.UserId" />
-                </CellTemplate>
-            </TemplateColumn>
             <TemplateColumn Title="Animal" Editable="false">
                 <CellTemplate>
                     <AnimalTooltip AnimalId="@context.Item.AnimalId" />
