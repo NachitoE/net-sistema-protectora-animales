@@ -62,7 +62,7 @@ namespace Infrastructure.Data
                 entity.Property(e => e.UserType)
                     .IsRequired()
                     .HasConversion<string>();
-                
+
                 entity.Property(e => e.UserStatus)
                     .IsRequired()
                     .HasDefaultValue(UserStatus.Active)
@@ -83,7 +83,7 @@ namespace Infrastructure.Data
                 new User("user-7", "Diego", "Rodríguez", "55667788", UserType.Adoptante, "diego", "123", UserStatus.Active),
                 new User("user-8", "Sofía", "López", "66778899", UserType.Adoptante, "sofia", "123", UserStatus.Active)
                 );
-        });
+            });
 
 
             //----- ANIMAL -----
@@ -122,15 +122,15 @@ namespace Infrastructure.Data
                     .HasForeignKey(e => e.UserId)
                     .IsRequired(false);
 
-                //seeding data
+                //seeding data (Adoptado solo si User es Adoptante; BajoCuidado si no; ARevisar si sin User)
                 entity.HasData(
                     new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
                     new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-5", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
                     new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
-                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.Adoptado, ""),
+                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.BajoCuidado, ""),
                     new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
                     new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
-                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.Adoptado, "Como es el bichito"));
+                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.BajoCuidado, "Como es el bichito"));
             });
 
             //----- HOUSE -----
@@ -163,7 +163,8 @@ namespace Infrastructure.Data
             });
             //----- SIGHTING -----
             modelBuilder.Entity<Sighting>(entity =>
-            { entity.HasKey(e => e.Id);
+            {
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
                 entity.Property(e => e.SightingAddressName)
@@ -370,7 +371,7 @@ namespace Infrastructure.Data
         )
         {
             AdoptionResponseDate = new DateTime(2024, 9, 3)
-                });
+        });
             });
 
             //----- ANIMAL RESPONSIBLE HISTORY -----
@@ -425,7 +426,7 @@ namespace Infrastructure.Data
                     // Bunny (Animal "3")
                     new AnimalResponsibleHistory("arh-13", new DateTime(2024, 5, 8), "user-7", "3")
                 );
-        });
+            });
         }
     }
 }

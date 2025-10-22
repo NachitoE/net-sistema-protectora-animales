@@ -160,7 +160,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "1",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Firulais",
@@ -179,7 +179,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "3",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Bunny",
@@ -188,7 +188,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "4",
-                            AnimalState = "Adoptado",
+                            AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "",
                             Name = "Lola",
@@ -208,7 +208,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "6",
-                            AnimalState = "Disponible",
+                            AnimalState = "ARevisar",
                             BirthDate = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Coco",
@@ -217,7 +217,7 @@ namespace Infrastructure.Data.Migrations
                         new
                         {
                             Id = "7",
-                            AnimalState = "Adoptado",
+                            AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Como es el bichito",
                             Name = "Pepi",

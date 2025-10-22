@@ -3,6 +3,7 @@ using DTOs;
 using Infrastructure.Data;
 using Helpers;
 using static Domain.Animal;
+using static Domain.User;
 using DTOs.History;
 
 namespace Services
@@ -243,7 +244,12 @@ namespace Services
             if (animal != null)
             {
                 animal.UserId = userId;
-                animal.AnimalState = AnimalStateEn.Adoptado;
+                AnimalStateEn newAnimalState = AnimalStateEn.BajoCuidado;
+                if(existingUser.UserType == EnumConversion.UserTypeToString(UserType.Adoptante)){
+                    newAnimalState = AnimalStateEn.Adoptado; //si es adoptante, el animal pasa a adoptado
+                }
+                animal.AnimalState = newAnimalState;
+
                 animalRepository.Update(animal);
 
                 // rechazar adopciones pendientes para ese animal

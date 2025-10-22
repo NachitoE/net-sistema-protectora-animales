@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMigration_20251021_162822 : Migration
+    public partial class AddMigration_20251022_122427 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -170,9 +170,9 @@ namespace Infrastructure.Data.Migrations
                 columns: new[] { "Id", "AnimalState", "BirthDate", "Description", "Name", "Species", "UserId" },
                 values: new object[,]
                 {
-                    { "1", "Disponible", new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Firulais", "Perro", null },
-                    { "3", "Disponible", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Bunny", "Conejo", null },
-                    { "6", "Disponible", new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Coco", "Conejo", null }
+                    { "1", "ARevisar", new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Firulais", "Perro", null },
+                    { "3", "ARevisar", new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Bunny", "Conejo", null },
+                    { "6", "ARevisar", new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Coco", "Conejo", null }
                 });
 
             migrationBuilder.InsertData(
@@ -237,9 +237,9 @@ namespace Infrastructure.Data.Migrations
                 values: new object[,]
                 {
                     { "2", "Adoptado", new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Miau", "Gato", "user-5" },
-                    { "4", "Adoptado", new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "Lola", "Gato", "user-4" },
+                    { "4", "BajoCuidado", new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "", "Lola", "Gato", "user-4" },
                     { "5", "Adoptado", new DateTime(2017, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Rex", "Perro", "user-2" },
-                    { "7", "Adoptado", new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Pepi", "Pajaro", "user-3" }
+                    { "7", "BajoCuidado", new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Como es el bichito", "Pepi", "Pajaro", "user-3" }
                 });
 
             migrationBuilder.InsertData(
