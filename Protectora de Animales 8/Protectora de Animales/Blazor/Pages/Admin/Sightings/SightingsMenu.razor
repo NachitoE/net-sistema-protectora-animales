@@ -3,7 +3,7 @@
 
 <h3>Menú de Avistamientos</h3>
 
-@if (!Session.IsAuthenticated || !(Session.Context.User.UserType == "Admin" || Session.Context.User.UserType == "Transito"))
+@if (!Session.IsAuthenticated || !(Session.Context.User.UserType == "Admin" || Session.Context.User.UserType == "Transito" || Session.Context.User.UserType == "Voluntario"))
 {
     <p>No autorizado</p>
 }
