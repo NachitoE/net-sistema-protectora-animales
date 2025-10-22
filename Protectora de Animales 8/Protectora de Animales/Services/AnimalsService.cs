@@ -13,7 +13,7 @@ namespace Services
         {
             if (string.IsNullOrEmpty(animalDTO.AnimalState))
             {
-                animalDTO.AnimalState = EnumConversion.AnimalStateToString(AnimalStateEn.Disponible);
+                animalDTO.AnimalState = EnumConversion.AnimalStateToString(AnimalStateEn.ARevisar);
             }
             AnimalRepository animalRepository = new AnimalRepository();
             Animal createdAnimal = new Animal
@@ -66,7 +66,7 @@ namespace Services
         {
             return
                 GetAll()
-                .Where((animalDTO) => animalDTO.AnimalState == EnumConversion.AnimalStateToString(AnimalStateEn.Disponible))
+                .Where((animalDTO) => animalDTO.AnimalState == EnumConversion.AnimalStateToString(AnimalStateEn.ARevisar))
                 .ToList();
         }
 
@@ -79,7 +79,7 @@ namespace Services
             if (Enum.TryParse<Animal.SpeciesEn>(species, true, out var speciesEnum))
             {
                 var animalsBySpecies = animalsDomain
-                    .Where(a => a.Species == speciesEnum && a.AnimalState == Animal.AnimalStateEn.Disponible)
+                    .Where(a => a.Species == speciesEnum && a.AnimalState == Animal.AnimalStateEn.ARevisar)
                     .Select(animal => new AnimalDTO
                     {
                         Id = animal.Id,
@@ -225,7 +225,7 @@ namespace Services
 
             if (animal != null)
             {
-                animal.AnimalState = AnimalStateEn.Disponible;
+                animal.AnimalState = AnimalStateEn.ARevisar;
                 animalRepository.Update(animal);
             }
         }

@@ -75,7 +75,8 @@ namespace Domain
         public enum AnimalStateEn
         {
             Adoptado, 
-            Disponible
+            ARevisar,
+            BajoCuidado
         } 
 
         private string _description;
