@@ -18,7 +18,6 @@ namespace WindowsForms.BasicForms
             InitializeComponent();
             _animalClient = ApiClientsFactory.AnimalClient();
             _medicalCheckupClient = ApiClientsFactory.MedicalCheckUpClient();
-            _authClient = ApiClientsFactory.AuthClient();
         }
 
         private async void btn_AcceptMC_Click(object? sender, EventArgs e)
@@ -76,16 +75,6 @@ namespace WindowsForms.BasicForms
                 }
 
 
-                var userResponse = await _authClient.MeAsync();
-                if (!userResponse.Success || userResponse.Data == null)
-                {
-                    MessageBox.Show("No se pudo obtener el usuario actual.",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                var currentUser = userResponse.Data;
-
 
                 var confirm = MessageBox.Show(
                     $"¿Es correcta esta información?\n\n" +
@@ -103,7 +92,6 @@ namespace WindowsForms.BasicForms
                 var medicalCheckupDto = new MedicalCheckUpRegisterDTO
                 {
                     AnimalId = foundAnimal.Id,
-                    UserId = currentUser.Id,
                     CheckUpDate = checkDate,
                     Observation = tb_MCFeedback.Text.Trim()
                 };

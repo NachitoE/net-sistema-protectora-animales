@@ -78,17 +78,15 @@ namespace WindowsForms.BasicForms
 
             var table = new DataTable();
             table.Columns.Add("Id", typeof(string));
-            table.Columns.Add("Usuario", typeof(string));
             table.Columns.Add("Animal", typeof(string));
             table.Columns.Add("FechaChequeo", typeof(DateTime));
             table.Columns.Add("Observación", typeof(string));
 
             foreach (var checkup in _medicalCheckUps)
             {
-                var userName = users.Data?.FirstOrDefault(u => u.Id == checkup.UserId)?.Name ?? "(Desconocido)";
                 var animalName = animals.Data?.FirstOrDefault(a => a.Id == checkup.AnimalId)?.Name ?? "(Desconocido)";
 
-                table.Rows.Add(checkup.Id, userName, animalName, checkup.CheckUpDate, checkup.Observation);
+                table.Rows.Add(checkup.Id, animalName, checkup.CheckUpDate, checkup.Observation);
             }
 
             dgv_User.DataSource = table;

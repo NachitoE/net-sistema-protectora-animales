@@ -37,7 +37,7 @@ namespace WindowsForms.menuAdopter
         private void btn_AdopterAnimals_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var menuredir = new fm_ShowAvailableAnimals();
+            var menuredir = new fm_ShowAvailableForAdoptAnimals();
             menuredir.ShowDialog();
             this.Show();
         }

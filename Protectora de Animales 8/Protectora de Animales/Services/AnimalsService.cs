@@ -71,6 +71,14 @@ namespace Services
                 .ToList();
         }
 
+        public List<AnimalDTO> GetAvailableForAdoptAnimals()
+        {
+            return
+                GetAll()
+                .Where((animalDTO) => animalDTO.AnimalState == EnumConversion.AnimalStateToString(AnimalStateEn.BajoCuidado))
+                .ToList();
+        }
+
         public List<AnimalDTO> GetAnimalsBySpecies(string species)
         {
             AnimalRepository animalRepository = new AnimalRepository();

@@ -104,7 +104,7 @@ namespace WindowsForms.menuAdopter
         private void llb_ShowAnimals_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            var menuredir = new fm_ShowAvailableAnimals();
+            var menuredir = new fm_ShowAvailableForAdoptAnimals();
             menuredir.ShowDialog();
             this.Show();
         }
