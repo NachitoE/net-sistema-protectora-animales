@@ -1,6 +1,6 @@
 ﻿namespace WindowsForms.menuAdopter
 {
-    partial class fm_ShowAvailableAnimals
+    partial class fm_ShowAvailableForAdoptAnimals
     {
         /// <summary>
         /// Required designer variable.

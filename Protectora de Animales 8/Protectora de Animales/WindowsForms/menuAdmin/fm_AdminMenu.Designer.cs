@@ -35,8 +35,7 @@
             btn_menuReports = new Button();
             btn_menuUsers = new Button();
             btn_FosterHouses = new Button();
-            btn_debugDownload = new Button();
-            button1 = new Button();
+            btn_AnimalsMenu = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).BeginInit();
             SuspendLayout();
             // 
@@ -112,40 +111,31 @@
             btn_FosterHouses.UseVisualStyleBackColor = true;
             btn_FosterHouses.Click += btn_FosterHouses_Click;
             // 
-            // btn_debugDownload
+            // btn_AnimalsMenu
             // 
-            btn_debugDownload.Location = new Point(93, 189);
-            btn_debugDownload.Name = "btn_debugDownload";
-            btn_debugDownload.Size = new Size(250, 23);
-            btn_debugDownload.TabIndex = 8;
-            btn_debugDownload.Text = "Adopciones";
-            btn_debugDownload.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(93, 334);
-            button1.Name = "button1";
-            button1.Size = new Size(250, 23);
-            button1.TabIndex = 9;
-            button1.Text = "DEBUG DOWNLOAD";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btn_AnimalsMenu.Location = new Point(93, 189);
+            btn_AnimalsMenu.Name = "btn_AnimalsMenu";
+            btn_AnimalsMenu.Size = new Size(250, 23);
+            btn_AnimalsMenu.TabIndex = 8;
+            btn_AnimalsMenu.Text = "Animales";
+            btn_AnimalsMenu.UseVisualStyleBackColor = true;
+            btn_AnimalsMenu.Click += btn_AnimalsMenu_Click;
             // 
             // fm_AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(426, 400);
-            Controls.Add(button1);
             Controls.Add(btn_FosterHouses);
             Controls.Add(btn_menuUsers);
             Controls.Add(btn_menuReports);
             Controls.Add(btn_menuSightings);
             Controls.Add(btn_menuAdoptions);
-            Controls.Add(btn_debugDownload);
+            Controls.Add(btn_AnimalsMenu);
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerPic);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "fm_AdminMenu";
             Text = "Administrador";
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).EndInit();
@@ -162,7 +152,6 @@
         private Button btn_menuReports;
         private Button btn_menuUsers;
         private Button btn_FosterHouses;
-        private Button btn_debugDownload;
-        private Button button1;
+        private Button btn_AnimalsMenu;
     }
 }

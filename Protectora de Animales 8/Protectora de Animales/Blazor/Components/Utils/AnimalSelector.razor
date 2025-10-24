@@ -50,6 +50,7 @@
     {
         {AnimalClientLoadMethod.All, () => ApiClientsFactory.AnimalClient().GetAllAsync()},
         {AnimalClientLoadMethod.Available, () => ApiClientsFactory.AnimalClient().GetAllAvailableAnimalsAsync()},
+        {AnimalClientLoadMethod.AvailableForAdopt, () => ApiClientsFactory.AnimalClient().GetAllAvailableForAdoptAnimalsAsync()},
         {AnimalClientLoadMethod.MyAnimals, () => ApiClientsFactory.AnimalClient().GetMyAnimalsAsync()},
     };
 
@@ -77,6 +78,7 @@
     {
         All,
         Available,
+        AvailableForAdopt,
         MyAnimals
     }
 }

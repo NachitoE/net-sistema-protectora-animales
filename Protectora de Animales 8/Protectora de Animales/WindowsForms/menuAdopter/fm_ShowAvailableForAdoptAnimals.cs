@@ -6,10 +6,10 @@ using static Domain.Animal;
 
 namespace WindowsForms.menuAdopter
 {
-    public partial class fm_ShowAvailableAnimals : Form
+    public partial class fm_ShowAvailableForAdoptAnimals : Form
     {
         private List<AnimalDTO> _availableAnimals;
-        public fm_ShowAvailableAnimals()
+        public fm_ShowAvailableForAdoptAnimals()
         {
             InitializeComponent();
             Load += ShowAvailableAnimalsFormLoadAsync;
@@ -19,7 +19,7 @@ namespace WindowsForms.menuAdopter
             SetupColumns();
             dgv_animals.AutoGenerateColumns = false;
             AnimalDTOClient animalClient = ApiClientsFactory.AnimalClient();
-            ApiResult<List<AnimalDTO>> availableAnimalsResult = await animalClient.GetAllAvailableAnimalsAsync();
+            ApiResult<List<AnimalDTO>> availableAnimalsResult = await animalClient.GetAllAvailableForAdoptAnimalsAsync();
             var availableAnimals = availableAnimalsResult.Data ?? new List<AnimalDTO>();
             _availableAnimals = availableAnimals;
             dgv_animals.DataSource = availableAnimals;

@@ -117,6 +117,23 @@ namespace WebAPI
                 .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
                 .WithOpenApi();
 
+            app.MapGet("/animals/available-for-adopt", () =>
+            {
+                try
+                {
+                    AnimalsService animalService = new AnimalsService();
+                    List<AnimalDTO> availableAnimalsDTOs = animalService.GetAvailableForAdoptAnimals();
+                    return Results.Ok(availableAnimalsDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithName("AvailableForAdoptAnimals")
+                .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
+                .WithOpenApi();
+
             app.MapPut("/animals/{id}/assign-responsible", (string id, [FromBody] string userId) =>
             {
                 try

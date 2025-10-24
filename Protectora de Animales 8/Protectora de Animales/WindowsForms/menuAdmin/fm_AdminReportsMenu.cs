@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.API;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsForms.Handlers;
 
 namespace WindowsForms.menuAdmin
 {
@@ -17,9 +19,16 @@ namespace WindowsForms.menuAdmin
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private async void btn_AdoptionReport_Click(object sender, EventArgs e)
         {
+            var cli = ApiClientsFactory.ReportClient(new WinFormDownloadHandler());
+            await cli.DownloadAdoptionMonthReportAsync();
+        }
 
+        private async void btn_CaretakersHReport_Click(object sender, EventArgs e)
+        {
+            var cli = ApiClientsFactory.ReportClient(new WinFormDownloadHandler());
+            await cli.DownloadAnimalsHistoryAsync();
         }
     }
 }
