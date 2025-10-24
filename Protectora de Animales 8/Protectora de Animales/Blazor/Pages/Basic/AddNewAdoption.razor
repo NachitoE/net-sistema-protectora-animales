@@ -6,7 +6,7 @@
 <MudPaper Class="pa-4" Elevation="2">
     <MudForm @ref="form">
         
-        <AnimalSelector OnAnimalSelected="OnAnimalSelected" LoadMethod="AnimalSelector.AnimalClientLoadMethod.Available"></AnimalSelector>
+        <AnimalSelector OnAnimalSelected="OnAnimalSelected" LoadMethod="AnimalSelector.AnimalClientLoadMethod.AvailableForAdopt"></AnimalSelector>
         <div class="mb-2"></div>
         <MudDatePicker @bind-Date="adoptionRequest.AdoptionRequestDate"
                        Label="Fecha Solicitud"
