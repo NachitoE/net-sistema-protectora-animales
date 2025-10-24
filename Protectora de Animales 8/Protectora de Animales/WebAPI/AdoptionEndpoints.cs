@@ -103,9 +103,9 @@ namespace WebAPI
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
 
-            app.MapGet("/adoptions/my-adoptions", (ICurrentUser CurrentUser) =>
+            app.MapGet("/adoptions/my-adoptions", (ICurrentUser currentUser) =>
             {
-                var userId = CurrentUser.UserId;
+                var userId = currentUser.UserId;
                 if (userId == null)
                     return Results.Unauthorized();
                 var service = new AdoptionsService();

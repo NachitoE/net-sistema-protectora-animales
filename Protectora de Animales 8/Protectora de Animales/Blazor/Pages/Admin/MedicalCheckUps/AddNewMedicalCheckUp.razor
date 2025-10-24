@@ -14,9 +14,19 @@ else
         <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
             
             <h5 class="mb-2">Seleccionar Animal</h5>
-            <AnimalSelector OnAnimalSelected="OnAnimalSelected" 
-                            LoadMethod="AnimalSelector.AnimalClientLoadMethod.All">
-            </AnimalSelector>
+            @if (Session.Context.User.UserType == "Admin")
+            {
+                <AnimalSelector OnAnimalSelected="OnAnimalSelected"
+                                LoadMethod="AnimalSelector.AnimalClientLoadMethod.All">
+                </AnimalSelector>
+            }
+            else
+            {
+                <AnimalSelector OnAnimalSelected="OnAnimalSelected"
+                                LoadMethod="AnimalSelector.AnimalClientLoadMethod.MyAnimals">
+                </AnimalSelector>
+            }
+
 
             <div class="mt-4"></div>
             <MudDatePicker Label="Fecha del Chequeo"

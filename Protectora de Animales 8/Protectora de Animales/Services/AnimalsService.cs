@@ -287,5 +287,16 @@ namespace Services
 
             return filteredAnimals.Select(fUser => fUser.ToDTO()).ToList();
         }
+
+        public bool UserIsResponsibleOfAnimal(string userId, string animalId)
+        {
+            AnimalRepository animalRepository = new AnimalRepository();
+            Animal? animal = animalRepository.Get(animalId);
+            if (animal != null && animal.UserId == userId)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

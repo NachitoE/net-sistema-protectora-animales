@@ -2,6 +2,7 @@
 using DTOs;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dependencies;
 
 namespace WebAPI
 {
@@ -153,6 +154,27 @@ namespace WebAPI
                 .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
+            app.MapGet("/animals/my-animals", (ICurrentUser currentUser) =>
+            {
+                try
+                {
+                    var userId = currentUser.UserId;
+                    if (userId == null)
+                        return Results.Unauthorized();
+                    AnimalsService animalService = new AnimalsService();
+                    List<AnimalDTO> animalDTOs = animalService.GetAnimalsBelongingToUser(userId);
+                    return Results.Ok(animalDTOs);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+            })
+                .WithDescription("Get animals assigned to the current user")
+                .WithName("My Animals")
+                .Produces<IEnumerable<AnimalDTO>>(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status401Unauthorized)
+                .WithOpenApi();
         }
 
     }

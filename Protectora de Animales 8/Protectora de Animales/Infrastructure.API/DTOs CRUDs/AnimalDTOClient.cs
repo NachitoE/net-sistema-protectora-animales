@@ -15,5 +15,7 @@ namespace Infrastructure.API
 
         public async Task<ApiResult<AnimalDTO>> AssignResponsible(string animalId, string userId) 
             => await _apiHttpClient.PutAsync<AnimalDTO>($"{_endpoint}/{animalId}/assign-responsible", userId);
+        public async Task<ApiResult<List<AnimalDTO>>> GetMyAnimalsAsync()
+            => await _apiHttpClient.GetAsync<List<AnimalDTO>>($"{_endpoint}/my-animals");
     }
 }
