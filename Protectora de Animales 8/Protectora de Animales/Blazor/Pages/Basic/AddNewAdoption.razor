@@ -8,11 +8,13 @@
         
         <AnimalSelector OnAnimalSelected="OnAnimalSelected" LoadMethod="AnimalSelector.AnimalClientLoadMethod.Available"></AnimalSelector>
         <div class="mb-2"></div>
+        <!--
         <MudDatePicker @bind-Date="adoptionRequest.AdoptionRequestDate"
                        Label="Fecha Solicitud"
                        Required="true"
                        Margin="Margin.Dense"
                        RequiredError="La fecha debe ser válida"/>
+                       -->
         <MudTextField @bind-Value="adoptionRequest.Description"
                       Label="Descripción"
                       Required="true"
