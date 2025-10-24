@@ -119,5 +119,14 @@ namespace Services
 
 
         }
+
+        public List<AdoptionDTO> GetAdoptionsByUserId(string userId)
+        {
+            var repo = new AdoptionRepository();
+            return repo.GetAll()
+                .Where(a => a.UserId == userId)
+                .Select(a => a.ToDTO())
+                .ToList();
+        }
     }
 }

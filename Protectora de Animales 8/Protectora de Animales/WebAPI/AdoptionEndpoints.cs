@@ -87,11 +87,11 @@ namespace WebAPI
                         return Results.NotFound();
                     return Results.Ok(dto);
                 }
-                catch(NotFoundException ex)
+                catch (NotFoundException ex)
                 {
                     return Results.NotFound(new { error = ex.Message });
                 }
-                catch(DomainException ex)
+                catch (DomainException ex)
                 {
                     return Results.BadRequest(new { error = ex.Message });
                 }
@@ -102,6 +102,23 @@ namespace WebAPI
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithOpenApi();
+
+            app.MapGet("/adoptions/my-adoptions", (ICurrentUser CurrentUser) =>
+            {
+                var userId = CurrentUser.UserId;
+                if (userId == null)
+                    return Results.Unauthorized();
+                var service = new AdoptionsService();
+                var adoptions = service.GetAdoptionsByUserId(userId);
+                return Results.Ok(adoptions);
+            }
+            )
+            .RequireAuthorization("AdopterOnly")
+            .WithName("Get Mis Adopciones")
+            .Produces<List<AdoptionDTO>>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status401Unauthorized)
+            .WithOpenApi();
+
         }
     }
 }
