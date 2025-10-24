@@ -1,5 +1,8 @@
-﻿using DTOs;
+﻿using Domain;
+using DTOs;
+using Helpers;
 using Services;
+using WebAPI.Dependencies;
 
 namespace WebAPI
 {
@@ -62,10 +65,25 @@ namespace WebAPI
             .Produces<MedicalCheckUpDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
 
-            checkUpsGroup.MapPost("/", (MedicalCheckUpRegisterDTO checkUpRegDTO) =>
+            checkUpsGroup.MapPost("/", (MedicalCheckUpRegisterDTO checkUpRegDTO, ICurrentUser currentUser) =>
             {
                 try
                 {
+                    if(currentUser.UserId == null)
+                    {
+                        return Results.Unauthorized();
+                    }
+                    var user = new UsersService().Get(currentUser.UserId);
+                    // chequear admin para que un usuario sin privilegios no pueda añadir medical checkups sin tener al animal
+                    if (EnumConversion.StringToUserType(user.UserType) != UserType.Admin)
+                    {
+                        AnimalsService animalService = new AnimalsService();
+                        if (!animalService.UserIsResponsibleOfAnimal(currentUser.UserId, checkUpRegDTO.AnimalId))
+                        {
+                            return Results.Unauthorized();
+                        }
+                    }
+                    
                     MedicalCheckUpService checkUpService = new MedicalCheckUpService();
                     MedicalCheckUpDTO checkUpDTO = checkUpService.Add(checkUpRegDTO);
                     return Results.Created($"/medical-checkups/{checkUpDTO.Id}", checkUpDTO);
@@ -79,6 +97,7 @@ namespace WebAPI
             .WithSummary("Registrar un nuevo control médico")
             .WithDescription("Crea un nuevo registro de control médico para un animal")
             .Produces<MedicalCheckUpDTO>(StatusCodes.Status201Created)
+            .Produces<MedicalCheckUpDTO>(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status400BadRequest);
 
             checkUpsGroup.MapGet("/animal/{animalId}", (string animalId) =>

@@ -1,0 +1,113 @@
+﻿@page "/my-adoptions"
+@using DTOs
+@using DTOs.Adoption
+
+<h3>Mis Solicitudes de Adopción</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Adoptante")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">@errorMessage</MudAlert>
+}
+else
+{
+    <MudPaper Class="pa-4 mb-4">
+        <MudStack Row="true" Spacing="2">
+            <MudButton OnClick="@ShowPending" Variant="Variant.Filled" Color="Color.Warning">Pendientes</MudButton>
+            <MudButton OnClick="@ShowApproved" Variant="Variant.Filled" Color="Color.Success">Aprobadas</MudButton>
+            <MudButton OnClick="@ShowRejected" Variant="Variant.Filled" Color="Color.Error">Rechazadas</MudButton>
+            <MudButton OnClick="@ShowAll" Variant="Variant.Outlined" Color="Color.Default">Mostrar Todas</MudButton>
+        </MudStack>
+    </MudPaper>
+
+    <MudDataGrid Items="@filteredAdoptions"
+                 Bordered="true"
+                 Dense="true"
+                 Hover="true"
+                 RowClass="pointer">
+        <Columns>
+            <TemplateColumn Title="Animal">
+                <CellTemplate>
+                    <AnimalTooltip AnimalId="@context.Item.AnimalId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.AdoptionRequestDate" Title="Fecha Solicitud" />
+            <PropertyColumn Property="x => x.AdoptionResponseDate" Title="Fecha Respuesta" />
+            <PropertyColumn Property="x => x.State" Title="Estado">
+                <CellTemplate>
+                    @if (context.Item.State == "Pendiente")
+                    {
+                        <MudChip Color="Color.Warning" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else if (context.Item.State == "Aprobada")
+                    {
+                        <MudChip Color="Color.Success" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else if (context.Item.State == "Rechazada")
+                    {
+                        <MudChip Color="Color.Error" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Color="Color.Default" Size="MudBlazor.Size.Small">@context.Item.State</MudChip>
+                    }
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.Description" Title="Descripción" />
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    private bool isLoading = true;
+    private string? errorMessage = null;
+    private List<AdoptionDTO> allAdoptions = new();
+    private List<AdoptionDTO> filteredAdoptions = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAdoptions();
+    }
+
+    private async Task LoadAdoptions()
+    {
+        isLoading = true;
+        errorMessage = null;
+        var result = await ApiClientsFactory.AdoptionClient().GetMyAdoptionsAsync();
+        isLoading = false;
+        if (!result.Success || result.Data == null)
+        {
+            errorMessage = result.Message ?? "Error al cargar las adopciones";
+            return;
+        }
+        allAdoptions = result.Data;
+        filteredAdoptions = allAdoptions.ToList();
+    }
+
+    private void ShowPending()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Pendiente").ToList();
+    }
+
+    private void ShowApproved()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Aprobada").ToList();
+    }
+
+    private void ShowRejected()
+    {
+        filteredAdoptions = allAdoptions.Where(a => a.State == "Rechazada").ToList();
+    }
+
+    private void ShowAll()
+    {
+        filteredAdoptions = allAdoptions.ToList();
+    }
+}

@@ -24,5 +24,9 @@ namespace Infrastructure.API
         {
             return await _apiHttpClient.PutAsync<AdoptionDTO>($"{_endpoint}/{id}/approve-reject", data);
         }
+        public async Task<ApiResult<List<AdoptionDTO>>> GetMyAdoptionsAsync()
+        {
+            return await _apiHttpClient.GetAsync<List<AdoptionDTO>>($"{_endpoint}/my-adoptions");
+        }
     }
 }

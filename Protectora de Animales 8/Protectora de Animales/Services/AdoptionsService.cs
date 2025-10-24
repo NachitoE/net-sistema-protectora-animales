@@ -73,7 +73,7 @@ namespace Services
         /// </summary>
         /// <param name="animalId"></param>
         /// <returns></returns>
-        public List<AdoptionDTO> RejectPendingAdoptionsByAnimalId(string animalId)
+        public List<AdoptionDTO> RejectPendingAdoptionsByAnimalId(string animalId, string? description = null)
         {
             var repo = new AdoptionRepository();
             List<Adoption> animalAdoptions = repo.GetAll()
@@ -81,6 +81,10 @@ namespace Services
                 .ToList();
             foreach(var adoption in animalAdoptions)
             {
+                if (!string.IsNullOrEmpty(description))
+                {
+                    adoption.Description = description;
+                }
                 adoption.AdoptionResponseDate = DateTime.Now;
                 adoption.State = AdoptionStateEn.Rechazada;
                 repo.Update(adoption);
@@ -118,6 +122,15 @@ namespace Services
             return adoptionDomain.ToDTO();
 
 
+        }
+
+        public List<AdoptionDTO> GetAdoptionsByUserId(string userId)
+        {
+            var repo = new AdoptionRepository();
+            return repo.GetAll()
+                .Where(a => a.UserId == userId)
+                .Select(a => a.ToDTO())
+                .ToList();
         }
     }
 }

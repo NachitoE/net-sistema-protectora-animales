@@ -260,9 +260,13 @@ namespace Services
 
                 animalRepository.Update(animal);
 
-                // rechazar adopciones pendientes para ese animal
+                // rechazar adopciones pendientes para ese animal SOLO si es adoptado, no bajo cuidado
                 var adoptionServ = new AdoptionsService();
-                adoptionServ.RejectPendingAdoptionsByAnimalId(animal.Id);
+                if (newAnimalState == AnimalStateEn.Adoptado)
+                {
+                    adoptionServ.RejectPendingAdoptionsByAnimalId(animal.Id, "Rechazado porque el animal ya fue adoptado por otro adoptante.");
+                }
+                
 
                 // crear historial
                 var animalRHService = new AnimalResponsibleHistoriesService();
@@ -290,6 +294,17 @@ namespace Services
                 );
 
             return filteredAnimals.Select(fUser => fUser.ToDTO()).ToList();
+        }
+
+        public bool UserIsResponsibleOfAnimal(string userId, string animalId)
+        {
+            AnimalRepository animalRepository = new AnimalRepository();
+            Animal? animal = animalRepository.Get(animalId);
+            if (animal != null && animal.UserId == userId)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
