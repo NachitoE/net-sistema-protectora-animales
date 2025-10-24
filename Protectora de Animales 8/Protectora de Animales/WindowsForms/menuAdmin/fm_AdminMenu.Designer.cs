@@ -35,8 +35,7 @@
             btn_menuReports = new Button();
             btn_menuUsers = new Button();
             btn_FosterHouses = new Button();
-            btn_menuAnimals = new Button();
-            btn_DebugDownload = new Button();
+            btn_AnimalsMenu = new Button();
             ((System.ComponentModel.ISupportInitialize)pb_headerPic).BeginInit();
             SuspendLayout();
             // 
@@ -112,38 +111,27 @@
             btn_FosterHouses.UseVisualStyleBackColor = true;
             btn_FosterHouses.Click += btn_FosterHouses_Click;
             // 
-            // btn_menuAnimals
+            // btn_AnimalsMenu
             // 
-            btn_menuAnimals.Location = new Point(93, 189);
-            btn_menuAnimals.Name = "btn_menuAnimals";
-            btn_menuAnimals.Size = new Size(250, 23);
-            btn_menuAnimals.TabIndex = 8;
-            btn_menuAnimals.Text = "Animales";
-            btn_menuAnimals.UseVisualStyleBackColor = true;
-            btn_menuAnimals.Click += btn_menuAnimals_Click;
-            // 
-            // btn_DebugDownload
-            // 
-            btn_DebugDownload.Location = new Point(93, 334);
-            btn_DebugDownload.Name = "btn_DebugDownload";
-            btn_DebugDownload.Size = new Size(250, 23);
-            btn_DebugDownload.TabIndex = 9;
-            btn_DebugDownload.Text = "DEBUG DOWNLOAD";
-            btn_DebugDownload.UseVisualStyleBackColor = true;
-            btn_DebugDownload.Click += btn_DebugDownload_Click;
+            btn_AnimalsMenu.Location = new Point(93, 189);
+            btn_AnimalsMenu.Name = "btn_AnimalsMenu";
+            btn_AnimalsMenu.Size = new Size(250, 23);
+            btn_AnimalsMenu.TabIndex = 8;
+            btn_AnimalsMenu.Text = "Animales";
+            btn_AnimalsMenu.UseVisualStyleBackColor = true;
+            btn_AnimalsMenu.Click += btn_AnimalsMenu_Click;
             // 
             // fm_AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(426, 400);
-            Controls.Add(btn_DebugDownload);
             Controls.Add(btn_FosterHouses);
             Controls.Add(btn_menuUsers);
             Controls.Add(btn_menuReports);
             Controls.Add(btn_menuSightings);
             Controls.Add(btn_menuAdoptions);
-            Controls.Add(btn_menuAnimals);
+            Controls.Add(btn_AnimalsMenu);
             Controls.Add(lb_MenuTitle);
             Controls.Add(pb_headerPic);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -164,7 +152,6 @@
         private Button btn_menuReports;
         private Button btn_menuUsers;
         private Button btn_FosterHouses;
-        private Button btn_menuAnimals;
-        private Button btn_DebugDownload;
+        private Button btn_AnimalsMenu;
     }
 }

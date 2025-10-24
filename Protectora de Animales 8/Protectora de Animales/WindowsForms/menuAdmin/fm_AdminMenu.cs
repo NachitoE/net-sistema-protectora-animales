@@ -31,13 +31,6 @@ namespace WindowsForms.menuAdmin
             this.Show();
         }
 
-        private void btn_menuAnimals_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var menuredir = new fm_AdminAnimalMenu();
-            menuredir.ShowDialog();
-            this.Show();
-        }
 
         private void btn_menuSightings_Click(object sender, EventArgs e)
         {
@@ -72,10 +65,13 @@ namespace WindowsForms.menuAdmin
             this.Show();
         }
 
-        private async void btn_DebugDownload_Click(object sender, EventArgs e)
+        private void btn_AnimalsMenu_Click(object sender, EventArgs e)
         {
-            var cli = ApiClientsFactory.ReportClient(new WinFormDownloadHandler());
-            await cli.DownloadAdoptionMonthReportAsync();
+            this.Hide();
+            var menuredir = new fm_AdminAnimalMenu();
+            menuredir.ShowDialog();
+            this.Show();
+
         }
     }
 }
