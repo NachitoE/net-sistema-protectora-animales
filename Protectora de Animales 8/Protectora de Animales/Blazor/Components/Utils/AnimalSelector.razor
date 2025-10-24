@@ -7,9 +7,15 @@
              RowClassFunc="@GetRowClassAnimal"
              RowClass="pointer">
     <Columns>
-        <PropertyColumn Property="x => x.Id" Title="ID" />
+        @if (ShowIDAndState)
+        {
+            <PropertyColumn Property="x => x.Id" Title="ID" />
+        }
         <PropertyColumn Property="x => x.Name" Title="Nombre" />
+        @if (ShowIDAndState)
+        {
         <PropertyColumn Property="x => x.AnimalState" Title="Estado" />
+        }
         <PropertyColumn Property="x => x.BirthDate" Title="Fecha de nacimiento" />
         <PropertyColumn Property="x => x.Description" Title="Descripción" />
         
@@ -21,6 +27,8 @@
     public Action<AnimalDTO?>? OnAnimalSelected { get; set; } = null;
     [Parameter]
     public AnimalClientLoadMethod LoadMethod { get; set; } = AnimalClientLoadMethod.All;
+    [Parameter]
+    public bool ShowIDAndState { get; set; } = true;
 
     public bool IsLoading { get; set; } = true;
     public AnimalDTO? SelectedAnimal
