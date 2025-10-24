@@ -41,6 +41,8 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole("Adoptante"));
     options.AddPolicy("AdopterOrAdminOnly", policy =>
         policy.RequireRole("Adoptante", "Admin"));
+    options.AddPolicy("FosterOrVolunteerOrAdminOnly", policy =>
+        policy.RequireRole("Adoptante", "Admin", "Voluntario"));
 });
 
 // Agregar servicios CORS

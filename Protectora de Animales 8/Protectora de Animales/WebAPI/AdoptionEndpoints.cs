@@ -96,7 +96,7 @@ namespace WebAPI
                     return Results.BadRequest(new { error = ex.Message });
                 }
             })
-            .RequireAuthorization("AdminOnly")
+            .RequireAuthorization("FosterOrVolunteerOrAdminOnly")
             .WithName("Rechazar o aprobar Adopcion")
             .Produces<AdoptionDTO>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
