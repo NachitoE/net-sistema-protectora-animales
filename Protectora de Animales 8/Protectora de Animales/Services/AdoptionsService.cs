@@ -113,6 +113,7 @@ namespace Services
             adoptionDomain.AdoptionResponseDate = changeDTO.AdoptionResponseDate ?? DateTime.Now;
             AdoptionStateEn newState = changeDTO.Approved ? AdoptionStateEn.Aprobada : AdoptionStateEn.Rechazada;
             adoptionDomain.State = newState;
+            adoptionDomain.Description = changeDTO.Description ?? adoptionDomain.Description;
             repo.Update(adoptionDomain);
             //asignar adoptante como responsable de animal, se rechazan las demás adopciones pendientes de ese animal
             if(newState == AdoptionStateEn.Rechazada) return adoptionDomain.ToDTO();

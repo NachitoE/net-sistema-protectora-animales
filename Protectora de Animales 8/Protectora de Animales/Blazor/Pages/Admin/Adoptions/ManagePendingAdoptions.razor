@@ -2,6 +2,7 @@
 @using DTOs
 @using DTOs.Adoption
 @inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
 <h3>Panel de Adopciones Pendientes</h3>
 @if (!Session.IsAuthenticated || !(Session.Context.User.UserType == "Admin" || Session.Context.User.UserType == "Transito" || Session.Context.User.UserType == "Voluntario"))
@@ -43,8 +44,8 @@ else
                     <UserTooltip UserId="@context.Item.UserId" />
                 </CellTemplate>
             </TemplateColumn>
-            <PropertyColumn Property="x => x.AdoptionRequestDate" Title="Fecha Solicitud" />
-            <PropertyColumn Property="x => x.AdoptionResponseDate" Title="Fecha Respuesta" />
+            <PropertyColumn Property="x => x.AdoptionRequestDate" Title="Fecha Solicitud" Format="dd/MM/yyyy" />
+            <PropertyColumn Property="x => x.AdoptionResponseDate" Title="Fecha Respuesta" Format="dd/MM/yyyy" />
             <PropertyColumn Property="x => x.State" Title="Estado">
                 <CellTemplate>
                     @if (context.Item.State == "Pendiente")
@@ -70,8 +71,20 @@ else
                 <CellTemplate>
                     @if (context.Item.State == "Pendiente")
                     {
-                        <MudButton Class="accordion-button" Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" OnClick="@(() => OnApprove(context.Item))">Aprobar</MudButton>
-                        <MudButton Class="mt-2 accordion-button" Color="Color.Error" Variant="Variant.Filled" Size="Size.Small" OnClick="@(() => OnReject(context.Item))">Rechazar</MudButton>
+                        <MudButton Class="accordion-button" 
+                                   Color="Color.Success" 
+                                   Variant="Variant.Filled" 
+                                   Size="Size.Small" 
+                                   OnClick="@(() => OnApprove(context.Item))">
+                            Aprobar
+                        </MudButton>
+                        <MudButton Class="mt-2 accordion-button" 
+                                   Color="Color.Error" 
+                                   Variant="Variant.Filled" 
+                                   Size="Size.Small" 
+                                   OnClick="@(() => OnReject(context.Item))">
+                            Rechazar
+                        </MudButton>
                     }
                 </CellTemplate>
             </TemplateColumn>
@@ -138,24 +151,38 @@ else
             Snackbar.Add($"Error al aprobar: {result.Message}", Severity.Error);
             return;
         }
-        Snackbar.Add("Adopción aprobada", Severity.Success);
+        Snackbar.Add("Adopción aprobada exitosamente", Severity.Success);
         await LoadAdoptions();
     }
 
     private async Task OnReject(AdoptionDTO adoption)
     {
+        // Mostrar diálogo para seleccionar razón de rechazo
+        var dialog = await DialogService.ShowAsync<RejectOptionDialog>("Rechazar Adopción");
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+        {
+            return;
+        }
+
+        string rejectionReason = result.Data as string ?? "Sin especificar";
+
         AdoptionRejectApproveDTO approveRejectDTO = new()
         {
             Approved = false,
-            AdoptionResponseDate = DateTime.Now
+            AdoptionResponseDate = DateTime.Now,
+            Description = rejectionReason
         };
-        var result = await ApiClientsFactory.AdoptionClient().ApproveOrRejectPendingAsync(adoption.Id, approveRejectDTO);
-        if (!result.Success)
+
+        var apiResult = await ApiClientsFactory.AdoptionClient().ApproveOrRejectPendingAsync(adoption.Id, approveRejectDTO);
+        if (!apiResult.Success)
         {
-            Snackbar.Add($"Error al rechazar: {result.Message}", Severity.Error);
+            Snackbar.Add($"Error al rechazar: {apiResult.Message}", Severity.Error);
             return;
         }
-        Snackbar.Add("Adopción rechazada", Severity.Success);
+        
+        Snackbar.Add($"Adopción rechazada. Razón: {rejectionReason}", Severity.Warning);
         await LoadAdoptions();
     }
 }

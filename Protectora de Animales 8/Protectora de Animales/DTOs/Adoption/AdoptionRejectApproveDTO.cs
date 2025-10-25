@@ -10,5 +10,6 @@ namespace DTOs.Adoption
     {
         public bool Approved { get; set; }
         public DateTime? AdoptionResponseDate { get; set; }
+        public string? Description { get; set; }
     }
 }

@@ -1,0 +1,85 @@
+﻿@inject ISnackbar Snackbar
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6" Class="mb-3">Seleccione la razón del rechazo</MudText>
+        
+        <MudRadioGroup @bind-Value="selectedReason" T="string" Required="true">
+            <MudRadio T="string" Value="@("Falta de espacio adecuado")" Color="Color.Primary">
+                Falta de espacio adecuado
+            </MudRadio>
+            <MudRadio T="string" Value="@("No cumple con los requisitos económicos")" Color="Color.Primary">
+                No cumple con los requisitos económicos
+            </MudRadio>
+            <MudRadio T="string" Value="@("Falta de experiencia con animales")" Color="Color.Primary">
+                Falta de experiencia con animales
+            </MudRadio>
+            <MudRadio T="string" Value="@("Documentación incompleta")" Color="Color.Primary">
+                Documentación incompleta
+            </MudRadio>
+            <MudRadio T="string" Value="@("No dispone de tiempo suficiente")" Color="Color.Primary">
+                No dispone de tiempo suficiente
+            </MudRadio>
+            <MudRadio T="string" Value="@("Animal ya fue adoptado por otro solicitante")" Color="Color.Primary">
+                Animal ya fue adoptado por otro solicitante
+            </MudRadio>
+            <MudRadio T="string" Value="@("Otro")" Color="Color.Primary">
+                Otro
+            </MudRadio>
+        </MudRadioGroup>
+
+        @if (selectedReason == "Otro")
+        {
+            <MudTextField @bind-Value="customReason" 
+                          Label="Especifique la razón" 
+                          Lines="3"
+                          Class="mt-3"
+                          Required="true"
+                          Immediate="true"
+                          Variant="Variant.Outlined" />
+        }
+
+        <MudAlert Severity="Severity.Info" Class="mt-4" Dense="true">
+            Esta razón será visible para el adoptante y quedará registrada en el sistema.
+        </MudAlert>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel" Color="Color.Default">Cancelar</MudButton>
+        <MudButton OnClick="Confirm" 
+                   Color="Color.Error" 
+                   Variant="Variant.Filled"
+                   Disabled="@(!IsValid())">
+            Confirmar Rechazo
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] 
+    IMudDialogInstance MudDialog { get; set; } = null!;
+
+    private string? selectedReason;
+    private string? customReason;
+
+    private bool IsValid()
+    {
+        if (string.IsNullOrEmpty(selectedReason))
+            return false;
+
+        if (selectedReason == "Otro" && string.IsNullOrWhiteSpace(customReason))
+            return false;
+
+        return true;
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private void Confirm()
+    {
+        var reason = selectedReason == "Otro" ? customReason : selectedReason;
+        MudDialog.Close(DialogResult.Ok(reason));
+    }
+}
