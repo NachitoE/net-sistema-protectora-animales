@@ -65,17 +65,21 @@ namespace Services
             {
                 // set user as pending house, set current user animals as available
                 var userDTO = GetUserBelongingToHouse(id);
-                if (userDTO == null)
-                    return false;
-                AnimalsService animalsService = new AnimalsService();
-                var animals = animalsService.GetAnimalsBelongingToUser(userDTO.Id);
-                foreach(AnimalDTO animal in animals)
+                if (userDTO != null)
                 {
-                    animalsService.SetAnimalAsAvailable(animal.Id);
+                    UsersService usersService = new UsersService();
+                    usersService.SetUserPendingHouse(userDTO.Id);
+                    AnimalsService animalsService = new AnimalsService();
+                    var animals = animalsService.GetAnimalsBelongingToUser(userDTO.Id);
+                    foreach (AnimalDTO animal in animals)
+                    {
+                        animalsService.SetAnimalAsAvailable(animal.Id);
+                    }
                 }
+                
                 return true;
             }
-            return false;
+            throw new Exception("Casa no encontrada");
         }
 
         public List<HouseDTO> GetAll()
@@ -157,6 +161,70 @@ namespace Services
             {
                 HouseId = house.Id,
                 Message = "Capacidad actualizada con éxito",
+                Success = true
+            };
+        }
+
+        public HouseBaseResponseDTO ChangeAddress(HouseChangeAddressDTO changeAddressDTO)
+        {
+            var houseRepository = new HouseRepository();
+            var house = houseRepository.Get(changeAddressDTO.HouseId);
+
+            if (house == null)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "Casa no encontrada",
+                    Success = false
+                };
+            }
+
+            var userService = new UsersService();
+            UserDTO? houseUserDTO = userService.Get(house.UserId);
+
+            if (houseUserDTO == null)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "El usuario asignado a esa casa no fue encontrado",
+                    Success = false
+                };
+            }
+
+            if (houseUserDTO.UserType != EnumConversion.UserTypeToString(Domain.UserType.Transito))
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "Solo usuarios de tipo Tránsito pueden cambiar la dirección de su casa",
+                    Success = false
+                };
+            }
+
+            if (string.IsNullOrWhiteSpace(changeAddressDTO.NewAddress))
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "La dirección no puede estar vacía",
+                    Success = false
+                };
+            }
+            if (changeAddressDTO.NewAddressNumber <= 0)
+            {
+                return new HouseBaseResponseDTO()
+                {
+                    Message = "El número de dirección debe ser mayor a 0",
+                    Success = false
+                };
+            }
+
+            house.Address = changeAddressDTO.NewAddress;
+            house.AddressNumber = changeAddressDTO.NewAddressNumber;
+            houseRepository.Update(house);
+
+            return new HouseBaseResponseDTO()
+            {
+                HouseId = house.Id,
+                Message = "Dirección actualizada con éxito",
                 Success = true
             };
         }

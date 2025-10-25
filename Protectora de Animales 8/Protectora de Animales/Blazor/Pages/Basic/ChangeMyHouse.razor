@@ -1,0 +1,263 @@
+@page "/change-my-house"
+@using DTOs.House
+@inject ISnackbar Snackbar
+
+<h3>Cambiar Mi Casa</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Transito")
+{
+    <MudAlert Severity="Severity.Warning">Solo usuarios de tipo Tránsito pueden cambiar su casa</MudAlert>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">ERROR: @errorMessage</MudAlert>
+}
+else if (currentHouse == null)
+{
+    <MudAlert Severity="Severity.Info">No tienes una casa asignada actualmente</MudAlert>
+}
+else
+{
+    <MudPaper Class="pa-4 mb-4">
+        <MudText Typo="Typo.h6" Class="mb-3">Información Actual de tu Casa</MudText>
+        <MudText><strong>Dirección:</strong> @currentHouse.Address @currentHouse.AddressNumber</MudText>
+        <MudText><strong>Capacidad:</strong> @currentHouse.Capacity animales</MudText>
+        @if (currentAnimalsCount.HasValue)
+        {
+            <MudText><strong>Animales actuales:</strong> @currentAnimalsCount.Value</MudText>
+        }
+    </MudPaper>
+
+    <MudPaper Class="pa-4">
+        <MudForm @ref="form" @bind-IsValid="@success" ValidationDelay="0">
+            <MudText Typo="Typo.h6" Class="mb-3">Modificar Información de la Casa</MudText>
+            
+            <MudTextField T="string" 
+                          Label="Calle/Avenida" 
+                          Required="true" 
+                          RequiredError="La dirección es obligatoria" 
+                          @bind-Value="@formData.NewAddress"
+                          Immediate="true"
+                          Margin="Margin.Dense" />
+                          
+            <MudNumericField T="int" 
+                             Label="Número" 
+                             Required="true" 
+                             RequiredError="El número es obligatorio" 
+                             @bind-Value="@formData.NewAddressNumber"
+                             Immediate="true"
+                             Min="1"
+                             Margin="Margin.Dense" />
+
+            <MudNumericField T="int" 
+                             Label="Capacidad" 
+                             Required="true" 
+                             RequiredError="La capacidad es obligatoria" 
+                             @bind-Value="@formData.NewCapacity"
+                             Immediate="true"
+                             Min="@(currentAnimalsCount ?? 1)"
+                             HelperText="@GetCapacityHelperText()"
+                             Margin="Margin.Dense" />
+
+            <MudAlert Severity="Severity.Info" Class="mt-3" Dense="true">
+                <strong>Nota:</strong> La capacidad no puede ser menor que la cantidad de animales que actualmente tienes asignados.
+                Los animales ya asignados no se verán afectados por estos cambios.
+            </MudAlert>
+
+            <MudButton OnClick="@SubmitChange" 
+                       Disabled="@(isSubmitting || !success)" 
+                       Class="mt-4" 
+                       Variant="Variant.Filled" 
+                       Color="Color.Primary"
+                       FullWidth="true">
+                @if (isSubmitting)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Actualizando...</MudText>
+                }
+                else
+                {
+                    <MudText>Guardar Cambios</MudText>
+                }
+            </MudButton>
+        </MudForm>
+    </MudPaper>
+}
+
+@code {
+    private bool isLoading = true;
+    private bool isSubmitting = false;
+    private bool success = false;
+    private string? errorMessage = null;
+    private HouseDTO? currentHouse = null;
+    private int? currentAnimalsCount = null;
+    private MudForm? form;
+    private ChangeHouseForm formData = new ChangeHouseForm();
+
+    public class ChangeHouseForm
+    {
+        public string NewAddress { get; set; } = string.Empty;
+        public int NewAddressNumber { get; set; } = 0;
+        public int NewCapacity { get; set; } = 1;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrentHouse();
+    }
+
+    private async Task LoadCurrentHouse()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            var houseClient = ApiClientsFactory.HouseClient();
+            var result = await houseClient.GetHouseByUserId(Session.Context.User.Id);
+
+            if (!result.Success)
+            {
+                errorMessage = result.Message ?? "Error al cargar la casa actual";
+                return;
+            }
+
+            currentHouse = result.Data;
+
+            if (currentHouse != null)
+            {
+                formData.NewAddress = currentHouse.Address;
+                formData.NewAddressNumber = currentHouse.AddressNumber;
+                formData.NewCapacity = currentHouse.Capacity;
+
+                await LoadCurrentAnimalsCount();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadCurrentAnimalsCount()
+    {
+        try
+        {
+            var userClient = ApiClientsFactory.UserClient();
+            var animalsResult = await userClient.GetUserAnimalsAsync(Session.Context.User.Id);
+            
+            if (animalsResult.Success && animalsResult.Data != null)
+            {
+                currentAnimalsCount = animalsResult.Data.Count;
+            }
+        }
+        catch (Exception)
+        {
+            currentAnimalsCount = null;
+        }
+    }
+
+    private string GetCapacityHelperText()
+    {
+        if (currentAnimalsCount.HasValue)
+        {
+            return $"Tienes {currentAnimalsCount.Value} animal(es) asignado(s). La capacidad mínima es {currentAnimalsCount.Value}.";
+        }
+        return "Capacidad mínima: 1";
+    }
+
+    private async Task SubmitChange()
+    {
+        if (isSubmitting || currentHouse == null) return;
+
+        try
+        {
+            isSubmitting = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (form != null)
+            {
+                await form.Validate();
+                if (!form.IsValid)
+                {
+                    errorMessage = "Complete todos los campos correctamente";
+                    return;
+                }
+            }
+
+            if (currentAnimalsCount.HasValue && formData.NewCapacity < currentAnimalsCount.Value)
+            {
+                errorMessage = $"La capacidad no puede ser menor que {currentAnimalsCount.Value} (cantidad de animales actuales)";
+                return;
+            }
+            bool hasChanges = false;
+
+            if (formData.NewAddress != currentHouse.Address || 
+                formData.NewAddressNumber != currentHouse.AddressNumber)
+            {
+                var changeAddressDTO = new HouseChangeAddressDTO
+                {
+                    HouseId = currentHouse.Id,
+                    NewAddress = formData.NewAddress,
+                    NewAddressNumber = formData.NewAddressNumber
+                };
+
+                var houseClient = ApiClientsFactory.HouseClient();
+                var addressResult = await houseClient.ChangeAddress(changeAddressDTO);
+
+                if (!addressResult.Success || addressResult.Data == null)
+                {
+                    errorMessage = addressResult.Message ?? "Error al cambiar la dirección";
+                    return;
+                }
+                hasChanges = true;
+            }
+
+            if (formData.NewCapacity != currentHouse.Capacity)
+            {
+                var changeCapacityDTO = new HouseChangeCapacityDTO
+                {
+                    HouseId = currentHouse.Id,
+                    NewCapacity = formData.NewCapacity
+                };
+
+                var houseClient = ApiClientsFactory.HouseClient();
+                var capacityResult = await houseClient.ChangeCapacity(changeCapacityDTO);
+
+                if (!capacityResult.Success || capacityResult.Data == null)
+                {
+                    errorMessage = capacityResult.Message ?? "Error al cambiar la capacidad";
+                    return;
+                }
+                hasChanges = true;
+            }
+
+            if (!hasChanges)
+            {
+                Snackbar.Add("No hay cambios para guardar", Severity.Info);
+                return;
+            }
+
+            Snackbar.Add("Casa actualizada exitosamente", Severity.Success);
+            await LoadCurrentHouse();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al actualizar la casa: {ex.Message}";
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged();
+        }
+    }
+}
