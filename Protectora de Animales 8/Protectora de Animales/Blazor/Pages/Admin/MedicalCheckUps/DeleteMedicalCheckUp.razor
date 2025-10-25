@@ -1,0 +1,159 @@
+@page "/delete-medical-checkups"
+@inject ISnackbar Snackbar
+
+<h3>Eliminar Chequeos Médicos</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">ERROR: @errorMessage</MudAlert>
+}
+else
+{
+    <MudDataGrid Items="@checkUps"
+                 @bind-SelectedItem="selectedCheckUp"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClass"
+                 RowClass="pointer">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID" />
+            <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha" Format="dd/MM/yyyy HH:mm" />
+            <TemplateColumn Title="Animal">
+                <CellTemplate>
+                    <AnimalTooltip AnimalId="@context.Item.AnimalId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.Observation" Title="Observación" />
+            <TemplateColumn Title="Acciones">
+                <CellTemplate>
+                    <MudButton OnClick="@(() => DeleteItem(context.Item))" 
+                               Disabled="@isDeleting" 
+                               Color="Color.Error" 
+                               Variant="Variant.Filled" 
+                               Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Delete">
+                        Eliminar
+                    </MudButton>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+
+    @if (selectedCheckUp != null)
+    {
+        <MudPaper Class="pa-4 mt-4">
+            <MudText Typo="Typo.h6">Chequeo médico seleccionado: @selectedCheckUp.Id</MudText>
+            <MudButton OnClick="@DeleteSelectedItem" 
+                       Disabled="@isDeleting" 
+                       Class="mt-2"
+                       Variant="Variant.Filled" 
+                       Color="Color.Error"
+                       FullWidth="true"
+                       StartIcon="@Icons.Material.Filled.Delete">
+                @if (isDeleting)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Eliminando...</MudText>
+                }
+                else
+                {
+                    <MudText>Eliminar Seleccionado</MudText>
+                }
+            </MudButton>
+        </MudPaper>
+    }
+}
+
+@code {
+    private bool isLoading = true;
+    private bool isDeleting = false;
+    private string? errorMessage = null;
+    private List<MedicalCheckUpDTO> checkUps = new();
+    private MedicalCheckUpDTO? selectedCheckUp = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCheckUps();
+    }
+
+    private async Task LoadCheckUps()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            var checkUpClient = ApiClientsFactory.MedicalCheckUpClient();
+            var result = await checkUpClient.GetAllAsync();
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al cargar los chequeos médicos";
+                return;
+            }
+
+            checkUps = result.Data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteItem(MedicalCheckUpDTO checkUp)
+    {
+        if (isDeleting) return;
+
+        try
+        {
+            isDeleting = true;
+            StateHasChanged();
+
+            var checkUpClient = ApiClientsFactory.MedicalCheckUpClient();
+            var result = await checkUpClient.DeleteAsync(checkUp.Id);
+
+            if (!result.Success)
+            {
+                Snackbar.Add(result.Message ?? "Error al eliminar el chequeo médico", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("Chequeo médico eliminado correctamente", Severity.Success);
+            await LoadCheckUps();
+            selectedCheckUp = null;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error inesperado: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private async Task DeleteSelectedItem()
+    {
+        if (selectedCheckUp != null)
+        {
+            await DeleteItem(selectedCheckUp);
+        }
+    }
+
+    private string GetRowClass(MedicalCheckUpDTO? checkUp, int index)
+        => selectedCheckUp?.Id == checkUp?.Id ? "selected-row" : string.Empty;
+}

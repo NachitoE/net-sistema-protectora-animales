@@ -53,19 +53,36 @@ namespace Infrastructure.API
 
         public async Task<ApiResult<bool>> DeleteAsync(string endpoint)
         {
-            var result = await ExecuteRequest<object>(async () => await _httpClient.DeleteAsync(endpoint));
-
-            if (result.Success)
+            try
             {
-                return ApiResult<bool>.FromSuccess(true, "Recurso eliminado exitosamente");
-            }
+                var response = await _httpClient.DeleteAsync(endpoint);
 
-            if (result.StatusCode == HttpStatusCode.NotFound)
+                if (response.IsSuccessStatusCode)
+                {
+                    return ApiResult<bool>.FromSuccess(true, "Recurso eliminado exitosamente");
+                }
+
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    var errorMessage = await ExtractServerMessage(response);
+                    return ApiResult<bool>.FromError(errorMessage, statusCode: response.StatusCode);
+                }
+
+                var message = await ExtractServerMessage(response);
+                return ApiResult<bool>.FromError(message, statusCode: response.StatusCode);
+            }
+            catch (HttpRequestException)
             {
-                return ApiResult<bool>.FromSuccess(false, "Recurso no encontrado");
+                return ApiResult<bool>.FromError("No se pudo conectar con el servidor");
             }
-
-            return ApiResult<bool>.FromError(result.Message, "", result.StatusCode);
+            catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
+            {
+                return ApiResult<bool>.FromError("La solicitud tardó demasiado tiempo");
+            }
+            catch (Exception ex)
+            {
+                return ApiResult<bool>.FromError($"Error inesperado: {ex.Message}");
+            }
         }
 
         /// <summary>

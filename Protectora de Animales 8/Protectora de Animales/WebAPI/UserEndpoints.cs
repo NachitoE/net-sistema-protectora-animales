@@ -89,17 +89,26 @@ namespace WebAPI
             */
             app.MapDelete("/users/{id}", (string id) =>
             {
-                UsersService userService = new UsersService();
-                bool deleted = userService.Delete(id);
+                try
+                {
+                    UsersService userService = new UsersService();
 
-                if (deleted)
-                    return Results.NoContent();
+                    bool deleted = userService.Delete(id);
 
-                return Results.NotFound();
+                    if (deleted)
+                        return Results.NoContent();
+
+                    return Results.NotFound();
+                }catch(DomainException ex)
+                {
+                    return Results.BadRequest(new { error = ex.Message });
+                }
+                
             })
                 .WithName("DeleteUser")
                 .Produces(StatusCodes.Status204NoContent)
                 .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status400BadRequest)
                 .WithOpenApi();
 
             app.MapPost("/users/search", (UserDTO criteria) =>

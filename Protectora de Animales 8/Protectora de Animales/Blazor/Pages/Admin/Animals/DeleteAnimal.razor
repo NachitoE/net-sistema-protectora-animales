@@ -1,0 +1,156 @@
+@page "/delete-animals"
+@inject ISnackbar Snackbar
+
+<h3>Eliminar Animales</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">ERROR: @errorMessage</MudAlert>
+}
+else
+{
+    <MudDataGrid Items="@animals"
+                 @bind-SelectedItem="selectedAnimal"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClass"
+                 RowClass="pointer">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID" />
+            <PropertyColumn Property="x => x.Name" Title="Nombre" />
+            <PropertyColumn Property="x => x.Species" Title="Especie" />
+            <PropertyColumn Property="x => x.AnimalState" Title="Estado" />
+            <PropertyColumn Property="x => x.BirthDate" Title="Fecha Nac." Format="dd/MM/yyyy" />
+            <TemplateColumn Title="Acciones">
+                <CellTemplate>
+                    <MudButton OnClick="@(() => DeleteItem(context.Item))" 
+                               Disabled="@isDeleting" 
+                               Color="Color.Error" 
+                               Variant="Variant.Filled" 
+                               Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Delete">
+                        Eliminar
+                    </MudButton>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+
+    @if (selectedAnimal != null)
+    {
+        <MudPaper Class="pa-4 mt-4">
+            <MudText Typo="Typo.h6">Animal seleccionado: @selectedAnimal.Name (@selectedAnimal.Id)</MudText>
+            <MudButton OnClick="@DeleteSelectedItem" 
+                       Disabled="@isDeleting" 
+                       Class="mt-2"
+                       Variant="Variant.Filled" 
+                       Color="Color.Error"
+                       FullWidth="true"
+                       StartIcon="@Icons.Material.Filled.Delete">
+                @if (isDeleting)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Eliminando...</MudText>
+                }
+                else
+                {
+                    <MudText>Eliminar Seleccionado</MudText>
+                }
+            </MudButton>
+        </MudPaper>
+    }
+}
+
+@code {
+    private bool isLoading = true;
+    private bool isDeleting = false;
+    private string? errorMessage = null;
+    private List<AnimalDTO> animals = new();
+    private AnimalDTO? selectedAnimal = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAnimals();
+    }
+
+    private async Task LoadAnimals()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            var animalClient = ApiClientsFactory.AnimalClient();
+            var result = await animalClient.GetAllAsync();
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al cargar los animales";
+                return;
+            }
+
+            animals = result.Data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteItem(AnimalDTO animal)
+    {
+        if (isDeleting) return;
+
+        try
+        {
+            isDeleting = true;
+            StateHasChanged();
+
+            var animalClient = ApiClientsFactory.AnimalClient();
+            var result = await animalClient.DeleteAsync(animal.Id);
+
+            if (!result.Success)
+            {
+                Snackbar.Add(result.Message ?? "Error al eliminar el animal", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("Animal eliminado correctamente", Severity.Success);
+            await LoadAnimals();
+            selectedAnimal = null;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error inesperado: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private async Task DeleteSelectedItem()
+    {
+        if (selectedAnimal != null)
+        {
+            await DeleteItem(selectedAnimal);
+        }
+    }
+
+    private string GetRowClass(AnimalDTO? animal, int index)
+        => selectedAnimal?.Id == animal?.Id ? "selected-row" : string.Empty;
+}

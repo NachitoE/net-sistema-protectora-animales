@@ -1,0 +1,164 @@
+@page "/delete-adoptions"
+@inject ISnackbar Snackbar
+
+<h3>Eliminar Adopciones</h3>
+
+@if (!Session.IsAuthenticated || Session.Context.User.UserType != "Admin")
+{
+    <p>No autorizado</p>
+}
+else if (isLoading)
+{
+    <MudProgressCircular Indeterminate="true" Color="Color.Secondary" Size="MudBlazor.Size.Medium" StrokeWidth="6" />
+}
+else if (errorMessage != null)
+{
+    <MudAlert Severity="Severity.Error">ERROR: @errorMessage</MudAlert>
+}
+else
+{
+    <MudDataGrid Items="@adoptions"
+                 @bind-SelectedItem="selectedAdoption"
+                 SelectOnRowClick="true"
+                 Hover="true"
+                 Bordered="true"
+                 Dense="true"
+                 RowClassFunc="@GetRowClass"
+                 RowClass="pointer">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID" />
+            <TemplateColumn Title="Animal">
+                <CellTemplate>
+                    <AnimalTooltip AnimalId="@context.Item.AnimalId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Usuario">
+                <CellTemplate>
+                    <UserTooltip UserId="@context.Item.UserId" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.AdoptionRequestDate" Title="Fecha Solicitud" Format="dd/MM/yyyy" />
+            <PropertyColumn Property="x => x.State" Title="Estado" />
+            <TemplateColumn Title="Acciones">
+                <CellTemplate>
+                    <MudButton OnClick="@(() => DeleteItem(context.Item))" 
+                               Disabled="@isDeleting" 
+                               Color="Color.Error" 
+                               Variant="Variant.Filled" 
+                               Size="Size.Small"
+                               StartIcon="@Icons.Material.Filled.Delete">
+                        Eliminar
+                    </MudButton>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+
+    @if (selectedAdoption != null)
+    {
+        <MudPaper Class="pa-4 mt-4">
+            <MudText Typo="Typo.h6">Adopción seleccionada: @selectedAdoption.Id</MudText>
+            <MudButton OnClick="@DeleteSelectedItem" 
+                       Disabled="@isDeleting" 
+                       Class="mt-2"
+                       Variant="Variant.Filled" 
+                       Color="Color.Error"
+                       FullWidth="true"
+                       StartIcon="@Icons.Material.Filled.Delete">
+                @if (isDeleting)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Eliminando...</MudText>
+                }
+                else
+                {
+                    <MudText>Eliminar Seleccionado</MudText>
+                }
+            </MudButton>
+        </MudPaper>
+    }
+}
+
+@code {
+    private bool isLoading = true;
+    private bool isDeleting = false;
+    private string? errorMessage = null;
+    private List<AdoptionDTO> adoptions = new();
+    private AdoptionDTO? selectedAdoption = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAdoptions();
+    }
+
+    private async Task LoadAdoptions()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            var adoptionClient = ApiClientsFactory.AdoptionClient();
+            var result = await adoptionClient.GetAllAsync();
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al cargar las adopciones";
+                return;
+            }
+
+            adoptions = result.Data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteItem(AdoptionDTO adoption)
+    {
+        if (isDeleting) return;
+
+        try
+        {
+            isDeleting = true;
+            StateHasChanged();
+
+            var adoptionClient = ApiClientsFactory.AdoptionClient();
+            var result = await adoptionClient.DeleteAsync(adoption.Id);
+
+            if (!result.Success)
+            {
+                Snackbar.Add(result.Message ?? "Error al eliminar la adopción", Severity.Error);
+                return;
+            }
+
+            Snackbar.Add("Adopción eliminada correctamente", Severity.Success);
+            await LoadAdoptions();
+            selectedAdoption = null;
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error inesperado: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    private async Task DeleteSelectedItem()
+    {
+        if (selectedAdoption != null)
+        {
+            await DeleteItem(selectedAdoption);
+        }
+    }
+
+    private string GetRowClass(AdoptionDTO? adoption, int index)
+        => selectedAdoption?.Id == adoption?.Id ? "selected-row" : string.Empty;
+}

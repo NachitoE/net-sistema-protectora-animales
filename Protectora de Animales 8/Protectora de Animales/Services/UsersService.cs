@@ -4,6 +4,7 @@ using DTOs.User;
 using Helpers;
 using Infrastructure.Data;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Services
 {
@@ -42,7 +43,19 @@ namespace Services
         public bool Delete(string id) 
         {
             UserRepository userRepository = new UserRepository();
-            return userRepository.Delete(id);
+            try
+            {
+                if(userRepository.Get(id).UserType == UserType.Admin)
+                {
+                    throw new DomainException("No se puede eliminar a un usuario administrador.");
+                }
+                bool deleted = userRepository.Delete(id);
+                return deleted;
+            }
+            catch (Exception)
+            {
+                throw new DomainException("No se puede eliminar a este usuario.");
+            }
         }
 
         public List<UserDTO> GetAll()
