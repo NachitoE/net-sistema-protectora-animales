@@ -2,6 +2,9 @@
 @using DTOs
 @inject SessionService Service
 
+<h2>¡Bienvenido a Protectora Atuel!</h2>
+<MudPaper Class="pa-16 ma-2" Outlined="true">
+    <h3 Class="">Iniciar Sesión</h3>
 <form>
     <div class="form-group">
         <label for="usernameInput">Usuario:</label>
@@ -13,6 +16,7 @@
     </div>
 </form>
 <button class="btn btn-primary mt-3" @onclick="@TryLogin">Ingresar</button>
+</MudPaper>
 <div>@status</div>
 @code {
     private string userName { get; set; }
