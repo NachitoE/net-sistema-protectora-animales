@@ -117,6 +117,44 @@ namespace Infrastructure.Data.Migrations
                             Description = "Primera solicitud rechazada por falta de documentación.",
                             State = "Rechazada",
                             UserId = "user-2"
+                        },
+                        new
+                        {
+                            Id = "adoption-7",
+                            AdoptionRequestDate = new DateTime(2024, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "9",
+                            Description = "Cree tener espacio adecuado.",
+                            State = "Pendiente",
+                            UserId = "user-9"
+                        },
+                        new
+                        {
+                            Id = "adoption-8",
+                            AdoptionRequestDate = new DateTime(2024, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdoptionResponseDate = new DateTime(2024, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "10",
+                            Description = "Solicitud aprobada tras verificación.",
+                            State = "Aprobada",
+                            UserId = "user-10"
+                        },
+                        new
+                        {
+                            Id = "adoption-9",
+                            AdoptionRequestDate = new DateTime(2024, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "14",
+                            Description = "Estoy interesada en cuidar a Nieve, somos una familia muy cariñosa.",
+                            State = "Pendiente",
+                            UserId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "adoption-10",
+                            AdoptionRequestDate = new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdoptionResponseDate = new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AnimalId = "17",
+                            Description = "El hogar no cumple las condiciones  necesarias para acoger aves.",
+                            State = "Rechazada",
+                            UserId = "user-7"
                         });
                 });
 
@@ -162,7 +200,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "1",
                             AnimalState = "ARevisar",
                             BirthDate = new DateTime(2018, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Perro mestizo de tamaño mediano, pelaje corto marrón con pecho blanco. Muy amistoso con las personas y tranquilo en los paseos.",
                             Name = "Firulais",
                             Species = "Perro"
                         },
@@ -171,7 +209,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "2",
                             AnimalState = "Adoptado",
                             BirthDate = new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Gato adulto de color gris atigrado, ojos verdes y carácter dulce. Se adaptó muy bien a su nuevo hogar.",
                             Name = "Miau",
                             Species = "Gato",
                             UserId = "user-5"
@@ -181,7 +219,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "3",
                             AnimalState = "ARevisar",
                             BirthDate = new DateTime(2021, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Conejo blanco con manchas grises, muy curioso y dócil. Le gusta saltar y explorar los rincones del lugar.",
                             Name = "Bunny",
                             Species = "Conejo"
                         },
@@ -190,7 +228,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "4",
                             AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
+                            Description = "Gata de pelo negro brillante, muy observadora y tranquila. Fue rescatada de la calle y actualmente está en recuperación.",
                             Name = "Lola",
                             Species = "Gato",
                             UserId = "user-4"
@@ -200,7 +238,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "5",
                             AnimalState = "Adoptado",
                             BirthDate = new DateTime(2017, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Perro grande de color beige con orejas caídas. Protector, paciente con niños y muy fiel a su adoptante.",
                             Name = "Rex",
                             Species = "Perro",
                             UserId = "user-2"
@@ -210,7 +248,7 @@ namespace Infrastructure.Data.Migrations
                             Id = "6",
                             AnimalState = "ARevisar",
                             BirthDate = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Conejo marrón oscuro de orejas largas, enérgico y juguetón. Se asusta fácilmente pero es muy curioso.",
                             Name = "Coco",
                             Species = "Conejo"
                         },
@@ -219,10 +257,126 @@ namespace Infrastructure.Data.Migrations
                             Id = "7",
                             AnimalState = "BajoCuidado",
                             BirthDate = new DateTime(2016, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Como es el bichito",
+                            Description = "Canario macho de plumaje amarillo intenso. Alegre, canta todos los días y se muestra muy sociable.",
                             Name = "Pepi",
                             Species = "Pajaro",
                             UserId = "user-3"
+                        },
+                        new
+                        {
+                            Id = "8",
+                            AnimalState = "BajoCuidado",
+                            BirthDate = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Perro mestizo color negro con patas blancas. Fue rescatado del abandono, ahora está recuperando peso y confianza.",
+                            Name = "Toby",
+                            Species = "Perro",
+                            UserId = "user-14"
+                        },
+                        new
+                        {
+                            Id = "9",
+                            AnimalState = "ARevisar",
+                            BirthDate = new DateTime(2020, 4, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Cachorra de tamaño mediano, pelaje dorado y ojos claros. Muy activa y juguetona, ideal para una familia con espacio.",
+                            Name = "Luna",
+                            Species = "Perro"
+                        },
+                        new
+                        {
+                            Id = "10",
+                            AnimalState = "Adoptado",
+                            BirthDate = new DateTime(2017, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Perro de pelaje oscuro, fuerte y leal. Se muestra protector y siempre atento a su entorno.",
+                            Name = "Rocky",
+                            Species = "Perro",
+                            UserId = "user-7"
+                        },
+                        new
+                        {
+                            Id = "11",
+                            AnimalState = "BajoCuidado",
+                            BirthDate = new DateTime(2021, 2, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Gato de pelo blanco y gris, ojos celestes. Muy mimoso y busca compañía humana constantemente.",
+                            Name = "Simón",
+                            Species = "Gato",
+                            UserId = "user-12"
+                        },
+                        new
+                        {
+                            Id = "12",
+                            AnimalState = "ARevisar",
+                            BirthDate = new DateTime(2022, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Gatita joven de color marrón claro con manchas blancas. Un poco tímida al principio, pero muy cariñosa cuando toma confianza.",
+                            Name = "Misha",
+                            Species = "Gato"
+                        },
+                        new
+                        {
+                            Id = "13",
+                            AnimalState = "Adoptado",
+                            BirthDate = new DateTime(2019, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Gata atigrada de pelaje dorado. Activa, curiosa y siempre lista para jugar.",
+                            Name = "Tigra",
+                            Species = "Gato",
+                            UserId = "user-9"
+                        },
+                        new
+                        {
+                            Id = "14",
+                            AnimalState = "ARevisar",
+                            BirthDate = new DateTime(2023, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Coneja completamente blanca, de pelaje suave. Tranquila, le gusta estar en brazos y es muy limpia.",
+                            Name = "Nieve",
+                            Species = "Conejo"
+                        },
+                        new
+                        {
+                            Id = "15",
+                            AnimalState = "BajoCuidado",
+                            BirthDate = new DateTime(2022, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Conejo marrón claro de orejas cortas. Muy sociable con otros conejos y disfruta de la compañía humana.",
+                            Name = "Choco",
+                            Species = "Conejo",
+                            UserId = "user-15"
+                        },
+                        new
+                        {
+                            Id = "16",
+                            AnimalState = "Adoptado",
+                            BirthDate = new DateTime(2021, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Coneja de color gris claro, muy sociable y tranquila. Le encanta recibir caricias y estar al aire libre.",
+                            Name = "Lili",
+                            Species = "Conejo",
+                            UserId = "user-6"
+                        },
+                        new
+                        {
+                            Id = "17",
+                            AnimalState = "BajoCuidado",
+                            BirthDate = new DateTime(2020, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Pájaro pequeño de tonos azules y verdes. Tiene un canto melodioso y disfruta del contacto visual con las personas.",
+                            Name = "Azul",
+                            Species = "Pajaro",
+                            UserId = "user-13"
+                        },
+                        new
+                        {
+                            Id = "18",
+                            AnimalState = "ARevisar",
+                            BirthDate = new DateTime(2023, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Polluelo color amarillo claro, encontrado en la vía pública. Está en observación hasta completar su desarrollo.",
+                            Name = "Sol",
+                            Species = "Pajaro"
+                        },
+                        new
+                        {
+                            Id = "19",
+                            AnimalState = "Adoptado",
+                            BirthDate = new DateTime(2022, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Pájaro pequeño de plumaje verde brillante, recuperado tras una lesión en el ala. Ahora vuela y canta normalmente.",
+                            Name = "Kiwi",
+                            Species = "Pajaro",
+                            UserId = "user-11"
                         });
                 });
 
@@ -256,92 +410,134 @@ namespace Infrastructure.Data.Migrations
                         {
                             Id = "arh-1",
                             AnimalId = "2",
-                            AssignedDate = new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2023, 12, 15, 14, 35, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-2"
                         },
                         new
                         {
                             Id = "arh-2",
                             AnimalId = "2",
-                            AssignedDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 3, 20, 10, 45, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-6"
                         },
                         new
                         {
                             Id = "arh-3",
                             AnimalId = "2",
-                            AssignedDate = new DateTime(2024, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 10, 8, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-5"
                         },
                         new
                         {
                             Id = "arh-4",
                             AnimalId = "5",
-                            AssignedDate = new DateTime(2024, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 2, 10, 15, 45, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-7"
                         },
                         new
                         {
                             Id = "arh-5",
                             AnimalId = "5",
-                            AssignedDate = new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 7, 20, 17, 46, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-2"
                         },
                         new
                         {
                             Id = "arh-6",
                             AnimalId = "4",
-                            AssignedDate = new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 4, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-3"
                         },
                         new
                         {
                             Id = "arh-7",
                             AnimalId = "4",
-                            AssignedDate = new DateTime(2024, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 6, 12, 13, 15, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-8"
                         },
                         new
                         {
                             Id = "arh-8",
                             AnimalId = "4",
-                            AssignedDate = new DateTime(2024, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 8, 15, 12, 45, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-4"
                         },
                         new
                         {
                             Id = "arh-9",
                             AnimalId = "7",
-                            AssignedDate = new DateTime(2024, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 1, 25, 14, 10, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-6"
                         },
                         new
                         {
                             Id = "arh-10",
                             AnimalId = "7",
-                            AssignedDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 9, 10, 15, 35, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-3"
                         },
                         new
                         {
                             Id = "arh-11",
                             AnimalId = "1",
-                            AssignedDate = new DateTime(2023, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2023, 8, 10, 16, 15, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-5"
                         },
                         new
                         {
                             Id = "arh-12",
                             AnimalId = "1",
-                            AssignedDate = new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 1, 15, 14, 20, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-8"
                         },
                         new
                         {
                             Id = "arh-13",
                             AnimalId = "3",
-                            AssignedDate = new DateTime(2024, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AssignedDate = new DateTime(2024, 5, 8, 17, 10, 0, 0, DateTimeKind.Unspecified),
                             ResponsibleId = "user-7"
+                        },
+                        new
+                        {
+                            Id = "arh-14",
+                            AnimalId = "8",
+                            AssignedDate = new DateTime(2024, 2, 12, 13, 45, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-14"
+                        },
+                        new
+                        {
+                            Id = "arh-15",
+                            AnimalId = "15",
+                            AssignedDate = new DateTime(2024, 8, 25, 16, 10, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-15"
+                        },
+                        new
+                        {
+                            Id = "arh-16",
+                            AnimalId = "10",
+                            AssignedDate = new DateTime(2024, 9, 18, 18, 15, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-16"
+                        },
+                        new
+                        {
+                            Id = "arh-17",
+                            AnimalId = "17",
+                            AssignedDate = new DateTime(2024, 10, 2, 14, 10, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-11"
+                        },
+                        new
+                        {
+                            Id = "arh-18",
+                            AnimalId = "11",
+                            AssignedDate = new DateTime(2025, 2, 10, 15, 45, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-12"
+                        },
+                        new
+                        {
+                            Id = "arh-19",
+                            AnimalId = "16",
+                            AssignedDate = new DateTime(2025, 3, 5, 17, 45, 0, 0, DateTimeKind.Unspecified),
+                            ResponsibleId = "user-6"
                         });
                 });
 
@@ -379,6 +575,30 @@ namespace Infrastructure.Data.Migrations
                             AddressNumber = 1341,
                             Capacity = 2,
                             UserId = "user-4"
+                        },
+                        new
+                        {
+                            Id = "house-2",
+                            Address = "San Martín",
+                            AddressNumber = 550,
+                            Capacity = 3,
+                            UserId = "user-14"
+                        },
+                        new
+                        {
+                            Id = "house-3",
+                            Address = "Mitre",
+                            AddressNumber = 200,
+                            Capacity = 1,
+                            UserId = "user-15"
+                        },
+                        new
+                        {
+                            Id = "house-4",
+                            Address = "Dorrego",
+                            AddressNumber = 900,
+                            Capacity = 2,
+                            UserId = "user-16"
                         });
                 });
 
@@ -410,36 +630,71 @@ namespace Infrastructure.Data.Migrations
                         {
                             Id = "mc-1",
                             AnimalId = "7",
-                            CheckUpDate = new DateTime(2024, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckUpDate = new DateTime(2024, 11, 15, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             Observation = "Control de rutina. Vacunas al día. Estado general excelente."
                         },
                         new
                         {
                             Id = "mc-2",
                             AnimalId = "5",
-                            CheckUpDate = new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckUpDate = new DateTime(2024, 10, 20, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             Observation = "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses."
                         },
                         new
                         {
                             Id = "mc-3",
                             AnimalId = "4",
-                            CheckUpDate = new DateTime(2024, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckUpDate = new DateTime(2024, 12, 5, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             Observation = "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual."
                         },
                         new
                         {
                             Id = "mc-4",
                             AnimalId = "1",
-                            CheckUpDate = new DateTime(2024, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckUpDate = new DateTime(2024, 9, 10, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             Observation = "Control pre-adopción. Animal en condiciones óptimas para ser adoptado."
                         },
                         new
                         {
                             Id = "mc-5",
                             AnimalId = "2",
-                            CheckUpDate = new DateTime(2024, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckUpDate = new DateTime(2024, 8, 25, 17, 45, 0, 0, DateTimeKind.Unspecified),
                             Observation = "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general."
+                        },
+                        new
+                        {
+                            Id = "mc-6",
+                            AnimalId = "8",
+                            CheckUpDate = new DateTime(2024, 11, 30, 17, 45, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Vacunación completa, leve sobrepeso."
+                        },
+                        new
+                        {
+                            Id = "mc-7",
+                            AnimalId = "10",
+                            CheckUpDate = new DateTime(2024, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Chequeo general, sin anomalías."
+                        },
+                        new
+                        {
+                            Id = "mc-8",
+                            AnimalId = "11",
+                            CheckUpDate = new DateTime(2024, 9, 5, 17, 45, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Tratamiento de pulgas realizado."
+                        },
+                        new
+                        {
+                            Id = "mc-9",
+                            AnimalId = "13",
+                            CheckUpDate = new DateTime(2025, 1, 3, 17, 45, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Control rutinario, en excelente estado."
+                        },
+                        new
+                        {
+                            Id = "mc-10",
+                            AnimalId = "16",
+                            CheckUpDate = new DateTime(2024, 10, 21, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Observation = "Revisión dental, sin problemas."
                         });
                 });
 
@@ -518,6 +773,24 @@ namespace Infrastructure.Data.Migrations
                             SightingDateTime = new DateTime(2025, 9, 21, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             SightingDescription = "Avistamiento de perro callejero al borde de la ruta, pueden ser más de uno, pareciese tener crías",
                             Sightingstate = 0
+                        },
+                        new
+                        {
+                            Id = "s6",
+                            SightingAddressName = "Av. San Juan",
+                            SightingAddressNumber = "987",
+                            SightingDateTime = new DateTime(2025, 10, 1, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            SightingDescription = "Perro negro con collar rojo caminando solo.",
+                            Sightingstate = 0
+                        },
+                        new
+                        {
+                            Id = "s7",
+                            SightingAddressName = "Parque Sur",
+                            SightingAddressNumber = "45",
+                            SightingDateTime = new DateTime(2025, 10, 10, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            SightingDescription = "Gato blanco escondido entre arbustos, parece asustado.",
+                            Sightingstate = 0
                         });
                 });
 
@@ -591,28 +864,6 @@ namespace Infrastructure.Data.Migrations
                         },
                         new
                         {
-                            Id = "user-3",
-                            Dni = "44180117",
-                            Name = "Ignacio",
-                            Password = "123",
-                            SurName = "Esteves",
-                            UserName = "nacho",
-                            UserStatus = "Active",
-                            UserType = "Voluntario"
-                        },
-                        new
-                        {
-                            Id = "user-4",
-                            Dni = "11223344",
-                            Name = "Nicolás",
-                            Password = "123",
-                            SurName = "Salerno",
-                            UserName = "niko",
-                            UserStatus = "Active",
-                            UserType = "Transito"
-                        },
-                        new
-                        {
                             Id = "user-5",
                             Dni = "33445566",
                             Name = "Martín",
@@ -654,6 +905,116 @@ namespace Infrastructure.Data.Migrations
                             UserName = "sofia",
                             UserStatus = "Active",
                             UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-9",
+                            Dni = "77889900",
+                            Name = "Valentina",
+                            Password = "123",
+                            SurName = "Moreno",
+                            UserName = "valen",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-10",
+                            Dni = "88990011",
+                            Name = "Andrés",
+                            Password = "123",
+                            SurName = "Pérez",
+                            UserName = "andres",
+                            UserStatus = "Active",
+                            UserType = "Adoptante"
+                        },
+                        new
+                        {
+                            Id = "user-3",
+                            Dni = "44180117",
+                            Name = "Ignacio",
+                            Password = "123",
+                            SurName = "Esteves",
+                            UserName = "nacho",
+                            UserStatus = "Active",
+                            UserType = "Voluntario"
+                        },
+                        new
+                        {
+                            Id = "user-11",
+                            Dni = "99112233",
+                            Name = "Lucía",
+                            Password = "123",
+                            SurName = "Benítez",
+                            UserName = "lucia",
+                            UserStatus = "Active",
+                            UserType = "Voluntario"
+                        },
+                        new
+                        {
+                            Id = "user-12",
+                            Dni = "99223344",
+                            Name = "Pedro",
+                            Password = "123",
+                            SurName = "Luna",
+                            UserName = "pedro",
+                            UserStatus = "Active",
+                            UserType = "Voluntario"
+                        },
+                        new
+                        {
+                            Id = "user-13",
+                            Dni = "99334455",
+                            Name = "Marta",
+                            Password = "123",
+                            SurName = "Salas",
+                            UserName = "marta",
+                            UserStatus = "Active",
+                            UserType = "Voluntario"
+                        },
+                        new
+                        {
+                            Id = "user-4",
+                            Dni = "11223344",
+                            Name = "Nicolás",
+                            Password = "123",
+                            SurName = "Salerno",
+                            UserName = "niko",
+                            UserStatus = "Active",
+                            UserType = "Transito"
+                        },
+                        new
+                        {
+                            Id = "user-14",
+                            Dni = "22334455",
+                            Name = "Julieta",
+                            Password = "123",
+                            SurName = "Rossi",
+                            UserName = "juli",
+                            UserStatus = "Active",
+                            UserType = "Transito"
+                        },
+                        new
+                        {
+                            Id = "user-15",
+                            Dni = "33445577",
+                            Name = "Federico",
+                            Password = "123",
+                            SurName = "Torres",
+                            UserName = "fede",
+                            UserStatus = "Active",
+                            UserType = "Transito"
+                        },
+                        new
+                        {
+                            Id = "user-16",
+                            Dni = "44557788",
+                            Name = "Carla",
+                            Password = "123",
+                            SurName = "Mendez",
+                            UserName = "carla",
+                            UserStatus = "Active",
+                            UserType = "Transito"
                         });
                 });
 

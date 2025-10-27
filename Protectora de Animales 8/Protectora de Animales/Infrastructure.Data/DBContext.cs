@@ -73,16 +73,29 @@ namespace Infrastructure.Data
                     .HasForeignKey<House>(h => h.UserId);
                 //seeding data
                 entity.HasData(
-                new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123", UserStatus.Active),
+
+                 new User("user-1", "UTN", "Rosario", "12345678", UserType.Admin, "utn", "123", UserStatus.Active),
+
+                // Adoptantes
                 new User("user-2", "Camila", "Stella", "87654321", UserType.Adoptante, "cami", "123", UserStatus.Active),
-                new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123", UserStatus.Active),
-                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123", UserStatus.Active),
-                //more adoptants
                 new User("user-5", "Martín", "González", "33445566", UserType.Adoptante, "martin", "123", UserStatus.Active),
                 new User("user-6", "Laura", "Fernández", "44556677", UserType.Adoptante, "laura", "123", UserStatus.Active),
                 new User("user-7", "Diego", "Rodríguez", "55667788", UserType.Adoptante, "diego", "123", UserStatus.Active),
-                new User("user-8", "Sofía", "López", "66778899", UserType.Adoptante, "sofia", "123", UserStatus.Active)
-                );
+                new User("user-8", "Sofía", "López", "66778899", UserType.Adoptante, "sofia", "123", UserStatus.Active),
+                new User("user-9", "Valentina", "Moreno", "77889900", UserType.Adoptante, "valen", "123", UserStatus.Active),
+                new User("user-10", "Andrés", "Pérez", "88990011", UserType.Adoptante, "andres", "123", UserStatus.Active),
+
+                // Voluntarios
+                new User("user-3", "Ignacio", "Esteves", "44180117", UserType.Voluntario, "nacho", "123", UserStatus.Active),
+                new User("user-11", "Lucía", "Benítez", "99112233", UserType.Voluntario, "lucia", "123", UserStatus.Active),
+                new User("user-12", "Pedro", "Luna", "99223344", UserType.Voluntario, "pedro", "123", UserStatus.Active),
+                new User("user-13", "Marta", "Salas", "99334455", UserType.Voluntario, "marta", "123", UserStatus.Active),
+
+                // Tránsitos
+                new User("user-4", "Nicolás", "Salerno", "11223344", UserType.Transito, "niko", "123", UserStatus.Active),
+                new User("user-14", "Julieta", "Rossi", "22334455", UserType.Transito, "juli", "123", UserStatus.Active),
+                new User("user-15", "Federico", "Torres", "33445577", UserType.Transito, "fede", "123", UserStatus.Active),
+                new User("user-16", "Carla", "Mendez", "44557788", UserType.Transito, "carla", "123", UserStatus.Active));
             });
 
 
@@ -124,13 +137,64 @@ namespace Infrastructure.Data
 
                 //seeding data (Adoptado solo si User es Adoptante; BajoCuidado si no; ARevisar si sin User)
                 entity.HasData(
-                    new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
-                    new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-5", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
-                    new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
-                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.BajoCuidado, ""),
-                    new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado, "Como es el bichito"),
-                    new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.ARevisar, "Como es el bichito"),
-                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.BajoCuidado, "Como es el bichito"));
+                   new Animal("1", "Firulais", Animal.SpeciesEn.Perro, new DateTime(2018, 5, 20), null, Animal.AnimalStateEn.ARevisar,
+                   "Perro mestizo de tamaño mediano, pelaje corto marrón con pecho blanco. Muy amistoso con las personas y tranquilo en los paseos."),
+
+                    new Animal("2", "Miau", Animal.SpeciesEn.Gato, new DateTime(2020, 3, 15), "user-5", Animal.AnimalStateEn.Adoptado,
+                        "Gato adulto de color gris atigrado, ojos verdes y carácter dulce. Se adaptó muy bien a su nuevo hogar."),
+
+                    new Animal("3", "Bunny", Animal.SpeciesEn.Conejo, new DateTime(2021, 7, 10), null, Animal.AnimalStateEn.ARevisar,
+                        "Conejo blanco con manchas grises, muy curioso y dócil. Le gusta saltar y explorar los rincones del lugar."),
+
+                    new Animal("4", "Lola", Animal.SpeciesEn.Gato, new DateTime(2019, 2, 5), "user-4", Animal.AnimalStateEn.BajoCuidado,
+                        "Gata de pelo negro brillante, muy observadora y tranquila. Fue rescatada de la calle y actualmente está en recuperación."),
+
+                    new Animal("5", "Rex", Animal.SpeciesEn.Perro, new DateTime(2017, 11, 30), "user-2", Animal.AnimalStateEn.Adoptado,
+                        "Perro grande de color beige con orejas caídas. Protector, paciente con niños y muy fiel a su adoptante."),
+
+                    new Animal("6", "Coco", Animal.SpeciesEn.Conejo, new DateTime(2022, 1, 25), null, Animal.AnimalStateEn.ARevisar,
+                        "Conejo marrón oscuro de orejas largas, enérgico y juguetón. Se asusta fácilmente pero es muy curioso."),
+
+                    new Animal("7", "Pepi", Animal.SpeciesEn.Pajaro, new DateTime(2016, 8, 18), "user-3", Animal.AnimalStateEn.BajoCuidado,
+                        "Canario macho de plumaje amarillo intenso. Alegre, canta todos los días y se muestra muy sociable."),
+
+                    new Animal("8", "Toby", Animal.SpeciesEn.Perro, new DateTime(2019, 10, 12), "user-14", Animal.AnimalStateEn.BajoCuidado,
+                        "Perro mestizo color negro con patas blancas. Fue rescatado del abandono, ahora está recuperando peso y confianza."),
+
+                    new Animal("9", "Luna", Animal.SpeciesEn.Perro, new DateTime(2020, 4, 8), null, Animal.AnimalStateEn.ARevisar,
+                        "Cachorra de tamaño mediano, pelaje dorado y ojos claros. Muy activa y juguetona, ideal para una familia con espacio."),
+
+                    new Animal("10", "Rocky", Animal.SpeciesEn.Perro, new DateTime(2017, 6, 20), "user-7", Animal.AnimalStateEn.Adoptado,
+                        "Perro de pelaje oscuro, fuerte y leal. Se muestra protector y siempre atento a su entorno."),
+
+                    new Animal("11", "Simón", Animal.SpeciesEn.Gato, new DateTime(2021, 2, 14), "user-12", Animal.AnimalStateEn.BajoCuidado,
+                        "Gato de pelo blanco y gris, ojos celestes. Muy mimoso y busca compañía humana constantemente."),
+
+                    new Animal("12", "Misha", Animal.SpeciesEn.Gato, new DateTime(2022, 11, 1), null, Animal.AnimalStateEn.ARevisar,
+                        "Gatita joven de color marrón claro con manchas blancas. Un poco tímida al principio, pero muy cariñosa cuando toma confianza."),
+
+                    new Animal("13", "Tigra", Animal.SpeciesEn.Gato, new DateTime(2019, 7, 22), "user-9", Animal.AnimalStateEn.Adoptado,
+                        "Gata atigrada de pelaje dorado. Activa, curiosa y siempre lista para jugar."),
+
+                    new Animal("14", "Nieve", Animal.SpeciesEn.Conejo, new DateTime(2023, 3, 15), null, Animal.AnimalStateEn.ARevisar,
+                        "Coneja completamente blanca, de pelaje suave. Tranquila, le gusta estar en brazos y es muy limpia."),
+
+                    new Animal("15", "Choco", Animal.SpeciesEn.Conejo, new DateTime(2022, 5, 5), "user-15", Animal.AnimalStateEn.BajoCuidado,
+                        "Conejo marrón claro de orejas cortas. Muy sociable con otros conejos y disfruta de la compañía humana."),
+
+                    new Animal("16", "Lili", Animal.SpeciesEn.Conejo, new DateTime(2021, 9, 10), "user-6", Animal.AnimalStateEn.Adoptado,
+                        "Coneja de color gris claro, muy sociable y tranquila. Le encanta recibir caricias y estar al aire libre."),
+
+                    new Animal("17", "Azul", Animal.SpeciesEn.Pajaro, new DateTime(2020, 12, 25), "user-13", Animal.AnimalStateEn.BajoCuidado,
+                        "Pájaro pequeño de tonos azules y verdes. Tiene un canto melodioso y disfruta del contacto visual con las personas."),
+
+                    new Animal("18", "Sol", Animal.SpeciesEn.Pajaro, new DateTime(2023, 1, 18), null, Animal.AnimalStateEn.ARevisar,
+                        "Polluelo color amarillo claro, encontrado en la vía pública. Está en observación hasta completar su desarrollo."),
+
+                    new Animal("19", "Kiwi", Animal.SpeciesEn.Pajaro, new DateTime(2022, 4, 2), "user-11", Animal.AnimalStateEn.Adoptado,
+                        "Pájaro pequeño de plumaje verde brillante, recuperado tras una lesión en el ala. Ahora vuela y canta normalmente.")
+                    );
+
             });
 
             //----- HOUSE -----
@@ -158,7 +222,10 @@ namespace Infrastructure.Data
                     .HasForeignKey(e => e.UserId);
 
                 entity.HasData(
-                    new House("house-1", "user-4", "Zeballos", 1341, 2)
+                    new House("house-1", "user-4", "Zeballos", 1341, 2),
+                    new House("house-2", "user-14", "San Martín", 550, 3),
+                    new House("house-3", "user-15", "Mitre", 200, 1),
+                    new House("house-4", "user-16", "Dorrego", 900, 2)
                         );
             });
             //----- SIGHTING -----
@@ -224,6 +291,25 @@ namespace Infrastructure.Data
          SightingDateTime = new DateTime(2025, 9, 21, 12, 0, 0),
          SightingDescription = "Avistamiento de perro callejero al borde de la ruta, pueden ser más de uno, pareciese tener crías",
          Sightingstate = Sighting.SightingState.Nuevo
+     },
+
+     new Sighting
+     {
+         Id = "s6",
+         SightingAddressName = "Av. San Juan",
+         SightingAddressNumber = "987",
+         SightingDateTime = new DateTime(2025, 10, 1, 17, 0, 0),
+         SightingDescription = "Perro negro con collar rojo caminando solo.",
+         Sightingstate = Sighting.SightingState.Nuevo
+     },
+     new Sighting
+     {
+        Id = "s7",
+        SightingAddressName = "Parque Sur",
+        SightingAddressNumber = "45",
+        SightingDateTime = new DateTime(2025, 10, 10, 8, 30, 0),
+        SightingDescription = "Gato blanco escondido entre arbustos, parece asustado.",
+        Sightingstate = Sighting.SightingState.Nuevo
      }
  );
             });
@@ -252,33 +338,60 @@ namespace Infrastructure.Data
                 entity.HasData(
                 new MedicalCheckUp(
                     "mc-1",
-                    new DateTime(2024, 11, 15),
+                    new DateTime(2024, 11, 15, 17, 45, 0),
                     "Control de rutina. Vacunas al día. Estado general excelente.",
                     "7"
                 ),
                 new MedicalCheckUp(
                     "mc-2",
-                    new DateTime(2024, 10, 20),
+                    new DateTime(2024, 10, 20, 17, 45, 0),
                     "Revisión post-adopción. El animal se ha adaptado bien. Se recomienda seguimiento en 3 meses.",
                     "5"
                 ),
                 new MedicalCheckUp(
                     "mc-3",
-                    new DateTime(2024, 12, 5),
+                    new DateTime(2024, 12, 5, 17, 45, 0),
                     "Desparasitación realizada. Peso adecuado para su edad. Continuar con alimentación actual.",
                     "4"
                 ),
                 new MedicalCheckUp(
                     "mc-4",
-                    new DateTime(2024, 9, 10),
+                    new DateTime(2024, 9, 10, 17, 45, 0),
                     "Control pre-adopción. Animal en condiciones óptimas para ser adoptado.",
                     "1"
                 ),
                 new MedicalCheckUp(
                     "mc-5",
-                    new DateTime(2024, 8, 25),
+                    new DateTime(2024, 8, 25, 17, 45, 0),
                     "Revisión dental. Se detectó sarro leve. Se realizó limpieza. Buen estado general.",
                     "2"
+                ),
+                new MedicalCheckUp("mc-6", 
+                new DateTime(2024, 11, 30, 17, 45, 0),
+                "Vacunación completa, leve sobrepeso.", 
+                "8"
+                ),
+                new MedicalCheckUp("mc-7", 
+                new DateTime(2024, 12, 12, 17, 45, 0), 
+                "Chequeo general, sin anomalías.",
+                "10"
+                ),
+                new MedicalCheckUp("mc-8",
+                new DateTime(2024, 9, 5, 17, 45, 0 ), 
+                "Tratamiento de pulgas realizado.",
+                "11"
+                ),
+                new MedicalCheckUp("mc-9",
+                new DateTime(2025, 1, 3, 17, 45, 0), 
+                "Control rutinario," +
+                " en excelente estado.", 
+                "13"
+                ),
+                new MedicalCheckUp("mc-10",
+                new DateTime(2024, 10, 21, 14,0,0), 
+                "Revisión dental, " +
+                "sin problemas.",
+                "16"
                 ));
             });
 
@@ -371,7 +484,37 @@ namespace Infrastructure.Data
         )
         {
             AdoptionResponseDate = new DateTime(2024, 9, 3)
-        });
+        },
+            new Adoption(
+                "adoption-7"
+                , "9", 
+                "user-9", 
+                new DateTime(2024, 11, 10), 
+                AdoptionStateEn.Pendiente, 
+                "Cree tener espacio adecuado."),
+            new Adoption(
+                "adoption-8",
+                "10", 
+                "user-10", 
+                new DateTime(2024, 10, 25), AdoptionStateEn.Aprobada, 
+                "Solicitud aprobada tras verificación.")
+            { AdoptionResponseDate = new DateTime(2024, 10, 28) },
+            new Adoption("adoption-9",
+            "14",
+            "user-6", 
+            new DateTime(2024, 12, 2), 
+            AdoptionStateEn.Pendiente, 
+            "Estoy interesada en cuidar a Nieve, somos una familia muy cariñosa."),
+            new Adoption("adoption-10", 
+            "17", 
+            "user-7", 
+            new DateTime(2025, 1, 10),
+            AdoptionStateEn.Rechazada,
+            "El hogar no cumple las condiciones  necesarias para acoger aves.")
+            { AdoptionResponseDate = new DateTime(2025, 1, 15) }
+            );
+
+
             });
 
             //----- ANIMAL RESPONSIBLE HISTORY -----
@@ -402,29 +545,35 @@ namespace Infrastructure.Data
                 // Seeding data con múltiples adopciones para algunos animales
                 entity.HasData(
                     // Miau (Animal "2")
-                    new AnimalResponsibleHistory("arh-1", new DateTime(2023, 12, 15), "user-2", "2"),
-                    new AnimalResponsibleHistory("arh-2", new DateTime(2024, 3, 20), "user-6", "2"),
-                    new AnimalResponsibleHistory("arh-3", new DateTime(2024, 10, 8), "user-5", "2"),
+                    new AnimalResponsibleHistory("arh-1", new DateTime(2023, 12, 15, 14,35, 0), "user-2", "2"),
+                    new AnimalResponsibleHistory("arh-2", new DateTime(2024, 3, 20, 10, 45, 0), "user-6", "2"),
+                    new AnimalResponsibleHistory("arh-3", new DateTime(2024, 10, 8, 17,45,0), "user-5", "2"),
 
                     // Rex (Animal "5")
-                    new AnimalResponsibleHistory("arh-4", new DateTime(2024, 2, 10), "user-7", "5"),
-                    new AnimalResponsibleHistory("arh-5", new DateTime(2024, 7, 20), "user-2", "5"),
+                    new AnimalResponsibleHistory("arh-4", new DateTime(2024, 2, 10, 15, 45, 0), "user-7", "5"),
+                    new AnimalResponsibleHistory("arh-5", new DateTime(2024, 7, 20, 17,46, 0), "user-2", "5"),
 
                     // Lola (Animal "4")
-                    new AnimalResponsibleHistory("arh-6", new DateTime(2024, 4, 5), "user-3", "4"),
-                    new AnimalResponsibleHistory("arh-7", new DateTime(2024, 6, 12), "user-8", "4"),
-                    new AnimalResponsibleHistory("arh-8", new DateTime(2024, 8, 15), "user-4", "4"),
+                    new AnimalResponsibleHistory("arh-6", new DateTime(2024, 4, 5, 16,0,0), "user-3", "4"),
+                    new AnimalResponsibleHistory("arh-7", new DateTime(2024, 6, 12, 13, 15, 0), "user-8", "4"),
+                    new AnimalResponsibleHistory("arh-8", new DateTime(2024, 8, 15, 12, 45,0), "user-4", "4"),
 
                     // Pepi (Animal "7")
-                    new AnimalResponsibleHistory("arh-9", new DateTime(2024, 1, 25), "user-6", "7"),
-                    new AnimalResponsibleHistory("arh-10", new DateTime(2024, 9, 10), "user-3", "7"),
+                    new AnimalResponsibleHistory("arh-9", new DateTime(2024, 1, 25,14,10,0), "user-6", "7"),
+                    new AnimalResponsibleHistory("arh-10", new DateTime(2024, 9, 10,15,35,0), "user-3", "7"),
 
                     // Firulais (Animal "1")
-                    new AnimalResponsibleHistory("arh-11", new DateTime(2023, 8, 10), "user-5", "1"),
-                    new AnimalResponsibleHistory("arh-12", new DateTime(2024, 1, 15), "user-8", "1"),
+                    new AnimalResponsibleHistory("arh-11", new DateTime(2023, 8, 10,16,15,0), "user-5", "1"),
+                    new AnimalResponsibleHistory("arh-12", new DateTime(2024, 1, 15,14,20,0), "user-8", "1"),
 
                     // Bunny (Animal "3")
-                    new AnimalResponsibleHistory("arh-13", new DateTime(2024, 5, 8), "user-7", "3")
+                    new AnimalResponsibleHistory("arh-13", new DateTime(2024, 5, 8, 17,10,0), "user-7", "3"),
+                    new AnimalResponsibleHistory("arh-14", new DateTime(2024, 2, 12, 13,45,0), "user-14", "8"),
+                    new AnimalResponsibleHistory("arh-15", new DateTime(2024, 8, 25, 16,10,0), "user-15", "15"),
+                    new AnimalResponsibleHistory("arh-16", new DateTime(2024, 9, 18, 18,15,0), "user-16", "10"),
+                    new AnimalResponsibleHistory("arh-17", new DateTime(2024, 10, 2, 14, 10, 0), "user-11", "17"),
+                    new AnimalResponsibleHistory("arh-18", new DateTime(2025, 2, 10, 15,45,0), "user-12", "11"),
+                    new AnimalResponsibleHistory("arh-19", new DateTime(2025, 3, 5,17, 45, 0), "user-6", "16")
                 );
             });
         }

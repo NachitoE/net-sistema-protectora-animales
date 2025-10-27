@@ -100,6 +100,8 @@
             Controls.Add(dataGridView1);
             Controls.Add(btn_AcceptChanges);
             Controls.Add(pb_Background);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "fm_ModifyAdoptions";
             Text = "fm_ModifyAdoptions";
             ((System.ComponentModel.ISupportInitialize)pb_Background).EndInit();

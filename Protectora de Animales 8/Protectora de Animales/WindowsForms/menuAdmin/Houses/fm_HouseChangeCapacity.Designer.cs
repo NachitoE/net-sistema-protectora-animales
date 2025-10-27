@@ -42,53 +42,56 @@
             // dgv_houses
             // 
             dgv_houses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_houses.Location = new Point(134, 24);
+            dgv_houses.Location = new Point(117, 18);
+            dgv_houses.Margin = new Padding(3, 2, 3, 2);
             dgv_houses.Name = "dgv_houses";
             dgv_houses.RowHeadersWidth = 51;
-            dgv_houses.Size = new Size(723, 373);
+            dgv_houses.Size = new Size(633, 280);
             dgv_houses.TabIndex = 0;
             // 
             // lb_currentCapacity
             // 
             lb_currentCapacity.AutoSize = true;
-            lb_currentCapacity.Location = new Point(134, 409);
+            lb_currentCapacity.Location = new Point(117, 307);
             lb_currentCapacity.Name = "lb_currentCapacity";
-            lb_currentCapacity.Size = new Size(121, 20);
+            lb_currentCapacity.Size = new Size(99, 15);
             lb_currentCapacity.TabIndex = 1;
             lb_currentCapacity.Text = "Current Capacity:";
             // 
             // lb_currentCapacityQuantity
             // 
             lb_currentCapacityQuantity.AutoSize = true;
-            lb_currentCapacityQuantity.Location = new Point(261, 409);
+            lb_currentCapacityQuantity.Location = new Point(228, 307);
             lb_currentCapacityQuantity.Name = "lb_currentCapacityQuantity";
-            lb_currentCapacityQuantity.Size = new Size(15, 20);
+            lb_currentCapacityQuantity.Size = new Size(12, 15);
             lb_currentCapacityQuantity.TabIndex = 2;
             lb_currentCapacityQuantity.Text = "-";
             // 
             // lb_desiredCapacity
             // 
             lb_desiredCapacity.AutoSize = true;
-            lb_desiredCapacity.Location = new Point(134, 446);
+            lb_desiredCapacity.Location = new Point(117, 334);
             lb_desiredCapacity.Name = "lb_desiredCapacity";
-            lb_desiredCapacity.Size = new Size(124, 20);
+            lb_desiredCapacity.Size = new Size(98, 15);
             lb_desiredCapacity.TabIndex = 3;
             lb_desiredCapacity.Text = "Desired Capacity:";
             // 
             // numud_desiredCapacity
             // 
-            numud_desiredCapacity.Location = new Point(261, 446);
+            numud_desiredCapacity.Location = new Point(228, 334);
+            numud_desiredCapacity.Margin = new Padding(3, 2, 3, 2);
             numud_desiredCapacity.Maximum = new decimal(new int[] { 99, 0, 0, 0 });
             numud_desiredCapacity.Name = "numud_desiredCapacity";
             numud_desiredCapacity.ReadOnly = true;
-            numud_desiredCapacity.Size = new Size(73, 27);
+            numud_desiredCapacity.Size = new Size(64, 23);
             numud_desiredCapacity.TabIndex = 5;
             // 
             // btn_accept
             // 
-            btn_accept.Location = new Point(921, 472);
+            btn_accept.Location = new Point(806, 354);
+            btn_accept.Margin = new Padding(3, 2, 3, 2);
             btn_accept.Name = "btn_accept";
-            btn_accept.Size = new Size(94, 29);
+            btn_accept.Size = new Size(82, 22);
             btn_accept.TabIndex = 6;
             btn_accept.Text = "Aceptar";
             btn_accept.UseVisualStyleBackColor = true;
@@ -96,9 +99,10 @@
             // 
             // btn_cancel
             // 
-            btn_cancel.Location = new Point(812, 472);
+            btn_cancel.Location = new Point(710, 354);
+            btn_cancel.Margin = new Padding(3, 2, 3, 2);
             btn_cancel.Name = "btn_cancel";
-            btn_cancel.Size = new Size(94, 29);
+            btn_cancel.Size = new Size(82, 22);
             btn_cancel.TabIndex = 7;
             btn_cancel.Text = "Cancelar";
             btn_cancel.UseVisualStyleBackColor = true;
@@ -106,9 +110,9 @@
             // 
             // fm_HouseChangeCapacity
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1027, 513);
+            ClientSize = new Size(899, 385);
             Controls.Add(btn_cancel);
             Controls.Add(btn_accept);
             Controls.Add(numud_desiredCapacity);
@@ -117,6 +121,8 @@
             Controls.Add(lb_currentCapacity);
             Controls.Add(dgv_houses);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
             Name = "fm_HouseChangeCapacity";
             Text = "fm_HouseChangeCapacity";
             ((System.ComponentModel.ISupportInitialize)dgv_houses).EndInit();

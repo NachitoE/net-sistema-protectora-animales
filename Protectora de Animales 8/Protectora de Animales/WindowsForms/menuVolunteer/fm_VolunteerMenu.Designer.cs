@@ -68,7 +68,7 @@
             btn_menuAdoptions.Name = "btn_menuAdoptions";
             btn_menuAdoptions.Size = new Size(373, 30);
             btn_menuAdoptions.TabIndex = 16;
-            btn_menuAdoptions.Text = "Adopciones";
+            btn_menuAdoptions.Text = "Revisar Adopciones";
             btn_menuAdoptions.UseVisualStyleBackColor = true;
             btn_menuAdoptions.Click += btn_menuAdoptions_Click;
             // 

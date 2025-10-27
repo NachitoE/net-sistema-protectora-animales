@@ -62,6 +62,7 @@
             ClientSize = new Size(933, 519);
             Controls.Add(dgv_userAnimals);
             Controls.Add(pb_headerpic);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "fm_CaretakersAnimals";
             Text = "CaretakersAnimals";

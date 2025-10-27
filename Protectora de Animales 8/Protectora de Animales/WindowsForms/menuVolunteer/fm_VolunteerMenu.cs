@@ -13,7 +13,7 @@ namespace WindowsForms.menuVolunteer
         private void btn_menuAdoptions_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var menuredir= new fm_VolunteerAdoptionMenu();
+            var menuredir = new fm_ManageAdoptions();
             menuredir.ShowDialog();
             this.Show();
         }

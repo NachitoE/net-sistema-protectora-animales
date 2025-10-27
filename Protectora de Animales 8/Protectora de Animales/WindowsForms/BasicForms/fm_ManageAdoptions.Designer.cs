@@ -163,6 +163,7 @@
             Controls.Add(btn_AcceptChanges);
             Controls.Add(pb_Background);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "fm_ManageAdoptions";
             Text = "fm_ManageAdoptions";
             ((System.ComponentModel.ISupportInitialize)pb_Background).EndInit();

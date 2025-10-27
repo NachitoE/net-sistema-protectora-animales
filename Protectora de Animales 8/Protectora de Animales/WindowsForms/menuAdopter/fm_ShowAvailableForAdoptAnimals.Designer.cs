@@ -105,7 +105,7 @@
             dgv_animals.Size = new Size(341, 405);
             dgv_animals.TabIndex = 7;
             // 
-            // fm_ShowAvailableAnimals
+            // fm_ShowAvailableForAdoptAnimals
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -117,7 +117,9 @@
             Controls.Add(btn_Dog);
             Controls.Add(lb_MATitle);
             Controls.Add(pb_headerpic);
-            Name = "fm_ShowAvailableAnimals";
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "fm_ShowAvailableForAdoptAnimals";
             Text = "fm_ShowAvailableAnimals";
             ((System.ComponentModel.ISupportInitialize)pb_headerpic).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_animals).EndInit();
