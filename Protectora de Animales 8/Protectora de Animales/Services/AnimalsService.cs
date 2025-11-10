@@ -234,6 +234,7 @@ namespace Services
 
             if (animal != null)
             {
+                animal.UserId = null;
                 animal.AnimalState = AnimalStateEn.ARevisar;
                 animalRepository.Update(animal);
             }

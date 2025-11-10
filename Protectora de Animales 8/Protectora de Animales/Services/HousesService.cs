@@ -61,10 +61,11 @@ namespace Services
         public bool Delete(string id)
         {
             HouseRepository houseRepository = new HouseRepository();
+            var userDTO = GetUserBelongingToHouse(id);
             if (houseRepository.Delete(id))
             {
                 // set user as pending house, set current user animals as available
-                var userDTO = GetUserBelongingToHouse(id);
+                
                 if (userDTO != null)
                 {
                     UsersService usersService = new UsersService();
