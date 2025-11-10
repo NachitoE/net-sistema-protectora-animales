@@ -1,10 +1,11 @@
 ﻿@page "/modify-medical-checkups"
-@using DTOs.House
-@using Helpers;
+@using DTOs
+@using Helpers
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 
 <h3>Modificar Registros Médicos</h3>
+
 @if (!Session.IsAuthenticated || !(Session.Context.User.UserType == "Admin" || Session.Context.User.UserType == "Transito" || Session.Context.User.UserType == "Voluntario"))
 {
     <p>No autorizado</p>
@@ -19,26 +20,28 @@ else if (errorMessage != null)
 }
 else
 {
-    <MudDataGrid Items="@elements"
+    <MudDataGrid T="MedicalCheckUpDTO"
+                 Items="@elements"
                  ReadOnly="false"
                  EditMode="DataGridEditMode.Form"
-                 CommittedItemChanges="@OnCommittedItemChangesHandler"
                  EditTrigger="DataGridEditTrigger.Manual"
+                 CommittedItemChanges="OnCommittedItemChanges"
                  Bordered="true"
                  Dense="true">
         <Columns>
-            <PropertyColumn Property="x => x.Id" Title="Id" Editable="false"/>
-            <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha de Chequeo" />
-            <PropertyColumn Property="x => x.Observation" Title="Observación">
-            </PropertyColumn>
+            <PropertyColumn Property="x => x.Id" Title="Id" Editable="false" />
             <TemplateColumn Title="Animal" Editable="false">
                 <CellTemplate>
                     <AnimalTooltip AnimalId="@context.Item.AnimalId" />
                 </CellTemplate>
             </TemplateColumn>
+            <PropertyColumn Property="x => x.CheckUpDate" Title="Fecha de Chequeo" />
+            <PropertyColumn Property="x => x.Observation" Title="Observación" />
             <TemplateColumn CellClass="d-flex justify-end">
                 <CellTemplate>
-                    <MudIconButton Size="Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
+                    <MudIconButton Size="Size.Small"
+                                   Icon="@Icons.Material.Outlined.Edit"
+                                   OnClick="@context.Actions.StartEditingItemAsync" />
                 </CellTemplate>
             </TemplateColumn>
         </Columns>
@@ -47,66 +50,78 @@ else
 
 @code {
     private bool isLoading = true;
-    private string? errorMessage = null;
+    private string? errorMessage;
     private List<MedicalCheckUpDTO> elements = new();
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await ApiClientsFactory.MedicalCheckUpClient().GetAllAsync();
-        isLoading = false;
-        if (!result.Success)
+        try
         {
-            errorMessage = result.Message;
-            return;
+            var user = Session.Context.User;
+            var medicalClient = ApiClientsFactory.MedicalCheckUpClient();
+            var userClient = ApiClientsFactory.UserClient();
+
+            var medicalResult = await medicalClient.GetAllAsync();
+            if (!medicalResult.Success || medicalResult.Data == null)
+            {
+                errorMessage = medicalResult.Message ?? "Error al cargar los chequeos médicos.";
+                return;
+            }
+
+            var allCheckups = medicalResult.Data.ToList();
+
+
+            if (user.UserType == "Admin")
+            {
+                elements = allCheckups;
+            }
+            else
+            {
+               
+                var userAnimalsResult = await userClient.GetUserAnimalsAsync(user.Id);
+                if (!userAnimalsResult.Success || userAnimalsResult.Data == null)
+                {
+                    Snackbar.Add("No se pudieron obtener los animales a cargo del usuario.", Severity.Warning);
+                    elements = new();
+                }
+                else
+                {
+                    var caretakerAnimalIds = userAnimalsResult.Data.Select(a => a.Id).ToHashSet();
+                    elements = allCheckups
+                        .Where(mc => caretakerAnimalIds.Contains(mc.AnimalId))
+                        .ToList();
+                }
+            }
         }
-        elements = result.Data!.ToList();
+        catch (Exception ex)
+        {
+            errorMessage = $"Error inesperado: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
     }
 
     private async Task OnCommittedItemChanges(MedicalCheckUpDTO medicalCheck)
     {
-        /*
-        if (house.Capacity < 1)
+        var client = ApiClientsFactory.MedicalCheckUpClient();
+        var result = await client.PutAsync(medicalCheck.Id, medicalCheck);
+
+        if (!result.Success)
         {
-            Snackbar.Add("La capacidad debe ser al menos 1", Severity.Error);
+            Snackbar.Add($"Error al actualizar el registro médico: {result.Message}", Severity.Error);
             await ReloadData();
             return;
         }
 
-        var userClient = ApiClientsFactory.UserClient();
-        var userAnimalsResult = await userClient.GetUserAnimalsAsync(house.UserId);
-
-        if (userAnimalsResult.Success)
-        {
-            int currentAnimalsCount = userAnimalsResult.Data.Count();
-            if (house.Capacity < currentAnimalsCount)
-            {
-                Snackbar.Add($"No se puede reducir la capacidad a {house.Capacity}. El usuario actualmente tiene {currentAnimalsCount} animales asignados.", Severity.Error);
-                await ReloadData();
-                return;
-            }
-        }
-
-        var houseClient = ApiClientsFactory.HouseClient();
-        var updateResult = await houseClient.PutAsync(house.Id, house);
-
-        if (!updateResult.Success)
-        {
-            Snackbar.Add($"Error: {updateResult.Message}", Severity.Error);
-            await ReloadData();
-            return;
-        }
-
-        Snackbar.Add($"Casa actualizada exitosamente", Severity.Success);
-        */
+        Snackbar.Add("Registro médico actualizado correctamente", Severity.Success);
     }
 
     private async Task ReloadData()
     {
-        var result = await ApiClientsFactory.MedicalCheckUpClient().GetAllAsync();
-        if (result.Success && result.Data != null)
-            elements = result.Data.ToList();
+        isLoading = true;
+        StateHasChanged();
+        await OnInitializedAsync();
     }
-
-    private EventCallback<MedicalCheckUpDTO> OnCommittedItemChangesHandler =>
-        EventCallback.Factory.Create<MedicalCheckUpDTO>(this, OnCommittedItemChanges);
 }
