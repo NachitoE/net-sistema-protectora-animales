@@ -18,7 +18,30 @@ else if (errorMessage != null)
 }
 else if (currentHouse == null)
 {
-    <MudAlert Severity="Severity.Info">No tienes una casa asignada actualmente</MudAlert>
+    <MudAlert Severity="Severity.Info" Class="mb-4">No tienes una casa asignada actualmente</MudAlert>
+    
+    <MudPaper Class="pa-4">
+        <MudForm @ref="formNewHouse" @bind-IsValid="@successNewHouse" ValidationDelay="0">
+            <HouseLoad HouseData="@newHouseData" MinimumCapacity="@(currentAnimalsCount ?? 1)" />
+            
+            <MudButton OnClick="@SubmitNewHouse" 
+                       Disabled="@(isSubmitting || !successNewHouse)" 
+                       Class="mt-4" 
+                       Variant="Variant.Filled" 
+                       Color="Color.Primary"
+                       FullWidth="true">
+                @if (isSubmitting)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="MudBlazor.Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Registrando casa...</MudText>
+                }
+                else
+                {
+                    <MudText>Registrar Casa</MudText>
+                }
+            </MudButton>
+        </MudForm>
+    </MudPaper>
 }
 else
 {
@@ -92,11 +115,14 @@ else
     private bool isLoading = true;
     private bool isSubmitting = false;
     private bool success = false;
+    private bool successNewHouse = false;
     private string? errorMessage = null;
     private HouseDTO? currentHouse = null;
     private int? currentAnimalsCount = null;
     private MudForm? form;
+    private MudForm? formNewHouse;
     private ChangeHouseForm formData = new ChangeHouseForm();
+    private HouseLoad.HouseFormData newHouseData = new HouseLoad.HouseFormData();
 
     public class ChangeHouseForm
     {
@@ -117,12 +143,20 @@ else
             isLoading = true;
             errorMessage = null;
 
+            await LoadCurrentAnimalsCount();
+
             var houseClient = ApiClientsFactory.HouseClient();
             var result = await houseClient.GetHouseByUserId(Session.Context.User.Id);
 
+            // Si el usuario no tiene casa, no es un error, es una situación válida
             if (!result.Success)
             {
-                errorMessage = result.Message ?? "Error al cargar la casa actual";
+                // Solo mostramos error si NO es el mensaje de "no tiene casa asignada"
+                if (result.Message != null && !result.Message.Contains("no tiene una casa asignada"))
+                {
+                    errorMessage = result.Message;
+                }
+                currentHouse = null;
                 return;
             }
 
@@ -133,8 +167,6 @@ else
                 formData.NewAddress = currentHouse.Address;
                 formData.NewAddressNumber = currentHouse.AddressNumber;
                 formData.NewCapacity = currentHouse.Capacity;
-
-                await LoadCurrentAnimalsCount();
             }
         }
         catch (Exception ex)
@@ -172,6 +204,63 @@ else
             return $"Tienes {currentAnimalsCount.Value} animal(es) asignado(s). La capacidad mínima es {currentAnimalsCount.Value}.";
         }
         return "Capacidad mínima: 1";
+    }
+
+    private async Task SubmitNewHouse()
+    {
+        if (isSubmitting) return;
+
+        try
+        {
+            isSubmitting = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            if (formNewHouse != null)
+            {
+                await formNewHouse.Validate();
+                if (!formNewHouse.IsValid)
+                {
+                    errorMessage = "Complete todos los campos correctamente";
+                    return;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(newHouseData.Address) || newHouseData.AddressNumber <= 0)
+            {
+                errorMessage = "Debe completar la dirección y el número correctamente";
+                return;
+            }
+
+            var houseRegisterDTO = new HouseRegisterRequestDTO
+            {
+                UserId = Session.Context.User.Id,
+                Address = newHouseData.Address,
+                AddressNumber = newHouseData.AddressNumber,
+                Capacity = newHouseData.Capacity
+            };
+
+            var houseClient = ApiClientsFactory.HouseClient();
+            var result = await houseClient.PostAsync(houseRegisterDTO);
+
+            if (!result.Success || result.Data == null)
+            {
+                errorMessage = result.Message ?? "Error al registrar la casa";
+                return;
+            }
+
+            Snackbar.Add("Casa registrada exitosamente", Severity.Success);
+            await LoadCurrentHouse();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al registrar la casa: {ex.Message}";
+        }
+        finally
+        {
+            isSubmitting = false;
+            StateHasChanged();
+        }
     }
 
     private async Task SubmitChange()
